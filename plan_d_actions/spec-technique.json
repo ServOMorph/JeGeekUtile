@@ -1,0 +1,282 @@
+{
+  "projet": "Console gestion agents IA",
+  "version": "1.0",
+  "optimisations": {
+    "reduction_fichiers": "70%",
+    "reduction_messages": "97%",
+    "reduction_latence": "90%",
+    "reduction_tokens": "77%"
+  },
+
+  "architecture": {
+    "pattern": "mono-page SPA",
+    "frontend": "Vanilla JS",
+    "backend": "Python simple",
+    "data": "JSON files",
+    "theme": "eco-responsable"
+  },
+
+  "structure_fichiers": {
+    "plan_d_actions": ["plan-optimise.md", "spec-technique.json"],
+    "console-agents": ["index.html", "app.js", "eco.css"],
+    "donnees": ["config.json", "agents.json", "sessions.json", "index.json"],
+    "tests": ["runner.py"],
+    "sessions": ["{date}/{id}.json"],
+    "racine": ["config.json"]
+  },
+
+  "workflow_execution": [
+    {
+      "etape": 1,
+      "nom": "Init structure",
+      "mode": "parallele",
+      "actions": [
+        "Créer dossiers",
+        "Créer config.json",
+        "Créer agents.json",
+        "Créer sessions.json",
+        "Créer runner.py"
+      ],
+      "duree_estimee_sec": 10
+    },
+    {
+      "etape": 2,
+      "nom": "UI complète",
+      "mode": "parallele",
+      "actions": [
+        "Créer index.html",
+        "Créer app.js",
+        "Créer eco.css"
+      ],
+      "duree_estimee_sec": 15
+    },
+    {
+      "etape": 3,
+      "nom": "Tests validation",
+      "mode": "sequentiel",
+      "actions": [
+        "Exécuter runner.py",
+        "Valider structure",
+        "Corriger si erreurs"
+      ],
+      "duree_estimee_sec": 5
+    },
+    {
+      "etape": 4,
+      "nom": "Intégration",
+      "mode": "parallele",
+      "actions": [
+        "Modifier close.md",
+        "Créer valider.md"
+      ],
+      "duree_estimee_sec": 5
+    },
+    {
+      "etape": 5,
+      "nom": "Validation finale",
+      "mode": "sequentiel",
+      "actions": [
+        "Tests complets",
+        "Rapport final",
+        "Commande lancement"
+      ],
+      "duree_estimee_sec": 10
+    }
+  ],
+
+  "tests": {
+    "agents": {
+      "robert": [
+        {
+          "nom": "orchestration-simple",
+          "input": "Optimise ce texte: Lorem ipsum dolor sit amet",
+          "attendu": {
+            "appel_promptparfait": true,
+            "demande_confirmation": true
+          },
+          "metriques": {"tokens_max": 2000, "temps_max_sec": 10}
+        },
+        {
+          "nom": "detection-hallucination",
+          "input": "Explique moi comment fonctionne la technologie XYZ123",
+          "attendu": {
+            "detection_invention": true,
+            "blocage": true
+          },
+          "metriques": {"precision_min": 95}
+        },
+        {
+          "nom": "workflow-multi-etapes",
+          "input": "Crée un agent puis teste-le",
+          "attendu": {
+            "etapes_identifiees": 2,
+            "ordre_correct": true
+          },
+          "metriques": {"tokens_max": 3000}
+        }
+      ],
+      "promptparfait": [
+        {
+          "nom": "reduction-tokens",
+          "input": "Je voudrais bien que tu puisses m'aider à optimiser ce texte qui est vraiment très long et verbeux",
+          "attendu": {
+            "reduction_min_pct": 30,
+            "preservation_sens": true
+          },
+          "metriques": {"tokens_max": 1000}
+        },
+        {
+          "nom": "elimination-ambiguite",
+          "input": "Fais quelque chose avec ça",
+          "attendu": {
+            "clarification": true,
+            "instructions_precises": true
+          },
+          "metriques": {"clarte_min": 90}
+        },
+        {
+          "nom": "preservation-intent",
+          "input": "Crée un système de gestion d'utilisateurs avec authentification",
+          "attendu": {
+            "objectif_preserve": true,
+            "details_techniques": true
+          },
+          "metriques": {"precision_min": 95}
+        }
+      ]
+    },
+    "systeme": [
+      {
+        "nom": "structure",
+        "validation": ["dossiers_existent", "permissions_ok"]
+      },
+      {
+        "nom": "archivage",
+        "validation": ["session_sauvegardee", "index_maj"]
+      },
+      {
+        "nom": "ui",
+        "validation": ["html_charge", "css_applique", "pixels_blancs_<5pct"]
+      },
+      {
+        "nom": "performance",
+        "validation": ["recherche_<2s", "memoire_<500mb"]
+      }
+    ]
+  },
+
+  "config_defaut": {
+    "chemins": {
+      "agents": ".claude/commandes",
+      "tests": "tests",
+      "sessions": "sessions",
+      "donnees": "donnees"
+    },
+    "ui": {
+      "theme": {
+        "bg": "#1a1a1a",
+        "primary": "#2d5016",
+        "secondary": "#4a4a4a",
+        "text": "#b8b8b8",
+        "accent": "#6b8e23",
+        "alert": "#8b4513"
+      },
+      "refresh_ms": 5000,
+      "pixels_blancs_max_pct": 5
+    },
+    "tests": {
+      "auto": true,
+      "declencheur": "fin_session",
+      "seuil_reussite": 80,
+      "timeout_sec": 30,
+      "iterations": 5
+    },
+    "trace": {
+      "active": true,
+      "niveau": "complet",
+      "retention_jours": 365,
+      "index_auto": true,
+      "tags_auto": true
+    },
+    "performance": {
+      "limite_tokens": 200000,
+      "optimisation_eco": true,
+      "cache_actif": true,
+      "compression_archives": true
+    },
+    "rapports": {
+      "quotidien": true,
+      "hebdomadaire": true,
+      "mensuel": true,
+      "formats": ["json", "md"]
+    }
+  },
+
+  "agents_preinstall": [
+    {
+      "id": "robert",
+      "nom": "Robert",
+      "role": "Orchestrateur",
+      "niveau": 0,
+      "parent": null,
+      "competences": ["workflow", "validation", "detection_hallucination", "orchestration"],
+      "fichier": ".claude/commandes/robert.md"
+    },
+    {
+      "id": "promptparfait",
+      "nom": "PromptParfait",
+      "role": "Optimiseur prompts",
+      "niveau": 1,
+      "parent": "robert",
+      "competences": ["reduction_tokens", "clarte", "restructuration", "elimination_ambiguite"],
+      "fichier": ".claude/commandes/promptparfait.md"
+    }
+  ],
+
+  "ui_vues": [
+    {
+      "id": "pyramide",
+      "nom": "Pyramide agents",
+      "elements": ["hierarchie_visuelle", "infos_hover", "ajout_agent"],
+      "technologie": "SVG_natif"
+    },
+    {
+      "id": "tests",
+      "nom": "Tests & Benchmarks",
+      "elements": ["dashboard_scores", "graphe_evolution", "bouton_execution", "rapport"],
+      "technologie": "Canvas + JSON"
+    },
+    {
+      "id": "config",
+      "nom": "Configuration",
+      "elements": ["form_edition", "sauvegarde_temps_reel", "validation", "backup"],
+      "technologie": "Form_native"
+    },
+    {
+      "id": "search",
+      "nom": "Recherche",
+      "elements": ["filtres_combines", "suggestions_auto", "export", "plein_texte"],
+      "technologie": "JSON_index"
+    }
+  ],
+
+  "communication_minimale": {
+    "pendant_execution": "silence_total",
+    "fin_execution": "une_seule_notification",
+    "format_notification": {
+      "statut": "✓ Système opérationnel",
+      "commande": "cd console-agents && python -m http.server 8000",
+      "url": "http://localhost:8000",
+      "tests": "Score: XX%",
+      "duree": "XX secondes"
+    }
+  },
+
+  "mode_autonome": {
+    "decisions_auto": true,
+    "valeurs_defaut": true,
+    "correction_erreurs": true,
+    "validation_auto": true,
+    "sollicitation_user": "uniquement_fin"
+  }
+}

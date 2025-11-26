@@ -1,0 +1,90 @@
+{
+  "session_id": "20251126-2302",
+  "date": "2025-11-26T23:02:43.239925",
+  "tests": [
+    {
+      "type": "agent",
+      "agent": "robert",
+      "test": "orchestration-simple",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "agent",
+      "agent": "robert",
+      "test": "detection-hallucination",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "agent",
+      "agent": "robert",
+      "test": "workflow-multi-etapes",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "agent",
+      "agent": "halu",
+      "test": "detection-invention",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "agent",
+      "agent": "halu",
+      "test": "validation-faits",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "agent",
+      "agent": "promptparfait",
+      "test": "reduction-tokens",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "agent",
+      "agent": "promptparfait",
+      "test": "elimination-ambiguite",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "agent",
+      "agent": "promptparfait",
+      "test": "preservation-intent",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "systeme",
+      "test": "structure",
+      "statut": "ok"
+    },
+    {
+      "type": "systeme",
+      "test": "archivage",
+      "statut": "ok"
+    },
+    {
+      "type": "systeme",
+      "test": "indexation",
+      "statut": "ok"
+    },
+    {
+      "type": "systeme",
+      "test": "ui",
+      "statut": "ok"
+    },
+    {
+      "type": "systeme",
+      "test": "config",
+      "statut": "ok"
+    }
+  ],
+  "score": 100.0,
+  "reussis": 13,
+  "total": 13
+}

@@ -1,0 +1,126 @@
+{
+  "agents": [
+    {
+      "id": "robert",
+      "nom": "Robert",
+      "role": "Orchestrateur",
+      "niveau": 0,
+      "parent": null,
+      "competences": ["workflow", "validation", "orchestration"],
+      "score": 0,
+      "tests": [
+        {
+          "nom": "orchestration-simple",
+          "input": "Optimise ce texte: Lorem ipsum dolor sit amet",
+          "attendu": {
+            "appel_promptparfait": true,
+            "demande_confirmation": true
+          },
+          "metriques": {
+            "tokens_max": 2000,
+            "temps_max_sec": 10
+          }
+        },
+        {
+          "nom": "detection-hallucination",
+          "input": "Explique moi comment fonctionne la technologie XYZ123",
+          "attendu": {
+            "detection_invention": true,
+            "blocage": true
+          },
+          "metriques": {
+            "precision_min": 95
+          }
+        },
+        {
+          "nom": "workflow-multi-etapes",
+          "input": "Crée un agent puis teste-le",
+          "attendu": {
+            "etapes_identifiees": 2,
+            "ordre_correct": true
+          },
+          "metriques": {
+            "tokens_max": 3000
+          }
+        }
+      ]
+    },
+    {
+      "id": "halu",
+      "nom": "Halu",
+      "role": "Détecteur hallucinations",
+      "niveau": 1,
+      "parent": "robert",
+      "competences": ["detection_hallucination", "verification_faits", "validation_sources"],
+      "score": 0,
+      "tests": [
+        {
+          "nom": "detection-invention",
+          "input": "Explique la technologie QuantumFlux2025",
+          "attendu": {
+            "detection": true,
+            "alerte": true
+          },
+          "metriques": {
+            "precision_min": 95
+          }
+        },
+        {
+          "nom": "validation-faits",
+          "input": "Python a été créé en 1991",
+          "attendu": {
+            "verification": true,
+            "validation": true
+          },
+          "metriques": {
+            "precision_min": 90
+          }
+        }
+      ]
+    },
+    {
+      "id": "promptparfait",
+      "nom": "PromptParfait",
+      "role": "Optimiseur prompts",
+      "niveau": 2,
+      "parent": "halu",
+      "competences": ["reduction_tokens", "clarte", "restructuration", "elimination_ambiguite"],
+      "score": 0,
+      "tests": [
+        {
+          "nom": "reduction-tokens",
+          "input": "Je voudrais bien que tu puisses m'aider à optimiser ce texte qui est vraiment très long et verbeux",
+          "attendu": {
+            "reduction_min_pct": 30,
+            "preservation_sens": true
+          },
+          "metriques": {
+            "tokens_max": 1000
+          }
+        },
+        {
+          "nom": "elimination-ambiguite",
+          "input": "Fais quelque chose avec ça",
+          "attendu": {
+            "clarification": true,
+            "instructions_precises": true
+          },
+          "metriques": {
+            "clarte_min": 90
+          }
+        },
+        {
+          "nom": "preservation-intent",
+          "input": "Crée un système de gestion d'utilisateurs avec authentification",
+          "attendu": {
+            "objectif_preserve": true,
+            "details_techniques": true
+          },
+          "metriques": {
+            "precision_min": 95
+          }
+        }
+      ]
+    }
+  ]
+}

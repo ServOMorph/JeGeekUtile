@@ -1,0 +1,46 @@
+{
+  "chemins": {
+    "agents": ".claude/commandes",
+    "tests": "tests",
+    "sessions": "sessions",
+    "donnees": "donnees"
+  },
+  "ui": {
+    "theme": {
+      "bg": "#1a1a1a",
+      "primary": "#2d5016",
+      "secondary": "#4a4a4a",
+      "text": "#b8b8b8",
+      "accent": "#6b8e23",
+      "alert": "#8b4513"
+    },
+    "refresh_ms": 5000,
+    "pixels_blancs_max_pct": 5
+  },
+  "tests": {
+    "auto": true,
+    "declencheur": "fin_session",
+    "seuil_reussite": 80,
+    "timeout_sec": 30,
+    "iterations": 5
+  },
+  "trace": {
+    "active": true,
+    "niveau": "complet",
+    "retention_jours": 365,
+    "index_auto": true,
+    "tags_auto": true
+  },
+  "performance": {
+    "limite_tokens": 200000,
+    "optimisation_eco": true,
+    "cache_actif": true,
+    "compression_archives": true
+  },
+  "rapports": {
+    "quotidien": true,
+    "hebdomadaire": true,
+    "mensuel": true,
+    "formats": ["json", "md"]
+  }
+}

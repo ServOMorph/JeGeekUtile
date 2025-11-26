@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Console Gestion Agents IA</title>
+  <link rel="stylesheet" href="eco.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Console Gestion Agents IA</h1>
+      <div id="stats-header"></div>
+    </header>
+
+    <nav>
+      <button data-view="pyramide" class="active">Pyramide</button>
+      <button data-view="tests">Tests</button>
+      <button data-view="config">Config</button>
+      <button data-view="recherche">Recherche</button>
+    </nav>
+
+    <main id="view"></main>
+
+    <div id="notification" class="notification hidden"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

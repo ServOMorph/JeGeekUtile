@@ -1,0 +1,12 @@
+crée un agent orchestrateur. 
+Je vais l'appeler /robert. 
+Il répondra pret quand il sera pret.
+Le msessage sur je donne il va l'envoyer à un agent /promptparfait qui va avoir comme tâche donne
+de le reécrire de façon optimisé. POur claude IA.
+ENsuite promptparfait rendevva à /robert. Celui ci l'analysera pour voir s'il n'ya pas d'hallucination.
+Et si c'eest bone il demande à l'user s'il peut l'écuter.
+On va créé une commande /start qu lancera une nouvelle conversation.
+IL faudra que cette commande initialise ropbert avec le moins de tokens possible mais le plus efficacement.
+la commande /close mettre à jour le fichier de suivi et commitera. 
+TU vas optimisé /start et /close pour qu'elle osit les plus performantes possibles avec le minimum de tokens.
+Ecris le plan d'action et attends ma validation
