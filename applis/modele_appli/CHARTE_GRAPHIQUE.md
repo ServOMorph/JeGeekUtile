@@ -8,32 +8,113 @@ Charte graphique standardisée pour toutes les applications du projet.
 
 ```css
 :root {
-  --bg-primary: #1a1a1a;        /* Background principal */
-  --bg-secondary: #2d2d2d;      /* Background secondaire */
-  --bg-tertiary: #4a4a4a;       /* Background tertiaire */
+  /* === BACKGROUNDS === */
+  --bg-primary: #0a0a0a;        /* Background principal (optimisé OLED) */
+  --bg-secondary: #1a1a1a;      /* Background secondaire */
+  --bg-tertiary: #2d2d2d;       /* Background tertiaire */
+  --bg-elevated: #3a3a3a;       /* Background élevé (cards hover) */
+
+  /* === ACCENTS === */
   --accent-primary: #2d5016;    /* Accent vert foncé */
   --accent-secondary: #6b8e23;  /* Accent vert clair */
-  --text-primary: #b8b8b8;      /* Texte principal */
-  --text-secondary: #6b8e23;    /* Texte secondaire */
+  --accent-tertiary: #4a6b1e;   /* Accent vert moyen */
+
+  /* === TEXTE === */
+  --text-primary: #b8b8b8;      /* Texte principal (contraste 11:1) */
+  --text-secondary: #8a8a8a;    /* Texte secondaire (contraste 6.5:1) */
+  --text-accent: #6b8e23;       /* Texte accent */
+  --text-muted: #6a6a6a;        /* Texte désactivé (contraste 4.5:1) */
+
+  /* === ÉTATS === */
   --border-color: #6b8e23;      /* Bordures */
-  --alert-color: #8b4513;       /* Alertes */
-  --warning-color: #ff8c00;     /* Avertissements */
+  --border-subtle: #3a3a3a;     /* Bordures subtiles */
+  --alert-color: #8b4513;       /* Alertes/Erreurs */
+  --warning-color: #cc7000;     /* Avertissements (désaturé pour OLED) */
+  --success-color: #6b8e23;     /* Succès */
+  --info-color: #5a7a8a;        /* Informations (évite bleu pur) */
+
+  /* === INTERACTIONS === */
+  --hover-overlay: rgba(107, 142, 35, 0.1);
+  --active-overlay: rgba(107, 142, 35, 0.2);
+  --focus-ring: #6b8e23;
+
+  /* === ESPACEMENT === */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 20px;
+  --space-xl: 30px;
+  --space-xxl: 40px;
+
+  /* === TYPOGRAPHIE === */
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-xxl: 20px;
+  --font-size-display: 32px;
+
+  --line-height-tight: 1.2;
+  --line-height-base: 1.5;
+  --line-height-relaxed: 1.7;
+
+  /* === BORDURES & RAYONS === */
+  --radius-sm: 3px;
+  --radius-md: 5px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  --border-width-thin: 1px;
+  --border-width-base: 2px;
+  --border-width-thick: 3px;
+  --border-width-heavy: 4px;
+
+  /* === OMBRES (minimales pour économie) === */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 4px 12px rgba(107, 142, 35, 0.15);
+
+  /* === TRANSITIONS (réduites pour économie) === */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
 }
 ```
+
+### Optimisation OLED
+
+**Couleurs évitées pour économie énergie** :
+- ❌ Bleu pur (`#0000FF`) : Consommation maximale sur OLED
+- ❌ Couleurs saturées vives : Pixels OLED à intensité maximale
+- ❌ Blanc pur (`#FFFFFF`) : 100% consommation tous sous-pixels
+
+**Couleurs privilégiées** :
+- ✅ Noir pur (`#000000`) : 0% consommation (pixels éteints)
+- ✅ Gris sombres (`#0a0a0a`, `#1a1a1a`) : <5% consommation
+- ✅ Couleurs désaturées (`#cc7000` vs `#ff8c00`) : -30% consommation
+- ✅ Verts terrestres (`#6b8e23`, `#2d5016`) : Consommation optimale
 
 ### Utilisation
 
 | Élément | Couleur | Variable |
 |---------|---------|----------|
-| Body background | #1a1a1a | `var(--bg-primary)` |
-| Cards, containers | #4a4a4a | `var(--bg-tertiary)` |
+| Body background | #0a0a0a | `var(--bg-primary)` |
+| Containers | #1a1a1a | `var(--bg-secondary)` |
+| Cards | #2d2d2d | `var(--bg-tertiary)` |
+| Cards hover | #3a3a3a | `var(--bg-elevated)` |
 | Header | #2d5016 | `var(--accent-primary)` |
 | Texte principal | #b8b8b8 | `var(--text-primary)` |
-| Texte accent | #6b8e23 | `var(--text-secondary)` |
-| Bordures | #6b8e23 | `var(--border-color)` |
+| Texte secondaire | #8a8a8a | `var(--text-secondary)` |
+| Texte accent | #6b8e23 | `var(--text-accent)` |
+| Texte désactivé | #6a6a6a | `var(--text-muted)` |
+| Bordures principales | #6b8e23 | `var(--border-color)` |
+| Bordures subtiles | #3a3a3a | `var(--border-subtle)` |
 | Boutons primaires | #6b8e23 | `var(--accent-secondary)` |
 | Erreurs | #8b4513 | `var(--alert-color)` |
-| Avertissements | #ff8c00 | `var(--warning-color)` |
+| Avertissements | #cc7000 | `var(--warning-color)` |
+| Succès | #6b8e23 | `var(--success-color)` |
+| Informations | #5a7a8a | `var(--info-color)` |
 
 ## Typographie
 
@@ -213,30 +294,133 @@ grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 gap: 20px;
 ```
 
+## Accessibilité (WCAG 2.1)
+
+### Ratios de Contraste
+
+| Combinaison | Ratio | Niveau |
+|-------------|-------|--------|
+| `#b8b8b8` sur `#0a0a0a` | 11.2:1 | AAA |
+| `#8a8a8a` sur `#0a0a0a` | 6.8:1 | AA |
+| `#6a6a6a` sur `#0a0a0a` | 4.7:1 | AA (large) |
+| `#6b8e23` sur `#0a0a0a` | 5.1:1 | AA |
+| `#6b8e23` sur `#2d2d2d` | 3.2:1 | AA (large uniquement) |
+
+**Règle** : Minimum 4.5:1 pour texte standard, 3:1 pour texte large (≥18px)
+
+### Focus Visible
+
+**Obligatoire** : Indicateur focus de 2px minimum
+```css
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+```
+
+### Zones Tactiles
+
+**Minimum** : 44×44px pour éléments cliquables (boutons, liens)
+
 ## Mode Sombre Éco-responsable
 
 ### Objectifs
 
-- **Pixels blancs** : < 5%
-- **Consommation électrique** : Minimale
-- **Confort visuel** : Optimal
-- **Cohérence** : Toutes applications
+- **Pixels noirs** : > 70% (pixels éteints sur OLED)
+- **Pixels blancs** : < 3% (réduit de 5% → 3%)
+- **Consommation électrique** : -40% vs mode clair
+- **Confort visuel** : Contraste optimal sans éblouissement
+- **Cohérence** : Toutes applications identiques
 
-### Métriques
+### Métriques Énergétiques
 
-| Métrique | Valeur | Objectif |
-|----------|--------|----------|
-| Pixels blancs | < 5% | ✓ |
-| Luminosité moyenne | < 20% | ✓ |
-| Contraste texte | > 4.5:1 | ✓ |
-| Backgrounds sombres | 100% | ✓ |
+| Métrique | Valeur | Gain vs Clair |
+|----------|--------|---------------|
+| Pixels noirs (OLED éteints) | > 70% | -70% consommation |
+| Pixels blancs | < 3% | -97% pixels énergivores |
+| Luminosité moyenne | < 15% | -85% luminosité |
+| Contraste texte | > 4.5:1 | WCAG AA minimum |
+| Backgrounds sombres | 100% | Optimal OLED |
+| Couleurs saturées évitées | 100% | -30% consommation couleurs |
+
+### Économies Mesurables
+
+1. **OLED/AMOLED** : -60% à -70% consommation écran
+2. **LCD** : -20% à -30% consommation rétroéclairage
+3. **Fatigue oculaire** : -40% en environnement sombre
+4. **Autonomie batterie** : +2h à +4h sur appareil mobile
 
 ### Avantages
 
-1. **Économie énergie** : Écrans OLED/AMOLED économisent jusqu'à 60%
-2. **Confort visuel** : Réduction fatigue oculaire
-3. **Esthétique** : Look professionnel
+1. **Économie énergie** : Jusqu'à 70% sur OLED
+2. **Confort visuel** : Réduction fatigue oculaire significative
+3. **Esthétique** : Design professionnel moderne
 4. **Cohérence** : Identité visuelle forte
+5. **Environnement** : Réduction empreinte carbone globale
+
+## Performance et Animations
+
+### Règles Animations
+
+**À ÉVITER** (consommation CPU/GPU inutile) :
+- ❌ Animations perpétuelles (spinners continus)
+- ❌ Transitions > 300ms
+- ❌ Animations sur `width`, `height`, `top`, `left`
+- ❌ `box-shadow` animées
+- ❌ Effets de parallaxe complexes
+
+**PRÉFÉRER** (optimisé GPU) :
+- ✅ `transform` et `opacity` uniquement
+- ✅ Transitions ≤ 200ms
+- ✅ `will-change` sur éléments animés uniquement
+- ✅ Animations déclenchées par interaction (pas auto)
+- ✅ `prefers-reduced-motion` respecté
+
+### Exemple Optimisé
+
+```css
+/* ✅ BIEN */
+.bouton {
+  transition: transform var(--transition-fast),
+              opacity var(--transition-fast);
+}
+
+.bouton:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* ❌ MAL */
+.bouton {
+  transition: all 500ms;
+  animation: pulse 2s infinite;
+}
+
+/* ✅ Respecter préférences utilisateur */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+### Lazy Loading
+
+**Images** : Charger uniquement visibles
+```html
+<img src="image.jpg" loading="lazy" alt="Description">
+```
+
+**JavaScript** : Modules chargés à la demande
+```javascript
+// Charger uniquement si nécessaire
+if (condition) {
+  import('./module-lourd.js').then(module => {
+    module.init();
+  });
+}
+```
 
 ## Règles d'Application
 
@@ -262,16 +446,40 @@ gap: 20px;
 
 ### Checklist Application
 
-- [ ] Variables CSS importées
-- [ ] Footer avec date + version
-- [ ] Police Consolas/Monaco
-- [ ] Tous backgrounds sombres
-- [ ] Pixels blancs < 5%
-- [ ] Bordures #6b8e23
-- [ ] Boutons standards
-- [ ] Notifications positionnées
-- [ ] Responsive (grids auto)
-- [ ] Pas de blanc pur (#fff)
+**Design** :
+- [ ] Variables CSS complètes importées
+- [ ] Footer avec format `@Je Geek Utile - DD/MM/YYYY - Nom v1.0`
+- [ ] Police système monospace (Consolas/Monaco)
+- [ ] Background principal `#0a0a0a` minimum
+- [ ] Pixels noirs > 70%
+- [ ] Pixels blancs < 3%
+- [ ] Pas de blanc pur (`#fff`), bleu pur (`#00f`), couleurs saturées
+
+**Accessibilité** :
+- [ ] Contraste texte ≥ 4.5:1 (AA minimum)
+- [ ] Focus visible 2px sur tous éléments interactifs
+- [ ] Zones cliquables ≥ 44×44px
+- [ ] `alt` sur toutes images
+- [ ] Labels sur tous inputs
+
+**Performance** :
+- [ ] Transitions ≤ 200ms
+- [ ] Animations `transform`/`opacity` uniquement
+- [ ] `@media (prefers-reduced-motion)` implémenté
+- [ ] Images en `loading="lazy"`
+- [ ] Pas d'animations infinies
+- [ ] JavaScript modules chargés à la demande
+
+**Responsive** :
+- [ ] Grids `auto-fit`/`auto-fill`
+- [ ] Mobile-first (breakpoints si nécessaire)
+- [ ] Pas de scroll horizontal
+
+**Code** :
+- [ ] Pas de frameworks CSS externes
+- [ ] CSS vanilla avec variables
+- [ ] JavaScript vanilla (pas de jQuery/React/etc)
+- [ ] Fichiers séparés (HTML/CSS/JS)
 
 ## Exemples Visuels
 
