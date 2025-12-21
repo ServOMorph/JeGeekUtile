@@ -121,6 +121,30 @@
           }
         }
       ]
+    },
+    {
+      "id": "adminia",
+      "nom": "AdminIA",
+      "role": "Spécialiste démarches et rédaction administrative",
+      "niveau": 1,
+      "parent": "robert",
+      "competences": [
+        "rédaction administrative",
+        "démarches légales",
+        "formulaires officiels",
+        "correspondance formelle"
+      ],
+      "score": 0,
+      "tests": [
+        {
+          "nom": "Rédaction lettre administrative",
+          "type": "validation"
+        },
+        {
+          "nom": "Complétion formulaire",
+          "type": "validation"
+        }
+      ]
     }
   ]
 }

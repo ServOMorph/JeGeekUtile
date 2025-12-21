@@ -290,7 +290,7 @@ const App = {
     const sortedSessions = [...sessions].reverse();
 
     return sortedSessions.map(session => `
-      <div class="result-item" data-session-id="${session.id}">
+      <div class="result-item clickable" data-session-id="${session.id}">
         <div class="result-header">
           <span class="result-id">${session.id}</span>
           <span class="result-score">${session.score}%</span>
@@ -339,6 +339,13 @@ const App = {
           filterBtns.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           this.filtrerSessions(btn.dataset.filter);
+        });
+      });
+
+      document.querySelectorAll('.result-item.clickable').forEach(item => {
+        item.addEventListener('click', () => {
+          const sessionId = item.dataset.sessionId;
+          this.afficherTraceSession(sessionId);
         });
       });
     }
@@ -452,6 +459,75 @@ const App = {
     }
 
     document.getElementById('search-results').innerHTML = this.renderSearchResults(filtered);
+  },
+
+  afficherTraceSession(sessionId) {
+    const session = this.data.sessions.sessions.find(s => s.id === sessionId);
+    if (!session || !session.trace_complete) {
+      this.showNotification('Aucune trace disponible pour cette session', 'error');
+      return;
+    }
+
+    const markdown = this.genererMarkdownTrace(session);
+
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Session ${session.id}</h2>
+          <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body markdown-viewer">
+          ${this.convertirMarkdownHTML(markdown)}
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    modal.querySelector('.modal-close').addEventListener('click', () => {
+      document.body.removeChild(modal);
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        document.body.removeChild(modal);
+      }
+    });
+  },
+
+  genererMarkdownTrace(session) {
+    let md = `# Trace Workflow - Session ${session.id}\n\n`;
+    md += `**Date**: ${new Date(session.date).toLocaleString('fr-FR')}\n\n`;
+    md += `**Agents**: ${session.agents.join(', ')}\n\n`;
+    md += `**Score**: ${session.score}% (${session.reussis}/${session.total})\n\n`;
+    md += `---\n\n`;
+
+    session.trace_complete.forEach((etape, index) => {
+      md += `## Étape ${index + 1}: ${etape.agent.toUpperCase()} - ${etape.type}\n\n`;
+      md += `**Timestamp**: ${new Date(etape.timestamp).toLocaleString('fr-FR')}\n\n`;
+      md += `### Contenu\n\`\`\`\n${etape.contenu}\n\`\`\`\n\n`;
+      if (etape.resultat) {
+        md += `### Résultat\n\`\`\`\n${etape.resultat}\n\`\`\`\n\n`;
+      }
+      md += `---\n\n`;
+    });
+
+    return md;
+  },
+
+  convertirMarkdownHTML(markdown) {
+    let html = markdown
+      .replace(/### (.*)/g, '<h3>$1</h3>')
+      .replace(/## (.*)/g, '<h2>$1</h2>')
+      .replace(/# (.*)/g, '<h1>$1</h1>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/```\n([\s\S]*?)\n```/g, '<pre><code>$1</code></pre>')
+      .replace(/---/g, '<hr>')
+      .replace(/\n\n/g, '<br><br>');
+
+    return html;
   },
 
   showNotification(message, type = 'success') {

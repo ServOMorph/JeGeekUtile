@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[NOM_APPLI]</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>[NOM_APPLI]</h1>
+      <div id="stats-header">
+        <!-- Statistiques header ici -->
+      </div>
+    </header>
+
+    <nav>
+      <button data-view="view1" class="active">Vue 1</button>
+      <button data-view="view2">Vue 2</button>
+      <button data-view="view3">Vue 3</button>
+    </nav>
+
+    <main id="view">
+      <!-- Contenu dynamique ici -->
+    </main>
+
+    <footer>
+      <span>@Je Geek Utile - <span id="footer-date"></span> - [NOM_APPLI] v[VERSION]</span>
+    </footer>
+
+    <div id="notification" class="notification hidden"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

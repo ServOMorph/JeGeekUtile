@@ -1,0 +1,39 @@
+{
+  "ias": [
+    {
+      "id": "chatgpt",
+      "nom": "ChatGPT",
+      "type": "cloud"
+    },
+    {
+      "id": "claude",
+      "nom": "Claude",
+      "type": "cloud"
+    },
+    {
+      "id": "comet",
+      "nom": "Comet",
+      "type": "cloud"
+    },
+    {
+      "id": "grok",
+      "nom": "Grok",
+      "type": "cloud"
+    },
+    {
+      "id": "gemini",
+      "nom": "Gemini",
+      "type": "cloud"
+    },
+    {
+      "id": "vertia",
+      "nom": "VertIA",
+      "type": "local"
+    },
+    {
+      "id": "whisper",
+      "nom": "Whisper",
+      "type": "local"
+    }
+  ]
+}

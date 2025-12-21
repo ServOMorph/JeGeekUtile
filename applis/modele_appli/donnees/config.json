@@ -1,0 +1,12 @@
+{
+  "appli": {
+    "nom": "[NOM_APPLI]",
+    "version": "[VERSION]",
+    "description": "Description de l'application"
+  },
+  "ui": {
+    "theme": "dark",
+    "pixels_blancs_max_pct": 5
+  },
+  "auteur": "@Je Geek Utile"
+}

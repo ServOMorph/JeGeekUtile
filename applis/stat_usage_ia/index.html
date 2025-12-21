@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tracker Usage IA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Tracker Usage IA</h1>
+      <div id="stats-header">
+        <div class="stat-item">
+          <span class="stat-label">Total clics</span>
+          <span class="stat-value" id="total-clics">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">IA locales</span>
+          <span class="stat-value" id="ratio-local">0%</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Objectif</span>
+          <span class="stat-value">70%</span>
+        </div>
+      </div>
+    </header>
+
+    <nav>
+      <button data-view="dashboard" class="active">Dashboard</button>
+      <button data-view="gestion">Gestion IA</button>
+      <button data-view="stats">Statistiques</button>
+    </nav>
+
+    <main id="view"></main>
+
+    <footer>
+      <span>@Je Geek Utile - <span id="footer-date"></span> - Tracker Usage IA v1.0</span>
+    </footer>
+
+    <div id="notification" class="notification hidden"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

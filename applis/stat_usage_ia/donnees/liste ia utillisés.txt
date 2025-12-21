@@ -1,0 +1,12 @@
+cloud :
+chatgpt
+claude
+comet
+grok
+gemini
+
+Locale : 
+VertIA
+Whisper
+
+

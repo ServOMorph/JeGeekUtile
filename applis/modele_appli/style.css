@@ -1,0 +1,351 @@
+/* =================================================================
+   MODÈLE STANDARD - APPLICATIONS JE GEEK UTILE
+   Mode sombre éco-responsable
+   Pixels blancs < 5%
+   ================================================================= */
+
+/* PALETTE COULEURS STANDARD */
+:root {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #4a4a4a;
+  --accent-primary: #2d5016;
+  --accent-secondary: #6b8e23;
+  --text-primary: #b8b8b8;
+  --text-secondary: #6b8e23;
+  --border-color: #6b8e23;
+  --alert-color: #8b4513;
+  --warning-color: #ff8c00;
+}
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* TYPOGRAPHIE */
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* STRUCTURE */
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+header {
+  background: var(--accent-primary);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--border-color);
+}
+
+header h1 {
+  font-size: 20px;
+  color: var(--text-primary);
+  font-weight: normal;
+}
+
+#stats-header {
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.stat-value {
+  color: var(--text-primary);
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* NAVIGATION */
+nav {
+  background: var(--bg-tertiary);
+  padding: 10px 20px;
+  display: flex;
+  gap: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+nav button {
+  background: transparent;
+  color: var(--text-primary);
+  border: none;
+  padding: 8px 20px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+nav button:hover {
+  background: var(--accent-primary);
+}
+
+nav button.active {
+  background: var(--accent-primary);
+  color: var(--text-secondary);
+  border-bottom: 2px solid var(--border-color);
+}
+
+/* MAIN */
+main {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  padding-bottom: 60px;
+}
+
+/* FOOTER */
+footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 10px 20px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 11px;
+  border-top-left-radius: 5px;
+  border-top: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
+}
+
+/* COMPOSANTS COMMUNS */
+
+/* Boutons */
+.btn-primary {
+  background: var(--accent-secondary);
+  color: var(--bg-primary);
+  border: none;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--accent-primary);
+  color: var(--text-primary);
+}
+
+.btn-secondary {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 8px 20px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+  background: var(--accent-primary);
+}
+
+.btn-danger {
+  background: var(--alert-color);
+  color: var(--text-primary);
+  border: none;
+  padding: 6px 15px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  border-radius: 3px;
+}
+
+.btn-danger:hover {
+  background: #a0522d;
+}
+
+/* Cards */
+.card {
+  background: var(--bg-tertiary);
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+  transition: all 0.3s;
+}
+
+.card:hover {
+  border-color: var(--accent-secondary);
+  box-shadow: 0 4px 12px rgba(107, 142, 35, 0.2);
+}
+
+/* Formulaires */
+.form-group {
+  margin: 20px 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+input,
+select,
+textarea {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  width: 100%;
+  font-family: inherit;
+  font-size: 14px;
+  border-radius: 3px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--text-primary);
+}
+
+/* Grilles */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* Tableaux */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: var(--accent-primary);
+  color: var(--text-secondary);
+  padding: 12px;
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 12px;
+  border-bottom: 1px solid var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+tr:hover {
+  background: var(--bg-secondary);
+}
+
+/* Notifications */
+.notification {
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  background: var(--accent-primary);
+  color: var(--text-primary);
+  padding: 15px 25px;
+  border-radius: 5px;
+  border: 2px solid var(--border-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  transition: opacity 0.3s;
+}
+
+.notification.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.notification.success {
+  border-color: var(--border-color);
+}
+
+.notification.error {
+  border-color: var(--alert-color);
+  background: var(--bg-tertiary);
+}
+
+/* Métriques */
+.metric-card {
+  background: var(--bg-tertiary);
+  padding: 20px;
+  border-radius: 5px;
+  border-left: 4px solid var(--border-color);
+}
+
+.metric-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.metric-value {
+  font-size: 32px;
+  color: var(--text-primary);
+  font-weight: bold;
+}
+
+.metric-detail {
+  font-size: 12px;
+  color: var(--text-primary);
+  margin-top: 5px;
+}
+
+/* Utilitaires */
+.text-center {
+  text-align: center;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.gap-20 {
+  gap: 20px;
+}
+
+.hidden {
+  display: none;
+}
