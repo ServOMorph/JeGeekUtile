@@ -34,6 +34,11 @@
       "id": "whisper",
       "nom": "Whisper",
       "type": "local"
+    },
+    {
+      "id": "NoteBook_lm",
+      "nom": "NoteBook LM",
+      "type": "cloud"
     }
   ]
 }
