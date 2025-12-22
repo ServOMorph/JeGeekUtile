@@ -15,27 +15,11 @@
   --grid-color: #2d2d2d;
 }
 
-:root[data-theme="crepuscule-nordique"] {
-  --bg-main: #1c1f26;
-  --bg-secondary: #2a2f3a;
-  --bg-card: #363d4d;
-  --bg-card-hover: #434b5e;
-  --accent-local: #88c0d0;
-  --accent-cloud: #d08770;
-  --text-primary: #e5e9f0;
-  --text-secondary: #81a1c1;
-  --border-color: #88c0d0;
-  --bg-header: #2e3440;
-  --bg-nav: #3b4252;
-  --bg-footer: #2e3440;
-  --grid-color: #3b4252;
-}
-
-:root[data-theme="terre-minerale"] {
-  --bg-main: #1a1512;
-  --bg-secondary: #2d2419;
-  --bg-card: #3d3428;
-  --bg-card-hover: #4d4438;
+:root[data-theme="terre-ethique"] {
+  --bg-main: #0a0a0a;
+  --bg-secondary: #1a1512;
+  --bg-card: #2d2419;
+  --bg-card-hover: #3d3428;
   --accent-local: #7c9d6f;
   --accent-cloud: #b8956a;
   --text-primary: #d4c5b0;
@@ -45,6 +29,54 @@
   --bg-nav: #3d3428;
   --bg-footer: #2d2419;
   --grid-color: #3d3428;
+}
+
+:root[data-theme="cryptage-nocturne"] {
+  --bg-main: #0a0a0a;
+  --bg-secondary: #0f1419;
+  --bg-card: #1a2332;
+  --bg-card-hover: #253142;
+  --accent-local: #5a7a8a;
+  --accent-cloud: #aa8a6a;
+  --text-primary: #c0d0e0;
+  --text-secondary: #8a9aaa;
+  --border-color: #5a7a8a;
+  --bg-header: #1e2d3d;
+  --bg-nav: #253142;
+  --bg-footer: #1e2d3d;
+  --grid-color: #253142;
+}
+
+:root[data-theme="aurore-humaine"] {
+  --bg-main: #0a0a0a;
+  --bg-secondary: #1a140f;
+  --bg-card: #2d2319;
+  --bg-card-hover: #3d3229;
+  --accent-local: #b8956a;
+  --accent-cloud: #cc8a60;
+  --text-primary: #d4c5b0;
+  --text-secondary: #a89680;
+  --border-color: #b8956a;
+  --bg-header: #3d2a1f;
+  --bg-nav: #3d3229;
+  --bg-footer: #2d2319;
+  --grid-color: #3d3229;
+}
+
+:root[data-theme="horizon-progres"] {
+  --bg-main: #0a0a0a;
+  --bg-secondary: #0f0f1a;
+  --bg-card: #1a1a2d;
+  --bg-card-hover: #252540;
+  --accent-local: #7a6aa8;
+  --accent-cloud: #b88a70;
+  --text-primary: #c8c0d8;
+  --text-secondary: #9888b8;
+  --border-color: #7a6aa8;
+  --bg-header: #1e1e3d;
+  --bg-nav: #252540;
+  --bg-footer: #1a1a2d;
+  --grid-color: #252540;
 }
 
 * {
@@ -659,12 +691,20 @@ tr:hover {
   background: linear-gradient(135deg, #0a0a0a 0%, #6b8e23 100%);
 }
 
-.theme-btn[data-theme="crepuscule-nordique"] {
-  background: linear-gradient(135deg, #1c1f26 0%, #88c0d0 100%);
+.theme-btn[data-theme="terre-ethique"] {
+  background: linear-gradient(135deg, #1a1512 0%, #7c9d6f 100%);
 }
 
-.theme-btn[data-theme="terre-minerale"] {
-  background: linear-gradient(135deg, #1a1512 0%, #7c9d6f 100%);
+.theme-btn[data-theme="cryptage-nocturne"] {
+  background: linear-gradient(135deg, #0f1419 0%, #5a7a8a 100%);
+}
+
+.theme-btn[data-theme="aurore-humaine"] {
+  background: linear-gradient(135deg, #1a140f 0%, #b8956a 100%);
+}
+
+.theme-btn[data-theme="horizon-progres"] {
+  background: linear-gradient(135deg, #0f0f1a 0%, #7a6aa8 100%);
 }
 
 @media (max-width: 1200px) {
