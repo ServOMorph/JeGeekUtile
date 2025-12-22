@@ -4,9 +4,24 @@ Charte graphique standardisée pour toutes les applications du projet.
 
 ## Palette Couleurs
 
+### Système de Thèmes
+
+Les applications proposent **5 thèmes configurables** représentant les valeurs du projet :
+
+1. **Nuit Forêt** (défaut) - Éco-responsabilité
+2. **Terre Éthique** - Éthique et transparence
+3. **Cryptage Nocturne** - Sécurité des données
+4. **Aurore Humaine** - IA pour les humains
+5. **Horizon Progrès** - Innovation et progrès
+
+Tous les thèmes respectent les contraintes OLED (noir profond, couleurs désaturées, > 70% pixels noirs).
+
 ### Variables CSS
 
+#### Thème 1 : Nuit Forêt (Éco-responsabilité)
+
 ```css
+:root[data-theme="nuit-foret"],
 :root {
   /* === BACKGROUNDS === */
   --bg-primary: #0a0a0a;        /* Background principal (optimisé OLED) */
@@ -82,6 +97,152 @@ Charte graphique standardisée pour toutes les applications du projet.
 }
 ```
 
+#### Thème 2 : Terre Éthique (Éthique et transparence)
+
+```css
+:root[data-theme="terre-ethique"] {
+  /* === BACKGROUNDS === */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #1a1512;
+  --bg-tertiary: #2d2419;
+  --bg-elevated: #3d3428;
+
+  /* === ACCENTS === */
+  --accent-primary: #342a1f;
+  --accent-secondary: #7c9d6f;
+  --accent-tertiary: #5a6d50;
+
+  /* === TEXTE === */
+  --text-primary: #d4c5b0;
+  --text-secondary: #9d8b73;
+  --text-accent: #7c9d6f;
+  --text-muted: #6a5d50;
+
+  /* === ÉTATS === */
+  --border-color: #7c9d6f;
+  --border-subtle: #3d3428;
+  --alert-color: #8b4513;
+  --warning-color: #b8956a;
+  --success-color: #7c9d6f;
+  --info-color: #7a8b7a;
+
+  /* === INTERACTIONS === */
+  --hover-overlay: rgba(124, 157, 111, 0.1);
+  --active-overlay: rgba(124, 157, 111, 0.2);
+  --focus-ring: #7c9d6f;
+
+  /* Héritage des autres variables (espacement, typo, etc.) */
+}
+```
+
+#### Thème 3 : Cryptage Nocturne (Sécurité des données)
+
+```css
+:root[data-theme="cryptage-nocturne"] {
+  /* === BACKGROUNDS === */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #0f1419;
+  --bg-tertiary: #1a2332;
+  --bg-elevated: #253142;
+
+  /* === ACCENTS === */
+  --accent-primary: #1e2d3d;
+  --accent-secondary: #5a7a8a;
+  --accent-tertiary: #3f5f6f;
+
+  /* === TEXTE === */
+  --text-primary: #c0d0e0;
+  --text-secondary: #8a9aaa;
+  --text-accent: #5a7a8a;
+  --text-muted: #6a7a8a;
+
+  /* === ÉTATS === */
+  --border-color: #5a7a8a;
+  --border-subtle: #253142;
+  --alert-color: #8a5a5a;
+  --warning-color: #aa8a6a;
+  --success-color: #6a8a7a;
+  --info-color: #5a7a8a;
+
+  /* === INTERACTIONS === */
+  --hover-overlay: rgba(90, 122, 138, 0.1);
+  --active-overlay: rgba(90, 122, 138, 0.2);
+  --focus-ring: #5a7a8a;
+}
+```
+
+#### Thème 4 : Aurore Humaine (IA pour les humains)
+
+```css
+:root[data-theme="aurore-humaine"] {
+  /* === BACKGROUNDS === */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #1a140f;
+  --bg-tertiary: #2d2319;
+  --bg-elevated: #3d3229;
+
+  /* === ACCENTS === */
+  --accent-primary: #3d2a1f;
+  --accent-secondary: #b8956a;
+  --accent-tertiary: #9a7a55;
+
+  /* === TEXTE === */
+  --text-primary: #d4c5b0;
+  --text-secondary: #a89680;
+  --text-accent: #b8956a;
+  --text-muted: #7a6a55;
+
+  /* === ÉTATS === */
+  --border-color: #b8956a;
+  --border-subtle: #3d3229;
+  --alert-color: #aa6a5a;
+  --warning-color: #cc8a60;
+  --success-color: #8a9a6a;
+  --info-color: #7a8a9a;
+
+  /* === INTERACTIONS === */
+  --hover-overlay: rgba(184, 149, 106, 0.1);
+  --active-overlay: rgba(184, 149, 106, 0.2);
+  --focus-ring: #b8956a;
+}
+```
+
+#### Thème 5 : Horizon Progrès (Innovation et progrès)
+
+```css
+:root[data-theme="horizon-progres"] {
+  /* === BACKGROUNDS === */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #0f0f1a;
+  --bg-tertiary: #1a1a2d;
+  --bg-elevated: #252540;
+
+  /* === ACCENTS === */
+  --accent-primary: #1e1e3d;
+  --accent-secondary: #7a6aa8;
+  --accent-tertiary: #5a4a88;
+
+  /* === TEXTE === */
+  --text-primary: #c8c0d8;
+  --text-secondary: #9888b8;
+  --text-accent: #7a6aa8;
+  --text-muted: #6a5a88;
+
+  /* === ÉTATS === */
+  --border-color: #7a6aa8;
+  --border-subtle: #252540;
+  --alert-color: #a85a6a;
+  --warning-color: #b88a70;
+  --success-color: #6a9a7a;
+  --info-color: #6a7aa8;
+
+  /* === INTERACTIONS === */
+  --hover-overlay: rgba(122, 106, 168, 0.1);
+  --active-overlay: rgba(122, 106, 168, 0.2);
+  --focus-ring: #7a6aa8;
+}
+```
+
 ### Optimisation OLED
 
 **Couleurs évitées pour économie énergie** :
@@ -94,6 +255,125 @@ Charte graphique standardisée pour toutes les applications du projet.
 - ✅ Gris sombres (`#0a0a0a`, `#1a1a1a`) : <5% consommation
 - ✅ Couleurs désaturées (`#cc7000` vs `#ff8c00`) : -30% consommation
 - ✅ Verts terrestres (`#6b8e23`, `#2d5016`) : Consommation optimale
+
+### Valeurs et Signification des Thèmes
+
+| Thème | Valeur | Couleurs dominantes | Symbolisme |
+|-------|--------|---------------------|------------|
+| **Nuit Forêt** | Éco-responsabilité | Verts terrestres (#6b8e23) | Nature, durabilité, économie d'énergie OLED |
+| **Terre Éthique** | Éthique et transparence | Bruns et verts doux (#7c9d6f, #d4c5b0) | Ancrage moral, solidité, authenticité |
+| **Cryptage Nocturne** | Sécurité des données | Gris-bleus acier (#5a7a8a) | Protection, confidentialité, cryptographie |
+| **Aurore Humaine** | IA pour les humains | Oranges chauds doux (#b8956a) | Humanité, empathie, chaleur |
+| **Horizon Progrès** | Innovation et progrès | Violets profonds (#7a6aa8) | Futur, innovation, vision |
+
+### Implémentation du Sélecteur de Thèmes
+
+#### HTML - Boutons de sélection (dans le header)
+
+```html
+<div class="theme-selector">
+  <span class="theme-selector-label">Thème:</span>
+  <button class="theme-btn active" data-theme="nuit-foret" title="Nuit Forêt"></button>
+  <button class="theme-btn" data-theme="terre-ethique" title="Terre Éthique"></button>
+  <button class="theme-btn" data-theme="cryptage-nocturne" title="Cryptage Nocturne"></button>
+  <button class="theme-btn" data-theme="aurore-humaine" title="Aurore Humaine"></button>
+  <button class="theme-btn" data-theme="horizon-progres" title="Horizon Progrès"></button>
+</div>
+```
+
+#### CSS - Styles des boutons de thèmes
+
+```css
+.theme-selector {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.theme-selector-label {
+  color: var(--text-secondary);
+  font-size: 11px;
+  margin-right: 5px;
+}
+
+.theme-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.theme-btn:hover {
+  transform: scale(1.1);
+  border-color: var(--text-primary);
+}
+
+.theme-btn.active {
+  border-color: var(--text-primary);
+  box-shadow: 0 0 8px var(--border-color);
+}
+
+.theme-btn[data-theme="nuit-foret"] {
+  background: linear-gradient(135deg, #0a0a0a 0%, #6b8e23 100%);
+}
+
+.theme-btn[data-theme="terre-ethique"] {
+  background: linear-gradient(135deg, #1a1512 0%, #7c9d6f 100%);
+}
+
+.theme-btn[data-theme="cryptage-nocturne"] {
+  background: linear-gradient(135deg, #0f1419 0%, #5a7a8a 100%);
+}
+
+.theme-btn[data-theme="aurore-humaine"] {
+  background: linear-gradient(135deg, #1a140f 0%, #b8956a 100%);
+}
+
+.theme-btn[data-theme="horizon-progres"] {
+  background: linear-gradient(135deg, #0f0f1a 0%, #7a6aa8 100%);
+}
+```
+
+#### JavaScript - Gestion des thèmes
+
+```javascript
+// Charger thème sauvegardé au démarrage
+loadTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'nuit-foret';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+
+  document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.theme === savedTheme);
+  });
+}
+
+// Changer de thème
+setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+
+  document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.theme === theme);
+  });
+
+  // Si graphiques Chart.js présents, les mettre à jour
+  if (typeof this.updateChartsColors === 'function') {
+    this.updateChartsColors();
+  }
+}
+
+// Configurer les événements
+setupThemeSelector() {
+  document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      this.setTheme(btn.dataset.theme);
+    });
+  });
+}
+```
 
 ### Utilisation
 
@@ -448,6 +728,9 @@ if (condition) {
 
 **Design** :
 - [ ] Variables CSS complètes importées
+- [ ] Système de 5 thèmes configurés (Nuit Forêt, Terre Éthique, Cryptage Nocturne, Aurore Humaine, Horizon Progrès)
+- [ ] Sélecteur de thèmes dans le header avec boutons visuels
+- [ ] Persistance du thème via localStorage
 - [ ] Footer avec format `@Je Geek Utile - DD/MM/YYYY - Nom v1.0`
 - [ ] Police système monospace (Consolas/Monaco)
 - [ ] Background principal `#0a0a0a` minimum
@@ -507,6 +790,7 @@ Questions ou suggestions sur la charte : Voir documentation projet
 
 ---
 
-**Charte Graphique** : v1.0
-**Date** : 26/11/2025
+**Charte Graphique** : v2.0
+**Date** : 22/12/2025
 **Auteur** : @Je Geek Utile
+**Nouveautés v2.0** : Système de 5 thèmes configurables représentant les valeurs du projet
