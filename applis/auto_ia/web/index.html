@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>auto_ia - Orchestrateur d'actions</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>auto_ia – Orchestrateur d'actions</h1>
+  </header>
+
+  <div class="container">
+    <aside class="control-panel">
+      <div class="panel">
+        <h2>Contrôle</h2>
+
+        <div class="health-indicator">
+          <div class="health-dot" id="health-dot"></div>
+          <div class="health-text" id="health-text">Vérification...</div>
+        </div>
+
+        <div class="health-indicator">
+          <div class="health-text" id="worker-status">Worker: inconnu</div>
+        </div>
+
+        <div class="form-group">
+          <label>URL API</label>
+          <input type="text" id="api-url" value="http://127.0.0.1:8000">
+        </div>
+
+        <div class="control-buttons">
+          <button class="btn primary" id="btn-start">Start</button>
+          <button class="btn" id="btn-pause">Pause</button>
+        </div>
+
+        <div class="control-buttons">
+          <button class="btn" id="btn-resume">Resume</button>
+          <button class="btn" id="btn-stop">Stop</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Sécurité</h2>
+        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12px;">
+          <div style="display: flex; justify-content: space-between;">
+            <span>Safe Mode:</span>
+            <span id="safe-mode-indicator" style="font-weight: 600;">-</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>Délai min:</span>
+            <span id="delay-indicator">-</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>Max/min:</span>
+            <span id="rate-limit-indicator">-</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Presets</h2>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <button class="btn" data-preset="copy-zone">Copier zone texte</button>
+          <button class="btn" data-preset="double-click">Double-clic standard</button>
+          <button class="btn" data-preset="paste-sequence">Coller séquence</button>
+        </div>
+      </div>
+
+      <div class="test-form">
+        <h3>
+          Test rapide
+          <span class="mode-badge" id="mode-indicator">Mode: direct</span>
+        </h3>
+        <form id="action-form">
+          <div class="form-group">
+            <label>Mode</label>
+            <div style="display: flex; gap: 12px; margin-top: 6px;">
+              <label style="display: flex; align-items: center; gap: 4px; font-size: 12px;">
+                <input type="radio" name="exec-mode" value="direct" checked>
+                Direct
+              </label>
+              <label style="display: flex; align-items: center; gap: 4px; font-size: 12px;">
+                <input type="radio" name="exec-mode" value="queue">
+                Enfiler
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Type d'action</label>
+            <select id="action-type">
+              <option value="mouse_click">mouse_click</option>
+              <option value="mouse_move">mouse_move</option>
+              <option value="mouse_scroll">mouse_scroll</option>
+              <option value="click_zone">click_zone</option>
+              <option value="clipboard_copy">clipboard_copy</option>
+              <option value="clipboard_paste">clipboard_paste</option>
+              <option value="keyboard_write">keyboard_write</option>
+              <option value="keyboard_press">keyboard_press</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Paramètres (JSON)</label>
+            <textarea id="action-params">{"x": 100, "y": 100, "button": "left"}</textarea>
+          </div>
+
+          <button type="submit" class="btn primary">Exécuter</button>
+        </form>
+      </div>
+    </aside>
+
+    <main class="queue-section">
+      <div class="panel">
+        <h2>Zones</h2>
+        <div style="margin-bottom: 12px;">
+          <button class="btn" id="btn-add-zone">+ Ajouter zone</button>
+        </div>
+        <div id="zones-list" style="display: flex; flex-direction: column; gap: 6px; font-size: 12px;"></div>
+
+        <div id="zone-form" class="test-form" style="display: none; margin-top: 12px; padding: 12px;">
+          <h3 style="font-size: 13px; margin-bottom: 8px;">Créer/Éditer zone</h3>
+          <div class="form-group">
+            <label>Nom</label>
+            <input type="text" id="zone-name" placeholder="ex: bouton_submit">
+          </div>
+          <div class="form-group">
+            <label>X</label>
+            <input type="number" id="zone-x" placeholder="500">
+          </div>
+          <div class="form-group">
+            <label>Y</label>
+            <input type="number" id="zone-y" placeholder="300">
+          </div>
+          <div class="form-group">
+            <label>Largeur (optionnel)</label>
+            <input type="number" id="zone-width" placeholder="100">
+          </div>
+          <div class="form-group">
+            <label>Hauteur (optionnel)</label>
+            <input type="number" id="zone-height" placeholder="40">
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn primary" id="btn-save-zone">Sauvegarder</button>
+            <button class="btn" id="btn-cancel-zone">Annuler</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>File d'actions</h2>
+        <div id="queue-list" class="queue-list">
+          <div class="empty-state">Aucune action en file</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Historique</h2>
+        <div id="history-list" class="history-list"></div>
+      </div>
+    </main>
+  </div>
+
+  <div id="tutorial-overlay" class="tutorial-overlay" style="display: none;">
+    <div class="tutorial-card">
+      <div class="tutorial-header">
+        <h2 id="tutorial-title"></h2>
+        <button class="btn-close-tutorial" id="btn-close-tutorial">×</button>
+      </div>
+      <div class="tutorial-progress">
+        <div class="progress-bar">
+          <div class="progress-fill" id="tutorial-progress-fill"></div>
+        </div>
+        <span class="progress-text" id="tutorial-progress-text">0 / 0</span>
+      </div>
+      <div class="tutorial-content">
+        <div class="tutorial-message" id="tutorial-message"></div>
+        <div class="tutorial-hint" id="tutorial-hint"></div>
+      </div>
+      <div class="tutorial-controls">
+        <button class="btn primary" id="btn-start-tutorial">Démarrer le tutoriel</button>
+        <button class="btn" id="btn-prefill-tutorial" style="display: none;">⚡ Pré-remplir le formulaire</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
