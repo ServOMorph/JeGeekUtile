@@ -32,7 +32,153 @@
         <button class="theme-btn" data-theme="aurore-humaine" title="Aurore Humaine"></button>
         <button class="theme-btn" data-theme="horizon-progres" title="Horizon Progrès"></button>
       </div>
+      <div class="mode-selector">
+        <span class="mode-selector-label">Mode:</span>
+        <button class="mode-btn" data-mode="hyper-econome" title="Hyper-économe">
+          <span class="mode-icon">E</span>
+        </button>
+        <button class="mode-btn active" data-mode="econome" title="Économe">
+          <span class="mode-icon">e</span>
+        </button>
+        <button class="mode-btn" data-mode="normal" title="Normal">
+          <span class="mode-icon">N</span>
+        </button>
+        <button class="mode-btn" data-mode="ultra" title="Ultra">
+          <span class="mode-icon">U</span>
+        </button>
+        <button class="mode-btn" data-mode="supernova" title="Supernova">
+          <span class="mode-icon">S</span>
+        </button>
+      </div>
+      <div class="user-profile" id="user-profile">
+        <div class="profile-orb">
+          <div class="orb-ring"></div>
+          <div class="orb-avatar">
+            <img src="" alt="Avatar" id="profile-avatar">
+            <div class="avatar-fallback" id="avatar-fallback">JG</div>
+          </div>
+          <div class="orb-status" data-status="online"></div>
+          <div class="orb-level"><span id="profile-level">1</span></div>
+        </div>
+        <div class="profile-info">
+          <span class="profile-name" id="profile-name">JeGeek</span>
+          <span class="profile-title" id="profile-title">Novice IA</span>
+        </div>
+      </div>
     </header>
+
+    <div class="profile-card hidden" id="profile-card">
+      <div class="profile-card-header">
+        <div class="profile-card-orb">
+          <div class="orb-ring large"></div>
+          <div class="orb-avatar large">
+            <img src="" alt="Avatar" id="card-avatar">
+            <div class="avatar-fallback large" id="card-avatar-fallback">JG</div>
+          </div>
+          <div class="orb-status large" data-status="online"></div>
+        </div>
+        <div class="profile-card-badges" id="profile-badges"></div>
+      </div>
+      <div class="profile-card-body">
+        <h3 class="profile-card-name" id="card-name">JeGeek</h3>
+        <span class="profile-card-title" id="card-title">Novice IA</span>
+        <div class="profile-xp-bar">
+          <div class="xp-fill" id="xp-fill"></div>
+          <span class="xp-text" id="xp-text">0 / 100 XP</span>
+        </div>
+        <p class="profile-card-bio" id="card-bio">Bio utilisateur...</p>
+        <div class="profile-card-stats">
+          <div class="profile-stat">
+            <span class="profile-stat-value" id="stat-total-clics">0</span>
+            <span class="profile-stat-label">Clics</span>
+          </div>
+          <div class="profile-stat">
+            <span class="profile-stat-value" id="stat-days-active">0</span>
+            <span class="profile-stat-label">Jours actifs</span>
+          </div>
+          <div class="profile-stat">
+            <span class="profile-stat-value" id="stat-local-ratio">0%</span>
+            <span class="profile-stat-label">Local</span>
+          </div>
+        </div>
+        <button class="profile-edit-btn" id="profile-edit-btn">Modifier le profil</button>
+      </div>
+    </div>
+
+    <div class="profile-edit-modal hidden" id="profile-edit-modal">
+      <div class="profile-edit-content">
+        <div class="profile-edit-header">
+          <h3>Modifier le profil</h3>
+          <button class="profile-edit-close" id="profile-edit-close">X</button>
+        </div>
+        <form id="profile-edit-form">
+          <div class="profile-edit-avatar-section">
+            <div class="profile-edit-avatar-preview">
+              <div class="orb-ring"></div>
+              <div class="orb-avatar">
+                <img src="" alt="Avatar" id="edit-avatar-preview">
+                <div class="avatar-fallback" id="edit-avatar-fallback">JG</div>
+              </div>
+            </div>
+            <div class="profile-edit-avatar-input">
+              <label for="edit-avatar">URL Avatar</label>
+              <input type="url" id="edit-avatar" placeholder="https://exemple.com/avatar.png">
+              <span class="input-hint">Laissez vide pour utiliser les initiales</span>
+            </div>
+          </div>
+          <div class="profile-prompt-generator">
+            <button type="button" class="btn-generate-prompt" id="btn-generate-prompt">
+              Generer prompt avatar (IA locale)
+            </button>
+            <div class="prompt-result hidden" id="prompt-result">
+              <label>Prompt genere</label>
+              <textarea id="generated-prompt" readonly rows="4"></textarea>
+              <button type="button" class="btn-copy-prompt" id="btn-copy-prompt">
+                Copier
+              </button>
+            </div>
+            <div class="prompt-loading hidden" id="prompt-loading">
+              Generation en cours...
+            </div>
+          </div>
+          <div class="profile-edit-field">
+            <label for="edit-username">Nom d'utilisateur</label>
+            <input type="text" id="edit-username" required maxlength="30" placeholder="Votre pseudo">
+          </div>
+          <div class="profile-edit-field">
+            <label for="edit-bio">Bio</label>
+            <textarea id="edit-bio" rows="3" maxlength="200" placeholder="Parlez de vous..."></textarea>
+            <span class="char-counter"><span id="bio-char-count">0</span>/200</span>
+          </div>
+          <div class="profile-edit-field">
+            <label for="edit-status">Statut</label>
+            <div class="status-selector">
+              <button type="button" class="status-option" data-status="online">
+                <span class="status-dot online"></span>
+                <span>En ligne</span>
+              </button>
+              <button type="button" class="status-option" data-status="idle">
+                <span class="status-dot idle"></span>
+                <span>Inactif</span>
+              </button>
+              <button type="button" class="status-option" data-status="dnd">
+                <span class="status-dot dnd"></span>
+                <span>Ne pas deranger</span>
+              </button>
+              <button type="button" class="status-option" data-status="offline">
+                <span class="status-dot offline"></span>
+                <span>Invisible</span>
+              </button>
+            </div>
+            <input type="hidden" id="edit-status" value="online">
+          </div>
+          <div class="profile-edit-actions">
+            <button type="button" class="btn-cancel" id="profile-edit-cancel">Annuler</button>
+            <button type="submit" class="btn-save">Sauvegarder</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <nav>
       <button data-view="dashboard" class="active">Dashboard</button>

@@ -6,18 +6,46 @@ const App = {
     timeFilter: 'all',
     granularity: 'day',
     charts: {},
-    currentTheme: 'nuit-foret'
+    currentTheme: 'nuit-foret',
+    currentMode: 'econome',
+    profile: {
+      username: 'JeGeekUtile',
+      avatar: '',
+      bio: 'Passionné par l\'IA éthique et locale. Objectif: 70% d\'utilisation d\'IAs locales pour réduire l\'empreinte carbone.',
+      status: 'online',
+      badges: [
+        { id: 'early_adopter', name: 'Early Adopter', icon: 'E', rarity: 'rare' },
+        { id: 'eco_warrior', name: 'Eco Warrior', icon: 'W', rarity: 'legendary' },
+        { id: 'local_first', name: 'Local First', icon: 'L', rarity: 'common' }
+      ],
+      createdAt: '2024-01-15'
+    }
   },
+
+  titles: [
+    { level: 1, name: 'Novice IA' },
+    { level: 5, name: 'Apprenti IA' },
+    { level: 10, name: 'Utilisateur IA' },
+    { level: 20, name: 'Expert IA' },
+    { level: 35, name: 'Maitre IA' },
+    { level: 50, name: 'Sage IA' },
+    { level: 75, name: 'Champion IA' },
+    { level: 100, name: 'Legendaire IA' }
+  ],
 
   async init() {
     try {
       this.loadTheme();
+      this.loadMode();
+      this.loadProfile();
       this.setupThemeSelector();
+      this.setupModeSelector();
       this.setFooterDate();
       await this.loadIAs();
       await this.loadClics();
       this.setupNavigation();
       this.updateStatsHeader();
+      this.setupProfile();
       this.render('dashboard');
     } catch (error) {
       this.showNotification('Erreur initialisation: ' + error.message, 'error');
@@ -54,6 +82,362 @@ const App = {
         this.setTheme(btn.dataset.theme);
       });
     });
+  },
+
+  loadMode() {
+    const savedMode = localStorage.getItem('displayMode') || 'econome';
+    this.data.currentMode = savedMode;
+    document.documentElement.setAttribute('data-mode', savedMode);
+
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.mode === savedMode);
+    });
+  },
+
+  setMode(mode) {
+    this.data.currentMode = mode;
+    document.documentElement.setAttribute('data-mode', mode);
+    localStorage.setItem('displayMode', mode);
+
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+
+    const labels = {
+      'hyper-econome': 'Hyper-économe',
+      'econome': 'Économe',
+      'normal': 'Normal',
+      'ultra': 'Ultra',
+      'supernova': 'Supernova'
+    };
+    this.showNotification(`Mode ${labels[mode]} activé`, 'success');
+  },
+
+  setupModeSelector() {
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.setMode(btn.dataset.mode);
+      });
+    });
+  },
+
+  calculateLevel() {
+    const totalClics = this.data.clics.length;
+    const xpPerClic = 10;
+    const totalXP = totalClics * xpPerClic;
+    let level = 1;
+    let xpForNextLevel = 100;
+    let accumulatedXP = 0;
+
+    while (accumulatedXP + xpForNextLevel <= totalXP && level < 100) {
+      accumulatedXP += xpForNextLevel;
+      level++;
+      xpForNextLevel = Math.floor(100 * Math.pow(1.15, level - 1));
+    }
+
+    const currentLevelXP = totalXP - accumulatedXP;
+    const xpNeeded = xpForNextLevel;
+    const progress = Math.min((currentLevelXP / xpNeeded) * 100, 100);
+
+    return { level, currentXP: currentLevelXP, xpNeeded, progress, totalXP };
+  },
+
+  getTitle(level) {
+    let title = this.titles[0].name;
+    for (const t of this.titles) {
+      if (level >= t.level) {
+        title = t.name;
+      }
+    }
+    return title;
+  },
+
+  getInitials(name) {
+    return name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+  },
+
+  getDaysActive() {
+    if (this.data.clics.length === 0) return 0;
+    const uniqueDays = new Set(
+      this.data.clics.map(c => new Date(c.timestamp).toDateString())
+    );
+    return uniqueDays.size;
+  },
+
+  setupProfile() {
+    this.updateProfileDisplay();
+    this.setupProfileEvents();
+  },
+
+  updateProfileDisplay() {
+    const { profile } = this.data;
+    const levelData = this.calculateLevel();
+    const title = this.getTitle(levelData.level);
+    const initials = this.getInitials(profile.username);
+
+    document.getElementById('profile-name').textContent = profile.username;
+    document.getElementById('profile-title').textContent = title;
+    document.getElementById('profile-level').textContent = levelData.level;
+    document.getElementById('avatar-fallback').textContent = initials;
+
+    document.getElementById('card-name').textContent = profile.username;
+    document.getElementById('card-title').textContent = title;
+    document.getElementById('card-avatar-fallback').textContent = initials;
+    document.getElementById('card-bio').textContent = profile.bio;
+
+    document.getElementById('xp-fill').style.width = `${levelData.progress}%`;
+    document.getElementById('xp-text').textContent = `${levelData.currentXP} / ${levelData.xpNeeded} XP`;
+
+    const totalClics = this.data.clics.length;
+    const clicsLocaux = this.data.clics.filter(c => {
+      const ia = this.data.ias.find(i => i.id === c.ia_id);
+      return ia && ia.type === 'local';
+    }).length;
+    const ratioLocal = totalClics > 0 ? Math.round((clicsLocaux / totalClics) * 100) : 0;
+
+    document.getElementById('stat-total-clics').textContent = totalClics;
+    document.getElementById('stat-days-active').textContent = this.getDaysActive();
+    document.getElementById('stat-local-ratio').textContent = `${ratioLocal}%`;
+
+    document.querySelectorAll('.orb-status').forEach(el => {
+      el.setAttribute('data-status', profile.status);
+    });
+
+    const badgesContainer = document.getElementById('profile-badges');
+    badgesContainer.innerHTML = profile.badges.map(badge => `
+      <div class="profile-badge ${badge.rarity}">
+        <span class="profile-badge-icon">${badge.icon}</span>
+        <span>${badge.name}</span>
+      </div>
+    `).join('');
+
+    if (profile.avatar) {
+      const avatarImgs = document.querySelectorAll('#profile-avatar, #card-avatar');
+      avatarImgs.forEach(img => {
+        img.src = profile.avatar;
+        img.onload = () => img.classList.add('loaded');
+      });
+    }
+  },
+
+  setupProfileEvents() {
+    const userProfile = document.getElementById('user-profile');
+    const profileCard = document.getElementById('profile-card');
+    const editModal = document.getElementById('profile-edit-modal');
+
+    userProfile.addEventListener('click', (e) => {
+      e.stopPropagation();
+      profileCard.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!profileCard.contains(e.target) && !userProfile.contains(e.target)) {
+        profileCard.classList.add('hidden');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        profileCard.classList.add('hidden');
+        editModal.classList.add('hidden');
+      }
+    });
+
+    document.getElementById('profile-edit-btn').addEventListener('click', () => {
+      this.openProfileEditModal();
+    });
+
+    document.getElementById('profile-edit-close').addEventListener('click', () => {
+      this.closeProfileEditModal();
+    });
+
+    document.getElementById('profile-edit-cancel').addEventListener('click', () => {
+      this.closeProfileEditModal();
+    });
+
+    editModal.addEventListener('click', (e) => {
+      if (e.target === editModal) {
+        this.closeProfileEditModal();
+      }
+    });
+
+    document.getElementById('profile-edit-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.saveProfile();
+    });
+
+    document.querySelectorAll('.status-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.status-option').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('edit-status').value = btn.dataset.status;
+      });
+    });
+
+    const bioTextarea = document.getElementById('edit-bio');
+    bioTextarea.addEventListener('input', () => {
+      document.getElementById('bio-char-count').textContent = bioTextarea.value.length;
+    });
+
+    const avatarInput = document.getElementById('edit-avatar');
+    avatarInput.addEventListener('input', () => {
+      this.updateAvatarPreview(avatarInput.value);
+    });
+
+    document.getElementById('btn-generate-prompt').addEventListener('click', () => {
+      this.generateAvatarPrompt();
+    });
+
+    document.getElementById('btn-copy-prompt').addEventListener('click', () => {
+      this.copyPrompt();
+    });
+  },
+
+  openProfileEditModal() {
+    const { profile } = this.data;
+    const editModal = document.getElementById('profile-edit-modal');
+
+    document.getElementById('edit-username').value = profile.username;
+    document.getElementById('edit-bio').value = profile.bio;
+    document.getElementById('edit-avatar').value = profile.avatar;
+    document.getElementById('edit-status').value = profile.status;
+    document.getElementById('bio-char-count').textContent = profile.bio.length;
+
+    document.querySelectorAll('.status-option').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.status === profile.status);
+    });
+
+    this.updateAvatarPreview(profile.avatar);
+
+    document.getElementById('profile-card').classList.add('hidden');
+    editModal.classList.remove('hidden');
+  },
+
+  closeProfileEditModal() {
+    document.getElementById('profile-edit-modal').classList.add('hidden');
+  },
+
+  updateAvatarPreview(url) {
+    const previewImg = document.getElementById('edit-avatar-preview');
+    const previewFallback = document.getElementById('edit-avatar-fallback');
+    const username = document.getElementById('edit-username').value || this.data.profile.username;
+
+    if (url && url.trim()) {
+      previewImg.src = url;
+      previewImg.classList.add('loaded');
+      previewFallback.style.display = 'none';
+    } else {
+      previewImg.classList.remove('loaded');
+      previewImg.src = '';
+      previewFallback.style.display = 'flex';
+      previewFallback.textContent = this.getInitials(username);
+    }
+  },
+
+  saveProfile() {
+    const username = document.getElementById('edit-username').value.trim();
+    const bio = document.getElementById('edit-bio').value.trim();
+    const avatar = document.getElementById('edit-avatar').value.trim();
+    const status = document.getElementById('edit-status').value;
+
+    if (!username) {
+      this.showNotification('Le nom d\'utilisateur est requis', 'error');
+      return;
+    }
+
+    this.data.profile.username = username;
+    this.data.profile.bio = bio;
+    this.data.profile.avatar = avatar;
+    this.data.profile.status = status;
+
+    localStorage.setItem('userProfile', JSON.stringify(this.data.profile));
+
+    this.updateProfileDisplay();
+    this.closeProfileEditModal();
+    this.showNotification('Profil mis a jour', 'success');
+  },
+
+  loadProfile() {
+    const savedProfile = localStorage.getItem('userProfile');
+    if (savedProfile) {
+      try {
+        const parsed = JSON.parse(savedProfile);
+        this.data.profile = { ...this.data.profile, ...parsed };
+      } catch (e) {
+        console.error('Erreur chargement profil:', e);
+      }
+    }
+  },
+
+  async generateAvatarPrompt() {
+    const username = document.getElementById('edit-username').value.trim();
+    const bio = document.getElementById('edit-bio').value.trim();
+
+    if (!username) {
+      this.showNotification('Nom requis pour generer le prompt', 'error');
+      return;
+    }
+
+    const btn = document.getElementById('btn-generate-prompt');
+    const loading = document.getElementById('prompt-loading');
+    const result = document.getElementById('prompt-result');
+    const textarea = document.getElementById('generated-prompt');
+
+    btn.disabled = true;
+    loading.classList.remove('hidden');
+    result.classList.add('hidden');
+
+    const systemPrompt = `Tu es un expert en prompts pour generateurs d'images IA.
+Cree un prompt detaille et optimise pour generer un avatar/photo de profil unique.
+Le prompt doit etre en anglais, precis, et adapte aux generateurs comme Midjourney, DALL-E ou Stable Diffusion.
+Reponds UNIQUEMENT avec le prompt, sans explication ni commentaire.`;
+
+    const userInput = `Cree un prompt pour un avatar base sur :
+- Nom/Pseudo : ${username}
+- Bio : ${bio || 'Aucune bio fournie'}
+
+Le prompt doit creer un avatar stylise, professionnel et memorable.`;
+
+    try {
+      const response = await fetch('http://localhost:11434/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'gemma3',
+          prompt: userInput,
+          system: systemPrompt,
+          stream: false
+        })
+      });
+
+      if (!response.ok) throw new Error('Erreur Ollama (verifiez que le serveur est demarre)');
+
+      const data = await response.json();
+      textarea.value = data.response.trim();
+      result.classList.remove('hidden');
+      this.showNotification('Prompt genere avec succes', 'success');
+    } catch (error) {
+      this.showNotification('Erreur: ' + error.message, 'error');
+    } finally {
+      btn.disabled = false;
+      loading.classList.add('hidden');
+    }
+  },
+
+  async copyPrompt() {
+    const textarea = document.getElementById('generated-prompt');
+    if (!textarea.value) {
+      this.showNotification('Aucun prompt a copier', 'error');
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(textarea.value);
+      this.showNotification('Prompt copie dans le presse-papier', 'success');
+    } catch (error) {
+      textarea.select();
+      document.execCommand('copy');
+      this.showNotification('Prompt copie', 'success');
+    }
   },
 
   setFooterDate() {
@@ -511,6 +895,7 @@ const App = {
 
       await this.loadClics();
       this.updateStatsHeader();
+      this.updateProfileDisplay();
       this.render(this.data.currentView);
 
       const ia = this.data.ias.find(i => i.id === iaId);

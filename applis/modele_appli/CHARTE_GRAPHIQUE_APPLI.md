@@ -16,6 +16,658 @@ Les applications proposent **5 thèmes configurables** représentant les valeurs
 
 Tous les thèmes respectent les contraintes OLED (noir profond, couleurs désaturées, > 70% pixels noirs).
 
+### Système de Modes d'Affichage
+
+Les applications proposent **4 modes d'affichage** indépendants des thèmes de couleurs :
+
+| Mode | Description | Cas d'usage |
+|------|-------------|-------------|
+| **Hyper-économe** | Minimalisme extrême, 0 effet visuel | Batterie critique, accessibilité, OLED max |
+| **Économe** | Design actuel équilibré | Usage quotidien standard |
+| **Normal** | Design moderne et esthétique | Présentation, démonstration |
+| **Ultra** | Effets visuels spectaculaires, animations fluides | Démonstration, showcase, expérience premium |
+
+#### Variables CSS - Mode Hyper-économe
+
+```css
+:root[data-mode="hyper-econome"] {
+  /* === ESPACEMENTS (réduits 50%) === */
+  --space-xs: 2px;
+  --space-sm: 4px;
+  --space-md: 6px;
+  --space-lg: 10px;
+  --space-xl: 15px;
+  --space-xxl: 20px;
+
+  /* === BORDURES (minimales) === */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+
+  --border-width-thin: 1px;
+  --border-width-base: 1px;
+  --border-width-thick: 1px;
+  --border-width-heavy: 2px;
+
+  /* === OMBRES (désactivées) === */
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+
+  /* === TRANSITIONS (désactivées) === */
+  --transition-fast: 0ms;
+  --transition-base: 0ms;
+  --transition-slow: 0ms;
+
+  /* === ANIMATIONS (désactivées) === */
+  --animation-duration: 0ms;
+  --animation-scale-hover: 1;
+  --animation-translate-hover: 0;
+  --animation-enabled: 0;
+
+  /* === TYPOGRAPHIE (compacte) === */
+  --font-size-xs: 10px;
+  --font-size-sm: 11px;
+  --font-size-base: 13px;
+  --font-size-lg: 15px;
+  --font-size-xl: 17px;
+  --font-size-xxl: 19px;
+  --font-size-display: 28px;
+
+  --line-height-tight: 1.1;
+  --line-height-base: 1.3;
+  --line-height-relaxed: 1.5;
+}
+```
+
+#### Variables CSS - Mode Économe (Défaut)
+
+```css
+:root[data-mode="econome"],
+:root {
+  /* Valeurs par défaut - voir section Variables CSS principale */
+  /* Ce mode utilise les variables standard définies dans chaque thème */
+
+  /* === ANIMATIONS (minimales) === */
+  --animation-duration: 150ms;
+  --animation-scale-hover: 1.02;
+  --animation-translate-hover: -2px;
+  --animation-enabled: 1;
+}
+```
+
+#### Variables CSS - Mode Normal
+
+```css
+:root[data-mode="normal"] {
+  /* === ESPACEMENTS (généreux) === */
+  --space-xs: 6px;
+  --space-sm: 12px;
+  --space-md: 18px;
+  --space-lg: 28px;
+  --space-xl: 42px;
+  --space-xxl: 56px;
+
+  /* === BORDURES (arrondies) === */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --border-width-thin: 1px;
+  --border-width-base: 2px;
+  --border-width-thick: 3px;
+  --border-width-heavy: 4px;
+
+  /* === OMBRES (prononcées) === */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.5), 0 3px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.5), 0 6px 12px var(--hover-overlay);
+
+  /* === TRANSITIONS (fluides) === */
+  --transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 450ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* === ANIMATIONS (enrichies) === */
+  --animation-duration: 300ms;
+  --animation-scale-hover: 1.05;
+  --animation-translate-hover: -4px;
+  --animation-enabled: 1;
+  --animation-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --animation-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* === TYPOGRAPHIE (aérée) === */
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-base: 15px;
+  --font-size-lg: 17px;
+  --font-size-xl: 20px;
+  --font-size-xxl: 24px;
+  --font-size-display: 40px;
+
+  --line-height-tight: 1.3;
+  --line-height-base: 1.6;
+  --line-height-relaxed: 1.8;
+}
+```
+
+#### Variables CSS - Mode Ultra
+
+```css
+:root[data-mode="ultra"] {
+  /* === ESPACEMENTS (très généreux) === */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 36px;
+  --space-xl: 56px;
+  --space-xxl: 80px;
+
+  /* === BORDURES (très arrondies) === */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 40px;
+
+  --border-width-thin: 1px;
+  --border-width-base: 2px;
+  --border-width-thick: 3px;
+  --border-width-heavy: 4px;
+
+  /* === OMBRES (spectaculaires avec glow coloré) === */
+  --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 20px var(--glow-color);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 40px var(--glow-color);
+  --shadow-lg: 0 16px 50px rgba(0, 0, 0, 0.6), 0 0 60px var(--glow-color);
+  --shadow-glow: 0 0 30px var(--glow-color), 0 0 60px var(--glow-color);
+
+  /* === TRANSITIONS (très fluides) === */
+  --transition-fast: 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-base: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-slow: 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* === ANIMATIONS (spectaculaires) === */
+  --animation-duration: 500ms;
+  --animation-scale-hover: 1.08;
+  --animation-translate-hover: -8px;
+  --animation-enabled: 1;
+  --animation-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --animation-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* === TYPOGRAPHIE (très aérée) === */
+  --font-size-xs: 13px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 19px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 32px;
+  --font-size-display: 56px;
+
+  --line-height-tight: 1.4;
+  --line-height-base: 1.7;
+  --line-height-relaxed: 2;
+
+  /* === COULEURS GLOW (par thème) === */
+  --glow-color: rgba(107, 142, 35, 0.4);
+  --glow-color-intense: rgba(107, 142, 35, 0.6);
+  --gradient-accent: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+}
+
+/* Glow colors par thème en mode Ultra */
+:root[data-mode="ultra"][data-theme="nuit-foret"] {
+  --glow-color: rgba(107, 142, 35, 0.4);
+  --glow-color-intense: rgba(107, 142, 35, 0.7);
+}
+
+:root[data-mode="ultra"][data-theme="terre-ethique"] {
+  --glow-color: rgba(124, 157, 111, 0.4);
+  --glow-color-intense: rgba(124, 157, 111, 0.7);
+}
+
+:root[data-mode="ultra"][data-theme="cryptage-nocturne"] {
+  --glow-color: rgba(90, 122, 138, 0.4);
+  --glow-color-intense: rgba(90, 122, 138, 0.7);
+}
+
+:root[data-mode="ultra"][data-theme="aurore-humaine"] {
+  --glow-color: rgba(184, 149, 106, 0.4);
+  --glow-color-intense: rgba(184, 149, 106, 0.7);
+}
+
+:root[data-mode="ultra"][data-theme="horizon-progres"] {
+  --glow-color: rgba(122, 106, 168, 0.4);
+  --glow-color-intense: rgba(122, 106, 168, 0.7);
+}
+```
+
+#### Règles CSS - Animations par Mode
+
+```css
+/* ============================================
+   MODE HYPER-ÉCONOME : Aucune animation
+   ============================================ */
+:root[data-mode="hyper-econome"] * {
+  animation: none !important;
+  transition: none !important;
+}
+
+:root[data-mode="hyper-econome"] .card:hover,
+:root[data-mode="hyper-econome"] .btn:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* ============================================
+   MODE ÉCONOME : Animations minimales
+   ============================================ */
+:root[data-mode="econome"] .card {
+  transition: border-color var(--transition-fast);
+}
+
+:root[data-mode="econome"] .card:hover {
+  border-color: var(--border-color);
+}
+
+:root[data-mode="econome"] .btn {
+  transition: background-color var(--transition-fast),
+              opacity var(--transition-fast);
+}
+
+:root[data-mode="econome"] .btn:hover {
+  opacity: 0.9;
+}
+
+/* ============================================
+   MODE NORMAL : Animations enrichies
+   ============================================ */
+
+/* Keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px var(--accent-secondary); }
+  50% { box-shadow: 0 0 15px var(--accent-secondary); }
+}
+
+/* Cards */
+:root[data-mode="normal"] .card {
+  transition: transform var(--transition-base),
+              box-shadow var(--transition-base),
+              border-color var(--transition-base);
+}
+
+:root[data-mode="normal"] .card:hover {
+  transform: translateY(var(--animation-translate-hover)) scale(var(--animation-scale-hover));
+  box-shadow: var(--shadow-lg);
+}
+
+/* Boutons */
+:root[data-mode="normal"] .btn {
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast),
+              background-color var(--transition-fast);
+}
+
+:root[data-mode="normal"] .btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: var(--shadow-md);
+}
+
+:root[data-mode="normal"] .btn:active {
+  transform: translateY(0) scale(0.97);
+  transition-duration: 50ms;
+}
+
+/* Bouton primaire avec glow */
+:root[data-mode="normal"] .btn-primary:focus {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Apparition des éléments */
+:root[data-mode="normal"] .animate-fade {
+  animation: fadeIn var(--animation-duration) var(--animation-smooth);
+}
+
+:root[data-mode="normal"] .animate-slide {
+  animation: slideIn var(--animation-duration) var(--animation-smooth);
+}
+
+/* Inputs focus */
+:root[data-mode="normal"] input:focus,
+:root[data-mode="normal"] select:focus,
+:root[data-mode="normal"] textarea:focus {
+  transform: scale(1.01);
+  box-shadow: 0 0 0 3px var(--hover-overlay);
+}
+
+/* Links hover */
+:root[data-mode="normal"] a {
+  transition: color var(--transition-fast),
+              text-decoration-color var(--transition-fast);
+}
+
+:root[data-mode="normal"] a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Focus ring amélioré */
+:root[data-mode="normal"] :focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(107, 142, 35, 0.2);
+}
+
+/* Glassmorphism pour cards */
+:root[data-mode="normal"] .card-glass {
+  background: linear-gradient(
+    135deg,
+    rgba(45, 45, 45, 0.9) 0%,
+    rgba(26, 26, 26, 0.95) 100%
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(107, 142, 35, 0.3);
+}
+
+/* Skeleton loading */
+:root[data-mode="normal"] .skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-tertiary) 25%,
+    var(--bg-elevated) 50%,
+    var(--bg-tertiary) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============================================
+   MODE ULTRA : Animations spectaculaires
+   ============================================ */
+
+/* Keyframes Ultra */
+@keyframes ultraPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--glow-color), 0 0 40px var(--glow-color);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--glow-color-intense), 0 0 80px var(--glow-color);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes ultraFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes ultraGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px var(--glow-color));
+  }
+  50% {
+    filter: drop-shadow(0 0 25px var(--glow-color-intense));
+  }
+}
+
+@keyframes ultraShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes ultraBorderFlow {
+  0% { border-color: var(--accent-primary); }
+  33% { border-color: var(--accent-secondary); }
+  66% { border-color: var(--accent-tertiary); }
+  100% { border-color: var(--accent-primary); }
+}
+
+@keyframes ultraFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes ultraSlideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes ultraRipple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Cards Ultra */
+:root[data-mode="ultra"] .card {
+  transition: transform var(--transition-base),
+              box-shadow var(--transition-base),
+              border-color var(--transition-base);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+:root[data-mode="ultra"] .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+:root[data-mode="ultra"] .card:hover::before {
+  left: 100%;
+}
+
+:root[data-mode="ultra"] .card:hover {
+  transform: translateY(var(--animation-translate-hover)) scale(var(--animation-scale-hover));
+  box-shadow: var(--shadow-lg);
+  animation: ultraBorderFlow 3s ease infinite;
+}
+
+/* Boutons Ultra */
+:root[data-mode="ultra"] .btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast),
+              background-color var(--transition-fast);
+  border-radius: var(--radius-md);
+}
+
+:root[data-mode="ultra"] .btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
+:root[data-mode="ultra"] .btn:active::after {
+  animation: ultraRipple 0.6s ease-out;
+}
+
+:root[data-mode="ultra"] .btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: var(--shadow-md);
+}
+
+:root[data-mode="ultra"] .btn:active {
+  transform: translateY(0) scale(0.95);
+  transition-duration: 100ms;
+}
+
+:root[data-mode="ultra"] .btn-primary {
+  background: var(--gradient-accent);
+  animation: ultraGlow 2s ease-in-out infinite;
+}
+
+/* Inputs Ultra */
+:root[data-mode="ultra"] input:focus,
+:root[data-mode="ultra"] select:focus,
+:root[data-mode="ultra"] textarea:focus {
+  transform: scale(1.02);
+  box-shadow: 0 0 0 4px var(--glow-color), var(--shadow-md);
+  border-radius: var(--radius-md);
+}
+
+/* Focus ring Ultra */
+:root[data-mode="ultra"] :focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 8px var(--glow-color);
+}
+
+/* Glassmorphism avancé Ultra */
+:root[data-mode="ultra"] .card-glass {
+  background: linear-gradient(
+    135deg,
+    rgba(45, 45, 45, 0.7) 0%,
+    rgba(26, 26, 26, 0.8) 100%
+  );
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Animation d'entrée des éléments */
+:root[data-mode="ultra"] .animate-in {
+  animation: ultraFadeInUp var(--animation-duration) var(--animation-elastic) forwards;
+}
+
+:root[data-mode="ultra"] .animate-slide {
+  animation: ultraSlideInLeft var(--animation-duration) var(--animation-elastic) forwards;
+}
+
+/* Header/Nav flottants */
+:root[data-mode="ultra"] header {
+  animation: ultraFloat 4s ease-in-out infinite;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Skeleton loading spectaculaire */
+:root[data-mode="ultra"] .skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-tertiary) 0%,
+    var(--glow-color) 50%,
+    var(--bg-tertiary) 100%
+  );
+  background-size: 200% 100%;
+  animation: ultraShimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+/* Effet néon sur les textes accent */
+:root[data-mode="ultra"] .text-glow {
+  text-shadow: 0 0 10px var(--glow-color),
+               0 0 20px var(--glow-color),
+               0 0 40px var(--glow-color);
+}
+
+/* Scrollbar stylisée */
+:root[data-mode="ultra"] ::-webkit-scrollbar {
+  width: 12px;
+}
+
+:root[data-mode="ultra"] ::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+  border-radius: 6px;
+}
+
+:root[data-mode="ultra"] ::-webkit-scrollbar-thumb {
+  background: var(--gradient-accent);
+  border-radius: 6px;
+  box-shadow: 0 0 10px var(--glow-color);
+}
+
+:root[data-mode="ultra"] ::-webkit-scrollbar-thumb:hover {
+  box-shadow: 0 0 20px var(--glow-color-intense);
+}
+
+/* Layout Ultra */
+:root[data-mode="ultra"] main {
+  padding: 50px;
+}
+
+:root[data-mode="ultra"] header {
+  padding: 25px 40px;
+}
+```
+
+#### Tableau Comparatif des Modes
+
+| Propriété | Hyper-économe | Économe | Normal | Ultra |
+|-----------|---------------|---------|--------|-------|
+| **Espacements** | -50% (compacts) | Standard | +40% (aérés) | +80% (très aérés) |
+| **Rayons bordures** | 0px (carrés) | 3-12px | 6-24px | 12-40px (très arrondis) |
+| **Ombres** | Aucune | Légères | Prononcées | Spectaculaires + glow coloré |
+| **Transitions** | 0ms | 150-300ms | 200-450ms | 250-600ms (elastic) |
+| **Taille police** | -1px | Standard | +1px | +2px |
+| **Line-height** | 1.1-1.5 | 1.2-1.7 | 1.3-1.8 | 1.4-2.0 |
+| **Hover cards** | Aucun | Bordure | Scale + ombre | Scale + glow + shimmer |
+| **Hover boutons** | Aucun | Opacité | Scale 1.03 | Scale 1.05 + ripple |
+| **Focus ring** | 2px | 2px | 3px + glow 6px | 3px + glow 8px |
+| **Keyframes** | Aucun | Aucun | 4 animations | 8+ animations |
+| **Effets spéciaux** | Non | Non | Glassmorphism | Glow, shimmer, float, ripple |
+| **Animations auto** | Non | Non | Non | Float header, pulse continu |
+| **Consommation CPU** | Minimale | Faible | Standard | Élevée |
+| **Cas d'usage** | Batterie faible | Quotidien | Présentation | Showcase premium |
+
 ### Variables CSS
 
 #### Thème 1 : Nuit Forêt (Éco-responsabilité)
@@ -375,6 +1027,140 @@ setupThemeSelector() {
 }
 ```
 
+### Implémentation du Sélecteur de Mode
+
+#### HTML - Boutons de sélection de mode (dans le header)
+
+```html
+<div class="mode-selector">
+  <span class="mode-selector-label">Mode:</span>
+  <button class="mode-btn" data-mode="hyper-econome" title="Hyper-économe">
+    <span class="mode-icon">⚡</span>
+  </button>
+  <button class="mode-btn active" data-mode="econome" title="Économe">
+    <span class="mode-icon">🌿</span>
+  </button>
+  <button class="mode-btn" data-mode="normal" title="Normal">
+    <span class="mode-icon">✨</span>
+  </button>
+</div>
+```
+
+#### CSS - Styles des boutons de mode
+
+```css
+.mode-selector {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-left: 20px;
+  padding-left: 20px;
+  border-left: 1px solid var(--border-subtle);
+}
+
+.mode-selector-label {
+  color: var(--text-secondary);
+  font-size: 11px;
+  margin-right: 5px;
+}
+
+.mode-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 28px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: 14px;
+}
+
+.mode-btn:hover {
+  background: var(--bg-elevated);
+  border-color: var(--border-color);
+}
+
+.mode-btn.active {
+  background: var(--accent-primary);
+  border-color: var(--border-color);
+  box-shadow: 0 0 6px var(--hover-overlay);
+}
+
+.mode-icon {
+  line-height: 1;
+}
+
+/* Variante compacte pour mode hyper-économe */
+:root[data-mode="hyper-econome"] .mode-selector {
+  gap: 4px;
+  margin-left: 10px;
+  padding-left: 10px;
+}
+
+:root[data-mode="hyper-econome"] .mode-btn {
+  width: 28px;
+  height: 24px;
+  font-size: 12px;
+}
+```
+
+#### JavaScript - Gestion des modes
+
+```javascript
+// Charger mode sauvegardé au démarrage
+loadMode() {
+  const savedMode = localStorage.getItem('displayMode') || 'econome';
+  document.documentElement.setAttribute('data-mode', savedMode);
+
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.mode === savedMode);
+  });
+}
+
+// Changer de mode
+setMode(mode) {
+  document.documentElement.setAttribute('data-mode', mode);
+  localStorage.setItem('displayMode', mode);
+
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.mode === mode);
+  });
+
+  // Notification optionnelle
+  this.showNotification(`Mode ${this.getModeLabel(mode)} activé`);
+}
+
+// Label lisible du mode
+getModeLabel(mode) {
+  const labels = {
+    'hyper-econome': 'Hyper-économe',
+    'econome': 'Économe',
+    'normal': 'Normal'
+  };
+  return labels[mode] || mode;
+}
+
+// Configurer les événements
+setupModeSelector() {
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      this.setMode(btn.dataset.mode);
+    });
+  });
+}
+
+// Initialisation complète (thème + mode)
+init() {
+  this.loadTheme();
+  this.loadMode();
+  this.setupThemeSelector();
+  this.setupModeSelector();
+}
+```
+
 ### Utilisation
 
 | Élément | Couleur | Variable |
@@ -731,6 +1517,10 @@ if (condition) {
 - [ ] Système de 5 thèmes configurés (Nuit Forêt, Terre Éthique, Cryptage Nocturne, Aurore Humaine, Horizon Progrès)
 - [ ] Sélecteur de thèmes dans le header avec boutons visuels
 - [ ] Persistance du thème via localStorage
+- [ ] Système de 3 modes d'affichage configurés (Hyper-économe, Économe, Normal)
+- [ ] Sélecteur de mode dans le header avec boutons visuels
+- [ ] Persistance du mode via localStorage
+- [ ] Combinaison mode + thème fonctionnelle
 - [ ] Footer avec format `@Je Geek Utile - DD/MM/YYYY - Nom v1.0`
 - [ ] Police système monospace (Consolas/Monaco)
 - [ ] Background principal `#0a0a0a` minimum
@@ -790,7 +1580,8 @@ Questions ou suggestions sur la charte : Voir documentation projet
 
 ---
 
-**Charte Graphique** : v2.0
-**Date** : 22/12/2025
+**Charte Graphique** : v2.1
+**Date** : 23/12/2025
 **Auteur** : @Je Geek Utile
+**Nouveautés v2.1** : Système de 3 modes d'affichage (Hyper-économe, Économe, Normal)
 **Nouveautés v2.0** : Système de 5 thèmes configurables représentant les valeurs du projet
