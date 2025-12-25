@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact - Je Geek Utile{% endblock %}
+
+{% block content %}
+<section class="section">
+    <h1 class="section-title">Contactez-nous</h1>
+
+    <div class="grid grid-2">
+        <div class="card">
+            <h2 class="card-title">Envoyez-nous un message</h2>
+            <form method="POST" action="{{ url_for('contact') }}">
+                <div class="form-group">
+                    <label class="form-label" for="nom">Nom</label>
+                    <input type="text" id="nom" name="nom" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="message">Message</label>
+                    <textarea id="message" name="message" class="form-textarea" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">Informations</h2>
+            <div style="margin-bottom: var(--space-lg);">
+                <h4>Adresse</h4>
+                <p style="color: var(--text-secondary);">
+                    Association Je Geek Utile<br>
+                    France
+                </p>
+            </div>
+            <div style="margin-bottom: var(--space-lg);">
+                <h4>Email</h4>
+                <p style="color: var(--text-secondary);">
+                    contact@jegeekutile.org
+                </p>
+            </div>
+            <div>
+                <h4>Reseaux sociaux</h4>
+                <p style="color: var(--text-secondary);">
+                    Suivez-nous pour les dernieres actualites.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

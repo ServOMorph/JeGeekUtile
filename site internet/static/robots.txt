@@ -1,0 +1,33 @@
+# robots.txt pour Je Geek Utile
+# Site web : https://jegeekutile.fr
+# Derniere mise a jour : Decembre 2025
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /instance/
+Disallow: /.git/
+Disallow: /.env
+Disallow: /login
+Disallow: /inscription
+
+Sitemap: https://jegeekutile.fr/sitemap.xml
+
+# Moteurs de recherche principaux
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+# Agents IA
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /

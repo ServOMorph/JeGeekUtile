@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Mon Profil - Je Geek Utile{% endblock %}
+
+{% block content %}
+<section class="section">
+    <h1 class="section-title">Mon Profil</h1>
+
+    <div class="grid grid-2">
+        <div class="card">
+            <h2 class="card-title">Informations personnelles</h2>
+            <form method="POST" action="{{ url_for('profil') }}">
+                <div class="form-group">
+                    <label class="form-label" for="prenom">Prenom</label>
+                    <input type="text" id="prenom" name="prenom" class="form-input"
+                           value="{{ current_user.prenom }}" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="nom">Nom</label>
+                    <input type="text" id="nom" name="nom" class="form-input"
+                           value="{{ current_user.nom }}" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email" class="form-input"
+                           value="{{ current_user.email }}" disabled>
+                    <small style="color: var(--text-muted);">L'email ne peut pas etre modifie</small>
+                </div>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">Statistiques</h2>
+            <div style="margin-bottom: var(--space-lg);">
+                <p style="color: var(--text-secondary);">Membre depuis</p>
+                <p class="stat-value">{{ current_user.date_inscription.strftime('%d/%m/%Y') }}</p>
+            </div>
+            <div style="margin-bottom: var(--space-lg);">
+                <p style="color: var(--text-secondary);">Statut</p>
+                <p class="stat-value">{% if current_user.is_admin %}Administrateur{% else %}Membre{% endif %}</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: var(--space-xl);">
+        <a href="{{ url_for('espace_membre') }}" class="btn btn-secondary">Retour a l'espace membre</a>
+    </div>
+</section>
+{% endblock %}

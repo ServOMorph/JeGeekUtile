@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}A propos - Je Geek Utile{% endblock %}
+
+{% block content %}
+<section class="section">
+    <h1 class="section-title">A propos de Je Geek Utile</h1>
+
+    <div class="card" style="margin-bottom: var(--space-xl);">
+        <h2 class="card-title">Notre Mission</h2>
+        <p>
+            Je Geek Utile est une association loi 1901 fondee avec la conviction
+            que la technologie doit etre au service de l'humain et de l'environnement.
+        </p>
+        <p>
+            Nous croyons en un numerique ethique, accessible et eco-responsable.
+            Notre mission est de democratiser l'acces aux technologies tout en
+            sensibilisant aux bonnes pratiques.
+        </p>
+    </div>
+
+    <h2 class="section-title">Nos 5 Piliers</h2>
+    <div class="grid grid-2">
+        <div class="card">
+            <h3 class="card-title">1. Eco-responsabilite</h3>
+            <p>
+                Toutes nos creations sont optimisees pour reduire la consommation
+                d'energie. Nos interfaces utilisent des themes sombres qui
+                consomment jusqu'a 70% moins d'energie sur les ecrans OLED.
+            </p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">2. Ethique et Transparence</h3>
+            <p>
+                Nous privilegions l'open source et la transparence dans nos
+                developpements. Nos outils respectent la vie privee des
+                utilisateurs et ne collectent que les donnees necessaires.
+            </p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">3. Securite des Donnees</h3>
+            <p>
+                La protection des donnees personnelles est une priorite.
+                Nous appliquons les meilleures pratiques de securite et
+                sensibilisons nos membres aux risques numeriques.
+            </p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">4. IA pour les Humains</h3>
+            <p>
+                L'intelligence artificielle doit augmenter les capacites
+                humaines sans les remplacer. Nous developpons des outils
+                d'IA ethiques et accessibles a tous.
+            </p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">5. Innovation et Progres</h3>
+            <p>
+                Nous explorons constamment les nouvelles technologies pour
+                identifier celles qui peuvent reellement ameliorer le quotidien,
+                tout en restant critiques et responsables.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section-title">Rejoignez-nous</h2>
+    <div class="card">
+        <p>
+            Vous partagez nos valeurs ? Rejoignez notre communaute de
+            passionnes de technologie responsable.
+        </p>
+        <p style="margin-top: var(--space-lg);">
+            <a href="{{ url_for('inscription') }}" class="btn btn-primary">Devenir membre</a>
+        </p>
+    </div>
+</section>
+{% endblock %}

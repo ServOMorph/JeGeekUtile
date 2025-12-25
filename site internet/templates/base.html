@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="nuit-foret" data-mode="econome">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#6b8e23">
+
+    <link rel="canonical" href="{% block canonical %}https://jegeekutile.fr{% endblock %}">
+
+    <title>{% block title %}Je Geek Utile{% endblock %}</title>
+    <meta name="description" content="{% block description %}Je Geek Utile - Association loi 1901 qui met la technologie au service de l'humain. Formations IA gratuites, outils open source, accompagnement numerique eco-responsable en France.{% endblock %}">
+
+    <meta property="og:title" content="{% block og_title %}Je Geek Utile - Technologie au service de l'humain{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Association loi 1901 proposant formations IA, outils open source et accompagnement numerique eco-responsable.{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{% block og_url %}https://jegeekutile.fr{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}https://jegeekutile.fr/static/images/og-image.png{% endblock %}">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Je Geek Utile">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}Je Geek Utile{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Technologie au service de l'humain{% endblock %}">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Je Geek Utile",
+        "alternateName": "JGU",
+        "url": "https://jegeekutile.fr",
+        "logo": "https://jegeekutile.fr/static/images/logo.png",
+        "description": "Association loi 1901 qui met la technologie au service de l'humain. Formations IA, outils open source, accompagnement numerique eco-responsable.",
+        "foundingDate": "2024",
+        "areaServed": {
+            "@type": "Country",
+            "name": "France"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Service client",
+            "areaServed": "FR",
+            "availableLanguage": "French"
+        },
+        "sameAs": []
+    }
+    </script>
+    {% block schema_extra %}{% endblock %}
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+    <header>
+        <div class="header-content">
+            <h1 class="logo">Je Geek Utile</h1>
+            <div class="header-controls">
+                <div class="theme-selector">
+                    <span class="theme-selector-label">Theme:</span>
+                    <button class="theme-btn active" data-theme="nuit-foret" title="Nuit Foret"></button>
+                    <button class="theme-btn" data-theme="terre-ethique" title="Terre Ethique"></button>
+                    <button class="theme-btn" data-theme="cryptage-nocturne" title="Cryptage Nocturne"></button>
+                    <button class="theme-btn" data-theme="aurore-humaine" title="Aurore Humaine"></button>
+                    <button class="theme-btn" data-theme="horizon-progres" title="Horizon Progres"></button>
+                    <button class="theme-btn" data-theme="ocean-profond" title="Ocean Profond"></button>
+                    <button class="theme-btn" data-theme="magma-digital" title="Magma Digital"></button>
+                    <button class="theme-btn" data-theme="glacier-arctique" title="Glacier Arctique"></button>
+                    <button class="theme-btn" data-theme="sable-dore" title="Sable Dore"></button>
+                    <button class="theme-btn" data-theme="nebula-cosmique" title="Nebula Cosmique"></button>
+                </div>
+                <div class="mode-selector">
+                    <span class="mode-selector-label">Mode:</span>
+                    <button class="mode-btn" data-mode="hyper-econome" title="Hyper-econome">H</button>
+                    <button class="mode-btn active" data-mode="econome" title="Econome">E</button>
+                    <button class="mode-btn" data-mode="normal" title="Normal">N</button>
+                    <button class="mode-btn" data-mode="ultra" title="Ultra">U</button>
+                    <button class="mode-btn" data-mode="supernova" title="Supernova">S</button>
+                    <button class="mode-btn" data-mode="quasar" title="Quasar">Q</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav aria-label="Navigation principale">
+        <a href="{{ url_for('accueil') }}" class="nav-link {% if request.endpoint == 'accueil' %}active{% endif %}"{% if request.endpoint == 'accueil' %} aria-current="page"{% endif %}>Accueil</a>
+        <a href="{{ url_for('a_propos') }}" class="nav-link {% if request.endpoint == 'a_propos' %}active{% endif %}"{% if request.endpoint == 'a_propos' %} aria-current="page"{% endif %}>A propos</a>
+        <a href="{{ url_for('services') }}" class="nav-link {% if request.endpoint == 'services' %}active{% endif %}"{% if request.endpoint == 'services' %} aria-current="page"{% endif %}>Services</a>
+        <a href="{{ url_for('contact') }}" class="nav-link {% if request.endpoint == 'contact' %}active{% endif %}"{% if request.endpoint == 'contact' %} aria-current="page"{% endif %}>Contact</a>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('espace_membre') }}" class="nav-link {% if request.endpoint == 'espace_membre' %}active{% endif %}">Espace Membre</a>
+            <a href="{{ url_for('logout') }}" class="nav-link nav-link-right">Deconnexion</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="nav-link nav-link-right {% if request.endpoint == 'login' %}active{% endif %}">Connexion</a>
+            <a href="{{ url_for('inscription') }}" class="nav-link {% if request.endpoint == 'inscription' %}active{% endif %}">Inscription</a>
+        {% endif %}
+    </nav>
+
+    <main id="main-content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="notification notification-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        @Je Geek Utile - {{ now().strftime('%d/%m/%Y') if now is defined else '25/12/2024' }} - Site v1.0
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</body>
+</html>

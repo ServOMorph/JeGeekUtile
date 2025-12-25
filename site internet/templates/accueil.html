@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Accueil - Je Geek Utile{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1 class="hero-title">Je Geek Utile</h1>
+    <p class="hero-subtitle">L'association qui met la technologie au service de l'humain</p>
+    <a href="{{ url_for('inscription') }}" class="btn btn-primary">Rejoignez-nous</a>
+</div>
+
+<section class="section">
+    <h2 class="section-title">Nos Valeurs</h2>
+    <div class="grid grid-3">
+        <div class="card">
+            <div class="feature-icon">*</div>
+            <h3 class="feature-title">Eco-responsabilite</h3>
+            <p class="feature-description">
+                Nous concevons des solutions numeriques respectueuses de l'environnement,
+                optimisees pour minimiser leur empreinte carbone.
+            </p>
+        </div>
+        <div class="card">
+            <div class="feature-icon">#</div>
+            <h3 class="feature-title">Ethique et Transparence</h3>
+            <p class="feature-description">
+                Toutes nos actions sont guidees par l'ethique.
+                Nous privilegions l'open source et la transparence.
+            </p>
+        </div>
+        <div class="card">
+            <div class="feature-icon">@</div>
+            <h3 class="feature-title">IA pour les Humains</h3>
+            <p class="feature-description">
+                L'intelligence artificielle doit servir l'humain,
+                pas l'inverse. Nous developpons des outils accessibles a tous.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section-title">Nos Actions</h2>
+    <div class="grid grid-2">
+        <div class="card">
+            <h3 class="card-title">Formation</h3>
+            <p>
+                Nous proposons des formations gratuites pour democratiser
+                l'acces aux technologies et a l'IA.
+            </p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Developpement</h3>
+            <p>
+                Nous creons des outils open source pour faciliter
+                le quotidien des utilisateurs.
+            </p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Accompagnement</h3>
+            <p>
+                Nous accompagnons les particuliers et les associations
+                dans leur transition numerique.
+            </p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Sensibilisation</h3>
+            <p>
+                Nous sensibilisons le public aux enjeux du numerique
+                responsable et de la cybersecurite.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

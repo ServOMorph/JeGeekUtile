@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Services - Je Geek Utile{% endblock %}
+
+{% block content %}
+<section class="section">
+    <h1 class="section-title">Nos Services</h1>
+
+    <div class="grid grid-2">
+        <div class="card">
+            <h2 class="card-title">Formation au Numerique</h2>
+            <p>
+                Nous proposons des ateliers et formations pour tous les niveaux :
+            </p>
+            <ul style="margin-left: var(--space-lg); margin-top: var(--space-md); color: var(--text-secondary);">
+                <li>Initiation a l'informatique</li>
+                <li>Securite en ligne et protection des donnees</li>
+                <li>Utilisation des outils d'IA</li>
+                <li>Programmation debutant a avance</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">Developpement d'Outils</h2>
+            <p>
+                Nous creeons des logiciels open source :
+            </p>
+            <ul style="margin-left: var(--space-lg); margin-top: var(--space-md); color: var(--text-secondary);">
+                <li>Applications de productivite</li>
+                <li>Outils d'automatisation</li>
+                <li>Solutions d'accessibilite</li>
+                <li>Interfaces eco-responsables</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">Accompagnement</h2>
+            <p>
+                Nous aidons les particuliers et associations :
+            </p>
+            <ul style="margin-left: var(--space-lg); margin-top: var(--space-md); color: var(--text-secondary);">
+                <li>Conseil en transition numerique</li>
+                <li>Audit de securite simplifie</li>
+                <li>Mise en place d'outils collaboratifs</li>
+                <li>Support technique benevole</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">Sensibilisation</h2>
+            <p>
+                Nous organisons des evenements de sensibilisation :
+            </p>
+            <ul style="margin-left: var(--space-lg); margin-top: var(--space-md); color: var(--text-secondary);">
+                <li>Conferences sur le numerique responsable</li>
+                <li>Ateliers cybersecurite</li>
+                <li>Tables rondes sur l'IA ethique</li>
+                <li>Demonstrations d'outils eco-conçus</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section-title">Tarification</h2>
+    <div class="grid grid-3">
+        <div class="card" style="text-align: center;">
+            <h3 class="card-title">Particuliers</h3>
+            <p class="stat-value">Gratuit</p>
+            <p style="color: var(--text-secondary);">
+                Toutes nos formations et notre accompagnement
+                sont gratuits pour les particuliers.
+            </p>
+        </div>
+        <div class="card" style="text-align: center;">
+            <h3 class="card-title">Associations</h3>
+            <p class="stat-value">Gratuit</p>
+            <p style="color: var(--text-secondary);">
+                Les associations a but non lucratif
+                beneficient de nos services gratuitement.
+            </p>
+        </div>
+        <div class="card" style="text-align: center;">
+            <h3 class="card-title">Entreprises</h3>
+            <p class="stat-value">Sur devis</p>
+            <p style="color: var(--text-secondary);">
+                Nous proposons des prestations adaptees
+                aux besoins des entreprises.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

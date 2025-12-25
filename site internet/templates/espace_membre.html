@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Espace Membre - Je Geek Utile{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="member-header">
+        <div>
+            <h1>Bienvenue, {{ current_user.prenom }} !</h1>
+            <p style="color: var(--text-secondary);">
+                Membre depuis le {{ current_user.date_inscription.strftime('%d/%m/%Y') }}
+            </p>
+        </div>
+        <div>
+            <a href="{{ url_for('profil') }}" class="btn btn-secondary">Mon profil</a>
+        </div>
+    </div>
+
+    <div class="member-stats">
+        <div class="stat-card">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Formations suivies</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Evenements participes</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Contributions</div>
+        </div>
+    </div>
+
+    <h2 class="section-title" style="margin-top: var(--space-xxl);">Mes Activites</h2>
+    <div class="grid grid-2">
+        <div class="card">
+            <h3 class="card-title">Formations disponibles</h3>
+            <p style="color: var(--text-secondary);">
+                Aucune formation disponible pour le moment.
+            </p>
+            <p style="margin-top: var(--space-md);">
+                De nouvelles formations seront bientot disponibles.
+                Restez connecte !
+            </p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Prochains evenements</h3>
+            <p style="color: var(--text-secondary);">
+                Aucun evenement programme pour le moment.
+            </p>
+            <p style="margin-top: var(--space-md);">
+                Les prochains evenements seront annonces ici.
+            </p>
+        </div>
+    </div>
+
+    <h2 class="section-title" style="margin-top: var(--space-xxl);">Ressources Membres</h2>
+    <div class="grid grid-3">
+        <div class="card">
+            <h3 class="card-title">Documentation</h3>
+            <p style="color: var(--text-secondary);">
+                Acces aux guides et tutoriels exclusifs.
+            </p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Outils</h3>
+            <p style="color: var(--text-secondary);">
+                Telechargez nos outils open source.
+            </p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Communaute</h3>
+            <p style="color: var(--text-secondary);">
+                Echangez avec les autres membres.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}
