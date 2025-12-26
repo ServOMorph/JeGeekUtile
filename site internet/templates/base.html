@@ -57,7 +57,9 @@
 
     <header>
         <div class="header-content">
-            <h1 class="logo">Je Geek Utile</h1>
+            <a href="{{ url_for('accueil') }}" class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Je Geek Utile" class="logo-img">
+            </a>
             <div class="header-controls">
                 <div class="theme-selector">
                     <span class="theme-selector-label">Theme:</span>
