@@ -28,6 +28,19 @@
                     <input type="password" id="password" name="password" class="form-input" required minlength="8">
                     <small style="color: var(--text-muted);">Minimum 8 caracteres</small>
                 </div>
+                <div class="form-group">
+                    <label class="form-label">Type de compte</label>
+                    <div style="display: flex; gap: var(--space-md); margin-top: var(--space-sm);">
+                        <label style="display: flex; align-items: center; gap: var(--space-xs); cursor: pointer;">
+                            <input type="radio" name="type_compte" value="visiteur" checked>
+                            <span>Simple visiteur</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: var(--space-xs); cursor: pointer;">
+                            <input type="radio" name="type_compte" value="benevole">
+                            <span>Benevole</span>
+                        </label>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">S'inscrire</button>
             </form>
 

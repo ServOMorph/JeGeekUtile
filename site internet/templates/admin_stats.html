@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+
+{% block title %}Statistiques - Administration{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="member-header">
+        <h1>Statistiques</h1>
+        <p>Vue d'ensemble des benevoles</p>
+    </div>
+
+    <div class="grid grid-3" style="gap: var(--space-lg); margin-bottom: var(--space-xl);">
+        <div class="card stat-card">
+            <div class="stat-value" style="font-size: 3rem; color: var(--accent);">{{ total_benevoles }}</div>
+            <div class="stat-label">Benevoles inscrits</div>
+        </div>
+        <div class="card stat-card">
+            <div class="stat-value geekos-display" style="font-size: 3rem; color: var(--accent);">
+                <img src="{{ url_for('static', filename='images/geekos.png') }}" alt="Geekos" class="geekos-icon" style="width: 40px; height: 40px;">
+                {{ total_geekos }}
+            </div>
+            <div class="stat-label">Geekos distribues</div>
+        </div>
+        <div class="card stat-card">
+            <div class="stat-value" style="font-size: 3rem; color: var(--accent);">{{ moyenne_age }} ans</div>
+            <div class="stat-label">Age moyen</div>
+        </div>
+    </div>
+
+    <div class="grid grid-2" style="gap: var(--space-lg); margin-bottom: var(--space-lg);">
+        <div class="card">
+            <h2 class="card-title">Repartition par temps disponible</h2>
+            <div class="chart-container">
+                {% set temps_labels = {
+                    'moins_2h': 'Moins de 2h',
+                    '2h_5h': '2h a 5h',
+                    '5h_10h': '5h a 10h',
+                    'plus_10h': 'Plus de 10h',
+                    'ponctuel': 'Ponctuel',
+                    'non_renseigne': 'Non renseigne'
+                } %}
+                {% set max_temps = temps_stats.values()|max if temps_stats.values()|list else 1 %}
+                {% for key, value in temps_stats.items() %}
+                <div class="chart-bar-row">
+                    <span class="chart-label">{{ temps_labels.get(key, key) }}</span>
+                    <div class="chart-bar-container">
+                        <div class="chart-bar" style="width: {{ (value / max_temps * 100)|int }}%;"></div>
+                        <span class="chart-value">{{ value }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">Repartition par age</h2>
+            <div class="chart-container">
+                {% set age_labels = {
+                    'moins_18': 'Moins de 18 ans',
+                    '18_25': '18-25 ans',
+                    '25_35': '25-35 ans',
+                    '35_50': '35-50 ans',
+                    'plus_50': 'Plus de 50 ans',
+                    'non_renseigne': 'Non renseigne'
+                } %}
+                {% set max_age = age_stats.values()|max if age_stats.values()|list else 1 %}
+                {% for key, value in age_stats.items() %}
+                <div class="chart-bar-row">
+                    <span class="chart-label">{{ age_labels.get(key, key) }}</span>
+                    <div class="chart-bar-container">
+                        <div class="chart-bar" style="width: {{ (value / max_age * 100)|int }}%;"></div>
+                        <span class="chart-value">{{ value }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-2" style="gap: var(--space-lg); margin-bottom: var(--space-lg);">
+        <div class="card">
+            <h2 class="card-title">Appetences populaires</h2>
+            <div class="chart-container">
+                {% set max_app = appetences_stats.values()|max if appetences_stats.values()|list else 1 %}
+                {% for nom, count in appetences_stats.items()|sort(attribute='1', reverse=True) %}
+                <div class="chart-bar-row">
+                    <span class="chart-label">{{ nom }}</span>
+                    <div class="chart-bar-container">
+                        <div class="chart-bar chart-bar-secondary" style="width: {{ (count / max_app * 100)|int if max_app > 0 else 0 }}%;"></div>
+                        <span class="chart-value">{{ count }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">Inscriptions par mois</h2>
+            <div class="chart-container">
+                {% set max_insc = inscriptions_par_mois.values()|max if inscriptions_par_mois.values()|list else 1 %}
+                {% for mois, count in inscriptions_par_mois.items() %}
+                <div class="chart-bar-row">
+                    <span class="chart-label">{{ mois }}</span>
+                    <div class="chart-bar-container">
+                        <div class="chart-bar chart-bar-tertiary" style="width: {{ (count / max_insc * 100)|int }}%;"></div>
+                        <span class="chart-value">{{ count }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">
+            <span class="geekos-display">
+                <img src="{{ url_for('static', filename='images/geekos.png') }}" alt="Geekos" class="geekos-icon">
+                Top 5 Geekos
+            </span>
+        </h2>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="border-bottom: 2px solid var(--border-color);">
+                        <th style="padding: var(--space-sm); text-align: left;">Rang</th>
+                        <th style="padding: var(--space-sm); text-align: left;">Benevole</th>
+                        <th style="padding: var(--space-sm); text-align: left;">Email</th>
+                        <th style="padding: var(--space-sm); text-align: right;">Geekos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for benevole in top_geekos %}
+                    <tr style="border-bottom: 1px solid var(--border-color);">
+                        <td style="padding: var(--space-sm);">
+                            {% if loop.index == 1 %}
+                                <span style="font-size: 1.5em;">1</span>
+                            {% elif loop.index == 2 %}
+                                <span style="font-size: 1.3em;">2</span>
+                            {% elif loop.index == 3 %}
+                                <span style="font-size: 1.1em;">3</span>
+                            {% else %}
+                                {{ loop.index }}
+                            {% endif %}
+                        </td>
+                        <td style="padding: var(--space-sm);">{{ benevole.prenom }} {{ benevole.nom }}</td>
+                        <td style="padding: var(--space-sm);">{{ benevole.email }}</td>
+                        <td style="padding: var(--space-sm); text-align: right;">
+                            <span class="geekos-display">
+                                <img src="{{ url_for('static', filename='images/geekos.png') }}" alt="Geekos" class="geekos-icon">
+                                {{ benevole.monnaie }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" style="padding: var(--space-sm); color: var(--text-secondary);">Aucun benevole</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p style="color: var(--text-secondary); margin-top: var(--space-md);">
+            Moyenne par benevole : <strong>{{ moyenne_geekos }}</strong> Geekos
+        </p>
+    </div>
+
+    <div style="margin-top: var(--space-lg);">
+        <a href="{{ url_for('admin') }}" class="btn btn-secondary">Retour a l'administration</a>
+    </div>
+</section>
+
+<style>
+.stat-card {
+    text-align: center;
+    padding: var(--space-xl);
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-top: var(--space-sm);
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.chart-bar-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.chart-label {
+    width: 120px;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.chart-bar-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.chart-bar {
+    height: 24px;
+    background: var(--accent);
+    border-radius: var(--radius-sm);
+    min-width: 4px;
+    transition: width 0.3s ease;
+}
+
+.chart-bar-secondary {
+    background: var(--accent-secondary, var(--accent));
+    opacity: 0.8;
+}
+
+.chart-bar-tertiary {
+    background: var(--text-primary);
+    opacity: 0.6;
+}
+
+.chart-value {
+    font-weight: bold;
+    color: var(--text-primary);
+    min-width: 30px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-label {
+        width: 100px;
+        font-size: 0.8rem;
+    }
+}
+</style>
+{% endblock %}

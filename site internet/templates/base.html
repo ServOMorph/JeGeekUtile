@@ -94,6 +94,13 @@
         <a href="{{ url_for('contact') }}" class="nav-link {% if request.endpoint == 'contact' %}active{% endif %}"{% if request.endpoint == 'contact' %} aria-current="page"{% endif %}>Contact</a>
         {% if current_user.is_authenticated %}
             <a href="{{ url_for('espace_membre') }}" class="nav-link {% if request.endpoint == 'espace_membre' %}active{% endif %}">Espace Membre</a>
+            {% if current_user.is_admin %}
+            <a href="{{ url_for('admin') }}" class="nav-link {% if request.endpoint in ['admin', 'admin_benevole_detail'] %}active{% endif %}">Admin</a>
+            {% endif %}
+            <span class="nav-geekos" title="Vos Geekos">
+                <img src="{{ url_for('static', filename='images/geekos.png') }}" alt="Geekos" class="geekos-icon">
+                {{ current_user.monnaie }}
+            </span>
             <a href="{{ url_for('logout') }}" class="nav-link nav-link-right">Deconnexion</a>
         {% else %}
             <a href="{{ url_for('login') }}" class="nav-link nav-link-right {% if request.endpoint == 'login' %}active{% endif %}">Connexion</a>

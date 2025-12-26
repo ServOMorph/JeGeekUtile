@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ benevole.prenom }} {{ benevole.nom }} - Administration{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="member-header">
+        <h1>{{ benevole.prenom }} {{ benevole.nom }}</h1>
+        <p>Fiche benevole</p>
+    </div>
+
+    <div class="grid grid-2" style="gap: var(--space-lg);">
+        <div class="card">
+            <h2 class="card-title">Informations personnelles</h2>
+
+            <div style="display: grid; gap: var(--space-md);">
+                <div>
+                    <strong>Email :</strong><br>
+                    {{ benevole.email }}
+                </div>
+                <div>
+                    <strong>Date de naissance :</strong><br>
+                    {% if benevole.date_naissance %}
+                        {{ benevole.date_naissance.strftime('%d/%m/%Y') }} ({{ benevole.get_age() }} ans)
+                    {% else %}
+                        Non renseigne
+                    {% endif %}
+                </div>
+                <div>
+                    <strong>Adresse :</strong><br>
+                    {{ benevole.adresse or 'Non renseignee' }}
+                </div>
+                <div>
+                    <strong>Date d'inscription :</strong><br>
+                    {{ benevole.date_inscription.strftime('%d/%m/%Y') }}
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">Engagement</h2>
+
+            <div style="display: grid; gap: var(--space-md);">
+                <div>
+                    <strong>Motivation :</strong><br>
+                    {{ benevole.motivation or 'Non renseignee' }}
+                </div>
+                <div>
+                    <strong>Temps disponible :</strong><br>
+                    {{ benevole.temps_disponible or 'Non renseigne' }}
+                </div>
+                <div>
+                    <strong>Appetences :</strong><br>
+                    {% if benevole.appetences %}
+                        {% for app in benevole.appetences %}
+                            <span style="display: inline-block; background: var(--accent); color: var(--bg-primary); padding: 2px 8px; border-radius: 4px; margin: 2px; font-size: 0.9em;">{{ app.nom }}</span>
+                        {% endfor %}
+                    {% else %}
+                        Aucune appetence renseignee
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: var(--space-lg);">
+        <h2 class="card-title">Missions et Geekos</h2>
+
+        <form method="POST" action="{{ url_for('admin_modifier_benevole', user_id=benevole.id) }}">
+            <div class="grid grid-2" style="gap: var(--space-md);">
+                <div class="form-group">
+                    <label class="form-label" for="missions_realisees">Missions realisees</label>
+                    <textarea id="missions_realisees" name="missions_realisees" class="form-input" rows="4">{{ benevole.missions_realisees or '' }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="missions_en_cours">Missions en cours</label>
+                    <textarea id="missions_en_cours" name="missions_en_cours" class="form-input" rows="4">{{ benevole.missions_en_cours or '' }}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label geekos-display" for="monnaie">
+                    <img src="{{ url_for('static', filename='images/geekos.png') }}" alt="Geekos" class="geekos-icon">
+                    Geekos disponibles
+                </label>
+                <input type="number" id="monnaie" name="monnaie" class="form-input" value="{{ benevole.monnaie }}" min="0" style="max-width: 200px;">
+            </div>
+            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+        </form>
+    </div>
+
+    <div style="margin-top: var(--space-lg);">
+        <a href="{{ url_for('admin') }}" class="btn btn-secondary">Retour a la liste</a>
+    </div>
+</section>
+{% endblock %}

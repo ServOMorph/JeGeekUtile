@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Formulaire Benevole - Je Geek Utile{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <div class="card">
+            <h1 class="card-title" style="text-align: center;">Profil Benevole</h1>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: var(--space-lg);">
+                Completez votre profil pour devenir benevole
+            </p>
+
+            <form method="POST" action="{{ url_for('formulaire_benevole') }}">
+                <div class="form-group">
+                    <label class="form-label" for="date_naissance">Date de naissance</label>
+                    <input type="date" id="date_naissance" name="date_naissance" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="adresse">Adresse</label>
+                    <textarea id="adresse" name="adresse" class="form-input" rows="2" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="motivation">Pourquoi souhaitez-vous devenir benevole ?</label>
+                    <textarea id="motivation" name="motivation" class="form-input" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="temps_disponible">Combien de temps pouvez-vous donner a l'association ?</label>
+                    <select id="temps_disponible" name="temps_disponible" class="form-input" required>
+                        <option value="">-- Selectionnez --</option>
+                        <option value="moins_2h">Moins de 2h par semaine</option>
+                        <option value="2h_5h">2h a 5h par semaine</option>
+                        <option value="5h_10h">5h a 10h par semaine</option>
+                        <option value="plus_10h">Plus de 10h par semaine</option>
+                        <option value="ponctuel">Ponctuellement selon les evenements</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Quelles sont vos appetences ?</label>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-sm); margin-top: var(--space-sm);">
+                        {% for appetence in appetences %}
+                        <label style="display: flex; align-items: center; gap: var(--space-xs); cursor: pointer;">
+                            <input type="checkbox" name="appetences" value="{{ appetence.id }}">
+                            <span>{{ appetence.nom }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Valider mon profil benevole</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -6,10 +6,10 @@
 <section class="section">
     <h1 class="section-title">Mon Profil</h1>
 
-    <div class="grid grid-2">
-        <div class="card">
-            <h2 class="card-title">Informations personnelles</h2>
-            <form method="POST" action="{{ url_for('profil') }}">
+    <form method="POST" action="{{ url_for('profil') }}">
+        <div class="grid grid-2">
+            <div class="card">
+                <h2 class="card-title">Informations personnelles</h2>
                 <div class="form-group">
                     <label class="form-label" for="prenom">Prenom</label>
                     <input type="text" id="prenom" name="prenom" class="form-input"
@@ -26,25 +26,93 @@
                            value="{{ current_user.email }}" disabled>
                     <small style="color: var(--text-muted);">L'email ne peut pas etre modifie</small>
                 </div>
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
-            </form>
+                <div class="form-group">
+                    <label class="form-label" for="date_naissance">Date de naissance</label>
+                    <input type="date" id="date_naissance" name="date_naissance" class="form-input"
+                           value="{{ current_user.date_naissance.strftime('%Y-%m-%d') if current_user.date_naissance else '' }}">
+                    {% if current_user.get_age() %}
+                    <small style="color: var(--text-muted);">Age : {{ current_user.get_age() }} ans</small>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="adresse">Adresse</label>
+                    <textarea id="adresse" name="adresse" class="form-input" rows="2">{{ current_user.adresse or '' }}</textarea>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title">Statistiques</h2>
+                <div style="margin-bottom: var(--space-lg);">
+                    <p style="color: var(--text-secondary);">Membre depuis</p>
+                    <p class="stat-value">{{ current_user.date_inscription.strftime('%d/%m/%Y') }}</p>
+                </div>
+                <div style="margin-bottom: var(--space-lg);">
+                    <p style="color: var(--text-secondary);">Statut</p>
+                    <p class="stat-value">{% if current_user.is_admin %}Administrateur{% elif current_user.is_benevole %}Benevole{% else %}Membre{% endif %}</p>
+                </div>
+                {% if current_user.is_benevole %}
+                <div style="margin-bottom: var(--space-lg);">
+                    <p style="color: var(--text-secondary);">Geekos disponibles</p>
+                    <p class="stat-value geekos-display">
+                        <img src="{{ url_for('static', filename='images/geekos.png') }}" alt="Geekos" class="geekos-icon">
+                        {{ current_user.monnaie }}
+                    </p>
+                </div>
+                {% endif %}
+            </div>
         </div>
 
-        <div class="card">
-            <h2 class="card-title">Statistiques</h2>
-            <div style="margin-bottom: var(--space-lg);">
-                <p style="color: var(--text-secondary);">Membre depuis</p>
-                <p class="stat-value">{{ current_user.date_inscription.strftime('%d/%m/%Y') }}</p>
+        {% if current_user.is_benevole %}
+        <div class="grid grid-2" style="margin-top: var(--space-lg);">
+            <div class="card">
+                <h2 class="card-title">Engagement benevole</h2>
+                <div class="form-group">
+                    <label class="form-label" for="motivation">Motivation</label>
+                    <textarea id="motivation" name="motivation" class="form-input" rows="3">{{ current_user.motivation or '' }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="temps_disponible">Temps disponible</label>
+                    <select id="temps_disponible" name="temps_disponible" class="form-input">
+                        <option value="">-- Selectionnez --</option>
+                        <option value="moins_2h" {% if current_user.temps_disponible == 'moins_2h' %}selected{% endif %}>Moins de 2h par semaine</option>
+                        <option value="2h_5h" {% if current_user.temps_disponible == '2h_5h' %}selected{% endif %}>2h a 5h par semaine</option>
+                        <option value="5h_10h" {% if current_user.temps_disponible == '5h_10h' %}selected{% endif %}>5h a 10h par semaine</option>
+                        <option value="plus_10h" {% if current_user.temps_disponible == 'plus_10h' %}selected{% endif %}>Plus de 10h par semaine</option>
+                        <option value="ponctuel" {% if current_user.temps_disponible == 'ponctuel' %}selected{% endif %}>Ponctuellement selon les evenements</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Appetences</label>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-sm); margin-top: var(--space-sm);">
+                        {% for appetence in appetences %}
+                        <label style="display: flex; align-items: center; gap: var(--space-xs); cursor: pointer;">
+                            <input type="checkbox" name="appetences" value="{{ appetence.id }}"
+                                   {% if appetence in current_user.appetences %}checked{% endif %}>
+                            <span>{{ appetence.nom }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
-            <div style="margin-bottom: var(--space-lg);">
-                <p style="color: var(--text-secondary);">Statut</p>
-                <p class="stat-value">{% if current_user.is_admin %}Administrateur{% else %}Membre{% endif %}</p>
+
+            <div class="card">
+                <h2 class="card-title">Missions</h2>
+                <div style="margin-bottom: var(--space-lg);">
+                    <p style="color: var(--text-secondary);">Missions realisees</p>
+                    <p style="white-space: pre-line;">{{ current_user.missions_realisees or 'Aucune mission realisee' }}</p>
+                </div>
+                <div>
+                    <p style="color: var(--text-secondary);">Missions en cours</p>
+                    <p style="white-space: pre-line;">{{ current_user.missions_en_cours or 'Aucune mission en cours' }}</p>
+                </div>
             </div>
         </div>
-    </div>
+        {% endif %}
 
-    <div style="margin-top: var(--space-xl);">
-        <a href="{{ url_for('espace_membre') }}" class="btn btn-secondary">Retour a l'espace membre</a>
-    </div>
+        <div style="margin-top: var(--space-lg);">
+            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+            <a href="{{ url_for('espace_membre') }}" class="btn btn-secondary" style="margin-left: var(--space-sm);">Retour a l'espace membre</a>
+        </div>
+    </form>
 </section>
 {% endblock %}

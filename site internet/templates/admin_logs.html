@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Logs d'activite - Administration{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="member-header">
+        <h1>Logs d'activite</h1>
+        <p>Suivi des interactions utilisateurs</p>
+    </div>
+
+    <div class="card" style="margin-bottom: var(--space-lg);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <strong>Total :</strong> {{ logs.total }} evenements
+            </div>
+            <a href="{{ url_for('admin_logs_export') }}" class="btn btn-secondary" target="_blank">Exporter JSON</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+                <thead>
+                    <tr style="border-bottom: 2px solid var(--border-color);">
+                        <th style="padding: var(--space-sm); text-align: left;">Date/Heure</th>
+                        <th style="padding: var(--space-sm); text-align: left;">Session</th>
+                        <th style="padding: var(--space-sm); text-align: left;">Utilisateur</th>
+                        <th style="padding: var(--space-sm); text-align: left;">Page</th>
+                        <th style="padding: var(--space-sm); text-align: left;">Type</th>
+                        <th style="padding: var(--space-sm); text-align: left;">Element</th>
+                        <th style="padding: var(--space-sm); text-align: left;">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs.items %}
+                    <tr style="border-bottom: 1px solid var(--border-color);">
+                        <td style="padding: var(--space-sm); white-space: nowrap;">{{ log.timestamp.strftime('%d/%m %H:%M:%S') }}</td>
+                        <td style="padding: var(--space-sm);">{{ log.session_id[:8] }}...</td>
+                        <td style="padding: var(--space-sm);">{{ log.user.email if log.user else 'Anonyme' }}</td>
+                        <td style="padding: var(--space-sm);">{{ log.page }}</td>
+                        <td style="padding: var(--space-sm);">
+                            <span style="display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 0.8em;
+                                {% if log.event_type == 'click' %}background: var(--accent);{% elif log.event_type == 'pageview' %}background: var(--accent-secondary);{% elif log.event_type == 'input' %}background: #e67e22;{% else %}background: #9b59b6;{% endif %} color: white;">
+                                {{ log.event_type }}
+                            </span>
+                        </td>
+                        <td style="padding: var(--space-sm); max-width: 150px; overflow: hidden; text-overflow: ellipsis;">{{ log.element or '-' }}</td>
+                        <td style="padding: var(--space-sm); max-width: 200px; overflow: hidden; text-overflow: ellipsis;">{{ log.details or '-' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if logs.pages > 1 %}
+        <div style="margin-top: var(--space-lg); display: flex; justify-content: center; gap: var(--space-sm);">
+            {% if logs.has_prev %}
+            <a href="{{ url_for('admin_logs', page=logs.prev_num) }}" class="btn btn-secondary">Precedent</a>
+            {% endif %}
+            <span style="padding: var(--space-sm);">Page {{ logs.page }} / {{ logs.pages }}</span>
+            {% if logs.has_next %}
+            <a href="{{ url_for('admin_logs', page=logs.next_num) }}" class="btn btn-secondary">Suivant</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+    <div style="margin-top: var(--space-lg);">
+        <a href="{{ url_for('admin') }}" class="btn btn-secondary">Retour a l'administration</a>
+    </div>
+</section>
+{% endblock %}

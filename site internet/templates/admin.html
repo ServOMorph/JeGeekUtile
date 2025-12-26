@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+
+{% block title %}Administration - Je Geek Utile{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="member-header">
+        <h1>Administration</h1>
+        <p>Gestion des benevoles</p>
+    </div>
+
+    <div class="card" style="margin-bottom: var(--space-lg);">
+        <h2 class="card-title">Outils</h2>
+        <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
+            <a href="{{ url_for('admin_stats') }}" class="btn btn-primary">Statistiques</a>
+            <a href="{{ url_for('admin_logs') }}" class="btn btn-secondary">Logs d'activite</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Liste des benevoles ({{ benevoles|length }})</h2>
+
+        <div class="admin-filters" style="margin-bottom: var(--space-lg); padding: var(--space-md); background: var(--bg-tertiary); border-radius: var(--radius-md);">
+            <div style="display: flex; gap: var(--space-md); flex-wrap: wrap; align-items: flex-end;">
+                <div class="form-group" style="margin: 0; flex: 1; min-width: 150px;">
+                    <label class="form-label" for="filter-search">Recherche</label>
+                    <input type="text" id="filter-search" class="form-input" placeholder="Nom, prenom, email...">
+                </div>
+                <div class="form-group" style="margin: 0; min-width: 150px;">
+                    <label class="form-label" for="filter-temps">Temps disponible</label>
+                    <select id="filter-temps" class="form-input">
+                        <option value="">Tous</option>
+                        <option value="moins_2h">Moins de 2h</option>
+                        <option value="2h_5h">2h a 5h</option>
+                        <option value="5h_10h">5h a 10h</option>
+                        <option value="plus_10h">Plus de 10h</option>
+                        <option value="ponctuel">Ponctuel</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin: 0; min-width: 150px;">
+                    <label class="form-label" for="filter-appetence">Appetence</label>
+                    <select id="filter-appetence" class="form-input">
+                        <option value="">Toutes</option>
+                        {% for appetence in appetences %}
+                        <option value="{{ appetence.nom }}">{{ appetence.nom }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group" style="margin: 0; min-width: 120px;">
+                    <label class="form-label" for="filter-age">Age min/max</label>
+                    <div style="display: flex; gap: var(--space-xs);">
+                        <input type="number" id="filter-age-min" class="form-input" placeholder="Min" min="0" style="width: 60px;">
+                        <input type="number" id="filter-age-max" class="form-input" placeholder="Max" min="0" style="width: 60px;">
+                    </div>
+                </div>
+                <button type="button" id="btn-reset-filters" class="btn btn-secondary">Reinitialiser</button>
+            </div>
+        </div>
+
+        {% if benevoles %}
+        <div style="overflow-x: auto;">
+            <table id="table-benevoles" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="border-bottom: 2px solid var(--border-color);">
+                        <th style="padding: var(--space-sm); text-align: left; cursor: pointer;" data-sort="nom">Nom</th>
+                        <th style="padding: var(--space-sm); text-align: left; cursor: pointer;" data-sort="prenom">Prenom</th>
+                        <th style="padding: var(--space-sm); text-align: left; cursor: pointer;" data-sort="email">Email</th>
+                        <th style="padding: var(--space-sm); text-align: left; cursor: pointer;" data-sort="age">Age</th>
+                        <th style="padding: var(--space-sm); text-align: left;" data-sort="temps">Temps dispo</th>
+                        <th style="padding: var(--space-sm); text-align: left; cursor: pointer;" data-sort="geekos"><span class="geekos-display"><img src="{{ url_for('static', filename='images/geekos.png') }}" alt="Geekos" class="geekos-icon"> Geekos</span></th>
+                        <th style="padding: var(--space-sm); text-align: center;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for benevole in benevoles %}
+                    <tr class="benevole-row" style="border-bottom: 1px solid var(--border-color);"
+                        data-nom="{{ benevole.nom|lower }}"
+                        data-prenom="{{ benevole.prenom|lower }}"
+                        data-email="{{ benevole.email|lower }}"
+                        data-age="{{ benevole.get_age() or 0 }}"
+                        data-temps="{{ benevole.temps_disponible or '' }}"
+                        data-geekos="{{ benevole.monnaie }}"
+                        data-appetences="{% for app in benevole.appetences %}{{ app.nom }},{% endfor %}">
+                        <td style="padding: var(--space-sm);">{{ benevole.nom }}</td>
+                        <td style="padding: var(--space-sm);">{{ benevole.prenom }}</td>
+                        <td style="padding: var(--space-sm);">{{ benevole.email }}</td>
+                        <td style="padding: var(--space-sm);">{{ benevole.get_age() or '-' }}</td>
+                        <td style="padding: var(--space-sm);">{{ benevole.temps_disponible or '-' }}</td>
+                        <td style="padding: var(--space-sm);">{{ benevole.monnaie }}</td>
+                        <td style="padding: var(--space-sm); text-align: center;">
+                            <a href="{{ url_for('admin_benevole_detail', user_id=benevole.id) }}" class="btn btn-secondary" style="padding: var(--space-xs) var(--space-sm);">Voir</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p id="no-results" style="color: var(--text-secondary); display: none; margin-top: var(--space-md);">Aucun benevole ne correspond aux filtres.</p>
+        {% else %}
+        <p style="color: var(--text-secondary);">Aucun benevole inscrit pour le moment.</p>
+        {% endif %}
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('filter-search');
+    const tempsSelect = document.getElementById('filter-temps');
+    const appetenceSelect = document.getElementById('filter-appetence');
+    const ageMinInput = document.getElementById('filter-age-min');
+    const ageMaxInput = document.getElementById('filter-age-max');
+    const resetBtn = document.getElementById('btn-reset-filters');
+    const rows = document.querySelectorAll('.benevole-row');
+    const noResults = document.getElementById('no-results');
+
+    function filterTable() {
+        const search = searchInput.value.toLowerCase();
+        const temps = tempsSelect.value;
+        const appetence = appetenceSelect.value;
+        const ageMin = parseInt(ageMinInput.value) || 0;
+        const ageMax = parseInt(ageMaxInput.value) || 999;
+        let visibleCount = 0;
+
+        rows.forEach(row => {
+            const nom = row.dataset.nom;
+            const prenom = row.dataset.prenom;
+            const email = row.dataset.email;
+            const age = parseInt(row.dataset.age) || 0;
+            const rowTemps = row.dataset.temps;
+            const appetences = row.dataset.appetences;
+
+            const matchSearch = !search || nom.includes(search) || prenom.includes(search) || email.includes(search);
+            const matchTemps = !temps || rowTemps === temps;
+            const matchAppetence = !appetence || appetences.includes(appetence);
+            const matchAge = age >= ageMin && age <= ageMax;
+
+            if (matchSearch && matchTemps && matchAppetence && matchAge) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        if (noResults) {
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+    }
+
+    if (searchInput) searchInput.addEventListener('input', filterTable);
+    if (tempsSelect) tempsSelect.addEventListener('change', filterTable);
+    if (appetenceSelect) appetenceSelect.addEventListener('change', filterTable);
+    if (ageMinInput) ageMinInput.addEventListener('input', filterTable);
+    if (ageMaxInput) ageMaxInput.addEventListener('input', filterTable);
+
+    if (resetBtn) {
+        resetBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            tempsSelect.value = '';
+            appetenceSelect.value = '';
+            ageMinInput.value = '';
+            ageMaxInput.value = '';
+            filterTable();
+        });
+    }
+});
+</script>
+{% endblock %}

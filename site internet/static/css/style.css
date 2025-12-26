@@ -890,6 +890,35 @@ nav {
     margin-left: auto;
 }
 
+.nav-geekos {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    color: var(--text-accent);
+    font-weight: bold;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    margin-left: var(--space-sm);
+}
+
+.geekos-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.geekos-display {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.geekos-display .geekos-icon {
+    width: 27px;
+    height: 27px;
+}
+
 /* === MAIN === */
 main {
     flex: 1;
