@@ -121,8 +121,24 @@
     </main>
 
     <footer>
+        <div style="margin-bottom: var(--space-sm);">
+            <a href="{{ url_for('mentions_legales') }}">Mentions legales</a> |
+            <a href="{{ url_for('politique_confidentialite') }}">Confidentialite</a> |
+            <a href="{{ url_for('politique_cookies') }}">Cookies</a>
+        </div>
         @Je Geek Utile - {{ now().strftime('%d/%m/%Y') if now is defined else '25/12/2024' }} - Site v1.0
     </footer>
+
+    <div id="cookie-banner" class="cookie-banner" style="display: none;">
+        <div class="cookie-banner-content">
+            <p>Ce site utilise des cookies pour ameliorer votre experience. Les cookies d'analyse ne sont actives qu'avec votre consentement.</p>
+            <div class="cookie-banner-buttons">
+                <button class="btn btn-primary" onclick="acceptCookies()">Accepter</button>
+                <button class="btn" onclick="refuseCookies()">Refuser</button>
+                <a href="{{ url_for('politique_cookies') }}" class="btn">En savoir plus</a>
+            </div>
+        </div>
+    </div>
 
     <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 </body>

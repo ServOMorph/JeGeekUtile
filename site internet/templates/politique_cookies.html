@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}Politique cookies - Je Geek Utile{% endblock %}
+
+{% block content %}
+<section class="section">
+    <h1 class="section-title">Politique cookies</h1>
+
+    <div class="card">
+        <h2 class="card-title">Qu'est-ce qu'un cookie ?</h2>
+        <p>Un cookie est un petit fichier texte depose sur votre appareil lors de la visite d'un site web. Il permet de stocker des informations relatives a votre navigation.</p>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Cookies utilises sur ce site</h2>
+
+        <h3>Cookies strictement necessaires</h3>
+        <p>Ces cookies sont indispensables au fonctionnement du site. Ils ne peuvent pas etre desactives.</p>
+        <table style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Finalite</th>
+                    <th>Duree</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>session</td>
+                    <td>Gestion de la session utilisateur</td>
+                    <td>Session</td>
+                </tr>
+                <tr>
+                    <td>cookie_consent</td>
+                    <td>Memorisation de vos choix cookies</td>
+                    <td>12 mois</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Cookies de preferences</h3>
+        <p>Ces cookies memorisent vos preferences d'affichage.</p>
+        <table style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Finalite</th>
+                    <th>Duree</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>theme (localStorage)</td>
+                    <td>Theme visuel choisi</td>
+                    <td>Permanent</td>
+                </tr>
+                <tr>
+                    <td>displayMode (localStorage)</td>
+                    <td>Mode d'affichage (econome, normal, etc.)</td>
+                    <td>Permanent</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Cookies d'analyse (avec consentement)</h3>
+        <p>Ces cookies nous permettent d'ameliorer le site en analysant son utilisation. Ils ne sont deposes qu'avec votre consentement.</p>
+        <table style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Finalite</th>
+                    <th>Duree</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>tracking_session</td>
+                    <td>Analyse de navigation interne</td>
+                    <td>Session</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Gerer vos preferences</h2>
+        <p>Vous pouvez a tout moment modifier vos preferences en cliquant sur le bouton ci-dessous :</p>
+        <button class="btn btn-primary" onclick="showCookieBanner()">Gerer mes cookies</button>
+        <p style="margin-top: var(--space-md);">Vous pouvez egalement configurer votre navigateur pour refuser les cookies.</p>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Plus d'informations</h2>
+        <p>Pour en savoir plus sur les cookies, consultez le site de la CNIL : <a href="https://www.cnil.fr/fr/cookies-et-autres-traceurs" target="_blank" rel="noopener">www.cnil.fr</a></p>
+    </div>
+</section>
+{% endblock %}

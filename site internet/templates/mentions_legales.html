@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Mentions legales - Je Geek Utile{% endblock %}
+
+{% block content %}
+<section class="section">
+    <h1 class="section-title">Mentions legales</h1>
+
+    <div class="card">
+        <h2 class="card-title">Editeur du site</h2>
+        <p><strong>Association Je Geek Utile</strong></p>
+        <p>Association loi 1901</p>
+        <p>Siege social : [Adresse a completer]</p>
+        <p>Email : contact@jegeekutile.org</p>
+        <p>Numero RNA : [A completer apres declaration]</p>
+        <p>Directeur de la publication : [Nom du president]</p>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Hebergement</h2>
+        <p><strong>[Nom de l'hebergeur]</strong></p>
+        <p>Adresse : [Adresse hebergeur]</p>
+        <p>Telephone : [Telephone hebergeur]</p>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Propriete intellectuelle</h2>
+        <p>Le code source de ce site est distribue sous licence MIT.</p>
+        <p>Les contenus (textes, images, logos) sont la propriete de l'association Je Geek Utile, sauf mention contraire.</p>
+        <p>Le logo et la marque "Je Geek Utile" sont proteges.</p>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Donnees personnelles</h2>
+        <p>Pour toute information concernant le traitement de vos donnees personnelles, consultez notre <a href="{{ url_for('politique_confidentialite') }}">politique de confidentialite</a>.</p>
+        <p><strong>Responsable du traitement :</strong> Association Je Geek Utile</p>
+        <p><strong>Contact DPO :</strong> dpo@jegeekutile.org</p>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Cookies</h2>
+        <p>Ce site utilise des cookies techniques necessaires a son fonctionnement et des cookies d'analyse avec votre consentement.</p>
+        <p>Consultez notre <a href="{{ url_for('politique_cookies') }}">politique cookies</a> pour plus d'informations.</p>
+    </div>
+</section>
+{% endblock %}

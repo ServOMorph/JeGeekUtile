@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Supprimer mon compte - Je Geek Utile{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div style="max-width: 500px; margin: 0 auto;">
+        <div class="card">
+            <h1 class="card-title" style="text-align: center; color: var(--alert-color);">Supprimer mon compte</h1>
+
+            <div style="background: var(--bg-tertiary); padding: var(--space-lg); border-radius: 8px; margin-bottom: var(--space-lg);">
+                <p style="color: var(--alert-color); font-weight: bold; margin-bottom: var(--space-md);">Attention : cette action est irreversible !</p>
+                <p style="color: var(--text-secondary);">La suppression de votre compte entrainera :</p>
+                <ul style="color: var(--text-secondary); margin-top: var(--space-sm); margin-left: var(--space-lg);">
+                    <li>La suppression definitive de toutes vos donnees personnelles</li>
+                    <li>La perte de vos Geekos accumules</li>
+                    <li>La suppression de votre historique de missions</li>
+                    <li>L'impossibilite de recuperer ces informations</li>
+                </ul>
+            </div>
+
+            <p style="margin-bottom: var(--space-lg);">Avant de supprimer votre compte, vous pouvez <a href="{{ url_for('export_donnees') }}">telecharger vos donnees</a>.</p>
+
+            <form method="POST" action="{{ url_for('supprimer_compte') }}">
+                <div class="form-group">
+                    <label class="form-label" for="confirmation">Pour confirmer, saisissez votre email : <strong>{{ current_user.email }}</strong></label>
+                    <input type="email" id="confirmation" name="confirmation" class="form-input" required placeholder="Saisissez votre email">
+                </div>
+
+                <div style="display: flex; gap: var(--space-md); margin-top: var(--space-lg);">
+                    <a href="{{ url_for('profil') }}" class="btn" style="flex: 1; text-align: center;">Annuler</a>
+                    <button type="submit" class="btn" style="flex: 1; background: var(--alert-color); color: white;">Supprimer definitivement</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
