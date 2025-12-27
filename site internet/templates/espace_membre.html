@@ -1,79 +1,223 @@
 {% extends 'base.html' %}
 
-{% block title %}Espace Membre - Je Geek Utile{% endblock %}
+{% block title %}Tableau de bord - Je Geek Utile{% endblock %}
 
 {% block content %}
 <section class="section">
     <div class="member-header">
         <div>
-            <h1>Bienvenue, {{ current_user.prenom }} !</h1>
+            <h1>Bonjour, {{ current_user.prenom }} !</h1>
             <p style="color: var(--text-secondary);">
-                Membre depuis le {{ current_user.date_inscription.strftime('%d/%m/%Y') }}
+                {% if current_user.is_admin %}Administrateur{% elif current_user.is_benevole %}Benevole{% else %}Membre{% endif %}
+                depuis le {{ current_user.date_inscription.strftime('%d/%m/%Y') }}
             </p>
         </div>
-        <div>
+        <div style="display: flex; gap: var(--space-sm);">
             <a href="{{ url_for('profil') }}" class="btn btn-secondary">Mon profil</a>
+            {% if current_user.is_admin %}
+            <a href="{{ url_for('admin') }}" class="btn btn-primary">Administration</a>
+            {% endif %}
         </div>
     </div>
 
-    <div class="member-stats">
-        <div class="stat-card">
-            <div class="stat-value">0</div>
-            <div class="stat-label">Formations suivies</div>
+    {% if current_user.is_admin and dashboard_data %}
+    <div class="dashboard-section">
+        <h2 class="section-title">Vue d'ensemble Admin</h2>
+        <div class="member-stats">
+            <div class="stat-card">
+                <div class="stat-value">{{ dashboard_data.total_users|default(0) }}</div>
+                <div class="stat-label">Utilisateurs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ dashboard_data.total_benevoles|default(0) }}</div>
+                <div class="stat-label">Benevoles</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value geekos-display">
+                    <img src="{{ url_for('static', filename='images/geekos.png') }}" alt="Geekos" class="geekos-icon">
+                    {{ dashboard_data.total_geekos|default(0) }}
+                </div>
+                <div class="stat-label">Geekos distribues</div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-value">0</div>
-            <div class="stat-label">Evenements participes</div>
+
+        <div class="grid grid-2" style="margin-top: var(--space-lg);">
+            <div class="card">
+                <h3 class="card-title">Dernieres inscriptions</h3>
+                {% if dashboard_data.recent_users %}
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    {% for user in dashboard_data.recent_users %}
+                    <li style="padding: var(--space-sm) 0; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                        <span>
+                            <strong>{{ user.prenom }} {{ user.nom }}</strong>
+                            {% if user.is_benevole %}<span style="color: var(--accent); font-size: 0.8em;"> (benevole)</span>{% endif %}
+                        </span>
+                        <span style="color: var(--text-secondary); font-size: 0.9em;">{{ user.date_inscription.strftime('%d/%m') }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p style="color: var(--text-secondary);">Aucune inscription recente.</p>
+                {% endif %}
+            </div>
+            <div class="card">
+                <h3 class="card-title">Activite recente</h3>
+                {% if dashboard_data.recent_logs %}
+                <ul style="list-style: none; padding: 0; margin: 0; max-height: 200px; overflow-y: auto;">
+                    {% for log in dashboard_data.recent_logs %}
+                    <li style="padding: var(--space-xs) 0; border-bottom: 1px solid var(--border-color); font-size: 0.85em;">
+                        <span style="color: var(--accent);">{{ log.event_type }}</span>
+                        <span style="color: var(--text-secondary);">{{ log.page }}</span>
+                        <span style="color: var(--text-muted); font-size: 0.8em;">{{ log.timestamp.strftime('%H:%M') }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <a href="{{ url_for('admin_logs') }}" class="btn btn-secondary" style="margin-top: var(--space-md); display: inline-block;">Voir tous les logs</a>
+                {% else %}
+                <p style="color: var(--text-secondary);">Aucune activite enregistree.</p>
+                {% endif %}
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-value">0</div>
-            <div class="stat-label">Contributions</div>
+
+        <div style="margin-top: var(--space-lg);">
+            <a href="{{ url_for('admin_stats') }}" class="btn btn-primary">Statistiques detaillees</a>
+            <a href="{{ url_for('admin') }}" class="btn btn-secondary" style="margin-left: var(--space-sm);">Gerer les benevoles</a>
         </div>
     </div>
+    {% endif %}
 
-    <h2 class="section-title" style="margin-top: var(--space-xxl);">Mes Activites</h2>
-    <div class="grid grid-2">
-        <div class="card">
-            <h3 class="card-title">Formations disponibles</h3>
+    {% if current_user.is_benevole %}
+    <div class="dashboard-section" {% if current_user.is_admin %}style="margin-top: var(--space-xxl);"{% endif %}>
+        <h2 class="section-title">Mon espace benevole</h2>
+        <div class="member-stats">
+            <div class="stat-card">
+                <div class="stat-value geekos-display">
+                    <img src="{{ url_for('static', filename='images/geekos.png') }}" alt="Geekos" class="geekos-icon" style="width: 40px; height: 40px;">
+                    {{ current_user.monnaie }}
+                </div>
+                <div class="stat-label">Mes Geekos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ current_user.temps_disponible or '-' }}</div>
+                <div class="stat-label">Disponibilite</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ dashboard_data.appetences|length if dashboard_data.appetences else 0 }}</div>
+                <div class="stat-label">Appetences</div>
+            </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-top: var(--space-lg);">
+            <div class="card">
+                <h3 class="card-title">Missions en cours</h3>
+                {% if current_user.missions_en_cours %}
+                <p style="white-space: pre-line;">{{ current_user.missions_en_cours }}</p>
+                {% else %}
+                <p style="color: var(--text-secondary);">Aucune mission en cours.</p>
+                <p style="margin-top: var(--space-sm);">De nouvelles missions seront bientot disponibles !</p>
+                {% endif %}
+            </div>
+            <div class="card">
+                <h3 class="card-title">Missions realisees</h3>
+                {% if current_user.missions_realisees %}
+                <p style="white-space: pre-line;">{{ current_user.missions_realisees }}</p>
+                {% else %}
+                <p style="color: var(--text-secondary);">Aucune mission realisee pour l'instant.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if dashboard_data.appetences %}
+        <div class="card" style="margin-top: var(--space-lg);">
+            <h3 class="card-title">Mes appetences</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
+                {% for app in dashboard_data.appetences %}
+                <span style="background: var(--accent); color: var(--bg-primary); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm);">{{ app.nom }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if not current_user.is_benevole and not current_user.is_admin %}
+    <div class="dashboard-section">
+        <div class="card" style="text-align: center; padding: var(--space-xl);">
+            <h2 class="card-title">Devenir benevole</h2>
+            <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">
+                Rejoignez notre equipe de benevoles et contribuez a rendre la technologie accessible a tous !
+            </p>
+            <p style="margin-bottom: var(--space-lg);">
+                En devenant benevole, vous pourrez :
+            </p>
+            <ul style="text-align: left; max-width: 400px; margin: 0 auto var(--space-lg);">
+                <li>Participer aux missions de l'association</li>
+                <li>Gagner des Geekos echangeables contre des avantages</li>
+                <li>Developper vos competences</li>
+                <li>Rencontrer d'autres passionnes</li>
+            </ul>
             <p style="color: var(--text-secondary);">
-                Aucune formation disponible pour le moment.
-            </p>
-            <p style="margin-top: var(--space-md);">
-                De nouvelles formations seront bientot disponibles.
-                Restez connecte !
-            </p>
-        </div>
-        <div class="card">
-            <h3 class="card-title">Prochains evenements</h3>
-            <p style="color: var(--text-secondary);">
-                Aucun evenement programme pour le moment.
-            </p>
-            <p style="margin-top: var(--space-md);">
-                Les prochains evenements seront annonces ici.
+                Contactez-nous pour en savoir plus !
             </p>
         </div>
     </div>
+    {% endif %}
 
-    <h2 class="section-title" style="margin-top: var(--space-xxl);">Ressources Membres</h2>
+    <h2 class="section-title" style="margin-top: var(--space-xxl);">Ressources</h2>
     <div class="grid grid-3">
         <div class="card">
             <h3 class="card-title">Documentation</h3>
             <p style="color: var(--text-secondary);">
-                Acces aux guides et tutoriels exclusifs.
+                Acces aux guides et tutoriels.
             </p>
         </div>
         <div class="card">
             <h3 class="card-title">Outils</h3>
             <p style="color: var(--text-secondary);">
-                Telechargez nos outils open source.
+                Nos outils open source.
             </p>
         </div>
         <div class="card">
             <h3 class="card-title">Communaute</h3>
             <p style="color: var(--text-secondary);">
-                Echangez avec les autres membres.
+                Echangez avec les membres.
             </p>
         </div>
     </div>
 </section>
+
+<style>
+.dashboard-section {
+    margin-bottom: var(--space-xl);
+}
+
+.member-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-md);
+}
+
+.stat-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    margin-top: var(--space-xs);
+}
+</style>
 {% endblock %}

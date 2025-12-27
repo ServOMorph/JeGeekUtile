@@ -169,7 +169,28 @@ def logout():
 @app.route('/espace-membre')
 @login_required
 def espace_membre():
-    return render_template('espace_membre.html')
+    dashboard_data = {}
+
+    if current_user.is_admin:
+        total_benevoles = User.query.filter_by(is_benevole=True).count()
+        total_users = User.query.count()
+        recent_users = User.query.order_by(User.date_inscription.desc()).limit(5).all()
+        total_geekos = db.session.query(db.func.sum(User.monnaie)).filter(User.is_benevole==True).scalar() or 0
+        recent_logs = ActivityLog.query.order_by(ActivityLog.timestamp.desc()).limit(10).all()
+
+        dashboard_data = {
+            'total_benevoles': total_benevoles,
+            'total_users': total_users,
+            'recent_users': recent_users,
+            'total_geekos': total_geekos,
+            'recent_logs': recent_logs
+        }
+
+    if current_user.is_benevole:
+        appetences = current_user.appetences
+        dashboard_data['appetences'] = appetences
+
+    return render_template('espace_membre.html', dashboard_data=dashboard_data)
 
 @app.route('/profil', methods=['GET', 'POST'])
 @login_required
