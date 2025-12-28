@@ -428,6 +428,18 @@ def admin_modifier_benevole(user_id):
     flash('Informations du benevole mises a jour.', 'success')
     return redirect(url_for('admin_benevole_detail', user_id=user_id))
 
+@app.route('/admin/preview-benevole')
+@login_required
+@admin_required
+def admin_preview_benevole():
+    evenements = Evenement.query.filter(Evenement.date_evenement >= date.today()).order_by(Evenement.date_evenement.asc()).limit(5).all()
+    appetences = Appetence.query.all()
+    preview_data = {
+        'evenements': evenements,
+        'appetences': appetences
+    }
+    return render_template('admin_preview_benevole.html', preview_data=preview_data)
+
 @app.route('/api/log', methods=['POST'])
 def api_log():
     data = request.get_json()

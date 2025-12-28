@@ -1,0 +1,277 @@
+{% extends 'base.html' %}
+
+{% block title %}Apercu tableau de bord benevole - Administration{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="preview-banner">
+        <span>Mode apercu admin</span> - Vous visualisez le tableau de bord tel qu'il apparait aux benevoles
+        <a href="{{ url_for('admin') }}" class="btn btn-secondary" style="margin-left: var(--space-md); padding: var(--space-xs) var(--space-sm);">Retour admin</a>
+    </div>
+
+    <div class="member-header">
+        <div>
+            <h1>Bonjour, [Prenom Benevole] !</h1>
+            <p style="color: var(--text-secondary);">Benevole depuis le [date]</p>
+        </div>
+        <div style="display: flex; gap: var(--space-sm);">
+            <span class="btn btn-secondary" style="cursor: default; opacity: 0.7;">Mon profil</span>
+        </div>
+    </div>
+
+    <div class="dashboard-section">
+        <h2 class="section-title">Mon espace benevole</h2>
+        <div class="member-stats">
+            <div class="stat-card">
+                <div class="stat-value geekos-display">
+                    <img src="{{ url_for('static', filename='images/geekos.png') }}" alt="Geekos" class="geekos-icon" style="width: 40px; height: 40px;">
+                    150
+                </div>
+                <div class="stat-label">Mes Geekos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">2h_5h</div>
+                <div class="stat-label">Disponibilite</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ preview_data.appetences|length }}</div>
+                <div class="stat-label">Appetences disponibles</div>
+            </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-top: var(--space-lg);">
+            <div class="card">
+                <h3 class="card-title">Missions en cours</h3>
+                <p style="color: var(--text-secondary);">Aucune mission en cours.</p>
+                <p style="margin-top: var(--space-sm);">De nouvelles missions seront bientot disponibles !</p>
+            </div>
+            <div class="card">
+                <h3 class="card-title">Missions realisees</h3>
+                <p style="color: var(--text-secondary);">Aucune mission realisee pour l'instant.</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: var(--space-lg);">
+            <h3 class="card-title">Evenements a venir</h3>
+            {% if preview_data.evenements %}
+            <div class="events-list">
+                {% for event in preview_data.evenements %}
+                <div class="event-item">
+                    <div class="event-date">
+                        <span class="event-day">{{ event.date_evenement.strftime('%d') }}</span>
+                        <span class="event-month">{{ event.date_evenement.strftime('%b').upper() }}</span>
+                    </div>
+                    <div class="event-details">
+                        <h4 class="event-title">{{ event.titre }}</h4>
+                        {% if event.description %}
+                        <p class="event-description">{{ event.description }}</p>
+                        {% endif %}
+                        <div class="event-meta">
+                            {% if event.lieu %}<span class="event-location">{{ event.lieu }}</span>{% endif %}
+                            {% if event.heure_debut %}<span class="event-time">{{ event.heure_debut }}{% if event.heure_fin %} - {{ event.heure_fin }}{% endif %}</span>{% endif %}
+                        </div>
+                    </div>
+                    <div class="event-actions">
+                        <span class="event-status event-status-{{ event.statut }}">
+                            {% if event.statut == 'ouvert' %}Inscriptions ouvertes{% elif event.statut == 'complet' %}Complet{% else %}Ferme{% endif %}
+                        </span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p style="color: var(--text-muted);">Aucun evenement a venir pour le moment.</p>
+            {% endif %}
+        </div>
+
+        <div class="card" style="margin-top: var(--space-lg);">
+            <h3 class="card-title">Mes appetences</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
+                {% for app in preview_data.appetences[:5] %}
+                <span style="background: var(--accent-secondary); color: var(--bg-primary); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm);">{{ app.nom }}</span>
+                {% endfor %}
+                {% if preview_data.appetences|length > 5 %}
+                <span style="color: var(--text-muted);">+{{ preview_data.appetences|length - 5 }} autres...</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <h2 class="section-title" style="margin-top: var(--space-xxl);">Ressources</h2>
+    <div class="grid grid-3">
+        <div class="card">
+            <h3 class="card-title">Documentation</h3>
+            <p style="color: var(--text-secondary);">Acces aux guides et tutoriels.</p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Outils</h3>
+            <p style="color: var(--text-secondary);">Nos outils open source.</p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Communaute</h3>
+            <p style="color: var(--text-secondary);">Echangez avec les membres.</p>
+        </div>
+    </div>
+</section>
+
+<style>
+.preview-banner {
+    background: var(--warning-color);
+    color: var(--bg-primary);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-xl);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.preview-banner span {
+    font-weight: bold;
+}
+
+.dashboard-section {
+    margin-bottom: var(--space-xl);
+}
+
+.member-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-md);
+}
+
+.stat-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--text-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    margin-top: var(--space-xs);
+}
+
+.events-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.event-item {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--border-color);
+    align-items: flex-start;
+}
+
+.event-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 50px;
+    padding: var(--space-sm);
+    background: var(--accent-primary);
+    border-radius: var(--radius-sm);
+}
+
+.event-day {
+    font-size: var(--font-size-xl);
+    font-weight: bold;
+    color: var(--text-accent);
+    line-height: 1;
+}
+
+.event-month {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.event-details {
+    flex: 1;
+}
+
+.event-title {
+    color: var(--text-accent);
+    margin: 0 0 var(--space-xs) 0;
+    font-size: var(--font-size-base);
+}
+
+.event-description {
+    color: var(--text-secondary);
+    margin: 0 0 var(--space-sm) 0;
+    font-size: var(--font-size-sm);
+}
+
+.event-meta {
+    display: flex;
+    gap: var(--space-md);
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+}
+
+.event-location::before {
+    content: "@ ";
+}
+
+.event-actions {
+    display: flex;
+    align-items: center;
+}
+
+.event-status {
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    white-space: nowrap;
+}
+
+.event-status-ouvert {
+    background: var(--success-color);
+    color: var(--bg-primary);
+}
+
+.event-status-complet {
+    background: var(--warning-color);
+    color: var(--bg-primary);
+}
+
+.event-status-ferme {
+    background: var(--alert-color);
+    color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+    .event-item {
+        flex-direction: column;
+    }
+
+    .event-date {
+        flex-direction: row;
+        gap: var(--space-xs);
+        width: fit-content;
+    }
+
+    .preview-banner {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>
+{% endblock %}
