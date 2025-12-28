@@ -51,6 +51,13 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label style="display: flex; align-items: flex-start; gap: var(--space-xs); cursor: pointer;">
+                        <input type="checkbox" name="rgpd_consent" required style="margin-top: 4px;">
+                        <span>J'accepte la <a href="{{ url_for('politique_confidentialite') }}" target="_blank">politique de confidentialite</a> et le traitement de mes donnees personnelles pour la gestion de mon benevolat.</span>
+                    </label>
+                </div>
+
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Valider mon profil benevole</button>
             </form>
         </div>

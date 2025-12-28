@@ -114,5 +114,16 @@
             <a href="{{ url_for('espace_membre') }}" class="btn btn-secondary" style="margin-left: var(--space-sm);">Retour a l'espace membre</a>
         </div>
     </form>
+
+    <div class="card" style="margin-top: var(--space-xl);">
+        <h2 class="card-title">Mes donnees personnelles (RGPD)</h2>
+        <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">
+            Conformement au RGPD, vous pouvez exercer vos droits sur vos donnees personnelles.
+        </p>
+        <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
+            <a href="{{ url_for('export_donnees') }}" class="btn btn-primary">Telecharger mes donnees</a>
+            <a href="{{ url_for('supprimer_compte') }}" class="btn" style="background: var(--alert-color); color: white;">Supprimer mon compte</a>
+        </div>
+    </div>
 </section>
 {% endblock %}

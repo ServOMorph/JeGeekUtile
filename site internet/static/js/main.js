@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadMode();
     setupThemeSelector();
     setupModeSelector();
-    initTracking();
+    checkCookieConsent();
 });
 
 function loadTheme() {
@@ -70,7 +70,46 @@ function autoHideNotifications() {
 
 document.addEventListener('DOMContentLoaded', autoHideNotifications);
 
+function checkCookieConsent() {
+    const consent = localStorage.getItem('cookie_consent');
+    if (consent === null) {
+        showCookieBanner();
+    } else if (consent === 'accepted') {
+        initTracking();
+    }
+}
+
+function showCookieBanner() {
+    const banner = document.getElementById('cookie-banner');
+    if (banner) {
+        banner.style.display = 'block';
+    }
+}
+
+function hideCookieBanner() {
+    const banner = document.getElementById('cookie-banner');
+    if (banner) {
+        banner.style.display = 'none';
+    }
+}
+
+function acceptCookies() {
+    localStorage.setItem('cookie_consent', 'accepted');
+    hideCookieBanner();
+    initTracking();
+}
+
+function refuseCookies() {
+    localStorage.setItem('cookie_consent', 'refused');
+    hideCookieBanner();
+}
+
+function hasTrackingConsent() {
+    return localStorage.getItem('cookie_consent') === 'accepted';
+}
+
 function initTracking() {
+    if (!hasTrackingConsent()) return;
     trackPageView();
     trackClicks();
     trackFormInputs();
@@ -78,6 +117,7 @@ function initTracking() {
 }
 
 function sendLog(data) {
+    if (!hasTrackingConsent()) return;
     fetch('/api/log', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

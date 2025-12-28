@@ -24,7 +24,7 @@ Copier le contenu ci-dessous dans `README.md` :
 
 ## Notre mission
 
-- Développer des outils IA accessibles fonctionnant en local (sans cloud)
+- Développer des outils IA accessibles privilégiant le local (diminution des usages cloud)
 - Accompagner les associations dans leur transition numérique responsable
 - Valoriser le bénévolat tech via notre système de reconnaissance Geekos
 

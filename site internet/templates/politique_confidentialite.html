@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}Politique de confidentialite - Je Geek Utile{% endblock %}
+
+{% block content %}
+<section class="section">
+    <h1 class="section-title">Politique de confidentialite</h1>
+
+    <div class="card">
+        <h2 class="card-title">Introduction</h2>
+        <p>L'association Je Geek Utile s'engage a proteger la vie privee des utilisateurs de son site. Cette politique explique comment nous collectons, utilisons et protegeoons vos donnees personnelles conformement au Reglement General sur la Protection des Donnees (RGPD).</p>
+        <p><strong>Derniere mise a jour :</strong> {{ now().strftime('%d/%m/%Y') if now is defined else '27/12/2025' }}</p>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Responsable du traitement</h2>
+        <p><strong>Association Je Geek Utile</strong></p>
+        <p>Email : contact@jegeekutile.org</p>
+        <p>Contact DPO : dpo@jegeekutile.org</p>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Donnees collectees</h2>
+
+        <h3>Donnees d'inscription</h3>
+        <ul>
+            <li>Nom et prenom</li>
+            <li>Adresse email</li>
+            <li>Mot de passe (stocke de maniere chiffree)</li>
+        </ul>
+
+        <h3>Donnees benevoles (optionnelles)</h3>
+        <ul>
+            <li>Date de naissance</li>
+            <li>Adresse postale</li>
+            <li>Motivations et disponibilites</li>
+            <li>Appetences et competences</li>
+        </ul>
+
+        <h3>Donnees de navigation (avec consentement)</h3>
+        <ul>
+            <li>Pages visitees</li>
+            <li>Actions effectuees sur le site</li>
+            <li>Donnees techniques (navigateur, appareil)</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Finalites du traitement</h2>
+        <table style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Finalite</th>
+                    <th>Base legale</th>
+                    <th>Duree de conservation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Gestion des comptes membres</td>
+                    <td>Execution du contrat</td>
+                    <td>Duree de l'adhesion + 3 ans</td>
+                </tr>
+                <tr>
+                    <td>Gestion du benevolat et des Geekos</td>
+                    <td>Execution du contrat</td>
+                    <td>Duree de l'adhesion + 3 ans</td>
+                </tr>
+                <tr>
+                    <td>Reponse aux demandes de contact</td>
+                    <td>Interet legitime</td>
+                    <td>3 ans</td>
+                </tr>
+                <tr>
+                    <td>Statistiques de navigation</td>
+                    <td>Consentement</td>
+                    <td>13 mois</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Vos droits</h2>
+        <p>Conformement au RGPD, vous disposez des droits suivants :</p>
+        <ul>
+            <li><strong>Droit d'acces :</strong> obtenir une copie de vos donnees</li>
+            <li><strong>Droit de rectification :</strong> corriger vos donnees inexactes</li>
+            <li><strong>Droit a l'effacement :</strong> demander la suppression de vos donnees</li>
+            <li><strong>Droit a la portabilite :</strong> recevoir vos donnees dans un format structure</li>
+            <li><strong>Droit d'opposition :</strong> vous opposer au traitement de vos donnees</li>
+            <li><strong>Droit de retrait du consentement :</strong> retirer votre consentement a tout moment</li>
+        </ul>
+        <p>Pour exercer ces droits, connectez-vous a votre espace membre ou contactez-nous a dpo@jegeekutile.org</p>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Securite des donnees</h2>
+        <ul>
+            <li>Mots de passe chiffres (hash securise)</li>
+            <li>Connexion HTTPS</li>
+            <li>Acces restreint aux donnees</li>
+            <li>Hebergement en France/UE</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Transferts de donnees</h2>
+        <p>Vos donnees sont hebergees en France/Union Europeenne.</p>
+        <p>Aucun transfert de donnees vers des pays tiers n'est effectue.</p>
+        <p>Nous privilegions les solutions d'IA locale pour minimiser les transferts de donnees.</p>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Reclamation</h2>
+        <p>Si vous estimez que vos droits ne sont pas respectes, vous pouvez introduire une reclamation aupres de la CNIL :</p>
+        <p>Commission Nationale de l'Informatique et des Libertes<br>
+        3 Place de Fontenoy, 75007 Paris<br>
+        www.cnil.fr</p>
+    </div>
+</section>
+{% endblock %}

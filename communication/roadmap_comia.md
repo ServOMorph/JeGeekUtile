@@ -64,18 +64,18 @@
 - **Notes**: Utiliser Shields.io pour badges
 
 ### [P1-002] Creer compte Mastodon
-- **Statut**: a_faire
+- **Statut**: termine (27/12/2025)
 - **Plateforme**: mastodon
 - **Echeance**: J-8
 - **Description**: Creer compte sur instance orientee libre/tech (Framapiaf, Mastodon.social)
 - **Livrables**:
-  - [ ] Compte cree
-  - [ ] Bio optimisee avec mission
-  - [ ] Lien vers repo GitHub
-  - [ ] Hashtags permanents : `#opensource`, `#IA`, `#Fediverse`, `#benevolat`
-  - [ ] Avatar/visuel avec logo Je Geek Utile
+  - [x] Compte cree
+  - [x] Bio optimisee avec mission
+  - [x] Lien vers repo GitHub
+  - [x] Hashtags permanents : `#opensource`, `#IA`, `#Fediverse`, `#benevolat`
+  - [x] Avatar/visuel avec logo Je Geek Utile
 - **KPI cible**: 1er abonne
-- **KPI actuel**: -
+- **KPI actuel**: Compte operationnel
 - **Notes**: Instance recommandee : Framapiaf
 
 ---
@@ -97,7 +97,7 @@
 - **Notes**: -
 
 ### [P1-004] Posts presentation Mastodon
-- **Statut**: a_faire
+- **Statut**: reporte
 - **Plateforme**: mastodon
 - **Echeance**: J-7
 - **Description**: Publier 2 posts de presentation + question ouverte

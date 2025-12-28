@@ -110,12 +110,28 @@ def a_propos():
 def services():
     return render_template('services.html')
 
+@app.route('/mentions-legales')
+def mentions_legales():
+    return render_template('mentions_legales.html')
+
+@app.route('/politique-confidentialite')
+def politique_confidentialite():
+    return render_template('politique_confidentialite.html')
+
+@app.route('/politique-cookies')
+def politique_cookies():
+    return render_template('politique_cookies.html')
+
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
         nom = request.form.get('nom')
         email = request.form.get('email')
         message = request.form.get('message')
+        rgpd_consent = request.form.get('rgpd_consent')
+        if not rgpd_consent:
+            flash('Vous devez accepter la politique de confidentialite.', 'error')
+            return redirect(url_for('contact'))
         flash('Votre message a ete envoye avec succes.', 'success')
         return redirect(url_for('contact'))
     return render_template('contact.html')
@@ -131,6 +147,11 @@ def inscription():
         nom = request.form.get('nom')
         prenom = request.form.get('prenom')
         type_compte = request.form.get('type_compte')
+        rgpd_consent = request.form.get('rgpd_consent')
+
+        if not rgpd_consent:
+            flash('Vous devez accepter la politique de confidentialite.', 'error')
+            return redirect(url_for('inscription'))
 
         if User.query.filter_by(email=email).first():
             flash('Cet email est deja utilise.', 'error')
@@ -225,6 +246,65 @@ def profil():
         flash('Profil mis a jour.', 'success')
     return render_template('profil.html', appetences=appetences)
 
+@app.route('/mes-donnees')
+@login_required
+def export_donnees():
+    user = current_user
+    data = {
+        'informations_personnelles': {
+            'id': user.id,
+            'email': user.email,
+            'nom': user.nom,
+            'prenom': user.prenom,
+            'date_inscription': user.date_inscription.isoformat() if user.date_inscription else None,
+            'date_naissance': user.date_naissance.isoformat() if user.date_naissance else None,
+            'adresse': user.adresse,
+            'is_benevole': user.is_benevole,
+            'is_admin': user.is_admin
+        },
+        'donnees_benevole': {
+            'motivation': user.motivation,
+            'temps_disponible': user.temps_disponible,
+            'missions_realisees': user.missions_realisees,
+            'missions_en_cours': user.missions_en_cours,
+            'monnaie_geekos': user.monnaie,
+            'appetences': [a.nom for a in user.appetences]
+        } if user.is_benevole else None,
+        'activite': [
+            {
+                'timestamp': log.timestamp.isoformat(),
+                'page': log.page,
+                'event_type': log.event_type
+            } for log in user.activity_logs
+        ],
+        'export_date': datetime.utcnow().isoformat(),
+        'rgpd_info': 'Export conforme RGPD - Article 20 Droit a la portabilite'
+    }
+    response = jsonify(data)
+    response.headers['Content-Disposition'] = f'attachment; filename=mes_donnees_jegeekutile_{user.id}.json'
+    return response
+
+@app.route('/supprimer-compte', methods=['GET', 'POST'])
+@login_required
+def supprimer_compte():
+    if request.method == 'POST':
+        confirmation = request.form.get('confirmation')
+        if confirmation != current_user.email:
+            flash('Email de confirmation incorrect.', 'error')
+            return redirect(url_for('supprimer_compte'))
+
+        user_id = current_user.id
+        ActivityLog.query.filter_by(user_id=user_id).delete()
+        user = User.query.get(user_id)
+        user.appetences = []
+        db.session.delete(user)
+        db.session.commit()
+        logout_user()
+        flash('Votre compte a ete supprime definitivement.', 'success')
+        return redirect(url_for('accueil'))
+
+    return render_template('supprimer_compte.html')
+
 @app.route('/formulaire-benevole', methods=['GET', 'POST'])
 def formulaire_benevole():
     user_id = session.get('nouveau_benevole_id')
@@ -240,6 +320,11 @@ def formulaire_benevole():
     appetences = Appetence.query.all()
 
     if request.method == 'POST':
+        rgpd_consent = request.form.get('rgpd_consent')
+        if not rgpd_consent:
+            flash('Vous devez accepter la politique de confidentialite.', 'error')
+            return redirect(url_for('formulaire_benevole'))
+
         date_naissance_str = request.form.get('date_naissance')
         if date_naissance_str:
             user.date_naissance = datetime.strptime(date_naissance_str, '%Y-%m-%d').date()
@@ -460,15 +545,18 @@ def admin_supprimer_evenement(event_id):
 def init_db():
     db.create_all()
 
-    if not User.query.filter_by(email='admin@admin.com').first():
-        admin = User(
-            email='admin@admin.com',
-            nom='Admin',
-            prenom='Admin',
-            is_admin=True
-        )
-        admin.set_password('admin123')
-        db.session.add(admin)
+    admin_email = os.environ.get('ADMIN_EMAIL')
+    admin_password = os.environ.get('ADMIN_PASSWORD')
+    if admin_email and admin_password:
+        if not User.query.filter_by(email=admin_email).first():
+            admin = User(
+                email=admin_email,
+                nom='Admin',
+                prenom='Admin',
+                is_admin=True
+            )
+            admin.set_password(admin_password)
+            db.session.add(admin)
 
     appetences_defaut = [
         'Informatique',
