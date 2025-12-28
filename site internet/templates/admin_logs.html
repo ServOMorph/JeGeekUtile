@@ -5,8 +5,11 @@
 {% block content %}
 <section class="section">
     <div class="member-header">
-        <h1>Logs d'activite</h1>
-        <p>Suivi des interactions utilisateurs</p>
+        <div>
+            <h1>Logs d'activite</h1>
+            <p>Suivi des interactions utilisateurs</p>
+        </div>
+        <a href="{{ url_for('admin') }}" class="btn btn-secondary">Retour admin</a>
     </div>
 
     <div class="card" style="margin-bottom: var(--space-lg);">

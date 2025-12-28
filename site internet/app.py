@@ -70,6 +70,17 @@ class ActivityLog(db.Model):
 
     user = db.relationship('User', backref=db.backref('activity_logs', lazy=True))
 
+class Evenement(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    titre = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.Text)
+    date_evenement = db.Column(db.Date, nullable=False)
+    heure_debut = db.Column(db.String(10))
+    heure_fin = db.Column(db.String(10))
+    lieu = db.Column(db.String(200))
+    statut = db.Column(db.String(20), default='ouvert')
+    date_creation = db.Column(db.DateTime, default=datetime.utcnow)
+
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -189,6 +200,8 @@ def espace_membre():
     if current_user.is_benevole:
         appetences = current_user.appetences
         dashboard_data['appetences'] = appetences
+        evenements = Evenement.query.filter(Evenement.date_evenement >= date.today()).order_by(Evenement.date_evenement.asc()).limit(5).all()
+        dashboard_data['evenements'] = evenements
 
     return render_template('espace_membre.html', dashboard_data=dashboard_data)
 
@@ -377,6 +390,72 @@ def admin_logs_export():
             'details': json.loads(log.details) if log.details else {}
         })
     return jsonify(data)
+
+@app.route('/admin/evenements')
+@login_required
+@admin_required
+def admin_evenements():
+    evenements = Evenement.query.order_by(Evenement.date_evenement.desc()).all()
+    return render_template('admin_evenements.html', evenements=evenements)
+
+@app.route('/admin/evenements/ajouter', methods=['POST'])
+@login_required
+@admin_required
+def admin_ajouter_evenement():
+    titre = request.form.get('titre')
+    description = request.form.get('description')
+    date_str = request.form.get('date_evenement')
+    heure_debut = request.form.get('heure_debut')
+    heure_fin = request.form.get('heure_fin')
+    lieu = request.form.get('lieu')
+    statut = request.form.get('statut', 'ouvert')
+
+    if not titre or not date_str:
+        flash('Titre et date sont obligatoires.', 'error')
+        return redirect(url_for('admin_evenements'))
+
+    date_evenement = datetime.strptime(date_str, '%Y-%m-%d').date()
+    evenement = Evenement(
+        titre=titre,
+        description=description,
+        date_evenement=date_evenement,
+        heure_debut=heure_debut,
+        heure_fin=heure_fin,
+        lieu=lieu,
+        statut=statut
+    )
+    db.session.add(evenement)
+    db.session.commit()
+    flash('Evenement ajoute avec succes.', 'success')
+    return redirect(url_for('admin_evenements'))
+
+@app.route('/admin/evenements/<int:event_id>/modifier', methods=['POST'])
+@login_required
+@admin_required
+def admin_modifier_evenement(event_id):
+    evenement = Evenement.query.get_or_404(event_id)
+    evenement.titre = request.form.get('titre')
+    evenement.description = request.form.get('description')
+    date_str = request.form.get('date_evenement')
+    if date_str:
+        evenement.date_evenement = datetime.strptime(date_str, '%Y-%m-%d').date()
+    evenement.heure_debut = request.form.get('heure_debut')
+    evenement.heure_fin = request.form.get('heure_fin')
+    evenement.lieu = request.form.get('lieu')
+    evenement.statut = request.form.get('statut')
+    db.session.commit()
+    flash('Evenement modifie avec succes.', 'success')
+    return redirect(url_for('admin_evenements'))
+
+@app.route('/admin/evenements/<int:event_id>/supprimer', methods=['POST'])
+@login_required
+@admin_required
+def admin_supprimer_evenement(event_id):
+    evenement = Evenement.query.get_or_404(event_id)
+    db.session.delete(evenement)
+    db.session.commit()
+    flash('Evenement supprime.', 'success')
+    return redirect(url_for('admin_evenements'))
 
 def init_db():
     db.create_all()

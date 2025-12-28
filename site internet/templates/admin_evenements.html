@@ -1,0 +1,264 @@
+{% extends 'base.html' %}
+
+{% block title %}Gestion des evenements - Je Geek Utile{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="member-header">
+        <div>
+            <h1>Gestion des evenements</h1>
+            <p style="color: var(--text-secondary);">Ajouter, modifier ou supprimer des evenements</p>
+        </div>
+        <a href="{{ url_for('admin') }}" class="btn btn-secondary">Retour admin</a>
+    </div>
+
+    <div class="card" style="margin-bottom: var(--space-lg);">
+        <h2 class="card-title">Ajouter un evenement</h2>
+        <form action="{{ url_for('admin_ajouter_evenement') }}" method="POST">
+            <div class="grid grid-2">
+                <div class="form-group">
+                    <label class="form-label" for="titre">Titre *</label>
+                    <input type="text" id="titre" name="titre" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="lieu">Lieu</label>
+                    <input type="text" id="lieu" name="lieu" class="form-input">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="description">Description</label>
+                <textarea id="description" name="description" class="form-textarea" rows="3"></textarea>
+            </div>
+            <div class="grid grid-4">
+                <div class="form-group">
+                    <label class="form-label" for="date_evenement">Date *</label>
+                    <input type="date" id="date_evenement" name="date_evenement" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="heure_debut">Heure debut</label>
+                    <input type="time" id="heure_debut" name="heure_debut" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="heure_fin">Heure fin</label>
+                    <input type="time" id="heure_fin" name="heure_fin" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="statut">Statut</label>
+                    <select id="statut" name="statut" class="form-input">
+                        <option value="ouvert">Inscriptions ouvertes</option>
+                        <option value="complet">Complet</option>
+                        <option value="ferme">Ferme</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter l'evenement</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Evenements ({{ evenements|length }})</h2>
+        {% if evenements %}
+        <div class="events-admin-list">
+            {% for event in evenements %}
+            <div class="event-admin-item" id="event-{{ event.id }}">
+                <div class="event-admin-header">
+                    <div class="event-admin-date">
+                        <span class="event-day">{{ event.date_evenement.strftime('%d') }}</span>
+                        <span class="event-month">{{ event.date_evenement.strftime('%b').upper() }}</span>
+                    </div>
+                    <div class="event-admin-info">
+                        <h3>{{ event.titre }}</h3>
+                        <p>{{ event.description or 'Pas de description' }}</p>
+                        <div class="event-admin-meta">
+                            {% if event.lieu %}<span>@ {{ event.lieu }}</span>{% endif %}
+                            {% if event.heure_debut %}<span>{{ event.heure_debut }}{% if event.heure_fin %} - {{ event.heure_fin }}{% endif %}</span>{% endif %}
+                            <span class="event-status event-status-{{ event.statut }}">
+                                {% if event.statut == 'ouvert' %}Ouvert{% elif event.statut == 'complet' %}Complet{% else %}Ferme{% endif %}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="event-admin-actions">
+                        <button type="button" class="btn btn-secondary" onclick="toggleEdit({{ event.id }})">Modifier</button>
+                        <form action="{{ url_for('admin_supprimer_evenement', event_id=event.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Supprimer cet evenement ?');">
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="event-edit-form" id="edit-{{ event.id }}" style="display: none;">
+                    <form action="{{ url_for('admin_modifier_evenement', event_id=event.id) }}" method="POST">
+                        <div class="grid grid-2">
+                            <div class="form-group">
+                                <label class="form-label">Titre</label>
+                                <input type="text" name="titre" class="form-input" value="{{ event.titre }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Lieu</label>
+                                <input type="text" name="lieu" class="form-input" value="{{ event.lieu or '' }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea name="description" class="form-textarea" rows="2">{{ event.description or '' }}</textarea>
+                        </div>
+                        <div class="grid grid-4">
+                            <div class="form-group">
+                                <label class="form-label">Date</label>
+                                <input type="date" name="date_evenement" class="form-input" value="{{ event.date_evenement.strftime('%Y-%m-%d') }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Heure debut</label>
+                                <input type="time" name="heure_debut" class="form-input" value="{{ event.heure_debut or '' }}">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Heure fin</label>
+                                <input type="time" name="heure_fin" class="form-input" value="{{ event.heure_fin or '' }}">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Statut</label>
+                                <select name="statut" class="form-input">
+                                    <option value="ouvert" {% if event.statut == 'ouvert' %}selected{% endif %}>Ouvert</option>
+                                    <option value="complet" {% if event.statut == 'complet' %}selected{% endif %}>Complet</option>
+                                    <option value="ferme" {% if event.statut == 'ferme' %}selected{% endif %}>Ferme</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: var(--space-sm);">
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            <button type="button" class="btn btn-secondary" onclick="toggleEdit({{ event.id }})">Annuler</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p style="color: var(--text-secondary);">Aucun evenement pour le moment.</p>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+.events-admin-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.event-admin-item {
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    border-left: 3px solid var(--border-color);
+}
+
+.event-admin-header {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+}
+
+.event-admin-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 50px;
+    padding: var(--space-sm);
+    background: var(--accent-primary);
+    border-radius: var(--radius-sm);
+}
+
+.event-day {
+    font-size: var(--font-size-xl);
+    font-weight: bold;
+    color: var(--text-accent);
+    line-height: 1;
+}
+
+.event-month {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+.event-admin-info {
+    flex: 1;
+}
+
+.event-admin-info h3 {
+    margin: 0 0 var(--space-xs) 0;
+    color: var(--text-accent);
+}
+
+.event-admin-info p {
+    margin: 0 0 var(--space-sm) 0;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.event-admin-meta {
+    display: flex;
+    gap: var(--space-md);
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+    flex-wrap: wrap;
+}
+
+.event-admin-actions {
+    display: flex;
+    gap: var(--space-xs);
+    flex-shrink: 0;
+}
+
+.event-admin-actions .btn {
+    padding: var(--space-xs) var(--space-sm);
+}
+
+.event-edit-form {
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border-subtle);
+}
+
+.event-status {
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-weight: bold;
+}
+
+.event-status-ouvert {
+    background: var(--success-color);
+    color: var(--bg-primary);
+}
+
+.event-status-complet {
+    background: var(--warning-color);
+    color: var(--bg-primary);
+}
+
+.event-status-ferme {
+    background: var(--alert-color);
+    color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+    .event-admin-header {
+        flex-direction: column;
+    }
+
+    .event-admin-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+</style>
+
+<script>
+function toggleEdit(eventId) {
+    const editForm = document.getElementById('edit-' + eventId);
+    if (editForm.style.display === 'none') {
+        editForm.style.display = 'block';
+    } else {
+        editForm.style.display = 'none';
+    }
+}
+</script>
+{% endblock %}

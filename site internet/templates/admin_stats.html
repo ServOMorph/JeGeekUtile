@@ -5,8 +5,11 @@
 {% block content %}
 <section class="section">
     <div class="member-header">
-        <h1>Statistiques</h1>
-        <p>Vue d'ensemble des benevoles</p>
+        <div>
+            <h1>Statistiques</h1>
+            <p>Vue d'ensemble des benevoles</p>
+        </div>
+        <a href="{{ url_for('admin') }}" class="btn btn-secondary">Retour admin</a>
     </div>
 
     <div class="grid grid-3" style="gap: var(--space-lg); margin-bottom: var(--space-xl);">
