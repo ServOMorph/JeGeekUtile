@@ -7,6 +7,9 @@ from functools import wraps
 import os
 import uuid
 import json
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+from config import PORT_SITE, DEBUG
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
@@ -81,6 +84,21 @@ class Evenement(db.Model):
     statut = db.Column(db.String(20), default='ouvert')
     date_creation = db.Column(db.DateTime, default=datetime.utcnow)
 
+class MembreEquipe(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nom = db.Column(db.String(100), nullable=False)
+    prenom = db.Column(db.String(100), nullable=False)
+    role = db.Column(db.String(150), nullable=True)
+    bio = db.Column(db.Text, nullable=True)
+    photo_filename = db.Column(db.String(200), nullable=True)
+    github_url = db.Column(db.String(300), nullable=True)
+    linkedin_url = db.Column(db.String(300), nullable=True)
+    email_public = db.Column(db.String(120), nullable=True)
+    site_url = db.Column(db.String(300), nullable=True)
+    ordre = db.Column(db.Integer, default=0)
+    visible = db.Column(db.Boolean, default=True)
+    date_ajout = db.Column(db.DateTime, default=datetime.utcnow)
+
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -102,9 +120,26 @@ def inject_now():
 def accueil():
     return render_template('accueil.html')
 
+@app.route('/notre-projet')
+def notre_projet():
+    return render_template('notre_projet.html')
+
+@app.route('/projet-d-actions')
+def projet_d_actions():
+    import markdown
+    md_path = os.path.join(os.path.dirname(__file__), '..', 'projet_d_action_V1.md')
+    with open(md_path, encoding='utf-8') as f:
+        content = markdown.markdown(f.read(), extensions=['extra', 'nl2br'])
+    return render_template('projet_d_actions.html', content=content)
+
+@app.route('/qui-sommes-nous')
+def qui_sommes_nous():
+    membres = MembreEquipe.query.filter_by(visible=True).order_by(MembreEquipe.ordre).all()
+    return render_template('qui_sommes_nous.html', membres=membres)
+
 @app.route('/a-propos')
 def a_propos():
-    return render_template('a_propos.html')
+    return redirect(url_for('notre_projet'))
 
 @app.route('/services')
 def services():
@@ -592,4 +627,4 @@ with app.app_context():
     init_db()
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=DEBUG, port=PORT_SITE)

@@ -9,6 +9,29 @@
 
 ## Sessions
 
+### 2026-02-25 - Site internet : UI membres + Projet d'actions
+- **Durée**: ~2h
+- **Tâches**:
+  - CSS carte membre : layout flex header (photo + nom + badge)
+  - Correction couleurs badge rôle et lien site (--text-accent)
+  - Ajout `.membre-site-link` visible sur fond sombre
+  - Onglet "Projet d'actions" : route, template, nav
+  - Création `projet_d_action_V1.md` (V2 mise à jour par user)
+  - Rendu markdown avec extensions `extra` + `nl2br`
+  - CSS `.prose` pour h1/h2/h3/p/hr sur rendu markdown
+  - Correction taille h1 prose (--font-size-display * 2 = 64px)
+  - Prompt bannière "Projet d'actions" dans prompts_bannieres_pages.md
+- **Score tests**: 19/19 (100%)
+- **Fichiers modifiés**:
+  - site internet/static/css/style.css
+  - site internet/templates/qui_sommes_nous.html
+  - site internet/templates/base.html
+  - site internet/app.py
+- **Fichiers créés**:
+  - site internet/templates/projet_d_actions.html
+  - projet_d_action_V1.md
+- **Commits**: 1
+
 ### 2025-11-26 - Console Gestion Agents IA
 - **Durée**: ~2h
 - **Tâches**:

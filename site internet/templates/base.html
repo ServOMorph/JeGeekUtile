@@ -50,7 +50,24 @@
 
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+
+    <script>
+    (function(){
+        var c=localStorage.getItem('charte')||'famicloud';
+        var t=localStorage.getItem('theme')||(c==='famicloud'?localStorage.getItem('famicloud-theme')||'ocean-profond':localStorage.getItem('jgu-theme')||'nuit-foret');
+        var m=localStorage.getItem('displayMode')||'econome';
+        document.documentElement.setAttribute('data-charte',c);
+        document.documentElement.setAttribute('data-theme',t);
+        document.documentElement.setAttribute('data-mode',m);
+        var fi=document.querySelector('link[rel="icon"]');
+        if(fi) fi.href=c==='famicloud'?'/static/images/favicon-famicloud.png':'/static/images/favicon.png';
+    })();
+    </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-famicloud.css') }}">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Aller au contenu principal</a>
@@ -58,7 +75,8 @@
     <header>
         <div class="header-content">
             <a href="{{ url_for('accueil') }}" class="logo">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Je Geek Utile" class="logo-img">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Je Geek Utile" class="logo-img logo-img-jgu">
+                <img src="{{ url_for('static', filename='images/logo-famicloud-duo.png') }}" alt="Je Geek Utile" class="logo-img logo-img-famicloud">
             </a>
             <div class="header-controls">
                 <div class="theme-selector">
@@ -74,6 +92,21 @@
                     <button class="theme-btn" data-theme="sable-dore" title="Sable Dore"></button>
                     <button class="theme-btn" data-theme="nebula-cosmique" title="Nebula Cosmique"></button>
                 </div>
+                <div class="famicloud-theme-selector" style="display:none;">
+                    <button class="theme-trigger-btn" id="famicloud-theme-trigger" title="Changer les couleurs" aria-expanded="false">&#127912;</button>
+                    <div class="theme-dropdown" id="famicloud-theme-dropdown">
+                        <button class="theme-btn" data-theme="nuit-foret" title="Nuit Foret"></button>
+                        <button class="theme-btn" data-theme="terre-ethique" title="Terre Ethique"></button>
+                        <button class="theme-btn" data-theme="cryptage-nocturne" title="Cryptage Nocturne"></button>
+                        <button class="theme-btn" data-theme="aurore-humaine" title="Aurore Humaine"></button>
+                        <button class="theme-btn" data-theme="horizon-progres" title="Horizon Progres"></button>
+                        <button class="theme-btn" data-theme="ocean-profond" title="Ocean Profond"></button>
+                        <button class="theme-btn" data-theme="magma-digital" title="Magma Digital"></button>
+                        <button class="theme-btn" data-theme="glacier-arctique" title="Glacier Arctique"></button>
+                        <button class="theme-btn" data-theme="sable-dore" title="Sable Dore"></button>
+                        <button class="theme-btn" data-theme="nebula-cosmique" title="Nebula Cosmique"></button>
+                    </div>
+                </div>
                 <div class="mode-selector">
                     <span class="mode-selector-label">Mode:</span>
                     <button class="mode-btn" data-mode="hyper-econome" title="Hyper-econome">H</button>
@@ -83,15 +116,22 @@
                     <button class="mode-btn" data-mode="supernova" title="Supernova">S</button>
                     <button class="mode-btn" data-mode="quasar" title="Quasar">Q</button>
                 </div>
+                <div class="charte-selector">
+                    <span class="charte-selector-label">Charte:</span>
+                    <button class="charte-btn active" data-charte="jgu" title="Je Geek Utile">Je Geek Utile</button>
+                    <button class="charte-btn" data-charte="famicloud" title="FamiCloud">FamiCloud</button>
+                </div>
             </div>
         </div>
     </header>
 
     <nav aria-label="Navigation principale">
         <a href="{{ url_for('accueil') }}" class="nav-link {% if request.endpoint == 'accueil' %}active{% endif %}"{% if request.endpoint == 'accueil' %} aria-current="page"{% endif %}>Accueil</a>
-        <a href="{{ url_for('a_propos') }}" class="nav-link {% if request.endpoint == 'a_propos' %}active{% endif %}"{% if request.endpoint == 'a_propos' %} aria-current="page"{% endif %}>A propos</a>
-        <a href="{{ url_for('services') }}" class="nav-link {% if request.endpoint == 'services' %}active{% endif %}"{% if request.endpoint == 'services' %} aria-current="page"{% endif %}>Services</a>
-        <a href="{{ url_for('contact') }}" class="nav-link {% if request.endpoint == 'contact' %}active{% endif %}"{% if request.endpoint == 'contact' %} aria-current="page"{% endif %}>Contact</a>
+        <a href="{{ url_for('notre_projet') }}" class="nav-link {% if request.endpoint == 'notre_projet' %}active{% endif %}"{% if request.endpoint == 'notre_projet' %} aria-current="page"{% endif %}>Notre projet</a>
+        <a href="{{ url_for('qui_sommes_nous') }}" class="nav-link {% if request.endpoint == 'qui_sommes_nous' %}active{% endif %}"{% if request.endpoint == 'qui_sommes_nous' %} aria-current="page"{% endif %}>Qui sommes nous</a>
+        <a href="{{ url_for('projet_d_actions') }}" class="nav-link {% if request.endpoint == 'projet_d_actions' %}active{% endif %}"{% if request.endpoint == 'projet_d_actions' %} aria-current="page"{% endif %}>Projet d'actions</a>
+        <span class="nav-link nav-link-disabled" title="Bientot disponible">Services</span>
+        <span class="nav-link nav-link-disabled" title="Bientot disponible">Contact</span>
         {% if current_user.is_authenticated %}
             <a href="{{ url_for('espace_membre') }}" class="nav-link {% if request.endpoint == 'espace_membre' %}active{% endif %}">Espace Membre</a>
             {% if current_user.is_admin %}
@@ -103,8 +143,8 @@
             </span>
             <a href="{{ url_for('logout') }}" class="nav-link nav-link-right">Deconnexion</a>
         {% else %}
-            <a href="{{ url_for('login') }}" class="nav-link nav-link-right {% if request.endpoint == 'login' %}active{% endif %}">Connexion</a>
-            <a href="{{ url_for('inscription') }}" class="nav-link {% if request.endpoint == 'inscription' %}active{% endif %}">Inscription</a>
+            <span class="nav-link nav-link-right nav-link-disabled" title="Bientot disponible">Connexion</span>
+            <span class="nav-link nav-link-disabled" title="Bientot disponible">Inscription</span>
         {% endif %}
     </nav>
 
@@ -126,7 +166,8 @@
             <a href="{{ url_for('politique_confidentialite') }}">Confidentialite</a> |
             <a href="{{ url_for('politique_cookies') }}">Cookies</a>
         </div>
-        @Je Geek Utile - {{ now().strftime('%d/%m/%Y') if now is defined else '25/12/2024' }} - Site v1.0
+        <img src="{{ url_for('static', filename='images/logo-serenia.png') }}" alt="SérénIA Tech" style="height:28px;vertical-align:middle;opacity:0.8;margin-right:0.4rem;">
+        © SérénIA Tech - {{ now().strftime('%d/%m/%Y') if now is defined else '25/02/2026' }} - Site v1.0
     </footer>
 
     <div id="cookie-banner" class="cookie-banner" style="display: none;">
