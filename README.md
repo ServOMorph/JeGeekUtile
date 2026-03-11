@@ -77,9 +77,6 @@ JeGeekUtile/
 │   ├── agents.json                       # 6 agents configurés
 │   └── sessions.json                     # Index + statistiques (6 sessions, 100% moy.)
 │
-├── partenariats/
-│   └── Familles Rurales/                 # Documentation partenariat Génissac
-│
 ├── sessions/                             # Archives sessions tests (par date)
 │   └── {AAAA-MM-JJ}/{id}.json
 │
@@ -393,7 +390,7 @@ Système de récompense pour bénévoles (10 à 200 geekos selon mission). Non c
 | Sessions tests archivées | 6 |
 | Dernier score tests | 100% (19/19) |
 | Applications satellites | 3 |
-| Partenariats documentés | 1 (Familles Rurales Génissac) |
+| Partenariats documentés | En cours |
 
 ---
 
