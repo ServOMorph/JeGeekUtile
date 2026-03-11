@@ -1,10 +1,58 @@
 document.addEventListener('DOMContentLoaded', function() {
+    loadCharte();
     loadTheme();
     loadMode();
+    setupCharteSelector();
     setupThemeSelector();
     setupModeSelector();
+    setupFamicloudThemeDropdown();
     checkCookieConsent();
 });
+
+const FAMICLOUD_MODES = ['hyper-econome', 'econome', 'normal'];
+
+function loadCharte() {
+    const saved = localStorage.getItem('charte') || 'famicloud';
+    applyCharte(saved);
+}
+
+function applyCharte(charte) {
+    document.documentElement.setAttribute('data-charte', charte);
+
+    document.querySelectorAll('.charte-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.charte === charte);
+    });
+
+    const famiSelector = document.querySelector('.famicloud-theme-selector');
+    if (famiSelector) {
+        famiSelector.style.display = charte === 'famicloud' ? 'flex' : 'none';
+    }
+
+    if (charte === 'famicloud') {
+        const currentMode = localStorage.getItem('displayMode') || 'normal';
+        if (!FAMICLOUD_MODES.includes(currentMode)) {
+            setMode('normal');
+        }
+        const famiTheme = localStorage.getItem('famicloud-theme') || 'ocean-profond';
+        setTheme(famiTheme);
+    } else {
+        const jguTheme = localStorage.getItem('jgu-theme') || 'nuit-foret';
+        setTheme(jguTheme);
+    }
+}
+
+function setCharte(charte) {
+    localStorage.setItem('charte', charte);
+    applyCharte(charte);
+}
+
+function setupCharteSelector() {
+    document.querySelectorAll('.charte-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            setCharte(this.dataset.charte);
+        });
+    });
+}
 
 function loadTheme() {
     const savedTheme = localStorage.getItem('theme') || 'nuit-foret';
@@ -18,6 +66,13 @@ function loadTheme() {
 function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
+
+    const charte = document.documentElement.getAttribute('data-charte') || 'jgu';
+    if (charte === 'famicloud') {
+        localStorage.setItem('famicloud-theme', theme);
+    } else {
+        localStorage.setItem('jgu-theme', theme);
+    }
 
     document.querySelectorAll('.theme-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.theme === theme);
@@ -55,6 +110,27 @@ function setupModeSelector() {
         btn.addEventListener('click', function() {
             setMode(this.dataset.mode);
         });
+    });
+}
+
+function setupFamicloudThemeDropdown() {
+    const trigger = document.getElementById('famicloud-theme-trigger');
+    const dropdown = document.getElementById('famicloud-theme-dropdown');
+    if (!trigger || !dropdown) return;
+
+    trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const isOpen = dropdown.classList.toggle('open');
+        trigger.setAttribute('aria-expanded', isOpen);
+    });
+
+    document.addEventListener('click', function() {
+        dropdown.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+    });
+
+    dropdown.addEventListener('click', function(e) {
+        e.stopPropagation();
     });
 }
 

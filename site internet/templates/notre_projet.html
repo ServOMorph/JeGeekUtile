@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}A propos - Je Geek Utile{% endblock %}
+{% block title %}Notre Projet - Je Geek Utile{% endblock %}
 
 {% block content %}
 <section class="section">
-    <h1 class="section-title">A propos de Je Geek Utile</h1>
+    <img src="{{ url_for('static', filename='images/banners/banner-notre-projet.png') }}" alt="Notre projet" class="page-banner">
 
     <div class="card" style="margin-bottom: var(--space-xl);">
-        <h2 class="card-title">Notre Mission</h2>
         <p>
             Je Geek Utile sera une association loi 1901 fondee avec la conviction
             que la technologie doit etre au service de l'humain et de l'environnement,
@@ -20,7 +19,7 @@
         </p>
     </div>
 
-    <h2 class="section-title">Nos 6 Piliers</h2>
+    <img src="{{ url_for('static', filename='images/banners/banner-nos-6-piliers.png') }}" alt="Nos 6 Piliers" class="page-banner">
     <div class="grid grid-2">
         <div class="card">
             <h3 class="card-title">1. Solidarite Numerique</h3>
@@ -75,7 +74,7 @@
     </div>
 </section>
 
-<section class="section">
+<section class="section" style="display:none;">
     <h2 class="section-title">Rejoignez-nous</h2>
     <div class="card">
         <p>

@@ -6,6 +6,19 @@
 - Être synthétique et direct
 - Optimiser l'utilisation des tokens
 
+## Marqueurs de fin (obligatoires)
+
+Chaque réponse se termine par :
+```
+# 😎
+# ❤️
+# ❤️
+# ❤️
+# ❤️
+# ❤️
+```
+
+
 ## Comportement
 - Exécuter uniquement les tâches demandées explicitement
 - Ne pas prendre d'initiatives non sollicitées

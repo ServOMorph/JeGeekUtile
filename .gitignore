@@ -1,6 +1,7 @@
 # Données personnelles & partenariats (usage local uniquement)
 partenariats/
 notes_persos/
+AGENTS/
 
 # Python
 __pycache__/

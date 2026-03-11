@@ -145,6 +145,51 @@
           "type": "validation"
         }
       ]
+    },
+    {
+      "id": "partenaires-integrateur",
+      "nom": "PartenairesIntegrateur",
+      "role": "Intégration valeurs partenaires",
+      "niveau": 1,
+      "parent": "robert",
+      "competences": ["integration_valeurs", "analyse_compatibilite", "generation_code", "validation_humaine"],
+      "score": 0,
+      "tests": [
+        {
+          "nom": "workflow-partenariat",
+          "type": "validation"
+        },
+        {
+          "nom": "detection-incompatibilite-valeurs",
+          "type": "validation"
+        }
+      ]
+    },
+    {
+      "id": "comia",
+      "nom": "ComIA",
+      "role": "Agent communication GitHub et Mastodon",
+      "niveau": 1,
+      "parent": "robert",
+      "competences": [
+        "strategie_communication",
+        "redaction_posts",
+        "gestion_roadmap",
+        "suivi_kpis",
+        "github_community",
+        "mastodon_community"
+      ],
+      "score": 0,
+      "tests": [
+        {
+          "nom": "Generation post Mastodon",
+          "type": "validation"
+        },
+        {
+          "nom": "MAJ roadmap",
+          "type": "validation"
+        }
+      ]
     }
   ]
 }

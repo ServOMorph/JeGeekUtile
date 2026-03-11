@@ -1,0 +1,107 @@
+/* === FAMICLOUD THEME v2.0 ===
+   Applique quand html[data-charte="famicloud"]
+   10 themes disponibles (memes que JGU), selecteur compact dropdown
+   Modes actifs : hyper-econome, econome, normal uniquement
+   ============================================================ */
+
+/* Typographie FamiCloud */
+:root[data-charte="famicloud"] body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+:root[data-charte="famicloud"] h1,
+:root[data-charte="famicloud"] h2,
+:root[data-charte="famicloud"] h3,
+:root[data-charte="famicloud"] h4,
+:root[data-charte="famicloud"] h5,
+:root[data-charte="famicloud"] h6 {
+    font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Masquer selecteur de themes en rangee et modes non disponibles */
+:root[data-charte="famicloud"] .theme-selector,
+:root[data-charte="famicloud"] .mode-btn[data-mode="ultra"],
+:root[data-charte="famicloud"] .mode-btn[data-mode="supernova"],
+:root[data-charte="famicloud"] .mode-btn[data-mode="quasar"] {
+    display: none;
+}
+
+/* Afficher le selecteur compact FamiCloud */
+:root[data-charte="famicloud"] .famicloud-theme-selector {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Bouton declencheur palette (cache par defaut, visible en FamiCloud) */
+.theme-trigger-btn {
+    display: none;
+    width: 32px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    font-size: 14px;
+}
+
+:root[data-charte="famicloud"] .theme-trigger-btn {
+    display: flex;
+}
+
+.theme-trigger-btn:hover {
+    background: var(--bg-elevated);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Dropdown palette */
+.theme-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    padding: 8px 10px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-md);
+    flex-wrap: wrap;
+    max-width: 140px;
+    z-index: 200;
+}
+
+.theme-dropdown.open {
+    display: flex;
+}
+
+.theme-dropdown .theme-btn {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border-width: 1px;
+    margin: 2px;
+    box-shadow: none;
+    transition: transform var(--transition-fast);
+}
+
+.theme-dropdown .theme-btn:hover {
+    transform: scale(1.2);
+    border-color: var(--text-primary);
+}
+
+.theme-dropdown .theme-btn.active {
+    border-color: var(--text-primary);
+    transform: scale(1.15);
+}
+
+/* Bouton switcher charte : etat actif */
+.charte-btn.active {
+    background: var(--accent-secondary);
+    border-color: var(--border-color);
+    color: var(--bg-primary);
+}

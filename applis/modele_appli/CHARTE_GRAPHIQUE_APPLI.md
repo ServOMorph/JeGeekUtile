@@ -6,19 +6,24 @@ Charte graphique standardisée pour toutes les applications du projet.
 
 ### Système de Thèmes
 
-Les applications proposent **5 thèmes configurables** représentant les valeurs du projet :
+Les applications proposent **10 thèmes configurables** représentant les valeurs du projet :
 
 1. **Nuit Forêt** (défaut) - Éco-responsabilité
 2. **Terre Éthique** - Éthique et transparence
 3. **Cryptage Nocturne** - Sécurité des données
 4. **Aurore Humaine** - IA pour les humains
 5. **Horizon Progrès** - Innovation et progrès
+6. **Océan Profond** - Profondeur et exploration
+7. **Magma Digital** - Puissance et énergie
+8. **Glacier Arctique** - Clarté et précision
+9. **Sable Doré** - Chaleur et richesse
+10. **Nebula Cosmique** - Créativité et mystère
 
 Tous les thèmes respectent les contraintes OLED (noir profond, couleurs désaturées, > 70% pixels noirs).
 
 ### Système de Modes d'Affichage
 
-Les applications proposent **4 modes d'affichage** indépendants des thèmes de couleurs :
+Les applications proposent **6 modes d'affichage** indépendants des thèmes de couleurs :
 
 | Mode | Description | Cas d'usage |
 |------|-------------|-------------|
@@ -26,6 +31,8 @@ Les applications proposent **4 modes d'affichage** indépendants des thèmes de 
 | **Économe** | Design actuel équilibré | Usage quotidien standard |
 | **Normal** | Design moderne et esthétique | Présentation, démonstration |
 | **Ultra** | Effets visuels spectaculaires, animations fluides | Démonstration, showcase, expérience premium |
+| **Supernova** | MODE CLAIR - Effets avancés, particules, gradients animés | Événements, landing pages, effet "wow" |
+| **Quasar** | MODE CLAIR - Maximum absolu, 3D, shaders, immersion totale | Portfolio, art numérique, expérience ultime |
 
 #### Variables CSS - Mode Hyper-économe
 
@@ -193,7 +200,8 @@ Les applications proposent **4 modes d'affichage** indépendants des thèmes de 
   --animation-translate-hover: -8px;
   --animation-enabled: 1;
   --animation-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --animation-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-smooth: cubic-bezier(0.4, 0, 0.2, 
+  1);
   --animation-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
   /* === TYPOGRAPHIE (très aérée) === */
@@ -239,6 +247,365 @@ Les applications proposent **4 modes d'affichage** indépendants des thèmes de 
 :root[data-mode="ultra"][data-theme="horizon-progres"] {
   --glow-color: rgba(122, 106, 168, 0.4);
   --glow-color-intense: rgba(122, 106, 168, 0.7);
+}
+
+:root[data-mode="ultra"][data-theme="ocean-profond"] {
+  --glow-color: rgba(45, 157, 168, 0.4);
+  --glow-color-intense: rgba(45, 157, 168, 0.7);
+}
+
+:root[data-mode="ultra"][data-theme="magma-digital"] {
+  --glow-color: rgba(196, 80, 80, 0.4);
+  --glow-color-intense: rgba(196, 80, 80, 0.7);
+}
+
+:root[data-mode="ultra"][data-theme="glacier-arctique"] {
+  --glow-color: rgba(104, 168, 200, 0.4);
+  --glow-color-intense: rgba(104, 168, 200, 0.7);
+}
+
+:root[data-mode="ultra"][data-theme="sable-dore"] {
+  --glow-color: rgba(200, 168, 72, 0.4);
+  --glow-color-intense: rgba(200, 168, 72, 0.7);
+}
+
+:root[data-mode="ultra"][data-theme="nebula-cosmique"] {
+  --glow-color: rgba(184, 104, 168, 0.4);
+  --glow-color-intense: rgba(184, 104, 168, 0.7);
+}
+```
+
+#### Variables CSS - Mode Supernova (MODE CLAIR)
+
+```css
+:root[data-mode="supernova"] {
+  /* === BACKGROUNDS CLAIRS === */
+  --bg-primary: #f5f5f0;
+  --bg-secondary: #eaeae5;
+  --bg-tertiary: #e0e0da;
+  --bg-elevated: #d5d5d0;
+
+  /* === TEXTE SOMBRE === */
+  --text-primary: #1a1a1a;
+  --text-secondary: #3a3a3a;
+  --text-muted: #5a5a5a;
+
+  /* === ESPACEMENTS (très généreux) === */
+  --space-xs: 10px;
+  --space-sm: 20px;
+  --space-md: 30px;
+  --space-lg: 45px;
+  --space-xl: 70px;
+  --space-xxl: 100px;
+
+  /* === BORDURES (très arrondies) === */
+  --radius-sm: 16px;
+  --radius-md: 24px;
+  --radius-lg: 36px;
+  --radius-xl: 50px;
+
+  --border-width-thin: 1px;
+  --border-width-base: 2px;
+  --border-width-thick: 3px;
+  --border-width-heavy: 4px;
+
+  /* === OMBRES (adaptées mode clair) === */
+  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.15), 0 0 30px var(--glow-color), 0 0 60px var(--glow-color-soft);
+  --shadow-md: 0 8px 40px rgba(0, 0, 0, 0.2), 0 0 50px var(--glow-color), 0 0 100px var(--glow-color-soft);
+  --shadow-lg: 0 16px 60px rgba(0, 0, 0, 0.25), 0 0 80px var(--glow-color-intense), 0 0 150px var(--glow-color);
+  --shadow-glow: 0 0 50px var(--glow-color), 0 0 100px var(--glow-color), 0 0 150px var(--glow-color-soft);
+  --shadow-neon: 0 0 5px var(--accent-secondary), 0 0 20px var(--accent-secondary), 0 0 40px var(--accent-secondary), 0 0 80px var(--accent-secondary);
+
+  /* === TRANSITIONS (très fluides avec rebond) === */
+  --transition-fast: 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-base: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-slow: 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* === ANIMATIONS (spectaculaires) === */
+  --animation-duration: 600ms;
+  --animation-scale-hover: 1.1;
+  --animation-translate-hover: -12px;
+  --animation-enabled: 1;
+  --animation-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --animation-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --animation-explosive: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* === TYPOGRAPHIE (très aérée) === */
+  --font-size-xs: 14px;
+  --font-size-sm: 15px;
+  --font-size-base: 17px;
+  --font-size-lg: 20px;
+  --font-size-xl: 26px;
+  --font-size-xxl: 36px;
+  --font-size-display: 64px;
+
+  --line-height-tight: 1.5;
+  --line-height-base: 1.8;
+  --line-height-relaxed: 2.2;
+
+  /* === COULEURS GLOW (intensifiées) === */
+  --glow-color: rgba(107, 142, 35, 0.5);
+  --glow-color-intense: rgba(107, 142, 35, 0.8);
+  --glow-color-soft: rgba(107, 142, 35, 0.3);
+  --gradient-accent: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+  --gradient-animated: linear-gradient(270deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary), var(--accent-secondary));
+
+  /* === EFFETS SPECIAUX === */
+  --blur-amount: 30px;
+  --saturate-amount: 200%;
+  --particle-count: 50;
+}
+
+/* Glow colors par thème en mode Supernova */
+:root[data-mode="supernova"][data-theme="nuit-foret"] {
+  --glow-color: rgba(107, 142, 35, 0.5);
+  --glow-color-intense: rgba(107, 142, 35, 0.9);
+  --glow-color-soft: rgba(107, 142, 35, 0.25);
+}
+
+:root[data-mode="supernova"][data-theme="terre-ethique"] {
+  --glow-color: rgba(124, 157, 111, 0.5);
+  --glow-color-intense: rgba(124, 157, 111, 0.9);
+  --glow-color-soft: rgba(124, 157, 111, 0.25);
+}
+
+:root[data-mode="supernova"][data-theme="cryptage-nocturne"] {
+  --glow-color: rgba(90, 122, 138, 0.5);
+  --glow-color-intense: rgba(90, 122, 138, 0.9);
+  --glow-color-soft: rgba(90, 122, 138, 0.25);
+}
+
+:root[data-mode="supernova"][data-theme="aurore-humaine"] {
+  --glow-color: rgba(184, 149, 106, 0.5);
+  --glow-color-intense: rgba(184, 149, 106, 0.9);
+  --glow-color-soft: rgba(184, 149, 106, 0.25);
+}
+
+:root[data-mode="supernova"][data-theme="horizon-progres"] {
+  --glow-color: rgba(122, 106, 168, 0.5);
+  --glow-color-intense: rgba(122, 106, 168, 0.9);
+  --glow-color-soft: rgba(122, 106, 168, 0.25);
+}
+
+:root[data-mode="supernova"][data-theme="ocean-profond"] {
+  --glow-color: rgba(45, 157, 168, 0.5);
+  --glow-color-intense: rgba(45, 157, 168, 0.9);
+  --glow-color-soft: rgba(45, 157, 168, 0.25);
+}
+
+:root[data-mode="supernova"][data-theme="magma-digital"] {
+  --glow-color: rgba(196, 80, 80, 0.5);
+  --glow-color-intense: rgba(196, 80, 80, 0.9);
+  --glow-color-soft: rgba(196, 80, 80, 0.25);
+}
+
+:root[data-mode="supernova"][data-theme="glacier-arctique"] {
+  --glow-color: rgba(104, 168, 200, 0.5);
+  --glow-color-intense: rgba(104, 168, 200, 0.9);
+  --glow-color-soft: rgba(104, 168, 200, 0.25);
+}
+
+:root[data-mode="supernova"][data-theme="sable-dore"] {
+  --glow-color: rgba(200, 168, 72, 0.5);
+  --glow-color-intense: rgba(200, 168, 72, 0.9);
+  --glow-color-soft: rgba(200, 168, 72, 0.25);
+}
+
+:root[data-mode="supernova"][data-theme="nebula-cosmique"] {
+  --glow-color: rgba(184, 104, 168, 0.5);
+  --glow-color-intense: rgba(184, 104, 168, 0.9);
+  --glow-color-soft: rgba(184, 104, 168, 0.25);
+}
+```
+
+#### Variables CSS - Mode Quasar (MODE CLAIR)
+
+```css
+:root[data-mode="quasar"] {
+  /* === BACKGROUNDS CLAIRS === */
+  --bg-primary: #fafaf8;
+  --bg-secondary: #f0f0ec;
+  --bg-tertiary: #e8e8e4;
+  --bg-elevated: #ddddd8;
+
+  /* === TEXTE SOMBRE === */
+  --text-primary: #0a0a0a;
+  --text-secondary: #2a2a2a;
+  --text-muted: #4a4a4a;
+
+  /* === ESPACEMENTS (maximum) === */
+  --space-xs: 12px;
+  --space-sm: 24px;
+  --space-md: 36px;
+  --space-lg: 56px;
+  --space-xl: 90px;
+  --space-xxl: 130px;
+
+  /* === BORDURES (ultra arrondies / circulaires) === */
+  --radius-sm: 20px;
+  --radius-md: 32px;
+  --radius-lg: 48px;
+  --radius-xl: 64px;
+  --radius-full: 9999px;
+
+  --border-width-thin: 1px;
+  --border-width-base: 2px;
+  --border-width-thick: 4px;
+  --border-width-heavy: 6px;
+
+  /* === OMBRES (adaptées mode clair avec profondeur 3D) === */
+  --shadow-sm:
+    0 4px 25px rgba(0, 0, 0, 0.1),
+    0 0 40px var(--glow-color),
+    0 0 80px var(--glow-color-soft),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --shadow-md:
+    0 10px 50px rgba(0, 0, 0, 0.15),
+    0 0 60px var(--glow-color),
+    0 0 120px var(--glow-color-soft),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9);
+  --shadow-lg:
+    0 20px 80px rgba(0, 0, 0, 0.2),
+    0 0 100px var(--glow-color-intense),
+    0 0 200px var(--glow-color),
+    inset 0 2px 0 rgba(255, 255, 255, 1);
+  --shadow-glow:
+    0 0 60px var(--glow-color),
+    0 0 120px var(--glow-color),
+    0 0 180px var(--glow-color-soft),
+    0 0 240px var(--glow-color-soft);
+  --shadow-neon:
+    0 0 10px var(--accent-secondary),
+    0 0 30px var(--accent-secondary),
+    0 0 60px var(--accent-secondary),
+    0 0 100px var(--accent-secondary),
+    0 0 150px var(--accent-secondary);
+  --shadow-3d:
+    0 25px 50px -12px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+
+  /* === TRANSITIONS (ultra fluides orchestrées) === */
+  --transition-fast: 400ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --transition-base: 600ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --transition-slow: 1000ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --transition-cinematic: 1500ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* === ANIMATIONS (immersives) === */
+  --animation-duration: 800ms;
+  --animation-scale-hover: 1.12;
+  --animation-translate-hover: -16px;
+  --animation-rotate-hover: 2deg;
+  --animation-enabled: 1;
+  --animation-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --animation-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --animation-explosive: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --animation-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* === TYPOGRAPHIE (maximale) === */
+  --font-size-xs: 15px;
+  --font-size-sm: 16px;
+  --font-size-base: 18px;
+  --font-size-lg: 22px;
+  --font-size-xl: 30px;
+  --font-size-xxl: 42px;
+  --font-size-display: 80px;
+  --font-size-hero: 120px;
+
+  --line-height-tight: 1.6;
+  --line-height-base: 1.9;
+  --line-height-relaxed: 2.4;
+
+  /* === COULEURS GLOW (maximales) === */
+  --glow-color: rgba(107, 142, 35, 0.6);
+  --glow-color-intense: rgba(107, 142, 35, 1);
+  --glow-color-soft: rgba(107, 142, 35, 0.4);
+  --glow-color-ultra: rgba(107, 142, 35, 0.9);
+  --gradient-accent: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+  --gradient-animated: linear-gradient(270deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary), var(--accent-primary));
+  --gradient-radial: radial-gradient(ellipse at center, var(--accent-secondary) 0%, transparent 70%);
+  --gradient-conic: conic-gradient(from 0deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary), var(--accent-primary));
+
+  /* === EFFETS SPECIAUX AVANCES === */
+  --blur-amount: 50px;
+  --saturate-amount: 250%;
+  --contrast-amount: 110%;
+  --perspective: 1500px;
+  --transform-style: preserve-3d;
+  --particle-count: 100;
+  --mesh-density: high;
+}
+
+/* Glow colors par thème en mode Quasar */
+:root[data-mode="quasar"][data-theme="nuit-foret"] {
+  --glow-color: rgba(107, 142, 35, 0.6);
+  --glow-color-intense: rgba(107, 142, 35, 1);
+  --glow-color-soft: rgba(107, 142, 35, 0.3);
+  --glow-color-ultra: rgba(107, 142, 35, 0.85);
+}
+
+:root[data-mode="quasar"][data-theme="terre-ethique"] {
+  --glow-color: rgba(124, 157, 111, 0.6);
+  --glow-color-intense: rgba(124, 157, 111, 1);
+  --glow-color-soft: rgba(124, 157, 111, 0.3);
+  --glow-color-ultra: rgba(124, 157, 111, 0.85);
+}
+
+:root[data-mode="quasar"][data-theme="cryptage-nocturne"] {
+  --glow-color: rgba(90, 122, 138, 0.6);
+  --glow-color-intense: rgba(90, 122, 138, 1);
+  --glow-color-soft: rgba(90, 122, 138, 0.3);
+  --glow-color-ultra: rgba(90, 122, 138, 0.85);
+}
+
+:root[data-mode="quasar"][data-theme="aurore-humaine"] {
+  --glow-color: rgba(184, 149, 106, 0.6);
+  --glow-color-intense: rgba(184, 149, 106, 1);
+  --glow-color-soft: rgba(184, 149, 106, 0.3);
+  --glow-color-ultra: rgba(184, 149, 106, 0.85);
+}
+
+:root[data-mode="quasar"][data-theme="horizon-progres"] {
+  --glow-color: rgba(122, 106, 168, 0.6);
+  --glow-color-intense: rgba(122, 106, 168, 1);
+  --glow-color-soft: rgba(122, 106, 168, 0.3);
+  --glow-color-ultra: rgba(122, 106, 168, 0.85);
+}
+
+:root[data-mode="quasar"][data-theme="ocean-profond"] {
+  --glow-color: rgba(45, 157, 168, 0.6);
+  --glow-color-intense: rgba(45, 157, 168, 1);
+  --glow-color-soft: rgba(45, 157, 168, 0.3);
+  --glow-color-ultra: rgba(45, 157, 168, 0.85);
+}
+
+:root[data-mode="quasar"][data-theme="magma-digital"] {
+  --glow-color: rgba(196, 80, 80, 0.6);
+  --glow-color-intense: rgba(196, 80, 80, 1);
+  --glow-color-soft: rgba(196, 80, 80, 0.3);
+  --glow-color-ultra: rgba(196, 80, 80, 0.85);
+}
+
+:root[data-mode="quasar"][data-theme="glacier-arctique"] {
+  --glow-color: rgba(104, 168, 200, 0.6);
+  --glow-color-intense: rgba(104, 168, 200, 1);
+  --glow-color-soft: rgba(104, 168, 200, 0.3);
+  --glow-color-ultra: rgba(104, 168, 200, 0.85);
+}
+
+:root[data-mode="quasar"][data-theme="sable-dore"] {
+  --glow-color: rgba(200, 168, 72, 0.6);
+  --glow-color-intense: rgba(200, 168, 72, 1);
+  --glow-color-soft: rgba(200, 168, 72, 0.3);
+  --glow-color-ultra: rgba(200, 168, 72, 0.85);
+}
+
+:root[data-mode="quasar"][data-theme="nebula-cosmique"] {
+  --glow-color: rgba(184, 104, 168, 0.6);
+  --glow-color-intense: rgba(184, 104, 168, 1);
+  --glow-color-soft: rgba(184, 104, 168, 0.3);
+  --glow-color-ultra: rgba(184, 104, 168, 0.85);
 }
 ```
 
@@ -647,26 +1014,669 @@ Les applications proposent **4 modes d'affichage** indépendants des thèmes de 
 :root[data-mode="ultra"] header {
   padding: 25px 40px;
 }
+
+/* ============================================
+   MODE SUPERNOVA : Animations avancées
+   ============================================ */
+
+/* Keyframes Supernova */
+@keyframes supernovaPulse {
+  0%, 100% {
+    box-shadow: 0 0 30px var(--glow-color), 0 0 60px var(--glow-color-soft);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 60px var(--glow-color-intense), 0 0 120px var(--glow-color);
+    transform: scale(1.03);
+  }
+}
+
+@keyframes supernovaFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(0.5deg); }
+  50% { transform: translateY(-5px) rotate(0deg); }
+  75% { transform: translateY(-12px) rotate(-0.5deg); }
+}
+
+@keyframes supernovaGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes supernovaShine {
+  0% { left: -150%; opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { left: 150%; opacity: 0; }
+}
+
+@keyframes supernovaBorderPulse {
+  0%, 100% {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 20px var(--glow-color);
+  }
+  33% {
+    border-color: var(--accent-secondary);
+    box-shadow: 0 0 40px var(--glow-color-intense);
+  }
+  66% {
+    border-color: var(--accent-tertiary);
+    box-shadow: 0 0 30px var(--glow-color);
+  }
+}
+
+@keyframes supernovaFadeInScale {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+    filter: blur(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes supernovaParticle {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes supernovaTextGlow {
+  0%, 100% {
+    text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color-soft);
+  }
+  50% {
+    text-shadow: 0 0 20px var(--glow-color-intense), 0 0 40px var(--glow-color), 0 0 60px var(--glow-color-soft);
+  }
+}
+
+/* Cards Supernova */
+:root[data-mode="supernova"] .card {
+  transition: transform var(--transition-base),
+              box-shadow var(--transition-base),
+              border-color var(--transition-base);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+}
+
+:root[data-mode="supernova"] .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transition: left 0.8s ease;
+}
+
+:root[data-mode="supernova"] .card:hover::before {
+  animation: supernovaShine 1s ease forwards;
+}
+
+:root[data-mode="supernova"] .card:hover {
+  transform: translateY(var(--animation-translate-hover)) scale(var(--animation-scale-hover));
+  box-shadow: var(--shadow-lg);
+  animation: supernovaBorderPulse 3s ease infinite;
+}
+
+/* Boutons Supernova */
+:root[data-mode="supernova"] .btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast),
+              background-color var(--transition-fast);
+  border-radius: var(--radius-md);
+}
+
+:root[data-mode="supernova"] .btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+}
+
+:root[data-mode="supernova"] .btn:hover::before {
+  animation: supernovaShine 0.6s ease;
+}
+
+:root[data-mode="supernova"] .btn:hover {
+  transform: translateY(-6px) scale(1.08);
+  box-shadow: var(--shadow-md);
+}
+
+:root[data-mode="supernova"] .btn:active {
+  transform: translateY(0) scale(0.95);
+  transition-duration: 100ms;
+}
+
+:root[data-mode="supernova"] .btn-primary {
+  background: var(--gradient-accent);
+  background-size: 200% 200%;
+  animation: supernovaGradient 4s ease infinite, supernovaPulse 3s ease-in-out infinite;
+}
+
+/* Header Supernova */
+:root[data-mode="supernova"] header {
+  animation: supernovaFloat 6s ease-in-out infinite;
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+}
+
+/* Titres avec glow */
+:root[data-mode="supernova"] h1,
+:root[data-mode="supernova"] h2 {
+  animation: supernovaTextGlow 3s ease-in-out infinite;
+}
+
+/* Entrée des éléments */
+:root[data-mode="supernova"] .animate-in {
+  animation: supernovaFadeInScale var(--animation-duration) var(--animation-explosive) forwards;
+}
+
+/* Focus ring Supernova */
+:root[data-mode="supernova"] :focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 5px;
+  box-shadow: 0 0 0 10px var(--glow-color), var(--shadow-glow);
+}
+
+/* Glassmorphism Supernova */
+:root[data-mode="supernova"] .card-glass {
+  background: linear-gradient(
+    135deg,
+    rgba(45, 45, 45, 0.6) 0%,
+    rgba(26, 26, 26, 0.7) 100%
+  );
+  backdrop-filter: blur(var(--blur-amount)) saturate(var(--saturate-amount));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Scrollbar Supernova */
+:root[data-mode="supernova"] ::-webkit-scrollbar {
+  width: 14px;
+}
+
+:root[data-mode="supernova"] ::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+  border-radius: 7px;
+}
+
+:root[data-mode="supernova"] ::-webkit-scrollbar-thumb {
+  background: var(--gradient-accent);
+  border-radius: 7px;
+  box-shadow: var(--shadow-neon);
+}
+
+/* Layout Supernova */
+:root[data-mode="supernova"] main {
+  padding: 60px;
+}
+
+:root[data-mode="supernova"] header {
+  padding: 30px 50px;
+}
+
+/* ============================================
+   MODE QUASAR : Animations immersives maximales
+   ============================================ */
+
+/* Keyframes Quasar */
+@keyframes quasarPulse {
+  0%, 100% {
+    box-shadow: var(--shadow-glow);
+    transform: scale(1) perspective(var(--perspective)) rotateX(0deg);
+  }
+  50% {
+    box-shadow: 0 0 100px var(--glow-color-intense), 0 0 200px var(--glow-color);
+    transform: scale(1.02) perspective(var(--perspective)) rotateX(1deg);
+  }
+}
+
+@keyframes quasarFloat {
+  0%, 100% {
+    transform: translateY(0) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotateX(2deg) rotateY(1deg);
+  }
+  50% {
+    transform: translateY(-8px) rotateX(0deg) rotateY(0deg);
+  }
+  75% {
+    transform: translateY(-18px) rotateX(-1deg) rotateY(-1deg);
+  }
+}
+
+@keyframes quasarGradientFlow {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 50% 100%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 50% 0%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes quasarHolographic {
+  0% {
+    background-position: 0% 0%;
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    background-position: 100% 100%;
+    filter: hue-rotate(15deg);
+  }
+  100% {
+    background-position: 0% 0%;
+    filter: hue-rotate(0deg);
+  }
+}
+
+@keyframes quasarPrism {
+  0% { left: -200%; opacity: 0; }
+  25% { opacity: 1; }
+  50% { opacity: 0.6; }
+  75% { opacity: 1; }
+  100% { left: 200%; opacity: 0; }
+}
+
+@keyframes quasarBorderOrbit {
+  0% {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 30px var(--glow-color), 0 -20px 40px var(--glow-color-soft);
+  }
+  25% {
+    border-color: var(--accent-secondary);
+    box-shadow: 20px 0 40px var(--glow-color-intense), 0 0 30px var(--glow-color);
+  }
+  50% {
+    border-color: var(--accent-tertiary);
+    box-shadow: 0 20px 40px var(--glow-color), 0 0 30px var(--glow-color-soft);
+  }
+  75% {
+    border-color: var(--accent-secondary);
+    box-shadow: -20px 0 40px var(--glow-color-intense), 0 0 30px var(--glow-color);
+  }
+  100% {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 30px var(--glow-color), 0 -20px 40px var(--glow-color-soft);
+  }
+}
+
+@keyframes quasarFadeIn3D {
+  from {
+    opacity: 0;
+    transform: perspective(var(--perspective)) translateZ(-200px) translateY(60px) rotateX(15deg);
+    filter: blur(20px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(var(--perspective)) translateZ(0) translateY(0) rotateX(0deg);
+    filter: blur(0);
+  }
+}
+
+@keyframes quasarRipple3D {
+  0% {
+    transform: scale(0) translateZ(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(2) translateZ(50px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(4) translateZ(100px);
+    opacity: 0;
+  }
+}
+
+@keyframes quasarTextHologram {
+  0%, 100% {
+    text-shadow:
+      0 0 10px var(--glow-color),
+      0 0 20px var(--glow-color),
+      0 0 40px var(--glow-color-intense),
+      0 0 80px var(--glow-color-soft);
+    transform: perspective(500px) rotateY(0deg);
+  }
+  25% {
+    text-shadow:
+      2px 0 10px var(--glow-color-intense),
+      4px 0 20px var(--glow-color),
+      6px 0 40px var(--glow-color-soft);
+    transform: perspective(500px) rotateY(2deg);
+  }
+  75% {
+    text-shadow:
+      -2px 0 10px var(--glow-color-intense),
+      -4px 0 20px var(--glow-color),
+      -6px 0 40px var(--glow-color-soft);
+    transform: perspective(500px) rotateY(-2deg);
+  }
+}
+
+@keyframes quasarParticleBurst {
+  0% {
+    transform: translateY(0) translateX(0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-150px) translateX(var(--particle-x, 0)) scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes quasarAuroraBackground {
+  0%, 100% {
+    background-position: 0% 0%;
+    opacity: 0.3;
+  }
+  50% {
+    background-position: 100% 100%;
+    opacity: 0.5;
+  }
+}
+
+/* Container 3D pour Quasar */
+:root[data-mode="quasar"] body {
+  perspective: var(--perspective);
+}
+
+:root[data-mode="quasar"] main {
+  transform-style: preserve-3d;
+}
+
+/* Aurora background effect */
+:root[data-mode="quasar"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-radial);
+  opacity: 0.2;
+  animation: quasarAuroraBackground 10s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Cards Quasar */
+:root[data-mode="quasar"] .card {
+  transition: transform var(--transition-base),
+              box-shadow var(--transition-base),
+              border-color var(--transition-base);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary), var(--bg-secondary));
+  background-size: 200% 200%;
+  transform-style: preserve-3d;
+  animation: quasarGradientFlow 8s ease infinite;
+}
+
+:root[data-mode="quasar"] .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -200%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.03),
+    transparent
+  );
+}
+
+:root[data-mode="quasar"] .card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: var(--gradient-conic);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+:root[data-mode="quasar"] .card:hover::before {
+  animation: quasarPrism 1.5s ease forwards;
+}
+
+:root[data-mode="quasar"] .card:hover::after {
+  opacity: 1;
+  animation: quasarHolographic 3s ease infinite;
+}
+
+:root[data-mode="quasar"] .card:hover {
+  transform: translateY(var(--animation-translate-hover))
+             scale(var(--animation-scale-hover))
+             perspective(var(--perspective))
+             rotateX(2deg)
+             rotateY(var(--animation-rotate-hover));
+  box-shadow: var(--shadow-lg);
+  animation: quasarBorderOrbit 4s ease infinite;
+}
+
+/* Boutons Quasar */
+:root[data-mode="quasar"] .btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast),
+              background-color var(--transition-fast);
+  border-radius: var(--radius-md);
+  transform-style: preserve-3d;
+}
+
+:root[data-mode="quasar"] .btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+}
+
+:root[data-mode="quasar"] .btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
+:root[data-mode="quasar"] .btn:hover::before {
+  animation: quasarPrism 0.8s ease;
+}
+
+:root[data-mode="quasar"] .btn:active::after {
+  animation: quasarRipple3D 0.8s ease-out;
+}
+
+:root[data-mode="quasar"] .btn:hover {
+  transform: translateY(-8px) scale(1.1) perspective(500px) rotateX(5deg);
+  box-shadow: var(--shadow-md);
+}
+
+:root[data-mode="quasar"] .btn:active {
+  transform: translateY(0) scale(0.95) perspective(500px) rotateX(-2deg);
+  transition-duration: 100ms;
+}
+
+:root[data-mode="quasar"] .btn-primary {
+  background: var(--gradient-accent);
+  background-size: 300% 300%;
+  animation: quasarGradientFlow 5s ease infinite, quasarPulse 4s ease-in-out infinite;
+}
+
+/* Header Quasar */
+:root[data-mode="quasar"] header {
+  animation: quasarFloat 8s ease-in-out infinite;
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary), var(--accent-secondary));
+  background-size: 200% 200%;
+  transform-style: preserve-3d;
+}
+
+/* Titres hologramme */
+:root[data-mode="quasar"] h1 {
+  animation: quasarTextHologram 5s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+:root[data-mode="quasar"] h2 {
+  animation: quasarTextHologram 6s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+/* Entrée des éléments 3D */
+:root[data-mode="quasar"] .animate-in {
+  animation: quasarFadeIn3D var(--animation-duration) var(--animation-cinematic) forwards;
+}
+
+/* Focus ring Quasar */
+:root[data-mode="quasar"] :focus-visible {
+  outline: 4px solid var(--focus-ring);
+  outline-offset: 6px;
+  box-shadow: 0 0 0 12px var(--glow-color), var(--shadow-glow);
+  animation: quasarPulse 2s ease-in-out infinite;
+}
+
+/* Glassmorphism Quasar */
+:root[data-mode="quasar"] .card-glass {
+  background: linear-gradient(
+    135deg,
+    rgba(45, 45, 45, 0.5) 0%,
+    rgba(26, 26, 26, 0.6) 50%,
+    rgba(45, 45, 45, 0.5) 100%
+  );
+  backdrop-filter: blur(var(--blur-amount)) saturate(var(--saturate-amount)) contrast(var(--contrast-amount));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-glow), var(--shadow-3d);
+  transform-style: preserve-3d;
+}
+
+/* Scrollbar Quasar */
+:root[data-mode="quasar"] ::-webkit-scrollbar {
+  width: 16px;
+}
+
+:root[data-mode="quasar"] ::-webkit-scrollbar-track {
+  background: linear-gradient(to right, var(--bg-primary), var(--bg-secondary));
+  border-radius: 8px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+:root[data-mode="quasar"] ::-webkit-scrollbar-thumb {
+  background: var(--gradient-accent);
+  background-size: 200% 200%;
+  border-radius: 8px;
+  box-shadow: var(--shadow-neon);
+  animation: quasarGradientFlow 4s ease infinite;
+}
+
+:root[data-mode="quasar"] ::-webkit-scrollbar-thumb:hover {
+  box-shadow: var(--shadow-glow);
+}
+
+/* Inputs Quasar */
+:root[data-mode="quasar"] input:focus,
+:root[data-mode="quasar"] select:focus,
+:root[data-mode="quasar"] textarea:focus {
+  transform: scale(1.03) perspective(500px) rotateX(2deg);
+  box-shadow: 0 0 0 6px var(--glow-color), var(--shadow-md), var(--shadow-3d);
+  border-radius: var(--radius-md);
+}
+
+/* Layout Quasar */
+:root[data-mode="quasar"] main {
+  padding: 80px;
+}
+
+:root[data-mode="quasar"] header {
+  padding: 35px 60px;
+}
+
+/* Effet de profondeur sur les liens */
+:root[data-mode="quasar"] a {
+  transition: all var(--transition-fast);
+  transform-style: preserve-3d;
+}
+
+:root[data-mode="quasar"] a:hover {
+  text-shadow: var(--shadow-neon);
+  transform: translateZ(10px);
+}
 ```
 
 #### Tableau Comparatif des Modes
 
-| Propriété | Hyper-économe | Économe | Normal | Ultra |
-|-----------|---------------|---------|--------|-------|
-| **Espacements** | -50% (compacts) | Standard | +40% (aérés) | +80% (très aérés) |
-| **Rayons bordures** | 0px (carrés) | 3-12px | 6-24px | 12-40px (très arrondis) |
-| **Ombres** | Aucune | Légères | Prononcées | Spectaculaires + glow coloré |
-| **Transitions** | 0ms | 150-300ms | 200-450ms | 250-600ms (elastic) |
-| **Taille police** | -1px | Standard | +1px | +2px |
-| **Line-height** | 1.1-1.5 | 1.2-1.7 | 1.3-1.8 | 1.4-2.0 |
-| **Hover cards** | Aucun | Bordure | Scale + ombre | Scale + glow + shimmer |
-| **Hover boutons** | Aucun | Opacité | Scale 1.03 | Scale 1.05 + ripple |
-| **Focus ring** | 2px | 2px | 3px + glow 6px | 3px + glow 8px |
-| **Keyframes** | Aucun | Aucun | 4 animations | 8+ animations |
-| **Effets spéciaux** | Non | Non | Glassmorphism | Glow, shimmer, float, ripple |
-| **Animations auto** | Non | Non | Non | Float header, pulse continu |
-| **Consommation CPU** | Minimale | Faible | Standard | Élevée |
-| **Cas d'usage** | Batterie faible | Quotidien | Présentation | Showcase premium |
+| Propriété | Hyper-économe | Économe | Normal | Ultra | Supernova | Quasar |
+|-----------|---------------|---------|--------|-------|-----------|--------|
+| **Espacements** | -50% (compacts) | Standard | +40% (aérés) | +80% (très aérés) | +100% (généreux) | +150% (maximum) |
+| **Rayons bordures** | 0px (carrés) | 3-12px | 6-24px | 12-40px | 16-50px | 20-64px + full |
+| **Ombres** | Aucune | Légères | Prononcées | Glow coloré | Multi-couches + neon | 3D + multi-glow + inset |
+| **Transitions** | 0ms | 150-300ms | 200-450ms | 250-600ms | 300-800ms | 400-1500ms (cinematic) |
+| **Taille police** | -1px | Standard | +1px | +2px | +3px | +4px + hero 120px |
+| **Line-height** | 1.1-1.5 | 1.2-1.7 | 1.3-1.8 | 1.4-2.0 | 1.5-2.2 | 1.6-2.4 |
+| **Hover cards** | Aucun | Bordure | Scale + ombre | Scale + glow + shimmer | Scale 1.1 + shine + border pulse | Scale 1.12 + 3D rotate + prism + orbit |
+| **Hover boutons** | Aucun | Opacité | Scale 1.03 | Scale 1.05 + ripple | Scale 1.08 + shine | Scale 1.1 + 3D rotate + ripple 3D |
+| **Focus ring** | 2px | 2px | 3px + glow 6px | 3px + glow 8px | 3px + glow 10px | 4px + glow 12px + pulse |
+| **Keyframes** | Aucun | Aucun | 4 animations | 8+ animations | 12+ animations | 15+ animations |
+| **Effets spéciaux** | Non | Non | Glassmorphism | Glow, shimmer, float | Gradients animés, neon, particles | 3D, holographic, aurora, prism |
+| **Animations auto** | Non | Non | Non | Float header, pulse | Float + text glow + gradient flow | Float 3D + hologram text + aurora BG |
+| **Perspective 3D** | Non | Non | Non | Non | Non | Oui (1500px) |
+| **Consommation CPU** | Minimale | Faible | Standard | Élevée | Très élevée | Maximale |
+| **Mode** | Sombre | Sombre | Sombre | Sombre | **Clair** | **Clair** |
+| **Cas d'usage** | Batterie faible | Quotidien | Présentation | Showcase | Événements, landing | Portfolio, art, ultime |
 
 ### Variables CSS
 
@@ -895,6 +1905,186 @@ Les applications proposent **4 modes d'affichage** indépendants des thèmes de 
 }
 ```
 
+#### Thème 6 : Océan Profond (Profondeur et exploration)
+
+```css
+:root[data-theme="ocean-profond"] {
+  /* === BACKGROUNDS === */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #0a1215;
+  --bg-tertiary: #102025;
+  --bg-elevated: #183038;
+
+  /* === ACCENTS === */
+  --accent-primary: #0d2530;
+  --accent-secondary: #2d9da8;
+  --accent-tertiary: #1a7080;
+
+  /* === TEXTE === */
+  --text-primary: #b8d8dc;
+  --text-secondary: #7ab8c0;
+  --text-accent: #2d9da8;
+  --text-muted: #5a8a92;
+
+  /* === ÉTATS === */
+  --border-color: #2d9da8;
+  --border-subtle: #183038;
+  --alert-color: #a85a5a;
+  --warning-color: #b8956a;
+  --success-color: #4a9a7a;
+  --info-color: #2d9da8;
+
+  /* === INTERACTIONS === */
+  --hover-overlay: rgba(45, 157, 168, 0.1);
+  --active-overlay: rgba(45, 157, 168, 0.2);
+  --focus-ring: #2d9da8;
+}
+```
+
+#### Thème 7 : Magma Digital (Puissance et énergie)
+
+```css
+:root[data-theme="magma-digital"] {
+  /* === BACKGROUNDS === */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #150a0a;
+  --bg-tertiary: #251515;
+  --bg-elevated: #352020;
+
+  /* === ACCENTS === */
+  --accent-primary: #3d1a1a;
+  --accent-secondary: #c45050;
+  --accent-tertiary: #8a3535;
+
+  /* === TEXTE === */
+  --text-primary: #e0c0c0;
+  --text-secondary: #b88a8a;
+  --text-accent: #c45050;
+  --text-muted: #8a6060;
+
+  /* === ÉTATS === */
+  --border-color: #c45050;
+  --border-subtle: #352020;
+  --alert-color: #c45050;
+  --warning-color: #c88050;
+  --success-color: #7a9a6a;
+  --info-color: #9a7a8a;
+
+  /* === INTERACTIONS === */
+  --hover-overlay: rgba(196, 80, 80, 0.1);
+  --active-overlay: rgba(196, 80, 80, 0.2);
+  --focus-ring: #c45050;
+}
+```
+
+#### Thème 8 : Glacier Arctique (Clarté et précision)
+
+```css
+:root[data-theme="glacier-arctique"] {
+  /* === BACKGROUNDS === */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #0c1418;
+  --bg-tertiary: #142028;
+  --bg-elevated: #1c2c38;
+
+  /* === ACCENTS === */
+  --accent-primary: #18303d;
+  --accent-secondary: #68a8c8;
+  --accent-tertiary: #4880a0;
+
+  /* === TEXTE === */
+  --text-primary: #d0e0e8;
+  --text-secondary: #90b0c0;
+  --text-accent: #68a8c8;
+  --text-muted: #607888;
+
+  /* === ÉTATS === */
+  --border-color: #68a8c8;
+  --border-subtle: #1c2c38;
+  --alert-color: #a86868;
+  --warning-color: #b8a068;
+  --success-color: #68a898;
+  --info-color: #68a8c8;
+
+  /* === INTERACTIONS === */
+  --hover-overlay: rgba(104, 168, 200, 0.1);
+  --active-overlay: rgba(104, 168, 200, 0.2);
+  --focus-ring: #68a8c8;
+}
+```
+
+#### Thème 9 : Sable Doré (Chaleur et richesse)
+
+```css
+:root[data-theme="sable-dore"] {
+  /* === BACKGROUNDS === */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #151208;
+  --bg-tertiary: #252010;
+  --bg-elevated: #353018;
+
+  /* === ACCENTS === */
+  --accent-primary: #3d3518;
+  --accent-secondary: #c8a848;
+  --accent-tertiary: #9a8035;
+
+  /* === TEXTE === */
+  --text-primary: #e8dcc0;
+  --text-secondary: #b8a880;
+  --text-accent: #c8a848;
+  --text-muted: #8a7a50;
+
+  /* === ÉTATS === */
+  --border-color: #c8a848;
+  --border-subtle: #353018;
+  --alert-color: #a86858;
+  --warning-color: #c8a848;
+  --success-color: #8a9a68;
+  --info-color: #a89868;
+
+  /* === INTERACTIONS === */
+  --hover-overlay: rgba(200, 168, 72, 0.1);
+  --active-overlay: rgba(200, 168, 72, 0.2);
+  --focus-ring: #c8a848;
+}
+```
+
+#### Thème 10 : Nebula Cosmique (Créativité et mystère)
+
+```css
+:root[data-theme="nebula-cosmique"] {
+  /* === BACKGROUNDS === */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #150a15;
+  --bg-tertiary: #251525;
+  --bg-elevated: #352035;
+
+  /* === ACCENTS === */
+  --accent-primary: #3d1a3d;
+  --accent-secondary: #b868a8;
+  --accent-tertiary: #884880;
+
+  /* === TEXTE === */
+  --text-primary: #e0c8dc;
+  --text-secondary: #b890b0;
+  --text-accent: #b868a8;
+  --text-muted: #886080;
+
+  /* === ÉTATS === */
+  --border-color: #b868a8;
+  --border-subtle: #352035;
+  --alert-color: #a85868;
+  --warning-color: #b8906a;
+  --success-color: #68a898;
+  --info-color: #9868a8;
+
+  /* === INTERACTIONS === */
+  --hover-overlay: rgba(184, 104, 168, 0.1);
+  --active-overlay: rgba(184, 104, 168, 0.2);
+  --focus-ring: #b868a8;
+}
+```
+
 ### Optimisation OLED
 
 **Couleurs évitées pour économie énergie** :
@@ -917,6 +2107,11 @@ Les applications proposent **4 modes d'affichage** indépendants des thèmes de 
 | **Cryptage Nocturne** | Sécurité des données | Gris-bleus acier (#5a7a8a) | Protection, confidentialité, cryptographie |
 | **Aurore Humaine** | IA pour les humains | Oranges chauds doux (#b8956a) | Humanité, empathie, chaleur |
 | **Horizon Progrès** | Innovation et progrès | Violets profonds (#7a6aa8) | Futur, innovation, vision |
+| **Océan Profond** | Profondeur et exploration | Cyan turquoise (#2d9da8) | Profondeur, exploration, sérénité |
+| **Magma Digital** | Puissance et énergie | Rouge bordeaux (#c45050) | Puissance, intensité, passion |
+| **Glacier Arctique** | Clarté et précision | Bleu glacier (#68a8c8) | Clarté, pureté, précision |
+| **Sable Doré** | Chaleur et richesse | Or beige (#c8a848) | Chaleur, richesse, élégance |
+| **Nebula Cosmique** | Créativité et mystère | Rose magenta (#b868a8) | Créativité, mystère, cosmos |
 
 ### Implémentation du Sélecteur de Thèmes
 
@@ -930,6 +2125,11 @@ Les applications proposent **4 modes d'affichage** indépendants des thèmes de 
   <button class="theme-btn" data-theme="cryptage-nocturne" title="Cryptage Nocturne"></button>
   <button class="theme-btn" data-theme="aurore-humaine" title="Aurore Humaine"></button>
   <button class="theme-btn" data-theme="horizon-progres" title="Horizon Progrès"></button>
+  <button class="theme-btn" data-theme="ocean-profond" title="Océan Profond"></button>
+  <button class="theme-btn" data-theme="magma-digital" title="Magma Digital"></button>
+  <button class="theme-btn" data-theme="glacier-arctique" title="Glacier Arctique"></button>
+  <button class="theme-btn" data-theme="sable-dore" title="Sable Doré"></button>
+  <button class="theme-btn" data-theme="nebula-cosmique" title="Nebula Cosmique"></button>
 </div>
 ```
 
@@ -987,6 +2187,26 @@ Les applications proposent **4 modes d'affichage** indépendants des thèmes de 
 .theme-btn[data-theme="horizon-progres"] {
   background: linear-gradient(135deg, #0f0f1a 0%, #7a6aa8 100%);
 }
+
+.theme-btn[data-theme="ocean-profond"] {
+  background: linear-gradient(135deg, #0a1215 0%, #2d9da8 100%);
+}
+
+.theme-btn[data-theme="magma-digital"] {
+  background: linear-gradient(135deg, #150a0a 0%, #c45050 100%);
+}
+
+.theme-btn[data-theme="glacier-arctique"] {
+  background: linear-gradient(135deg, #0c1418 0%, #68a8c8 100%);
+}
+
+.theme-btn[data-theme="sable-dore"] {
+  background: linear-gradient(135deg, #151208 0%, #c8a848 100%);
+}
+
+.theme-btn[data-theme="nebula-cosmique"] {
+  background: linear-gradient(135deg, #150a15 0%, #b868a8 100%);
+}
 ```
 
 #### JavaScript - Gestion des thèmes
@@ -1042,6 +2262,15 @@ setupThemeSelector() {
   </button>
   <button class="mode-btn" data-mode="normal" title="Normal">
     <span class="mode-icon">✨</span>
+  </button>
+  <button class="mode-btn" data-mode="ultra" title="Ultra">
+    <span class="mode-icon">🔥</span>
+  </button>
+  <button class="mode-btn" data-mode="supernova" title="Supernova">
+    <span class="mode-icon">💫</span>
+  </button>
+  <button class="mode-btn" data-mode="quasar" title="Quasar">
+    <span class="mode-icon">🌌</span>
   </button>
 </div>
 ```
@@ -1138,7 +2367,10 @@ getModeLabel(mode) {
   const labels = {
     'hyper-econome': 'Hyper-économe',
     'econome': 'Économe',
-    'normal': 'Normal'
+    'normal': 'Normal',
+    'ultra': 'Ultra',
+    'supernova': 'Supernova',
+    'quasar': 'Quasar'
   };
   return labels[mode] || mode;
 }
@@ -1517,7 +2749,7 @@ if (condition) {
 - [ ] Système de 5 thèmes configurés (Nuit Forêt, Terre Éthique, Cryptage Nocturne, Aurore Humaine, Horizon Progrès)
 - [ ] Sélecteur de thèmes dans le header avec boutons visuels
 - [ ] Persistance du thème via localStorage
-- [ ] Système de 3 modes d'affichage configurés (Hyper-économe, Économe, Normal)
+- [ ] Système de 6 modes d'affichage configurés (Hyper-économe, Économe, Normal, Ultra, Supernova, Quasar)
 - [ ] Sélecteur de mode dans le header avec boutons visuels
 - [ ] Persistance du mode via localStorage
 - [ ] Combinaison mode + thème fonctionnelle
@@ -1580,8 +2812,10 @@ Questions ou suggestions sur la charte : Voir documentation projet
 
 ---
 
-**Charte Graphique** : v2.1
-**Date** : 23/12/2025
+**Charte Graphique** : v2.3
+**Date** : 25/12/2025
 **Auteur** : @Je Geek Utile
-**Nouveautés v2.1** : Système de 3 modes d'affichage (Hyper-économe, Économe, Normal)
+**Nouveautés v2.3** : Modes Supernova et Quasar passés en MODE CLAIR (fond clair, texte sombre)
+**Nouveautés v2.2** : Ajout des modes Supernova et Quasar (6 modes d'affichage au total)
+**Nouveautés v2.1** : Système de modes d'affichage (Hyper-économe, Économe, Normal, Ultra)
 **Nouveautés v2.0** : Système de 5 thèmes configurables représentant les valeurs du projet

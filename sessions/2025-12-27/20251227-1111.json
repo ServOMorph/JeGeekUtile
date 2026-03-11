@@ -1,0 +1,104 @@
+{
+  "session_id": "20251227-1111",
+  "date": "2025-12-27T11:11:56.966600",
+  "tests": [
+    {
+      "type": "agent",
+      "agent": "robert",
+      "test": "orchestration-simple",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "agent",
+      "agent": "robert",
+      "test": "detection-hallucination",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "agent",
+      "agent": "robert",
+      "test": "workflow-multi-etapes",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "agent",
+      "agent": "halu",
+      "test": "detection-invention",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "agent",
+      "agent": "halu",
+      "test": "validation-faits",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "agent",
+      "agent": "promptparfait",
+      "test": "reduction-tokens",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "agent",
+      "agent": "promptparfait",
+      "test": "elimination-ambiguite",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "agent",
+      "agent": "promptparfait",
+      "test": "preservation-intent",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "agent",
+      "agent": "adminia",
+      "test": "Rédaction lettre administrative",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "agent",
+      "agent": "adminia",
+      "test": "Complétion formulaire",
+      "statut": "ok",
+      "duree_sec": 0.0
+    },
+    {
+      "type": "systeme",
+      "test": "structure",
+      "statut": "ok"
+    },
+    {
+      "type": "systeme",
+      "test": "archivage",
+      "statut": "ok"
+    },
+    {
+      "type": "systeme",
+      "test": "indexation",
+      "statut": "ok"
+    },
+    {
+      "type": "systeme",
+      "test": "ui",
+      "statut": "ok"
+    },
+    {
+      "type": "systeme",
+      "test": "config",
+      "statut": "ok"
+    }
+  ],
+  "score": 100.0,
+  "reussis": 15,
+  "total": 15
+}

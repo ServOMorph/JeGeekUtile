@@ -22,33 +22,141 @@
         "promptparfait",
         "robert"
       ]
+    },
+    {
+      "id": "20251126-2324",
+      "date": "2025-11-26T23:24:56.703394",
+      "score": 100.0,
+      "reussis": 2,
+      "total": 2,
+      "agents": [
+        "robert",
+        "halu",
+        "promptparfait"
+      ],
+      "trace_complete": [
+        {
+          "timestamp": "2025-11-26T23:24:56.703394",
+          "agent": "robert",
+          "type": "reception_prompt",
+          "contenu": "crée une fonction python qui additionne deux nombres",
+          "resultat": "Workflow démarré"
+        },
+        {
+          "timestamp": "2025-11-26T23:24:56.703394",
+          "agent": "halu",
+          "type": "validation",
+          "contenu": "crée une fonction python qui additionne deux nombres",
+          "resultat": "STATUS: valid - Prompt simple, clair, sans ambiguïté"
+        },
+        {
+          "timestamp": "2025-11-26T23:24:56.703394",
+          "agent": "promptparfait",
+          "type": "optimisation",
+          "contenu": "crée une fonction python qui additionne deux nombres",
+          "resultat": "Créer fonction Python add(a, b) retournant a+b"
+        },
+        {
+          "timestamp": "2025-11-26T23:24:56.703394",
+          "agent": "halu",
+          "type": "validation",
+          "contenu": "Créer fonction Python add(a, b) retournant a+b",
+          "resultat": "STATUS: valid - Prompt optimisé cohérent, exécutable"
+        },
+        {
+          "timestamp": "2025-11-26T23:24:56.703394",
+          "agent": "robert",
+          "type": "confirmation_user",
+          "contenu": "Prompt optimisé: Créer fonction Python add(a, b) retournant a+b",
+          "resultat": "En attente"
+        }
+      ]
+    },
+    {
+      "id": "20251126-2325",
+      "date": "2025-11-26T23:25:09.667329",
+      "score": 100.0,
+      "reussis": 2,
+      "total": 2,
+      "agents": [
+        "robert",
+        "halu",
+        "promptparfait"
+      ],
+      "trace_complete": [
+        {
+          "timestamp": "2025-11-26T23:25:09.667329",
+          "agent": "robert",
+          "type": "reception_prompt",
+          "contenu": "crée une fonction python qui additionne deux nombres",
+          "resultat": "Workflow démarré"
+        },
+        {
+          "timestamp": "2025-11-26T23:25:09.667329",
+          "agent": "halu",
+          "type": "validation",
+          "contenu": "crée une fonction python qui additionne deux nombres",
+          "resultat": "STATUS: valid - Prompt simple, clair, sans ambiguïté"
+        },
+        {
+          "timestamp": "2025-11-26T23:25:09.667329",
+          "agent": "promptparfait",
+          "type": "optimisation",
+          "contenu": "crée une fonction python qui additionne deux nombres",
+          "resultat": "Créer fonction Python add(a, b) retournant a+b"
+        },
+        {
+          "timestamp": "2025-11-26T23:25:09.667329",
+          "agent": "halu",
+          "type": "validation",
+          "contenu": "Créer fonction Python add(a, b) retournant a+b",
+          "resultat": "STATUS: valid - Prompt optimisé cohérent, exécutable"
+        },
+        {
+          "timestamp": "2025-11-26T23:25:09.667329",
+          "agent": "robert",
+          "type": "confirmation_user",
+          "contenu": "Prompt optimisé: Créer fonction Python add(a, b) retournant a+b",
+          "resultat": "En attente"
+        }
+      ]
     }
   ],
   "index": {
     "dates": {
       "2025-11-26": [
         "20251126-2235",
-        "20251126-2301"
+        "20251126-2301",
+        "20251126-2324",
+        "20251126-2325"
       ]
     },
     "agents": {
       "promptparfait": [
         "20251126-2235",
-        "20251126-2301"
+        "20251126-2301",
+        "20251126-2324",
+        "20251126-2325"
       ],
       "robert": [
         "20251126-2235",
-        "20251126-2301"
+        "20251126-2301",
+        "20251126-2324",
+        "20251126-2325"
       ],
       "halu": [
-        "20251126-2301"
+        "20251126-2301",
+        "20251126-2324",
+        "20251126-2325"
       ]
     },
     "tags": {},
     "scores": {
       "90-100": [
         "20251126-2235",
-        "20251126-2301"
+        "20251126-2301",
+        "20251126-2324",
+        "20251126-2325"
       ],
       "80-89": [],
       "70-79": [],
@@ -57,7 +165,7 @@
     }
   },
   "stats": {
-    "total_sessions": 2,
+    "total_sessions": 4,
     "score_moyen": 100.0,
     "tokens_totaux": 0,
     "duree_totale_min": 0

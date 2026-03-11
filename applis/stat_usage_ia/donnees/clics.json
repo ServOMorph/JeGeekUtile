@@ -89,6 +89,351 @@
       "ia_id": "vertia",
       "timestamp": "2025-12-21T21:24:57.231388",
       "type": "local"
+    },
+    {
+      "ia_id": "chatgpt",
+      "timestamp": "2025-12-22T06:51:51.331648",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "chatgpt",
+      "timestamp": "2025-12-22T06:52:42.769995",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "chatgpt",
+      "timestamp": "2025-12-22T09:22:04.540955",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "chatgpt",
+      "timestamp": "2025-12-22T09:23:57.334716",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "chatgpt",
+      "timestamp": "2025-12-22T09:25:26.645327",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "chatgpt",
+      "timestamp": "2025-12-22T09:29:25.002891",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-22T11:35:44.034464",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "comet",
+      "timestamp": "2025-12-22T11:35:46.131503",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-22T12:05:25.069762",
+      "type": "local"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-22T12:07:59.797503",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-22T12:08:52.307032",
+      "type": "local"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-22T12:09:57.169387",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-22T12:14:11.196488",
+      "type": "local"
+    },
+    {
+      "ia_id": "chatgpt",
+      "timestamp": "2025-12-22T12:14:12.405070",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-22T12:18:29.558796",
+      "type": "local"
+    },
+    {
+      "ia_id": "chatgpt",
+      "timestamp": "2025-12-22T12:18:30.217574",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-22T12:24:51.438599",
+      "type": "local"
+    },
+    {
+      "ia_id": "grok",
+      "timestamp": "2025-12-22T12:25:10.135866",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "grok",
+      "timestamp": "2025-12-22T12:25:58.947413",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-22T12:51:43.900919",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-22T12:53:59.298444",
+      "type": "local"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-22T12:59:25.768489",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-22T13:00:23.050067",
+      "type": "local"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-22T13:00:40.130028",
+      "type": "local"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-22T13:05:17.569042",
+      "type": "local"
+    },
+    {
+      "ia_id": "grok",
+      "timestamp": "2025-12-22T13:05:18.456625",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-22T13:07:28.394209",
+      "type": "local"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-22T13:08:43.761001",
+      "type": "local"
+    },
+    {
+      "ia_id": "grok",
+      "timestamp": "2025-12-22T13:08:44.540378",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-22T13:10:19.981390",
+      "type": "local"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-22T13:13:12.261687",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-22T13:14:18.400577",
+      "type": "local"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-22T13:15:13.445247",
+      "type": "local"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-22T17:38:20.734030",
+      "type": "local"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-22T17:38:45.575864",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "grok",
+      "timestamp": "2025-12-22T17:39:33.431072",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "grok",
+      "timestamp": "2025-12-22T17:39:33.992462",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-22T18:37:23.529859",
+      "type": "local"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-22T18:54:48.898426",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-22T18:54:49.620399",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "mistral",
+      "timestamp": "2025-12-22T19:05:12.138093",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "mistral",
+      "timestamp": "2025-12-22T19:05:14.756572",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "mistral",
+      "timestamp": "2025-12-22T19:05:15.153122",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "comet",
+      "timestamp": "2025-12-22T19:08:29.754132",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "comet",
+      "timestamp": "2025-12-22T19:08:30.270693",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "comet",
+      "timestamp": "2025-12-22T19:08:31.018950",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "comet",
+      "timestamp": "2025-12-22T19:22:43.520873",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-22T19:27:57.037032",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "comet",
+      "timestamp": "2025-12-22T19:32:27.605632",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-22T19:32:28.555394",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-22T19:57:45.157504",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "comet",
+      "timestamp": "2025-12-22T19:57:45.874281",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-22T19:57:46.484686",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "comet",
+      "timestamp": "2025-12-22T19:57:46.992771",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-22T19:57:47.548650",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-23T08:25:51.042849",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-23T08:25:52.047676",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-23T08:25:52.587705",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "comet",
+      "timestamp": "2025-12-23T08:25:55.002306",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "comet",
+      "timestamp": "2025-12-23T08:25:55.412269",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "comet",
+      "timestamp": "2025-12-23T08:25:55.594853",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "comet",
+      "timestamp": "2025-12-23T08:25:55.755337",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-23T08:44:32.741244",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-23T08:44:34.352978",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-23T14:39:46.933898",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-23T14:39:51.270064",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "claude",
+      "timestamp": "2025-12-23T14:39:54.085780",
+      "type": "cloud"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-23T14:51:39.765215",
+      "type": "local"
+    },
+    {
+      "ia_id": "vertia",
+      "timestamp": "2025-12-23T15:03:39.803905",
+      "type": "local"
     }
   ]
 }

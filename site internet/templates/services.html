@@ -10,52 +10,56 @@
         <div class="card">
             <h2 class="card-title">Formation au Numerique</h2>
             <p>
-                Nous proposons des ateliers et formations pour tous les niveaux :
+                Nous proposons des ateliers et formations collectifs pour tous les niveaux,
+                en presentiel ou a distance, adaptes aux besoins locaux :
             </p>
             <ul style="margin-left: var(--space-lg); margin-top: var(--space-md); color: var(--text-secondary);">
-                <li>Initiation a l'informatique</li>
+                <li>Initiation a l'informatique et au numerique quotidien</li>
                 <li>Securite en ligne et protection des donnees</li>
-                <li>Utilisation des outils d'IA</li>
+                <li>Utilisation des outils d'IA accessibles</li>
                 <li>Programmation debutant a avance</li>
+                <li>Ateliers parents-enfants autour du numerique responsable</li>
             </ul>
         </div>
 
         <div class="card">
             <h2 class="card-title">Developpement d'Outils</h2>
             <p>
-                Nous creeons des logiciels open source :
+                Nous creons des logiciels open source legers et eco-responsables :
             </p>
             <ul style="margin-left: var(--space-lg); margin-top: var(--space-md); color: var(--text-secondary);">
-                <li>Applications de productivite</li>
-                <li>Outils d'automatisation</li>
-                <li>Solutions d'accessibilite</li>
-                <li>Interfaces eco-responsables</li>
+                <li>Applications de productivite simples a utiliser</li>
+                <li>Outils d'automatisation pour associations</li>
+                <li>Solutions d'accessibilite et d'inclusion numerique</li>
+                <li>Interfaces eco-responsables basse consommation</li>
             </ul>
         </div>
 
         <div class="card">
             <h2 class="card-title">Accompagnement</h2>
             <p>
-                Nous aidons les particuliers et associations :
+                Nous aidons les particuliers, familles et associations dans leur transition numerique,
+                y compris dans les territoires ruraux et zones eloignees :
             </p>
             <ul style="margin-left: var(--space-lg); margin-top: var(--space-md); color: var(--text-secondary);">
-                <li>Conseil en transition numerique</li>
-                <li>Audit de securite simplifie</li>
-                <li>Mise en place d'outils collaboratifs</li>
-                <li>Support technique benevole</li>
+                <li>Conseil en transition numerique et simplification des outils</li>
+                <li>Audit de securite simplifie et accessible</li>
+                <li>Mise en place d'outils collaboratifs et participatifs</li>
+                <li>Support technique benevole de proximite</li>
             </ul>
         </div>
 
         <div class="card">
             <h2 class="card-title">Sensibilisation</h2>
             <p>
-                Nous organisons des evenements de sensibilisation :
+                Nous organisons des evenements ouverts a tous pour construire ensemble
+                une culture numerique responsable et solidaire :
             </p>
             <ul style="margin-left: var(--space-lg); margin-top: var(--space-md); color: var(--text-secondary);">
-                <li>Conferences sur le numerique responsable</li>
-                <li>Ateliers cybersecurite</li>
-                <li>Tables rondes sur l'IA ethique</li>
-                <li>Demonstrations d'outils eco-conçus</li>
+                <li>Conferences sur le numerique responsable et l'impact environnemental</li>
+                <li>Ateliers cybersecurite pour tous publics</li>
+                <li>Tables rondes sur l'IA ethique et citoyenne</li>
+                <li>Demonstrations d'outils eco-conçus et participatifs</li>
             </ul>
         </div>
     </div>
@@ -63,31 +67,15 @@
 
 <section class="section">
     <h2 class="section-title">Tarification</h2>
-    <div class="grid grid-3">
-        <div class="card" style="text-align: center;">
-            <h3 class="card-title">Particuliers</h3>
-            <p class="stat-value">Gratuit</p>
-            <p style="color: var(--text-secondary);">
-                Toutes nos formations et notre accompagnement
-                sont gratuits pour les particuliers.
-            </p>
-        </div>
-        <div class="card" style="text-align: center;">
-            <h3 class="card-title">Associations</h3>
-            <p class="stat-value">Gratuit</p>
-            <p style="color: var(--text-secondary);">
-                Les associations a but non lucratif
-                beneficient de nos services gratuitement.
-            </p>
-        </div>
-        <div class="card" style="text-align: center;">
-            <h3 class="card-title">Entreprises</h3>
-            <p class="stat-value">Sur devis</p>
-            <p style="color: var(--text-secondary);">
-                Nous proposons des prestations adaptees
-                aux besoins des entreprises.
-            </p>
-        </div>
+    <div class="card" style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <p class="stat-value">Prix Libre</p>
+        <p style="color: var(--text-secondary); margin-top: var(--space-md);">
+            Nos services sont accessibles a tous. Vous contribuez selon vos moyens et votre situation.
+            Chaque don, meme modeste, soutient nos actions solidaires et eco-responsables.
+        </p>
+        <p style="margin-top: var(--space-lg);">
+            <a href="{{ url_for('contact') }}" class="btn btn-primary">Nous contacter</a>
+        </p>
     </div>
 </section>
 {% endblock %}

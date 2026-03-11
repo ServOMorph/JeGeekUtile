@@ -39,6 +39,11 @@
       "id": "NoteBook_lm",
       "nom": "NoteBook LM",
       "type": "cloud"
+    },
+    {
+      "id": "mistral",
+      "nom": "Mistral",
+      "type": "cloud"
     }
   ]
 }
