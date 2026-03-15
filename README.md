@@ -396,6 +396,12 @@ Système de récompense pour bénévoles (10 à 200 geekos selon mission). Non c
 
 ---
 
+## 👨‍💻 Auteur
+
+Créé par **ServOMorph**
+
+---
+
 ## Licence
 
 Projet interne — Tous droits réservés
