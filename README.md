@@ -1,5 +1,7 @@
 # Je Geek Utile
 
+[![Build Status](https://github.com/ServOMorph/JeGeekUtile/actions/workflows/python-app.yml/badge.svg)](https://github.com/ServOMorph/JeGeekUtile/actions)
+
 Association loi 1901 — Tech au service humain.
 
 Système complet incluant un site web associatif Flask, un système d'agents IA orchestrés, des applications satellites et une console de gestion.
