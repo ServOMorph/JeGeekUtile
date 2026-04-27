@@ -295,7 +295,7 @@ RESET_TOKEN_EXPIRY = 3600  # 1 heure
 ## 14. Roadmap
 - **Phase 1** : Core dashboard + auth + reset MDP par email
 - **Phase 2** : App "Présentation" (défaut) + App "Bénévoles" installable
-- **Phase 3** : Système progression + espace discussion
+- **Phase 3** : Système progression + espace  (juste prévoir la place dasn l'ui et créer un placeholder)
 - **Phase 4** : Panel admin + config.py dynamique
 - **Phase 5** : Tests 85% + déploiement
 
@@ -319,6 +319,7 @@ RESET_TOKEN_EXPIRY = 3600  # 1 heure
 - Temps réel (WebSocket ou polling)
 - Émojis supportés
 - Historique scrollable
+- Qui pourra être activé ou désactivé par l'admin pour certain users
 
 ## 17. Système progression
 - Temps d'utilisation par app tracké
