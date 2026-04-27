@@ -3,68 +3,121 @@
 {% block title %}Dashboard — JeGeekUtile{% endblock %}
 
 {% block content %}
-<section class="section">
-  <div class="section-eyebrow">DASHBOARD</div>
-  <h2 class="section-title">Bienvenue {{ user.email }}</h2>
-  <p class="section-desc">
-    Voici ton espace personnel. Gère tes applications et suis ta progression.
-  </p>
-</section>
-
-<section class="section">
-  <div class="section-eyebrow">APPLICATIONS</div>
-  <h3 class="section-title" style="font-size: 24px; margin-bottom: 32px;">Apps Installées</h3>
-
-  <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
-    <div class="card card-neon">
-      <div style="font-family: var(--display); font-weight: 800; font-size: 14px; color: var(--neon); margin-bottom: 8px;">
-        PRÉSENTATION
-      </div>
-      <p style="font-size: 12px; color: var(--mute); margin-bottom: 16px;">
-        Découvre le projet JeGeekUtile et ses missions.
-      </p>
-      <button class="btn btn-sm btn-ghost" style="width: 100%;">
-        OUVRIR
-      </button>
-    </div>
-  </div>
-
-  <p style="font-size: 13px; color: var(--dim); margin-top: 32px; font-family: var(--mono);">
-    D'autres applications seront bientôt disponibles.
-  </p>
-</section>
-
-<section class="section">
-  <div class="section-eyebrow">PROGRESSION</div>
-  <h3 class="section-title" style="font-size: 24px; margin-bottom: 32px;">Ta Progression</h3>
-
-  <div style="background: var(--bg-card); border: 1px solid var(--line); padding: 24px; border-radius: 0;">
-    <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-      <span style="font-family: var(--mono); font-size: 11px; color: var(--mute); text-transform: uppercase;">
-        Compétences
-      </span>
-      <span style="font-family: var(--mono); font-size: 11px; color: var(--neon);">
-        5 / 10
-      </span>
-    </div>
-    <div class="progress-bar">
-      <div class="progress-bar-fill" style="width: 50%;"></div>
-    </div>
-  </div>
-
-  <p style="font-size: 12px; color: var(--dim); margin-top: 16px; font-family: var(--mono);">
-    Complète des missions pour gagner des badges et progresser.
-  </p>
-</section>
-
-<section class="section">
-  <div class="section-eyebrow">DISCUSSION</div>
-  <h3 class="section-title" style="font-size: 24px; margin-bottom: 32px;">Zone Discussion</h3>
-
-  <div style="background: var(--bg-card); border: 1px solid var(--line); padding: 24px; border-radius: 0; text-align: center; min-height: 200px; display: flex; align-items: center; justify-content: center;">
-    <p style="font-family: var(--mono); font-size: 12px; color: var(--dim);">
-      💬 Zone discussion — À venir
+<section style="border-bottom: 1px solid var(--line); padding: 72px 80px 64px; display: flex; flex-direction: row; align-items: center; justify-content: center; position: relative;">
+  <h1 style="font-family: var(--display); font-weight: 900; font-size: 96px; letter-spacing: -0.02em; color: var(--text); line-height: 0.95; text-align: center;">
+    JeGeekUtile
+  </h1>
+  <div style="position: absolute; right: 80px; display: flex; flex-direction: column; align-items: flex-end; justify-content: center;">
+    <p style="font-family: var(--display); font-weight: 800; font-size: 36px; color: var(--neon); letter-spacing: 0.05em; text-shadow: 0 0 20px rgba(0,255,136,0.5), 0 0 40px rgba(0,255,136,0.25); margin: 0;">
+      {{ user.email }}
     </p>
   </div>
 </section>
+
+<div style="display: grid; grid-template-columns: 1fr 280px; gap: 24px; padding: 0 80px 64px; margin-top: -32px;">
+
+  <!-- COLONNE GAUCHE: APPLICATIONS -->
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div class="section-eyebrow" style="padding: 0 8px;">APPLICATIONS</div>
+
+    <div>
+      <h3 style="font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--mute); text-transform: uppercase; margin-bottom: 12px;">Installées</h3>
+      <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px;">
+        {% for app in installed_apps %}
+        <div style="aspect-ratio: 1; background: var(--bg-card); border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px; cursor: pointer; transition: background 0.12s, border-color 0.12s;" onmouseover="this.style.background='rgba(0,255,136,0.06)'; this.style.borderColor='rgba(0,255,136,0.35)'" onmouseout="this.style.background='var(--bg-card)'; this.style.borderColor='rgba(0,255,136,0.14)'">
+          <div style="font-family: var(--display); font-weight: 700; font-size: 9px; color: var(--neon); text-align: center; line-height: 1.1;">
+            {{ app.name|upper }}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+      <h3 style="font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--mute); text-transform: uppercase; margin-bottom: 12px;">Catalogue</h3>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+        {% for app in catalog_apps %}
+        <div style="aspect-ratio: 1; background: var(--bg-card); border: 1px dashed rgba(0,255,136,0.35); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px; cursor: pointer; transition: background 0.12s, border-color 0.12s;" onmouseover="this.style.background='rgba(0,255,136,0.04)'; this.style.borderColor='rgba(0,255,136,0.5)'" onmouseout="this.style.background='var(--bg-card)'; this.style.borderColor='rgba(0,255,136,0.35)'">
+          <div style="font-family: var(--display); font-weight: 700; font-size: 12px; color: var(--mute); text-align: center; line-height: 1.2; margin-bottom: 8px;">
+            {{ app.name|upper }}
+          </div>
+          <button class="btn btn-sm btn-primary" style="font-size: 9px; padding: 4px 8px;" onclick="installApp({{ app.id }})">
+            INSTALLER
+          </button>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- COLONNE DROITE: PROGRESSION + INFO -->
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <!-- PROGRESSION -->
+    <div style="background: var(--bg-card); border: 1px solid var(--line); padding: 12px;">
+      <div class="section-eyebrow" style="padding: 0; margin-bottom: 12px; font-size: 9px;">PROGRESSION</div>
+      <div style="margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span style="font-family: var(--mono); font-size: 9px; color: var(--dim); text-transform: uppercase;">Compétences</span>
+          <span style="font-family: var(--mono); font-size: 9px; color: var(--neon);">5 / 10</span>
+        </div>
+        <div class="progress-bar" style="height: 3px;">
+          <div class="progress-bar-fill" style="width: 50%;"></div>
+        </div>
+      </div>
+      <p style="font-family: var(--mono); font-size: 8px; color: var(--dim); line-height: 1.4;">
+        Complète des missions pour progresser.
+      </p>
+    </div>
+
+    <!-- MODULE INFO -->
+    <div style="flex: 1; background: var(--bg-card); border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; overflow: hidden; position: relative;">
+      <img id="info-image" src="/assets/info1.png" alt="Info" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      <div style="position: absolute; bottom: 4px; right: 4px; font-family: var(--mono); font-size: 7px; color: var(--dim); background: rgba(5,7,5,0.8); padding: 2px 4px;">
+        <span id="info-counter">1/8</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const infoImages = [
+  'info1.png', 'info2.png', 'info3.png', 'info4.png',
+  'info5.png', 'info6.png', 'info7.png', 'info8.png',
+  'infojpg1.jpg', 'infojpg2.jpg', 'infojpg3.jpg', 'infojpg4.jpg',
+  'infojpg5.jpg', 'infojpg6.jpg', 'infojpg7.jpg', 'infojpg8.jpg',
+  'infojpg9.jpg', 'infojpg10.jpg', 'infojpg11.jpg', 'infojpg12.jpg'
+];
+let currentInfoIndex = 0;
+
+function rotateInfoImage() {
+  const img = document.getElementById('info-image');
+  const counter = document.getElementById('info-counter');
+
+  if (img && infoImages.length > 0) {
+    currentInfoIndex = (currentInfoIndex + 1) % infoImages.length;
+    const nextImage = infoImages[currentInfoIndex];
+    img.src = `/assets/${nextImage}`;
+    img.onerror = function() {
+      console.warn(`Image not found: ${nextImage}`);
+    };
+    if (counter) counter.textContent = `${currentInfoIndex + 1}/${infoImages.length}`;
+  }
+}
+
+setInterval(rotateInfoImage, 5000);
+
+function installApp(appId) {
+  fetch('/api/apps/install', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({app_id: appId})
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.success) location.reload();
+    else alert(data.message || 'Erreur');
+  });
+}
+</script>
 {% endblock %}

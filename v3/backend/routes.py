@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash
-from backend.models import db, User, PasswordReset
+from backend.models import db, User, PasswordReset, App
 from backend.auth import login_required, admin_required
 from backend.services.email import EmailService
 import logging
@@ -133,7 +133,13 @@ def dashboard():
         session.clear()
         return redirect(url_for('main.login'))
 
-    return render_template('dashboard.html', user=user)
+    all_apps = App.query.filter_by(admin_only=False).all()
+    installed_app_ids = set(user.installed_apps) if user.installed_apps else set()
+
+    installed_apps = [app for app in all_apps if app.id in installed_app_ids]
+    catalog_apps = [app for app in all_apps if app.id not in installed_app_ids]
+
+    return render_template('dashboard.html', user=user, installed_apps=installed_apps, catalog_apps=catalog_apps)
 
 
 @main_bp.route('/admin', methods=['GET'])

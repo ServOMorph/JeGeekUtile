@@ -72,71 +72,87 @@ body::after {
   position: fixed;
   top: 0;
   left: 0;
-  bottom: 0;
-  width: 220px;
+  right: 0;
+  height: auto;
   background: rgba(5,7,5,0.96);
-  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
   backdrop-filter: blur(12px);
-  padding: 32px 0 24px;
+  padding: 12px 80px;
   z-index: 100;
   display: flex;
-  flex-direction: column;
-  overflow-y: auto;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+  overflow-x: auto;
 }
 
 .sidenav-logo {
-  padding: 0 22px 28px;
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border-right: 1px solid var(--line);
+  padding-right: 40px;
+  margin-bottom: 0;
+  flex-shrink: 0;
 }
 
 .sidenav-logo-mark {
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 20px;
   background: var(--neon);
   clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
-  box-shadow: 0 0 16px var(--neon-glow);
-  margin-bottom: 8px;
+  box-shadow: 0 0 12px var(--neon-glow);
+  margin-bottom: 0;
+  flex-shrink: 0;
 }
 
 .sidenav-logo-name {
   font-family: var(--display);
   font-weight: 900;
-  font-size: 13px;
+  font-size: 12px;
   letter-spacing: 0.06em;
   color: var(--text);
+  margin-right: 6px;
 }
 
 .sidenav-logo-sub {
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 8px;
   letter-spacing: 0.2em;
   color: var(--mute);
-  margin-top: 2px;
+  margin-top: 0;
 }
 
 .nav-section {
-  padding: 0 16px;
-  margin-bottom: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  margin-bottom: 0;
+  flex-shrink: 0;
 }
 
 .nav-section-title {
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 600;
   letter-spacing: 0.25em;
   color: var(--dim);
   text-transform: uppercase;
-  padding: 12px 8px 6px;
+  padding: 0;
+  margin-right: 8px;
+  display: none;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
+  gap: 6px;
+  padding: 4px 8px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.06em;
   color: var(--mute);
@@ -144,6 +160,8 @@ body::after {
   border-radius: 2px;
   transition: background 0.12s, color 0.12s;
   cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-item:hover {
@@ -154,11 +172,12 @@ body::after {
 .nav-item.active {
   color: var(--neon);
   background: rgba(0,255,136,0.08);
+  border-bottom: 2px solid var(--neon);
 }
 
 .nav-item .dot {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: currentColor;
   flex-shrink: 0;
@@ -166,8 +185,7 @@ body::after {
 
 /* ── Main ── */
 .main {
-  margin-left: 220px;
-  padding: 0 0 120px;
+  padding: 16px 0 120px;
 }
 
 /* ── Section ── */
@@ -670,3 +688,4 @@ td.label {
     font-size: 24px;
   }
 }
+

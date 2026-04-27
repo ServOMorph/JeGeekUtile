@@ -1,0 +1,16 @@
+{
+  "name": "jegeekutile",
+  "version": "3.0.0-dev",
+  "description": "JeGeekUtile - Tableau de bord personnel modulaire avec applications installables",
+  "main": "v3/app.py",
+  "repository": "https://github.com/ServOMorph/JeGeekUtile",
+  "author": "ServOMorph",
+  "license": "MIT",
+  "keywords": [
+    "association",
+    "dashboard",
+    "applications",
+    "progression",
+    "gestion"
+  ]
+}
