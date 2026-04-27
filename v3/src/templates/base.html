@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}JeGeekUtile — La technologie au service de l'humain{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/charte.css') }}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <nav class="sidenav">
+    <div class="sidenav-logo">
+      <div class="sidenav-logo-mark"></div>
+      <div class="sidenav-logo-name">JEGU</div>
+      <div class="sidenav-logo-sub">v3.0-dev</div>
+    </div>
+
+    {% if session.get('user_id') %}
+      <div class="nav-section">
+        <div class="nav-section-title">USER</div>
+        <a class="nav-item {% if request.path == '/dashboard' %}active{% endif %}" href="{{ url_for('main.dashboard') }}">
+          <span class="dot"></span> Dashboard
+        </a>
+        {% if session.get('user_role') == 'admin' %}
+          <a class="nav-item {% if request.path == '/admin' %}active{% endif %}" href="{{ url_for('main.admin') }}">
+            <span class="dot"></span> Admin
+          </a>
+        {% endif %}
+        <a class="nav-item" href="{{ url_for('main.logout') }}" onclick="return confirm('Quitter ?')">
+          <span class="dot"></span> Logout
+        </a>
+      </div>
+    {% else %}
+      <div class="nav-section">
+        <div class="nav-section-title">AUTH</div>
+        <a class="nav-item {% if request.path == '/login' %}active{% endif %}" href="{{ url_for('main.login') }}">
+          <span class="dot"></span> Login
+        </a>
+        <a class="nav-item {% if request.path == '/forgot-password' %}active{% endif %}" href="{{ url_for('main.forgot_password') }}">
+          <span class="dot"></span> Reset
+        </a>
+      </div>
+    {% endif %}
+  </nav>
+
+  <main class="main">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{% if category == 'error' %}error{% else %}success{% endif %}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

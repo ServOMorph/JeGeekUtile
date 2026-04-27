@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from config import config
 from backend.models import db
 from backend.auth import auth_bp
+from backend.routes import main_bp
 import logging
 
 load_dotenv()
@@ -12,10 +13,22 @@ def create_app(config_name=None):
     if config_name is None:
         config_name = os.getenv('FLASK_ENV', 'development')
 
-    app = Flask(__name__, instance_relative_config=True)
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    template_dir = os.path.join(base_dir, 'src', 'templates')
+    static_dir = os.path.join(base_dir, 'src', 'static')
+
+    app = Flask(
+        __name__,
+        template_folder=template_dir,
+        static_folder=static_dir,
+        static_url_path='/static',
+        instance_relative_config=True
+    )
     app.config.from_object(config[config_name])
 
     os.makedirs(app.instance_path, exist_ok=True)
+    os.makedirs(template_dir, exist_ok=True)
+    os.makedirs(static_dir, exist_ok=True)
 
     db.init_app(app)
 
@@ -23,6 +36,7 @@ def create_app(config_name=None):
         db.create_all()
 
     app.register_blueprint(auth_bp)
+    app.register_blueprint(main_bp)
 
     setup_logging(app)
 

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Erreur {{ code }} — JeGeekUtile{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <div class="form-box" style="text-align: center;">
+    <h1 class="form-box-title" style="font-size: 64px; margin-bottom: 16px;">
+      {{ code }}
+    </h1>
+
+    <p class="form-box-desc" style="margin-bottom: 32px;">
+      {{ message }}
+    </p>
+
+    <a href="{{ url_for('main.login') }}" class="btn btn-primary">
+      RETOUR
+    </a>
+  </div>
+</div>
+{% endblock %}

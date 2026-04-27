@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard — JeGeekUtile{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="section-eyebrow">DASHBOARD</div>
+  <h2 class="section-title">Bienvenue {{ user.email }}</h2>
+  <p class="section-desc">
+    Voici ton espace personnel. Gère tes applications et suis ta progression.
+  </p>
+</section>
+
+<section class="section">
+  <div class="section-eyebrow">APPLICATIONS</div>
+  <h3 class="section-title" style="font-size: 24px; margin-bottom: 32px;">Apps Installées</h3>
+
+  <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+    <div class="card card-neon">
+      <div style="font-family: var(--display); font-weight: 800; font-size: 14px; color: var(--neon); margin-bottom: 8px;">
+        PRÉSENTATION
+      </div>
+      <p style="font-size: 12px; color: var(--mute); margin-bottom: 16px;">
+        Découvre le projet JeGeekUtile et ses missions.
+      </p>
+      <button class="btn btn-sm btn-ghost" style="width: 100%;">
+        OUVRIR
+      </button>
+    </div>
+  </div>
+
+  <p style="font-size: 13px; color: var(--dim); margin-top: 32px; font-family: var(--mono);">
+    D'autres applications seront bientôt disponibles.
+  </p>
+</section>
+
+<section class="section">
+  <div class="section-eyebrow">PROGRESSION</div>
+  <h3 class="section-title" style="font-size: 24px; margin-bottom: 32px;">Ta Progression</h3>
+
+  <div style="background: var(--bg-card); border: 1px solid var(--line); padding: 24px; border-radius: 0;">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+      <span style="font-family: var(--mono); font-size: 11px; color: var(--mute); text-transform: uppercase;">
+        Compétences
+      </span>
+      <span style="font-family: var(--mono); font-size: 11px; color: var(--neon);">
+        5 / 10
+      </span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-bar-fill" style="width: 50%;"></div>
+    </div>
+  </div>
+
+  <p style="font-size: 12px; color: var(--dim); margin-top: 16px; font-family: var(--mono);">
+    Complète des missions pour gagner des badges et progresser.
+  </p>
+</section>
+
+<section class="section">
+  <div class="section-eyebrow">DISCUSSION</div>
+  <h3 class="section-title" style="font-size: 24px; margin-bottom: 32px;">Zone Discussion</h3>
+
+  <div style="background: var(--bg-card); border: 1px solid var(--line); padding: 24px; border-radius: 0; text-align: center; min-height: 200px; display: flex; align-items: center; justify-content: center;">
+    <p style="font-family: var(--mono); font-size: 12px; color: var(--dim);">
+      💬 Zone discussion — À venir
+    </p>
+  </div>
+</section>
+{% endblock %}
