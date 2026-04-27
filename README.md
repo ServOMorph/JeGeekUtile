@@ -1,8 +1,31 @@
+<p align="center">
+  <img src="ASSETS/IMAGES/LOGOS/logo_titre_transparent_1.png" alt="Je Geek Utile" width="400"/>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/license/ServOMorph/JeGeekUtile?color=2d5016" alt="Licence MIT"/>
+  <img src="https://img.shields.io/badge/tests-100%25-brightgreen" alt="Tests 100%"/>
+  <img src="https://img.shields.io/badge/python-3.8+-blue" alt="Python 3.8+"/>
+  <img src="https://img.shields.io/badge/version-3.0--dev-informational" alt="Version 3.0-dev"/>
+  <img src="https://img.shields.io/badge/statut-en--developpement-orange" alt="En développement"/>
+  <img src="https://img.shields.io/badge/pixels--blancs-%3C5%25-2d5016" alt="Eco-responsable"/>
+</p>
+
 # Je Geek Utile
 
-Association loi 1901 — Tech au service humain.
+**La technologie au service de l'humain — pas l'inverse.**
 
-Système complet incluant un site web associatif Flask, un système d'agents IA orchestrés, des applications satellites et une console de gestion.
+Boîte à outils open source pour associations : site web Flask complet, agents IA Claude Code orchestrés, console de gestion, et applications satellites. Éco-responsable par conception, traçable, auto-suffisant. Conçu par et pour des bénévoles qui veulent que la tech reste un outil, pas une fin.
+
+---
+
+## Pourquoi ce projet ?
+
+Les associations manquent d'outils numériques adaptés — soit trop chers, soit trop complexes, soit conçus sans elles. JGU part d'un constat simple : la tech devrait être au service de ceux qui s'engagent, pas l'inverse.
+
+- **L'IA doit rester un outil, pas un oracle.** Notre système d'agents orchestrés (Robert, Halu, PromptParfait...) intègre la détection d'hallucinations dès le départ — parce qu'on pense que l'IA fiable, c'est une IA qu'on contrôle.
+- **Le numérique a un coût énergétique.** On impose thème sombre, zéro dépendance externe, moins de 5% de pixels blancs. Pas comme contrainte, comme valeur.
+- **Un bénévole ne devrait pas avoir besoin d'une DSI.** Tout est auto-hébergeable, documenté, modulaire, et lancé en 3 commandes.
 
 ---
 
@@ -126,7 +149,6 @@ python app.py
 # http://localhost:5000
 ```
 
-Compte admin par défaut : `admin@admin.com` / `admin123`
 
 ### Console agents (port 8000)
 
@@ -394,12 +416,33 @@ Système de récompense pour bénévoles (10 à 200 geekos selon mission). Non c
 
 ---
 
-## Licence
+## Roadmap
 
-Projet interne — Tous droits réservés
+Suivi complet de la progression : objectifs, tâches par phase, métriques.
+
+Voir [docs/ROADMAP_GITHUB_VISIBILITE.md](docs/ROADMAP_GITHUB_VISIBILITE.md)
 
 ---
 
-**Version :** 2.0
-**Dernière mise à jour :** 02/03/2026
-**Statut :** Production ready
+## Comment contribuer ?
+
+Les contributions sont les bienvenues — issues, PRs, retours d'usage.
+
+1. Fork le repo
+2. Crée une branche (`git checkout -b feature/ma-contribution`)
+3. Commit (`git commit -m 'feat: description'`)
+4. Push et ouvre une PR
+
+Pour les bugs ou idées : ouvre une [issue](https://github.com/ServOMorph/JeGeekUtile/issues).
+
+---
+
+## Licence
+
+MIT — voir [LICENSE](LICENSE)
+
+---
+
+**Version :** 3.0 (dev)
+**Dernière mise à jour :** 27/04/2026
+**Statut :** En développement

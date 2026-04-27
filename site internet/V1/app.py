@@ -8,7 +8,7 @@ import os
 import uuid
 import json
 import sys
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from config import PORT_SITE, DEBUG
 
 app = Flask(__name__)
@@ -127,7 +127,7 @@ def notre_projet():
 @app.route('/projet-d-actions')
 def projet_d_actions():
     import markdown
-    md_path = os.path.join(os.path.dirname(__file__), '..', 'projet_d_action_V1.md')
+    md_path = os.path.join(os.path.dirname(__file__), '..', '..', 'projet_d_action_V1.md')
     with open(md_path, encoding='utf-8') as f:
         content = markdown.markdown(f.read(), extensions=['extra', 'nl2br'])
     return render_template('projet_d_actions.html', content=content)

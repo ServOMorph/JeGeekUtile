@@ -7,7 +7,7 @@ import time
 sys.path.insert(0, os.path.dirname(__file__))
 from config import PORT_SITE
 
-site_dir = os.path.join(os.path.dirname(__file__), "site internet")
+site_dir = os.path.join(os.path.dirname(__file__), "site internet", "V1")
 
 def ouvrir_navigateur():
     time.sleep(1.5)

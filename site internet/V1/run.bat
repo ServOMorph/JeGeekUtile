@@ -7,7 +7,7 @@ pip install -r requirements.txt -q
 
 echo.
 echo Lancement du site...
-echo Acces: http://localhost:5000
+echo Acces: http://localhost:5020
 echo.
 
 python app.py
