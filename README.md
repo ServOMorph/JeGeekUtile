@@ -15,7 +15,7 @@
 
 **La technologie au service de l'humain — pas l'inverse.**
 
-Boîte à outils open source pour associations : site web Flask complet, agents IA Claude Code orchestrés, console de gestion, et applications satellites. Éco-responsable par conception, traçable, auto-suffisant. Conçu par et pour des bénévoles qui veulent que la tech reste un outil, pas une fin.
+Boîte à outils open source pour associations : site web Flask complet (V3 avec Dashboard épuré), agents IA Claude Code orchestrés, catalogue de projets Markdown, et applications satellites. Éco-responsable par conception, traçable, auto-suffisant. Conçu par et pour des bénévoles qui veulent que la tech reste un outil, pas une fin.
 
 ---
 
@@ -33,9 +33,9 @@ Les associations manquent d'outils numériques adaptés — soit trop chers, soi
 
 Le projet regroupe plusieurs composants interdépendants :
 
-- **Site internet** — Application Flask (25 templates, BDD SQLite, espace membre/admin)
+- **Site internet V3** — Application Flask (Dashbord ultra-épuré, rendu Markdown dynamique, BDD SQLite)
 - **Système d'agents IA** — 6 agents Claude Code orchestrés par Robert
-- **Console agents** — Interface web de gestion/benchmark des agents (Vanilla JS)
+- **Catalogue Projets** — Gestion de contenu via fichiers Markdown (.md) pour une maintenance simplifiée
 - **Applications satellites** — auto_ia, stat_usage_ia, modele_appli
 
 ---

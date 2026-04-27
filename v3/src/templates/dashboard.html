@@ -2,78 +2,235 @@
 
 {% block title %}Dashboard — JeGeekUtile{% endblock %}
 
+{% block extra_css %}
+<style>
+  .dashboard-hero {
+    border-bottom: 1px solid var(--line);
+    padding: 100px 50px 60px;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 48px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .dashboard-title {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: 94px; /* Reduced by 1/3 from 140px */
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 0.95;
+    text-align: center;
+    margin: 0;
+  }
+  
+  .dashboard-user-info {
+    position: absolute;
+    right: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  
+  .user-email-neon {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 38px; /* Reduced by 1/3 from 56px */
+    color: var(--neon);
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 20px rgba(0,255,136,0.5), 0 0 40px rgba(0,255,136,0.25);
+    margin: 0;
+  }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 48px;
+    padding: 0 80px 80px;
+    margin-top: -48px;
+  }
+
+  .apps-grid-installed {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+  }
+
+  .apps-grid-catalog {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+  }
+
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--mute);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 1400px) {
+    .dashboard-title { font-size: 100px; }
+    .user-email-neon { font-size: 42px; }
+  }
+
+  @media (max-width: 1200px) {
+    .dashboard-hero { padding: 120px 40px 60px; }
+    .dashboard-title { font-size: 80px; }
+    .dashboard-user-info { right: 40px; }
+    .user-email-neon { font-size: 32px; }
+    .dashboard-grid { padding: 0 40px 60px; grid-template-columns: 1fr 320px; }
+  }
+
+  @media (max-width: 1024px) {
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+      margin-top: 0;
+      padding-top: 48px;
+    }
+    .dashboard-user-info {
+      position: static;
+      margin-top: 32px;
+      align-items: center;
+    }
+    .dashboard-hero {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-hero { padding: 100px 20px 40px; }
+    .dashboard-title { font-size: 56px; }
+    .user-email-neon { font-size: 24px; }
+    .dashboard-grid { padding: 0 20px 40px; }
+  }
+
+  /* MODAL SYSTEM */
+  .app-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 7, 5, 0.9);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+  
+  .app-modal-window {
+    width: 100%;
+    max-width: 1000px;
+    height: 85vh;
+    background: var(--bg);
+    border: 1px solid var(--neon);
+    box-shadow: 0 0 40px var(--neon-glow);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+  }
+  
+  .app-modal-header {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 255, 136, 0.04);
+  }
+  
+  .app-modal-title {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--neon);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  
+  .app-modal-close {
+    background: transparent;
+    border: 1px solid var(--dim);
+    color: var(--dim);
+    font-family: var(--mono);
+    font-size: 14px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .app-modal-close:hover {
+    border-color: var(--red);
+    color: var(--red);
+    box-shadow: 0 0 10px rgba(255, 69, 69, 0.3);
+  }
+  
+  .app-modal-body {
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  .app-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  @media (max-width: 768px) {
+    .app-modal-overlay { padding: 10px; }
+    .app-modal-window { height: 95vh; }
+  }
+</style>
+{% endblock %}
+
 {% block content %}
-<section style="border-bottom: 1px solid var(--line); padding: 72px 80px 64px; display: flex; flex-direction: row; align-items: center; justify-content: center; position: relative;">
-  <h1 style="font-family: var(--display); font-weight: 900; font-size: 96px; letter-spacing: -0.02em; color: var(--text); line-height: 0.95; text-align: center;">
-    JeGeekUtile
-  </h1>
-  <div style="position: absolute; right: 80px; display: flex; flex-direction: column; align-items: flex-end; justify-content: center;">
-    <p style="font-family: var(--display); font-weight: 800; font-size: 36px; color: var(--neon); letter-spacing: 0.05em; text-shadow: 0 0 20px rgba(0,255,136,0.5), 0 0 40px rgba(0,255,136,0.25); margin: 0;">
-      {{ user.email }}
+<section class="dashboard-hero" style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-height: 300px;">
+  <div style="display: flex; flex-direction: column; align-items: flex-start;">
+    <div class="dashboard-user-info" style="position: static; margin-bottom: 8px; align-items: flex-start;">
+      <p class="user-email-neon">
+        {{ user.email }}
+      </p>
+    </div>
+    <h1 class="dashboard-title" style="text-align: left; margin: 0;">
+      JeGeekUtile
+    </h1>
+    <p style="font-family: var(--mono); font-size: 16px; color: var(--mute); margin-top: 8px; text-transform: uppercase; letter-spacing: 0.1em;">
+      Future association loi 1901
     </p>
   </div>
 </section>
 
-<div style="display: grid; grid-template-columns: 1fr 280px; gap: 24px; padding: 0 80px 64px; margin-top: -32px;">
-
-  <!-- COLONNE GAUCHE: APPLICATIONS -->
-  <div style="display: flex; flex-direction: column; gap: 16px;">
-    <div class="section-eyebrow" style="padding: 0 8px;">APPLICATIONS</div>
-
+<div class="dashboard-grid" style="margin-top: 48px;">
+  
+  <!-- GAUCHE: PROJETS (BOUTON) -->
+  <div style="display: flex; flex-direction: column; gap: 48px;">
     <div>
-      <h3 style="font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--mute); text-transform: uppercase; margin-bottom: 12px;">Installées</h3>
-      <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px;">
-        {% for app in installed_apps %}
-        <div style="aspect-ratio: 1; background: var(--bg-card); border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px; cursor: pointer; transition: background 0.12s, border-color 0.12s;" onmouseover="this.style.background='rgba(0,255,136,0.06)'; this.style.borderColor='rgba(0,255,136,0.35)'" onmouseout="this.style.background='var(--bg-card)'; this.style.borderColor='rgba(0,255,136,0.14)'">
-          <div style="font-family: var(--display); font-weight: 700; font-size: 9px; color: var(--neon); text-align: center; line-height: 1.1;">
-            {{ app.name|upper }}
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-
-    <div style="margin-top: 20px;">
-      <h3 style="font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--mute); text-transform: uppercase; margin-bottom: 12px;">Catalogue</h3>
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
-        {% for app in catalog_apps %}
-        <div style="aspect-ratio: 1; background: var(--bg-card); border: 1px dashed rgba(0,255,136,0.35); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px; cursor: pointer; transition: background 0.12s, border-color 0.12s;" onmouseover="this.style.background='rgba(0,255,136,0.04)'; this.style.borderColor='rgba(0,255,136,0.5)'" onmouseout="this.style.background='var(--bg-card)'; this.style.borderColor='rgba(0,255,136,0.35)'">
-          <div style="font-family: var(--display); font-weight: 700; font-size: 12px; color: var(--mute); text-align: center; line-height: 1.2; margin-bottom: 8px;">
-            {{ app.name|upper }}
-          </div>
-          <button class="btn btn-sm btn-primary" style="font-size: 9px; padding: 4px 8px;" onclick="installApp({{ app.id }})">
-            INSTALLER
-          </button>
-        </div>
-        {% endfor %}
+      <div class="section-eyebrow" style="margin-bottom: 24px;">PROJETS EN COURS DE DÉVELOPPEMENT</div>
+      <div style="margin-bottom: 60px;">
+        <button class="btn btn-primary" onclick="openProjects()" style="font-size: 14px; padding: 16px 32px; letter-spacing: 0.1em; width: 100%; text-align: left;">
+          DÉCOUVRIR LES PROJETS & REJOINDRE LE DÉVELOPPEMENT
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- COLONNE DROITE: PROGRESSION + INFO -->
-  <div style="display: flex; flex-direction: column; gap: 16px;">
-    <!-- PROGRESSION -->
-    <div style="background: var(--bg-card); border: 1px solid var(--line); padding: 12px;">
-      <div class="section-eyebrow" style="padding: 0; margin-bottom: 12px; font-size: 9px;">PROGRESSION</div>
-      <div style="margin-bottom: 12px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span style="font-family: var(--mono); font-size: 9px; color: var(--dim); text-transform: uppercase;">Compétences</span>
-          <span style="font-family: var(--mono); font-size: 9px; color: var(--neon);">5 / 10</span>
-        </div>
-        <div class="progress-bar" style="height: 3px;">
-          <div class="progress-bar-fill" style="width: 50%;"></div>
-        </div>
-      </div>
-      <p style="font-family: var(--mono); font-size: 8px; color: var(--dim); line-height: 1.4;">
-        Complète des missions pour progresser.
-      </p>
-    </div>
-
-    <!-- MODULE INFO -->
-    <div style="flex: 1; background: var(--bg-card); border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; overflow: hidden; position: relative;">
-      <img id="info-image" src="/assets/info1.png" alt="Info" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-      <div style="position: absolute; bottom: 4px; right: 4px; font-family: var(--mono); font-size: 7px; color: var(--dim); background: rgba(5,7,5,0.8); padding: 2px 4px;">
-        <span id="info-counter">1/8</span>
+  <!-- DROITE: INFO (CAROUSEL) -->
+  <div style="display: flex; flex-direction: column; gap: 24px;">
+    <div class="section-eyebrow" style="margin-bottom: 0px;">INFOS & RESSOURCES</div>
+    <div style="flex: 1; min-height: 400px; background: var(--bg-card); border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px; overflow: hidden; position: relative;">
+      <img id="info-image" src="/assets/info1.png" alt="Info" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.8; transition: opacity 0.3s ease;">
+      <div style="position: absolute; bottom: 16px; right: 16px; font-family: var(--mono); font-size: 18px; color: var(--neon); background: rgba(5,7,5,0.85); padding: 8px 16px; border: 1px solid var(--line);">
+        <span id="info-counter">1/20</span>
       </div>
     </div>
   </div>
@@ -97,27 +254,19 @@ function rotateInfoImage() {
   if (img && infoImages.length > 0) {
     currentInfoIndex = (currentInfoIndex + 1) % infoImages.length;
     const nextImage = infoImages[currentInfoIndex];
-    img.src = `/assets/${nextImage}`;
-    img.onerror = function() {
-      console.warn(`Image not found: ${nextImage}`);
-    };
-    if (counter) counter.textContent = `${currentInfoIndex + 1}/${infoImages.length}`;
+    img.style.opacity = '0';
+    setTimeout(() => {
+      img.src = `/assets/${nextImage}`;
+      img.onload = () => { img.style.opacity = '0.8'; };
+      img.onerror = function() {
+        console.warn(`Image not found: ${nextImage}`);
+        rotateInfoImage();
+      };
+      if (counter) counter.textContent = `${currentInfoIndex + 1}/${infoImages.length}`;
+    }, 300);
   }
 }
 
 setInterval(rotateInfoImage, 5000);
-
-function installApp(appId) {
-  fetch('/api/apps/install', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({app_id: appId})
-  })
-  .then(r => r.json())
-  .then(data => {
-    if (data.success) location.reload();
-    else alert(data.message || 'Erreur');
-  });
-}
 </script>
 {% endblock %}

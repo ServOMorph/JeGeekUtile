@@ -4,6 +4,9 @@ Ce fichier centralise la progression globale du projet JeGeekUtile.
 
 ## État Global : Version 3.0 (En développement)
 
+> [!IMPORTANT]
+> **Contrainte Technique Majeure** : L'interface V3 doit être **100% responsive** (mobile, tablette, desktop). Aucun élément ne doit déborder et l'agencement doit s'adapter fluidement à toutes les tailles d'écran.
+
 ---
 
 ## ✅ Phase 1 : Cœur du Système (V1/V2)
@@ -47,12 +50,11 @@ Ce fichier centralise la progression globale du projet JeGeekUtile.
 - [x] Configuration SMTP fonctionnelle
 - [x] Tests backend ≥ 85% coverage (90.27% atteint)
 
-## 🏃 Phase 6 : App "Présentation" + App "Bénévoles" (EN COURS)
+## ✅ Phase 6 : App "Présentation" (COMPLÉTÉE)
 - [x] Système de gestion des applications (auto-création + installation)
 - [x] **Application "Présentation" (installée par défaut)**
-- [ ] **Application "Bénévoles" (modèle jeu vidéo, installable)**
 - [x] Catalogue apps dans dashboard
-- [ ] Fenêtres apps indépendantes (popup/modal/iframe)
+- [x] Fenêtres apps indépendantes (popup/modal/iframe)
 
 ## 📅 Phase 7 : Dashboard UI + Navigation (COMPLÉTÉE)
 - [x] Navigation horizontale en haut (refonte sidenav)
@@ -65,8 +67,9 @@ Ce fichier centralise la progression globale du projet JeGeekUtile.
 ## 📅 Phase 8 : Système Progression + Dashboard
 - [ ] Tracker temps utilisation par app
 - [ ] Compteur contributions (actions utilisateur)
+- [ ] **Intégration logique "Bénévoles" (XP via missions)**
 - [ ] Système badges (paliers débloqués)
-- [x] Indicateur progression visible
+- [x] Indicateur progression visible et intégré au Header
 
 ## 📅 Phase 9 : Panel Admin + Config Dynamique
 - [ ] Dashboard admin complet
@@ -74,18 +77,28 @@ Ce fichier centralise la progression globale du projet JeGeekUtile.
 - [ ] Logs modifications (audit trail)
 - [ ] Reset MDP utilisateur par admin
 
-## ✅ Phase 10 : Charte Graphique + Agencement UI (COMPLÉTÉE)
+## 🏃 Phase 10 : Charte Graphique + Agencement UI (EN COURS)
 - [x] **Intégration complète charte graphique V3**
 - [x] **Respect strict agencement référence V3**
 - [x] Navigation horizontale conforme
 - [x] Responsive grid layout
-- [ ] Responsive design (mobile/tablet/desktop)
+- [ ] **Optimisation Responsiveness Totale (Mobile/Tablet/Desktop)**
 
 ## 📅 Phase 11 : Tests & Optimisation
 - [x] **Coverage global ≥ 85%**
 - [ ] **Performance <2s validée**
 - [ ] Sécurité auditée
 - [ ] Déploiement staging + production
+
+## 📅 Phase 12 : Documentation & Finalisation
+- [ ] Manuel utilisateur complet
+- [ ] Guide de contribution pour nouveaux développeurs
+- [ ] Nettoyage du code et suppression des fichiers obsolètes (V1/V2)
+
+## 📅 Phase 13 : Maintenance & Évolutions
+- [ ] Monitoring des retours utilisateurs
+- [ ] Amélioration continue de l'accessibilité (WCAG)
+- [ ] Exploration de nouvelles applications satellites
 
 ---
 
@@ -101,7 +114,13 @@ Ce fichier centralise la progression globale du projet JeGeekUtile.
 - **(2026-04-27)** : Refonte du dashboard - Navigation horizontale en haut, titre "JeGeekUtile" géant centré, pseudo utilisateur neon à droite. Suppression zone discussion, réduction apps de moitié.
 - **(2026-04-27)** : Module Info avec carrousel d'images (20 images PNG/JPG depuis Bot ou pas Bot), changement port configurable via config.py.
 - **(2026-04-27)** : Auto-création utilisateurs de test et app Présentation au démarrage. Endpoint /assets/ pour servir images externes.
-- **(2026-04-27)** : Phases 5 (Auth), 2 (Frontend V3), et 10 (Charte graphique) complétées. Phase 6 (Apps) initiée avec Présentation.
+- **(2026-04-27)** : Suppression de l'application Bénévoles (fusionnée dans la progression globale).
+- **(2026-04-27)** : Augmentation de la taille des polices de l'UI (x2) pour une meilleure lisibilité et un style plus affirmé.
+- **(2026-04-27)** : Ajout de la contrainte de **Responsiveness Totale** et extension de la roadmap jusqu'à la Phase 13.
+- **(2026-04-27)** : Centralisation du contenu de présentation dans un fichier Markdown (`presentation.md`).
+- **(2026-04-27)** : Mise en œuvre du rendu Markdown dynamique via la bibliothèque Python `markdown`.
+- **(2026-04-27)** : Dashboard ultra-épuré (suppression des grilles d'apps) au profit d'un bouton "Catalogue Projets" ouvrant une modale Markdown dédiée.
+- **(2026-04-27)** : Réorganisation finale du Header (badge Niveau à l'extrême droite) et du Hero (Email au-dessus du titre).
 
 *Dernière mise à jour : 27/04/2026*
 

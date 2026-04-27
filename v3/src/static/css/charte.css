@@ -15,8 +15,19 @@ body {
   background: #050705;
   color: #e8ffe8;
   font-family: 'Space Grotesk', system-ui, sans-serif;
-  font-size: 15px;
+  font-size: 24px; /* Originally 15px, adjusted to 24px for readability x2-ish */
   line-height: 1.6;
+}
+
+/* Hide scrollbars globally on main window */
+html, body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+html::-webkit-scrollbar, 
+body::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
 }
 
 /* ── Tokens CSS ── */
@@ -78,12 +89,26 @@ body::after {
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(12px);
   padding: 12px 80px;
-  z-index: 100;
+  z-index: 1000;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 40px;
   overflow-x: auto;
+}
+
+@media (max-width: 1024px) {
+  .sidenav {
+    padding: 12px 40px;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidenav {
+    padding: 12px 20px;
+    gap: 12px;
+  }
 }
 
 .sidenav-logo {
@@ -110,15 +135,15 @@ body::after {
 .sidenav-logo-name {
   font-family: var(--display);
   font-weight: 900;
-  font-size: 12px;
+  font-size: 24px;
   letter-spacing: 0.06em;
   color: var(--text);
-  margin-right: 6px;
+  margin-right: 12px;
 }
 
 .sidenav-logo-sub {
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 14px;
   letter-spacing: 0.2em;
   color: var(--mute);
   margin-top: 0;
@@ -149,15 +174,15 @@ body::after {
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 8px;
+  gap: 12px;
+  padding: 8px 16px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 18px;
   font-weight: 500;
   letter-spacing: 0.06em;
   color: var(--mute);
   text-decoration: none;
-  border-radius: 2px;
+  border-radius: 4px;
   transition: background 0.12s, color 0.12s;
   cursor: pointer;
   white-space: nowrap;
@@ -191,7 +216,19 @@ body::after {
 /* ── Section ── */
 .section {
   border-bottom: 1px solid var(--line);
-  padding: 72px 80px 64px;
+  padding: 120px 80px 64px; /* Added top padding to account for fixed sidenav */
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding: 100px 40px 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 80px 20px 32px;
+  }
 }
 
 .section:last-child {
@@ -200,15 +237,15 @@ body::after {
 
 .section-eyebrow {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 18px;
   font-weight: 600;
   letter-spacing: 0.3em;
   color: var(--neon);
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 
 .section-eyebrow::before {
@@ -223,20 +260,20 @@ body::after {
 .section-title {
   font-family: var(--display);
   font-weight: 900;
-  font-size: 38px;
+  font-size: 64px; /* Originally 38px, doubled to 76px but adjusted to 64px for better fit */
   letter-spacing: -0.01em;
   color: var(--text);
   line-height: 1.1;
-  margin-bottom: 12px;
+  margin-bottom: 24px;
 }
 
 .section-desc {
   font-family: var(--body);
-  font-size: 15px;
+  font-size: 24px;
   color: var(--mute);
-  max-width: 620px;
+  max-width: 800px;
   line-height: 1.65;
-  margin-bottom: 48px;
+  margin-bottom: 72px;
 }
 
 /* ── Cover / Hero ── */
@@ -245,9 +282,21 @@ body::after {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 80px;
+  padding: 120px 80px 80px;
   position: relative;
   overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .cover {
+    padding: 100px 40px 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cover {
+    padding: 80px 20px 40px;
+  }
 }
 
 .cover-glow {
@@ -277,6 +326,19 @@ body::after {
   color: var(--neon);
   margin-bottom: 16px;
   text-shadow: 0 0 32px var(--neon-glow);
+  line-height: 1;
+}
+
+@media (max-width: 1024px) {
+  .cover-logo {
+    font-size: 72px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cover-logo {
+    font-size: 48px;
+  }
 }
 
 .cover-subtitle {
@@ -303,11 +365,11 @@ body::after {
 /* ── Boutons ── */
 .btn {
   display: inline-block;
-  padding: 14px 20px;
+  padding: 24px 36px;
   border: none;
   border-radius: 0;
   font-family: var(--display);
-  font-size: 14px;
+  font-size: 24px;
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -316,7 +378,7 @@ body::after {
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
 }
 
 .btn-primary {
@@ -385,11 +447,11 @@ body::after {
   color: var(--neon);
   border: 1px solid var(--line);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 20px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 5px 11px;
+  padding: 10px 22px;
   border-radius: 0;
 }
 
@@ -444,7 +506,7 @@ body::after {
 .input-field-prefix {
   color: var(--neon);
   font-family: var(--mono);
-  font-size: 14px;
+  font-size: 28px;
   flex-shrink: 0;
 }
 
@@ -453,7 +515,7 @@ body::after {
   border: none;
   color: var(--text);
   font-family: var(--body);
-  font-size: 14px;
+  font-size: 28px;
   flex: 1;
   outline: none;
 }
@@ -475,21 +537,21 @@ body::after {
 .form-label {
   display: block;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 20px;
   font-weight: 600;
   letter-spacing: 0.08em;
   color: var(--mute);
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 /* ── Flash messages ── */
 .alert {
-  padding: 14px 18px;
+  padding: 24px 32px;
   border-radius: 0;
   font-family: var(--body);
-  font-size: 14px;
-  margin-bottom: 16px;
+  font-size: 24px;
+  margin-bottom: 32px;
 }
 
 .alert-error {
@@ -525,24 +587,24 @@ body::after {
 .form-box-title {
   font-family: var(--display);
   font-weight: 900;
-  font-size: 28px;
+  font-size: 56px;
   color: var(--text);
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .form-box-desc {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 20px;
   color: var(--mute);
   letter-spacing: 0.08em;
-  margin-bottom: 32px;
+  margin-bottom: 48px;
 }
 
 .form-box-footer {
-  margin-top: 24px;
+  margin-top: 48px;
   text-align: center;
   font-family: var(--body);
-  font-size: 13px;
+  font-size: 24px;
 }
 
 .form-box-footer a {
@@ -590,18 +652,18 @@ table {
   width: 100%;
   border-collapse: collapse;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 22px;
 }
 
 th {
-  font-size: 9px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.25em;
   color: var(--dim);
   text-transform: uppercase;
   background: rgba(0,0,0,0.3);
   border-bottom: 1px solid var(--line);
-  padding: 12px 16px;
+  padding: 16px 24px;
   text-align: left;
 }
 
@@ -652,40 +714,257 @@ td.label {
   padding-bottom: 16px;
 }
 
-/* ── Responsive ── */
-@media (max-width: 900px) {
-  .sidenav {
-    width: 180px;
-  }
-
-  .main {
-    margin-left: 180px;
-  }
-
-  .section {
-    padding: 48px 40px 40px;
-  }
+/* ── Responsive Utils ── */
+.hide-mobile {
+  display: block;
 }
 
-@media (max-width: 600px) {
-  .sidenav {
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+  
+  .sidenav-logo-name {
+    font-size: 10px;
+  }
+  
+  .sidenav-logo-sub {
     display: none;
   }
-
-  .main {
-    margin-left: 0;
-  }
-
-  .section {
-    padding: 32px 20px 24px;
-  }
-
-  .form-box {
-    max-width: 100%;
-  }
-
-  .section-title {
-    font-size: 24px;
+  
+  .nav-item {
+    font-size: 9px;
+    padding: 4px 6px;
   }
 }
 
+/* ── Barres de progression ── */
+.progress-bar {
+  background: var(--line);
+  height: 6px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  background: var(--neon);
+  height: 100%;
+  width: 0;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px var(--neon-glow);
+}
+
+/* ── Système de Modales ── */
+.app-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 7, 5, 0.9);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.app-modal-window {
+  width: 100%;
+  max-width: 1000px;
+  height: 85vh;
+  background: var(--bg);
+  border: 1px solid var(--neon);
+  box-shadow: 0 0 40px var(--neon-glow);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+}
+
+.app-modal-header {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 255, 136, 0.04);
+}
+
+.app-modal-title {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--neon);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.app-modal-close {
+  background: transparent;
+  border: 1px solid var(--dim);
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 14px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.app-modal-close:hover {
+  border-color: var(--red);
+  color: var(--red);
+  box-shadow: 0 0 10px rgba(255, 69, 69, 0.3);
+}
+
+.app-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 40px;
+  font-family: var(--body);
+}
+
+/* Show scrollbar specifically for modal body */
+body .app-modal-body {
+  overflow-y: auto !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: var(--line-s) transparent !important;
+}
+
+body .app-modal-body::-webkit-scrollbar {
+  display: block !important;
+  width: 8px !important;
+}
+
+body .app-modal-body::-webkit-scrollbar-track {
+  background: rgba(0, 255, 136, 0.05) !important;
+}
+
+body .app-modal-body::-webkit-scrollbar-thumb {
+  background: var(--line-s) !important;
+  border: 2px solid var(--bg) !important;
+  border-radius: 10px !important;
+}
+
+body .app-modal-body::-webkit-scrollbar-thumb:hover {
+  background: var(--neon) !important;
+}
+
+.app-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ── Badge de Niveau ── */
+.level-badge {
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid var(--neon);
+  padding: 8px 16px;
+  color: var(--neon);
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Markdown Content Styling ── */
+.markdown-body {
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-family: var(--body);
+  color: var(--text);
+}
+
+.markdown-body h1 {
+  font-family: var(--display);
+  color: var(--neon);
+  margin-bottom: 24px;
+  font-size: 28px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-left: 4px solid var(--neon);
+  padding-left: 20px;
+}
+
+.markdown-body h2 {
+  font-family: var(--display);
+  color: var(--neon);
+  margin-bottom: 20px;
+  margin-top: 40px;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+.markdown-body h3 {
+  font-family: var(--display);
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 12px;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.markdown-body h3::before {
+  content: '#';
+  color: var(--neon);
+}
+
+.markdown-body p {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.markdown-body strong {
+  color: var(--neon);
+}
+
+.markdown-body ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 24px;
+}
+
+.markdown-body li {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--mute);
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.markdown-body li::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  color: var(--neon);
+}
+
+.markdown-body hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line-s), transparent);
+  margin: 40px 0;
+}
+
+.markdown-body a {
+  color: var(--neon);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+  transition: all 0.3s ease;
+}
+
+.markdown-body a:hover {
+  border-bottom: 1px solid var(--neon);
+  text-shadow: 0 0 10px var(--neon);
+}
