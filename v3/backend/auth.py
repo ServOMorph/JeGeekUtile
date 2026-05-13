@@ -24,7 +24,7 @@ def admin_required(f):
     def decorated_function(*args, **kwargs):
         if 'user_id' not in session:
             return jsonify({'error': 'Unauthorized'}), 401
-        user = User.query.get(session['user_id'])
+        user = db.session.get(User, session['user_id'])
         if not user or user.role != 'admin':
             return jsonify({'error': 'Forbidden'}), 403
         return f(*args, **kwargs)
@@ -166,14 +166,13 @@ def verify_token(token):
 
     if reset.is_valid():
         return jsonify({'valid': True, 'user_email': reset.user.email}), 200
-    else:
-        return jsonify({'valid': False, 'error': 'Token expiré ou déjà utilisé'}), 410
+    return jsonify({'valid': False, 'error': 'Token expiré ou déjà utilisé'}), 410
 
 
 @auth_bp.route('/me', methods=['GET'])
 @login_required
 def get_current_user():
-    user = User.query.get(session['user_id'])
+    user = db.session.get(User, session['user_id'])
     if not user:
         return jsonify({'error': 'Utilisateur non trouvé'}), 404
 

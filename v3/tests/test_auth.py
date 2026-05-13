@@ -110,7 +110,7 @@ class TestLogin:
             'email': 'test@example.com',
             'password': 'SecurePassword123'
         })
-        updated_user = User.query.get(auth_user.id)
+        updated_user = db.session.get(User, auth_user.id)
         assert updated_user.last_login is not None
         assert updated_user.last_login > (old_login or datetime.min)
 
@@ -195,7 +195,7 @@ class TestPasswordReset:
         reset_after = PasswordReset.query.filter_by(token=reset.token).first()
         assert reset_after.used
 
-        user_after = User.query.get(auth_user.id)
+        user_after = db.session.get(User, auth_user.id)
         assert user_after.check_password('NewPassword123')
 
     def test_confirm_reset_invalid_token(self, client):
@@ -345,7 +345,7 @@ class TestPasswordResetFlow10Steps:
         assert response.status_code == 200
 
         step8_9 = "Vérifier que password_hash est changé et token marqué used"
-        user_updated = User.query.get(auth_user.id)
+        user_updated = db.session.get(User, auth_user.id)
         assert user_updated.password_hash != original_password_hash
         assert user_updated.check_password('CompletelyNewPassword456')
 

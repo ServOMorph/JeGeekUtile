@@ -128,7 +128,7 @@ def reset_password(token):
 @main_bp.route('/dashboard', methods=['GET'])
 @login_required
 def dashboard():
-    user = User.query.get(session['user_id'])
+    user = db.session.get(User, session['user_id'])
     if not user:
         session.clear()
         return redirect(url_for('main.login'))

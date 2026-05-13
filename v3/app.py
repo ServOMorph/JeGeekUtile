@@ -86,7 +86,8 @@ def create_app(config_name=None):
 
     with app.app_context():
         db.create_all()
-        _create_test_users()
+        if not app.testing:
+            _create_test_users()
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(main_bp)
@@ -112,7 +113,7 @@ def create_app(config_name=None):
         from flask import session
         user_id = session.get('user_id')
         if user_id:
-            user = User.query.get(user_id)
+            user = db.session.get(User, user_id)
             if user:
                 # Logic for progression (placeholder for now)
                 # In Phase 8 we will implement real tracking

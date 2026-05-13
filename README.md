@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/github/license/ServOMorph/JeGeekUtile?color=2d5016" alt="Licence MIT"/>
   <img src="https://img.shields.io/badge/tests-100%25-brightgreen" alt="Tests 100%"/>
   <img src="https://img.shields.io/badge/python-3.8+-blue" alt="Python 3.8+"/>
-  <img src="https://img.shields.io/badge/version-3.0--dev-informational" alt="Version 3.0-dev"/>
+  <img src="https://img.shields.io/badge/version-3.0.2-informational" alt="Version 3.0.2"/>
   <img src="https://img.shields.io/badge/statut-en--developpement-orange" alt="En développement"/>
   <img src="https://img.shields.io/badge/pixels--blancs-%3C5%25-2d5016" alt="Eco-responsable"/>
 </p>
@@ -15,7 +15,7 @@
 
 **La technologie au service de l'humain — pas l'inverse.**
 
-Boîte à outils open source pour associations : site web Flask complet (V3 avec Dashboard épuré), agents IA Claude Code orchestrés, catalogue de projets Markdown, et applications satellites. Éco-responsable par conception, traçable, auto-suffisant. Conçu par et pour des bénévoles qui veulent que la tech reste un outil, pas une fin.
+Boîte à outils open source pour associations : site web Flask complet (V3 avec dashboard responsive), agents IA Claude Code orchestrés, catalogue de projets Markdown, et applications satellites. Éco-responsable par conception, traçable, auto-suffisant. Conçu par et pour des bénévoles qui veulent que la tech reste un outil, pas une fin.
 
 ---
 
@@ -267,7 +267,7 @@ Template HTML/JS/CSS réutilisable pour toutes les nouvelles applis JGU, conform
 python tests/runner.py
 ```
 
-Dernière session (2026-02-25) : **100% — 19/19 tests réussis** (6 agents couverts)
+Validation V3 (2026-05-13) : **74/74 tests réussis — 91.67% de coverage**
 
 Seuil de réussite : **80%**
 
@@ -443,6 +443,6 @@ MIT — voir [LICENSE](LICENSE)
 
 ---
 
-**Version :** 3.0 (dev)
-**Dernière mise à jour :** 27/04/2026
+**Version :** 3.0.2
+**Dernière mise à jour :** 13/05/2026
 **Statut :** En développement

@@ -1,6 +1,6 @@
 {
   "name": "jegeekutile",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "JeGeekUtile - Tableau de bord personnel modulaire avec applications installables",
   "main": "v3/app.py",
   "repository": "https://github.com/ServOMorph/JeGeekUtile",

@@ -2,6 +2,23 @@
 
 Tous les changements notables de ce projet sont documentés dans ce fichier.
 
+## [3.0.2] - 2026-05-13
+
+### Added
+
+- Tests dédiés pour les routes `v3/backend/apps.py` : catalogue, installation, désinstallation, cas d'erreur et rollback.
+
+### Changed
+
+- Dashboard V3 rendu pleinement responsive avec simplification du layout hero et ajustements de navigation mobile.
+- Validation V3 stabilisée avec isolation correcte des comptes de test en mode `testing`.
+
+### Fixed
+
+- Suppression des collisions `UNIQUE constraint failed: users.email` dans la suite V3.
+- Remplacement des usages legacy `Query.get()` par `db.session.get()` dans le code V3 et les tests associés.
+- Couverture V3 rétablie au-dessus du seuil requis avec `74` tests passés et `91.67%` de coverage.
+
 ## [3.0.1] - 2026-05-13
 
 ### Added

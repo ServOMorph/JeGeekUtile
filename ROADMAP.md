@@ -87,12 +87,12 @@ Ce fichier centralise la progression globale du projet JeGeekUtile.
 - [x] **Tests pytest 52/52 passés, coverage 91% (seuil 80%)**
 - [x] Config locale (aucun secret commité, .gitignore strict)
 
-## 🏃 Phase 10 : Charte Graphique + Agencement UI (EN COURS)
+## ✅ Phase 10 : Charte Graphique + Agencement UI (COMPLÉTÉE)
 - [x] **Intégration complète charte graphique V3**
 - [x] **Respect strict agencement référence V3**
 - [x] Navigation horizontale conforme
 - [x] Responsive grid layout
-- [ ] **Optimisation Responsiveness Totale (Mobile/Tablet/Desktop)**
+- [x] **Optimisation Responsiveness Totale (Mobile/Tablet/Desktop)**
 
 ## 📅 Phase 11 : Tests & Optimisation
 - [x] **Coverage global ≥ 85%**
@@ -134,6 +134,7 @@ Ce fichier centralise la progression globale du projet JeGeekUtile.
 
 - **(2026-05-13)** : Lancement du module ANTISPAMS — analyse locale d'emails IMAP Free.fr, scoring RGPD heuristique, plaidoyer MD/JSON, port 8020, tests >80%. Phase marquée URGENT.
 - **(2026-05-13)** : Finalisation ANTISPAMS — 52 tests passés (coverage 91%), module complet opérationnel, documentation, CHANGELOG créé, version 3.0.1.
+- **(2026-05-13)** : Finalisation responsive du dashboard V3 — hero refactorisé, navigation mobile resserrée, suppression des largeurs figées et des débordements principaux sur mobile/tablette/desktop.
+- **(2026-05-13)** : Validation complète du socle V3 — isolation des tests corrigée, couverture apps ajoutée, migrations `Query.get()` vers `db.session.get()`, suite `pytest v3/tests -q` validée à 74 tests et 91.67% de coverage.
 
 *Dernière mise à jour : 13/05/2026*
-
