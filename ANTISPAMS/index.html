@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AntiSpams — JeGeekUtile</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>ANTISPAMS — Analyse RGPD Emails</h1>
+      <div id="stats-header">
+        <div class="stat-item">
+          <span class="stat-value" id="stat-total">—</span>
+          <span class="stat-label">Emails</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="stat-avg">—</span>
+          <span class="stat-label">Score Moy.</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="stat-haut-risque">—</span>
+          <span class="stat-label">Haut Risque</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="stat-rapports">—</span>
+          <span class="stat-label">Rapports</span>
+        </div>
+      </div>
+    </header>
+
+    <nav>
+      <button data-view="liste" class="active">Liste</button>
+      <button data-view="detail">Analyse</button>
+      <button data-view="rapports">Rapports</button>
+      <button data-view="config">Config</button>
+    </nav>
+
+    <main id="view"></main>
+
+    <footer>
+      <span>@Je Geek Utile — <span id="footer-date"></span> — AntiSpams v1.0</span>
+    </footer>
+
+    <div id="notification" class="notification hidden"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

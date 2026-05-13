@@ -1,0 +1,16 @@
+{
+  "imap": {
+    "host": "imap.free.fr",
+    "port": 993,
+    "ssl": true,
+    "user": "VOTRE_ADRESSE@free.fr",
+    "password": "VOTRE_MOT_DE_PASSE"
+  },
+  "server": {
+    "port": 8020
+  },
+  "scoring": {
+    "seuil_haut_risque": 60,
+    "seuil_risque_modere": 30
+  }
+}

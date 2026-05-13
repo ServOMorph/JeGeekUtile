@@ -77,6 +77,16 @@ Ce fichier centralise la progression globale du projet JeGeekUtile.
 - [ ] Logs modifications (audit trail)
 - [ ] Reset MDP utilisateur par admin
 
+## ✅ Phase ANTISPAMS : Module Analyse Emails (COMPLÉTÉE)
+- [x] **Interface UI mode sombre (port 8020) opérationnelle**
+- [x] Connexion IMAP Free.fr (imap.free.fr:993 SSL) lecture seule
+- [x] Scoring risque 0-100 (heuristique pure : tracking, opt-out, RGPD)
+- [x] Boutons [Analyser] [Générer Rapport] [Anonymiser]
+- [x] Génération plaidoyer Markdown + JSON (sans envoi auto)
+- [x] Validation humaine obligatoire avant export
+- [x] **Tests pytest 52/52 passés, coverage 91% (seuil 80%)**
+- [x] Config locale (aucun secret commité, .gitignore strict)
+
 ## 🏃 Phase 10 : Charte Graphique + Agencement UI (EN COURS)
 - [x] **Intégration complète charte graphique V3**
 - [x] **Respect strict agencement référence V3**
@@ -122,5 +132,8 @@ Ce fichier centralise la progression globale du projet JeGeekUtile.
 - **(2026-04-27)** : Dashboard ultra-épuré (suppression des grilles d'apps) au profit d'un bouton "Catalogue Projets" ouvrant une modale Markdown dédiée.
 - **(2026-04-27)** : Réorganisation finale du Header (badge Niveau à l'extrême droite) et du Hero (Email au-dessus du titre).
 
-*Dernière mise à jour : 27/04/2026*
+- **(2026-05-13)** : Lancement du module ANTISPAMS — analyse locale d'emails IMAP Free.fr, scoring RGPD heuristique, plaidoyer MD/JSON, port 8020, tests >80%. Phase marquée URGENT.
+- **(2026-05-13)** : Finalisation ANTISPAMS — 52 tests passés (coverage 91%), module complet opérationnel, documentation, CHANGELOG créé, version 3.0.1.
+
+*Dernière mise à jour : 13/05/2026*
 

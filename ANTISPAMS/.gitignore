@@ -1,0 +1,13 @@
+donnees/config.json
+donnees/rapports/
+__pycache__/
+core/__pycache__/
+tests/__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/

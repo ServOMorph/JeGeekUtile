@@ -194,8 +194,8 @@
 {% endblock %}
 
 {% block content %}
-<section class="dashboard-hero" style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-height: 300px;">
-  <div style="display: flex; flex-direction: column; align-items: flex-start;">
+<section class="dashboard-hero" style="display: grid; grid-template-columns: 1fr 700px; gap: 48px; align-items: flex-start; min-height: 550px; padding: 150px 80px 40px;">
+  <div style="display: flex; flex-direction: column; align-items: flex-start; padding-top: 20px;">
     <div class="dashboard-user-info" style="position: static; margin-bottom: 8px; align-items: flex-start;">
       <p class="user-email-neon">
         {{ user.email }}
@@ -208,29 +208,23 @@
       Future association loi 1901
     </p>
   </div>
+
+  <!-- DROITE: INFO (CAROUSEL) - POSITIONED LOWER -->
+  <div style="width: 700px; height: 550px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; position: relative; margin-top: 0;">
+    <img id="info-image" src="/assets/info1.png" alt="Info" style="width: 100%; height: 100%; object-fit: contain; display: block; opacity: 0.95; transition: opacity 0.3s ease;">
+  </div>
 </section>
 
-<div class="dashboard-grid" style="margin-top: 48px;">
+<div class="dashboard-grid" style="margin-top: -252px; grid-template-columns: 1fr;">
   
   <!-- GAUCHE: PROJETS (BOUTON) -->
   <div style="display: flex; flex-direction: column; gap: 48px;">
     <div>
       <div class="section-eyebrow" style="margin-bottom: 24px;">PROJETS EN COURS DE DÉVELOPPEMENT</div>
       <div style="margin-bottom: 60px;">
-        <button class="btn btn-primary" onclick="openProjects()" style="font-size: 14px; padding: 16px 32px; letter-spacing: 0.1em; width: 100%; text-align: left;">
+        <button class="btn btn-primary" onclick="openProjects()" style="font-size: 14px; padding: 16px 32px; letter-spacing: 0.1em; width: auto;">
           DÉCOUVRIR LES PROJETS & REJOINDRE LE DÉVELOPPEMENT
         </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- DROITE: INFO (CAROUSEL) -->
-  <div style="display: flex; flex-direction: column; gap: 24px;">
-    <div class="section-eyebrow" style="margin-bottom: 0px;">INFOS & RESSOURCES</div>
-    <div style="flex: 1; min-height: 400px; background: var(--bg-card); border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px; overflow: hidden; position: relative;">
-      <img id="info-image" src="/assets/info1.png" alt="Info" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.8; transition: opacity 0.3s ease;">
-      <div style="position: absolute; bottom: 16px; right: 16px; font-family: var(--mono); font-size: 18px; color: var(--neon); background: rgba(5,7,5,0.85); padding: 8px 16px; border: 1px solid var(--line);">
-        <span id="info-counter">1/20</span>
       </div>
     </div>
   </div>
@@ -249,7 +243,6 @@ let currentInfoIndex = 0;
 
 function rotateInfoImage() {
   const img = document.getElementById('info-image');
-  const counter = document.getElementById('info-counter');
 
   if (img && infoImages.length > 0) {
     currentInfoIndex = (currentInfoIndex + 1) % infoImages.length;
@@ -257,12 +250,11 @@ function rotateInfoImage() {
     img.style.opacity = '0';
     setTimeout(() => {
       img.src = `/assets/${nextImage}`;
-      img.onload = () => { img.style.opacity = '0.8'; };
+      img.onload = () => { img.style.opacity = '0.95'; };
       img.onerror = function() {
         console.warn(`Image not found: ${nextImage}`);
         rotateInfoImage();
       };
-      if (counter) counter.textContent = `${currentInfoIndex + 1}/${infoImages.length}`;
     }, 300);
   }
 }
