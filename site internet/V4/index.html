@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VibeCode Sessions — Le développeur de demain | JeGeekUtile</title>
+  <meta name="description"
+    content="Rendez-vous hebdomadaire pour apprendre le vibe coding entre étudiants en informatique. Le développeur de demain sait vibecoder ET comprendre le code.">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg:        #050705;
+      --bg-elev:   #0b0f0c;
+      --bg-card:   #0f1411;
+      --line:      rgba(0,255,136,0.14);
+      --line-s:    rgba(0,255,136,0.35);
+      --neon:      #00ff88;
+      --neon-dim:  #00c46a;
+      --neon-glow: rgba(0,255,136,0.4);
+      --magenta:   #ff2d95;
+      --cyan:      #00e0ff;
+      --amber:     #ffb020;
+      --red:       #ff4545;
+      --text:      #e8ffe8;
+      --mute:      #7a8a7e;
+      --dim:       #4a5a4e;
+      --display:   'Orbitron', sans-serif;
+      --mono:      'JetBrains Mono', ui-monospace, monospace;
+      --body:      'Space Grotesk', system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 18px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    html, body { scrollbar-width: none; -ms-overflow-style: none; }
+    html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg,
+        rgba(0,255,136,0.022) 0px, rgba(0,255,136,0.022) 1px,
+        transparent 1px, transparent 3px);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%);
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* ── Nav ── */
+    .sidenav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(5,7,5,0.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+      padding: 14px 80px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .sidenav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-right: 1px solid var(--line);
+      padding-right: 40px;
+      flex-shrink: 0;
+    }
+
+    .sidenav-logo-mark {
+      width: 20px; height: 20px;
+      background: var(--neon);
+      clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+      box-shadow: 0 0 12px var(--neon-glow);
+      flex-shrink: 0;
+    }
+
+    .sidenav-logo-name {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: 0.06em;
+      color: var(--text);
+    }
+
+    .sidenav-logo-sub {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--mute);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .nav-cta { padding: 10px 18px; flex-shrink: 0; }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--mute);
+      text-decoration: none;
+      transition: background 0.12s, color 0.12s;
+    }
+
+    .nav-item:hover { background: rgba(0,255,136,0.06); color: var(--text); }
+    .nav-item .dot { width: 4px; height: 4px; border-radius: 50%; background: currentColor; }
+
+    @media (max-width: 1200px) {
+      .sidenav { padding: 14px 40px; gap: 24px; }
+      .nav-item { padding: 8px 12px; font-size: 13px; }
+      .nav-links { gap: 2px; }
+    }
+
+    @media (max-width: 1024px) {
+      .nav-links { display: none; }
+      .nav-cta { margin-left: auto; }
+    }
+
+    @media (max-width: 900px) {
+      .sidenav { padding: 12px 20px; gap: 16px; }
+      .sidenav-logo { padding-right: 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .sidenav-logo-sub { display: none; }
+      .sidenav-logo-name { font-size: 17px; }
+      .nav-cta { padding: 9px 14px; font-size: 12px; }
+    }
+
+    /* ── Boutons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 30px;
+      font-family: var(--display);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: box-shadow 0.12s, background 0.12s;
+    }
+
+    .btn-primary {
+      background: var(--neon);
+      color: #000;
+      clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+      box-shadow: 0 0 28px var(--neon-glow);
+    }
+
+    .btn-primary:hover { box-shadow: 0 0 44px var(--neon-glow); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--neon);
+      border: 1px solid var(--line-s);
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: none;
+    }
+
+    .btn-ghost:hover { background: rgba(0,255,136,0.08); }
+
+    /* ── Chips ── */
+    .chip {
+      display: inline-block;
+      background: rgba(0,255,136,0.08);
+      color: var(--neon);
+      border: 1px solid var(--line);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 8px 18px;
+    }
+
+    .chip-magenta { background: rgba(255,45,149,0.08); color: var(--magenta); border-color: rgba(255,45,149,0.3); }
+    .chip-cyan    { background: rgba(0,224,255,0.08); color: var(--cyan); border-color: rgba(0,224,255,0.3); }
+    .chip-amber   { background: rgba(255,176,32,0.08); color: var(--amber); border-color: rgba(255,176,32,0.3); }
+
+    /* ── Sections ── */
+    .section {
+      padding: 110px 80px;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+
+    @media (max-width: 1200px) { .section { padding: 90px 48px; } }
+    @media (max-width: 900px) { .section { padding: 70px 24px; } }
+    @media (max-width: 480px) { .section { padding: 56px 18px; } }
+
+    .section-eyebrow {
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      color: var(--neon);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      width: 28px; height: 1px;
+      background: var(--neon);
+      opacity: 0.6;
+    }
+
+    .section-title {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 46px;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 900px) { .section-title { font-size: 32px; } }
+
+    .section-desc {
+      font-size: 19px;
+      color: var(--mute);
+      max-width: 760px;
+      line-height: 1.7;
+    }
+
+    /* ── Hero ── */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 140px 80px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 1200px) { .cover { padding: 130px 48px 70px; } }
+    @media (max-width: 900px) { .cover { padding: 120px 24px 60px; } }
+    @media (max-width: 480px) { .cover { padding: 104px 18px 48px; min-height: auto; } }
+
+    .cover-glow {
+      position: absolute;
+      top: 40%; left: 60%;
+      transform: translate(-50%, -50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(0,255,136,0.15), transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+    }
+
+    .cover-tags { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; position: relative; }
+
+    .cover-logo {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 84px;
+      letter-spacing: -0.02em;
+      line-height: 1.02;
+      margin-bottom: 28px;
+      position: relative;
+      max-width: 1000px;
+    }
+
+    .cover-logo .neon { color: var(--neon); text-shadow: 0 0 32px var(--neon-glow); }
+
+    @media (max-width: 900px) { .cover-logo { font-size: 46px; } }
+
+    .cover-subtitle {
+      font-size: 22px;
+      color: var(--mute);
+      margin-bottom: 48px;
+      max-width: 700px;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    @media (max-width: 900px) { .cover-subtitle { font-size: 18px; } }
+
+    .cover-cta { display: flex; gap: 18px; flex-wrap: wrap; position: relative; }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+      margin-top: 64px;
+      position: relative;
+    }
+
+    .cover-meta-item { font-family: var(--mono); font-size: 13px; color: var(--dim); }
+    .cover-meta-item strong { display: block; color: var(--neon); font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+
+    /* ── Deux compétences ── */
+    .duo-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 32px;
+      align-items: stretch;
+      margin-top: 56px;
+    }
+
+    @media (max-width: 900px) { .duo-grid { grid-template-columns: 1fr; } }
+
+    .duo-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line-s);
+      padding: 40px 34px;
+      position: relative;
+      background-image: linear-gradient(135deg, rgba(0,255,136,0.04), transparent 70%);
+    }
+
+    .duo-card.magenta { background-image: linear-gradient(135deg, rgba(255,45,149,0.05), transparent 70%); border-color: rgba(255,45,149,0.3); }
+
+    .duo-card-num {
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: var(--dim);
+      margin-bottom: 18px;
+    }
+
+    .duo-card-title {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 26px;
+      margin-bottom: 16px;
+      color: var(--neon);
+    }
+
+    .duo-card.magenta .duo-card-title { color: var(--magenta); }
+
+    .duo-card-text { color: var(--mute); font-size: 17px; line-height: 1.65; }
+
+    .duo-card-text strong { color: var(--text); }
+
+    .duo-plus {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 56px;
+      color: var(--neon);
+      text-shadow: 0 0 24px var(--neon-glow);
+    }
+
+    @media (max-width: 900px) { .duo-plus { font-size: 40px; } }
+
+    .duo-result {
+      margin-top: 48px;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 20px;
+      color: var(--text);
+      letter-spacing: 0.04em;
+    }
+
+    .duo-result .hl { color: var(--neon); font-weight: 700; }
+
+    /* ── Valeur de base : bannière ── */
+    .value-banner {
+      position: relative;
+      margin-top: 40px;
+      background: var(--bg-card);
+      border: 1px solid rgba(0,224,255,0.3);
+      background-image: linear-gradient(135deg, rgba(0,224,255,0.06), transparent 60%);
+      padding: 56px 48px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 900px) { .value-banner { padding: 36px 24px; } }
+
+    .value-banner-glow {
+      position: absolute;
+      top: -20%; right: -10%;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(0,224,255,0.14), transparent 70%);
+      filter: blur(50px);
+      pointer-events: none;
+    }
+
+    .value-banner-tag {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--cyan);
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .value-banner-title {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 38px;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    @media (max-width: 900px) { .value-banner-title { font-size: 28px; } }
+
+    .value-banner-title .cyan { color: var(--cyan); text-shadow: 0 0 28px rgba(0,224,255,0.4); }
+
+    .value-banner-text {
+      font-size: 18px;
+      color: var(--mute);
+      max-width: 720px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      position: relative;
+    }
+
+    @media (max-width: 900px) { .value-grid { grid-template-columns: 1fr; } }
+
+    .value-item {
+      background: rgba(0,224,255,0.04);
+      border: 1px solid rgba(0,224,255,0.16);
+      border-left: 3px solid var(--cyan);
+      padding: 24px 22px;
+    }
+
+    .value-item-icon {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+
+    .value-item-title {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .value-item p { color: var(--mute); font-size: 15px; line-height: 1.6; }
+
+    /* ── Programme / cards ── */
+    .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 56px;
+    }
+
+    @media (max-width: 1200px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      padding: 32px 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover { border-color: var(--line-s); transform: translateY(-4px); }
+
+    .card-icon {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--neon);
+      letter-spacing: 0.1em;
+      margin-bottom: 18px;
+    }
+
+    .card-title {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .card-text { color: var(--mute); font-size: 16px; line-height: 1.6; }
+
+    /* ── Format / rendez-vous ── */
+    .rdv {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 56px;
+    }
+
+    .rdv-item {
+      flex: 1;
+      min-width: 200px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--neon);
+      padding: 28px 26px;
+    }
+
+    .rdv-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 12px;
+    }
+
+    .rdv-value { font-family: var(--display); font-weight: 700; font-size: 24px; color: var(--text); }
+    .rdv-sub { color: var(--mute); font-size: 14px; margin-top: 8px; font-family: var(--mono); }
+
+    /* ── Étapes ── */
+    .steps { margin-top: 56px; display: flex; flex-direction: column; gap: 4px; }
+
+    .step {
+      display: flex;
+      gap: 28px;
+      padding: 28px 0;
+      border-top: 1px dashed var(--line);
+      align-items: flex-start;
+    }
+
+    .step-num {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 40px;
+      color: var(--neon);
+      opacity: 0.4;
+      flex-shrink: 0;
+      width: 80px;
+      text-shadow: 0 0 20px var(--neon-glow);
+    }
+
+    .step-body h3 { font-family: var(--display); font-weight: 700; font-size: 22px; margin-bottom: 10px; }
+    .step-body p { color: var(--mute); font-size: 17px; max-width: 640px; }
+
+    /* ── CTA final ── */
+    .cta-final {
+      text-align: center;
+      padding: 130px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-final .cover-glow { top: 50%; left: 50%; }
+
+    .cta-final h2 {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 54px;
+      margin-bottom: 24px;
+      position: relative;
+      line-height: 1.1;
+    }
+
+    @media (max-width: 900px) { .cta-final h2 { font-size: 34px; } }
+
+    .cta-final p {
+      color: var(--mute);
+      font-size: 20px;
+      max-width: 600px;
+      margin: 0 auto 48px;
+      position: relative;
+    }
+
+    .cta-final .cover-cta { justify-content: center; }
+
+    /* ── Footer ── */
+    .footer {
+      padding: 48px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--dim);
+    }
+
+    @media (max-width: 900px) { .footer { padding: 32px 24px; } }
+
+    .footer a { color: var(--mute); text-decoration: none; }
+    .footer a:hover { color: var(--neon); }
+
+    /* ── Petits écrans : ajustements globaux ── */
+    @media (max-width: 600px) {
+      body { font-size: 16px; }
+      .cover-logo { font-size: 38px; }
+      .cover-subtitle { font-size: 17px; margin-bottom: 36px; }
+      .cover-meta { gap: 28px; margin-top: 44px; }
+      .cover-cta, .cta-final .cover-cta { flex-direction: column; align-items: stretch; }
+      .btn { justify-content: center; width: 100%; }
+      .section-title { font-size: 28px; }
+      .section-desc { font-size: 17px; }
+      .duo-result { font-size: 16px; }
+      .cta-final { padding: 90px 18px; }
+      .cta-final h2 { font-size: 30px; }
+      .cta-final p { font-size: 17px; }
+      .rdv-item { min-width: 100%; }
+      .step { gap: 16px; }
+      .step-num { font-size: 30px; width: 48px; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="sidenav">
+    <div class="sidenav-logo">
+      <div class="sidenav-logo-mark"></div>
+      <div>
+        <div class="sidenav-logo-name">JeGeekUtile</div>
+        <div class="sidenav-logo-sub">VIBECODE SESSIONS</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a class="nav-item" href="#concept"><span class="dot"></span> Concept</a>
+      <a class="nav-item" href="#competences"><span class="dot"></span> Les 2 compétences</a>
+      <a class="nav-item" href="#ethique"><span class="dot"></span> IA locale</a>
+      <a class="nav-item" href="#programme"><span class="dot"></span> Programme</a>
+      <a class="nav-item" href="#orchestration"><span class="dot"></span> Multi-agents</a>
+    </div>
+    <a class="nav-item btn-ghost nav-cta" href="#rejoindre"><span class="dot"></span> Rejoindre</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="cover">
+    <div class="cover-glow"></div>
+    <div class="cover-tags">
+      <span class="chip">Étudiants en informatique</span>
+      <span class="chip chip-cyan">1 soir / semaine</span>
+      <span class="chip chip-magenta">À distance sur Discord</span>
+    </div>
+    <h1 class="cover-logo">
+      Le développeur de demain<br>
+      sera <span class="neon">double compétence</span>.
+    </h1>
+    <p class="cover-subtitle">
+      Rejoins un rendez-vous hebdomadaire, le soir, à distance sur Discord, entre étudiants en informatique.
+      On apprend ensemble le vibe coding — sans jamais oublier ce qui fait ta valeur :
+      comprendre et modifier le code.
+    </p>
+    <div class="cover-cta">
+      <a class="btn btn-primary" href="#rejoindre">Rejoins nous sur Discord &rsaquo;</a>
+      <a class="btn btn-ghost" href="#concept">Découvrir le concept</a>
+    </div>
+    <div class="cover-meta">
+      <div class="cover-meta-item"><strong>1x</strong>par semaine, le soir</div>
+      <div class="cover-meta-item"><strong>2h</strong>de pratique en groupe</div>
+      <div class="cover-meta-item"><strong>0&euro;</strong>entre étudiants</div>
+    </div>
+  </header>
+
+  <!-- CONCEPT -->
+  <section class="section" id="concept">
+    <div class="section-eyebrow">Le concept</div>
+    <h2 class="section-title">Un rendez-vous. Chaque semaine. Pour ne pas subir l'IA, mais la piloter.</h2>
+    <p class="section-desc">
+      Le vibe coding change la manière de produire du logiciel : on décrit une intention,
+      l'IA génère le code. Mais générer ne suffit pas. Celui qui ne sait que demander
+      reste dépendant. Celui qui sait aussi lire, débugger et corriger garde le contrôle.
+      Ces sessions hebdomadaires existent pour développer les deux réflexes, en pratiquant
+      sur de vrais projets, entre étudiants en informatique.
+    </p>
+  </section>
+
+  <!-- LES 2 COMPÉTENCES -->
+  <section class="section" id="competences">
+    <div class="section-eyebrow">L'équation</div>
+    <h2 class="section-title">Deux compétences, une seule personne.</h2>
+    <p class="section-desc">
+      Demain, la rareté ne sera plus de savoir coder ligne par ligne, ni seulement de savoir
+      prompter une IA. La vraie valeur, c'est de réunir les deux.
+    </p>
+
+    <div class="duo-grid">
+      <div class="duo-card">
+        <div class="duo-card-num">// COMPÉTENCE 01</div>
+        <div class="duo-card-title">Savoir vibecoder</div>
+        <p class="duo-card-text">
+          Dialoguer avec l'IA, formuler des intentions précises, itérer vite,
+          structurer un projet de bout en bout. <strong>Produire dix fois plus vite</strong>
+          en orchestrant les bons outils.
+        </p>
+      </div>
+
+      <div class="duo-plus">&plus;</div>
+
+      <div class="duo-card magenta">
+        <div class="duo-card-num">// COMPÉTENCE 02</div>
+        <div class="duo-card-title">Comprendre &amp; modifier le code</div>
+        <p class="duo-card-text">
+          Lire ce que l'IA génère, repérer une faille, refactorer, débugger,
+          garantir la qualité. <strong>C'est exactement ce que tes études t'apprennent</strong> —
+          et ce qui te rend irremplaçable.
+        </p>
+      </div>
+    </div>
+
+    <div class="duo-result">
+      <span class="hl">Vibecoder</span> sans comprendre = dépendance.
+      Comprendre sans <span class="hl">vibecoder</span> = lenteur.
+      Les deux réunis = <span class="hl">le profil que le marché s'arrachera</span>.
+    </div>
+  </section>
+
+  <!-- VALORISATION FORMATION -->
+  <section class="section">
+    <div class="section-eyebrow">Ta formation est ton avantage</div>
+    <h2 class="section-title">Tes études ne deviennent pas obsolètes. Elles deviennent ton arme.</h2>
+    <p class="section-desc">
+      Algorithmique, architecture, structures de données, débogage, lecture de code :
+      tout ce que tu apprends est précisément ce qui manque à ceux qui ne savent
+      que prompter. Ces sessions ne remplacent pas ta formation — elles la branchent
+      sur les outils d'aujourd'hui pour te transformer en développeur double compétence.
+    </p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">[ FONDATIONS ]</div>
+        <div class="card-title">Tu sais déjà lire le code</div>
+        <p class="card-text">Là où d'autres font confiance aveuglément à l'IA, tu vérifies, tu corriges, tu décides.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">[ RIGUEUR ]</div>
+        <div class="card-title">Tu sais ce qui est juste</div>
+        <p class="card-text">Complexité, sécurité, maintenabilité : ton regard technique filtre le code généré.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">[ VITESSE ]</div>
+        <div class="card-title">On ajoute le vibe coding</div>
+        <p class="card-text">On greffe les réflexes IA sur tes bases solides pour décupler ce que tu produis.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALEUR DE BASE : IA LOCALE / OLLAMA -->
+  <section class="section" id="ethique">
+    <div class="section-eyebrow">Notre valeur de base</div>
+    <div class="value-banner">
+      <div class="value-banner-glow"></div>
+      <div class="value-banner-tag">// IA LOCALE &amp; OPEN SOURCE</div>
+      <h2 class="value-banner-title">On apprend aussi à vibecoder avec des IA locales open source, via <span class="cyan">Ollama</span>.</h2>
+      <p class="value-banner-text">
+        Vibecoder ne veut pas dire tout envoyer dans le cloud. Ici, on fait aussi tourner
+        des modèles open source directement sur ta machine avec Ollama. Ce n'est pas une
+        option de fin de programme : c'est une valeur de base, dès le départ.
+      </p>
+      <div class="value-grid">
+        <div class="value-item">
+          <div class="value-item-icon">[ ÉTHIQUE ]</div>
+          <div class="value-item-title">Tes données restent chez toi</div>
+          <p>Pas de code ni de données envoyés à un service tiers. Souveraineté et confidentialité par défaut.</p>
+        </div>
+        <div class="value-item">
+          <div class="value-item-icon">[ ÉCO-RESPONSABLE ]</div>
+          <div class="value-item-title">Moins de cloud, moins d'empreinte</div>
+          <p>Un modèle local bien choisi suffit pour énormément de tâches, sans solliciter un datacenter géant.</p>
+        </div>
+        <div class="value-item">
+          <div class="value-item-icon">[ AUTONOMIE ]</div>
+          <div class="value-item-title">Tu ne dépends de personne</div>
+          <p>Pas d'abonnement obligatoire, pas de quota. Tu gardes le contrôle total de tes outils.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMME -->
+  <section class="section" id="programme">
+    <div class="section-eyebrow">Au programme</div>
+    <h2 class="section-title">Ce qu'on va faire ensemble, une fois par semaine.</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">&gt; 01</div>
+        <div class="card-title">Prompts &amp; intentions</div>
+        <p class="card-text">Apprendre à décrire ce qu'on veut pour que l'IA produise du code juste du premier coup.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&gt; 02</div>
+        <div class="card-title">Lecture critique du code</div>
+        <p class="card-text">Décortiquer ce que l'IA génère, comprendre chaque ligne, repérer ce qui cloche.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&gt; 03</div>
+        <div class="card-title">Refactor &amp; debug</div>
+        <p class="card-text">Reprendre, corriger et améliorer du code généré jusqu'à un résultat propre et maintenable.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&gt; 04</div>
+        <div class="card-title">Projets réels</div>
+        <p class="card-text">Construire de vraies petites applications de bout en bout, du prompt au déploiement.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&gt; 05</div>
+        <div class="card-title">Outils &amp; workflow</div>
+        <p class="card-text">Maîtriser GitHub, VSCode, Claude Code, Codex, Antigravity et Zcode — les 6 outils du vibecoder.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&gt; 06</div>
+        <div class="card-title">Entraide entre pairs</div>
+        <p class="card-text">On progresse en groupe : chacun partage ses trouvailles, personne ne reste bloqué.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTILS -->
+  <section class="section" id="outils">
+    <div class="section-eyebrow">L'arsenal</div>
+    <h2 class="section-title">Les outils qu'on va maîtriser.</h2>
+    <p class="section-desc">
+      Pas de théorie abstraite — on apprend sur les vrais outils du vibe coding professionnel,
+      ceux que les meilleurs développeurs utilisent aujourd'hui.
+    </p>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 48px;">
+      <div class="card" style="border-left: 3px solid var(--neon);">
+        <div class="card-icon">[ 01 ] GITHUB</div>
+        <div class="card-title">GitHub</div>
+        <p class="card-text">Versionner, collaborer, et piloter des projets entiers avec Copilot intégré directement dans les PR.</p>
+      </div>
+      <div class="card" style="border-left: 3px solid var(--neon);">
+        <div class="card-icon">[ 02 ] VSCODE</div>
+        <div class="card-title">VSCode</div>
+        <p class="card-text">L'éditeur central du workflow IA. Extensions, terminal intégré, debug et agents dans un seul espace.</p>
+      </div>
+      <div class="card" style="border-left: 3px solid var(--neon);">
+        <div class="card-icon">[ 03 ] CLAUDE CODE</div>
+        <div class="card-title">Claude Code</div>
+        <p class="card-text">L'agent IA en ligne de commande d'Anthropic. Il lit, écrit et modifie ta codebase en dialogue direct.</p>
+      </div>
+      <div class="card" style="border-left: 3px solid var(--neon);">
+        <div class="card-icon">[ 04 ] CODEX</div>
+        <div class="card-title">Codex</div>
+        <p class="card-text">L'agent cloud d'OpenAI qui exécute des tâches de développement en autonomie depuis un repo GitHub.</p>
+      </div>
+      <div class="card" style="border-left: 3px solid var(--magenta);">
+        <div class="card-icon" style="color: var(--magenta);">[ 05 ] ANTIGRAVITY</div>
+        <div class="card-title">Antigravity</div>
+        <p class="card-text">Outil de vibecoding nouvelle génération pour construire des interfaces et des apps à partir de descriptions.</p>
+      </div>
+      <div class="card" style="border-left: 3px solid var(--magenta);">
+        <div class="card-icon" style="color: var(--magenta);">[ 06 ] ZCODE</div>
+        <div class="card-title">Zcode</div>
+        <p class="card-text">Environnement de développement assisté par IA pour accélérer les cycles de code, test et déploiement.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORCHESTRATION MULTI-AGENTS -->
+  <section class="section" id="orchestration">
+    <div class="section-eyebrow">Niveau supérieur</div>
+    <h2 class="section-title">Orchestrer plusieurs agents, pas juste prompter un chatbot.</h2>
+    <p class="section-desc">
+      Le vibecoding sérieux ne se résume pas à une conversation avec une IA. C'est savoir
+      configurer un projet pour le piloter avec plusieurs agents, maîtriser le contexte
+      qu'on leur donne et minimiser les tokens. C'est ce qui sépare l'amateur du
+      développeur réellement augmenté.
+    </p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">&gt; MULTI-AGENTS</div>
+        <div class="card-title">Configurer un projet multi-agents</div>
+        <p class="card-text">Préparer une codebase pour la vibecoder avec plusieurs agents de codage différents (Claude Code, Codex, agents locaux) sans qu'ils se marchent dessus.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&gt; CONTEXTE &amp; TOKENS</div>
+        <div class="card-title">Process de gestion du contexte</div>
+        <p class="card-text">Créer des process optimisés pour donner le bon contexte au bon moment, minimiser les tokens consommés et gérer proprement le passage entre différentes conversations.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&gt; AGENTS PARALLÈLES</div>
+        <div class="card-title">Plusieurs agents, plusieurs tâches</div>
+        <p class="card-text">Créer et coordonner plusieurs agents qui travaillent en parallèle sur des tâches différentes d'un même projet, puis assembler leurs résultats.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMAT -->
+  <section class="section" id="format">
+    <div class="section-eyebrow">Le format</div>
+    <h2 class="section-title">Simple, régulier, sans pression.</h2>
+    <p class="section-desc">
+      Un créneau fixe chaque semaine pour créer une vraie habitude. Tout se passe à distance,
+      en visio sur Discord : tu te connectes et tu repars avec un projet
+      qui avance et des réflexes en plus.
+    </p>
+    <div class="rdv">
+      <div class="rdv-item">
+        <div class="rdv-label">Quand</div>
+        <div class="rdv-value">1 soir / semaine</div>
+        <div class="rdv-sub">jour fixe — à définir ensemble</div>
+      </div>
+      <div class="rdv-item">
+        <div class="rdv-label">Où</div>
+        <div class="rdv-value">À distance</div>
+        <div class="rdv-sub">en visio sur Discord</div>
+      </div>
+      <div class="rdv-item">
+        <div class="rdv-label">Durée</div>
+        <div class="rdv-value">~ 2 heures</div>
+        <div class="rdv-sub">après les cours</div>
+      </div>
+      <div class="rdv-item">
+        <div class="rdv-label">Pour qui</div>
+        <div class="rdv-value">Étudiants en informatique</div>
+        <div class="rdv-sub">tous niveaux</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ETAPES -->
+  <section class="section">
+    <div class="section-eyebrow">Comment ça marche</div>
+    <h2 class="section-title">Trois pas pour commencer.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <h3>Tu rejoins le Discord</h3>
+          <p>Un clic sur le bouton ci-dessous. Tu arrives directement dans le serveur, pas de formulaire, pas d'attente.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <h3>Tu te connectes au channel le soir J</h3>
+          <p>On se retrouve en vocal un soir par semaine. Laptop ouvert, on code ensemble — aucune préparation requise.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <h3>Tu reviens chaque semaine</h3>
+          <p>Session après session, tu construis tes deux compétences et un portfolio de projets concrets.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final" id="rejoindre">
+    <div class="cover-glow"></div>
+    <h2>Deviens le développeur<br>que demain s'arrachera.</h2>
+    <p>
+      Rejoins les VibeCode Sessions et apprends à vibecoder sans jamais perdre
+      le contrôle du code. Entre étudiants, un soir par semaine, à distance sur Discord.
+    </p>
+    <div class="cover-cta">
+      <a class="btn btn-primary" href="https://discord.gg/" target="_blank">Rejoins nous sur Discord &rsaquo;</a>
+      <a class="btn btn-ghost" href="https://github.com/ServOMorph/JeGeekUtile" target="_blank">Voir le projet</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>JeGeekUtile — VibeCode Sessions &middot; La technologie au service de l'humain</div>
+    <div>
+      <a href="mailto:servomorph14@gmail.com">Contact</a> &middot;
+      <a href="https://github.com/ServOMorph/JeGeekUtile" target="_blank">GitHub</a>
+    </div>
+  </footer>
+</body>
+
+</html>

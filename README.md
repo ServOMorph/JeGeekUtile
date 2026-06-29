@@ -15,7 +15,7 @@
 
 **La technologie au service de l'humain — pas l'inverse.**
 
-Boîte à outils open source pour associations : site web Flask complet (V3 avec dashboard responsive), agents IA Claude Code orchestrés, catalogue de projets Markdown, et applications satellites. Éco-responsable par conception, traçable, auto-suffisant. Conçu par et pour des bénévoles qui veulent que la tech reste un outil, pas une fin.
+Boîte à outils open source pour associations : site web Flask complet (V3 avec dashboard responsive), landing page V4 VibeCode Sessions, agents IA Claude Code orchestrés, catalogue de projets Markdown, et applications satellites. Éco-responsable par conception, traçable, auto-suffisant. Conçu par et pour des bénévoles qui veulent que la tech reste un outil, pas une fin.
 
 ---
 
@@ -33,7 +33,8 @@ Les associations manquent d'outils numériques adaptés — soit trop chers, soi
 
 Le projet regroupe plusieurs composants interdépendants :
 
-- **Site internet V3** — Application Flask (Dashbord ultra-épuré, rendu Markdown dynamique, BDD SQLite)
+- **Landing page V4** — Page HTML standalone VibeCode Sessions : sessions hebdomadaires de vibe coding sur Discord, ciblant les étudiants en informatique (IA locale Ollama, orchestration multi-agents)
+- **Site internet V3** — Application Flask (Dashboard ultra-épuré, rendu Markdown dynamique, BDD SQLite)
 - **Système d'agents IA** — 6 agents Claude Code orchestrés par Robert
 - **Catalogue Projets** — Gestion de contenu via fichiers Markdown (.md) pour une maintenance simplifiée
 - **Applications satellites** — auto_ia, stat_usage_ia, modele_appli
@@ -103,15 +104,18 @@ JeGeekUtile/
 ├── sessions/                             # Archives sessions tests (par date)
 │   └── {AAAA-MM-JJ}/{id}.json
 │
-├── site internet/                        # Application Flask
-│   ├── app.py                            # 100+ routes, Flask + SQLAlchemy
-│   ├── instance/jegeekutile.db           # BDD SQLite
-│   ├── static/
-│   │   ├── css/                          # style.css, theme-famicloud.css
-│   │   ├── images/                       # banners, cards, logos, membres, nav
-│   │   └── js/main.js
-│   ├── templates/                        # 25 templates Jinja2
-│   └── requirements.txt
+├── site internet/
+│   ├── V4/
+│   │   └── index.html                    # Landing page VibeCode Sessions (standalone HTML)
+│   └── V3/                               # Application Flask
+│       ├── app.py                        # 100+ routes, Flask + SQLAlchemy
+│       ├── instance/jegeekutile.db       # BDD SQLite
+│       ├── static/
+│       │   ├── css/                      # style.css, theme-famicloud.css
+│       │   ├── images/                   # banners, cards, logos, membres, nav
+│       │   └── js/main.js
+│       ├── templates/                    # 25 templates Jinja2
+│       └── requirements.txt
 │
 ├── tests/
 │   └── runner.py                         # Exécuteur tests unifié
@@ -443,6 +447,6 @@ MIT — voir [LICENSE](LICENSE)
 
 ---
 
-**Version :** 3.0.2
-**Dernière mise à jour :** 13/05/2026
+**Version :** 4.0.0
+**Dernière mise à jour :** 29/06/2026
 **Statut :** En développement

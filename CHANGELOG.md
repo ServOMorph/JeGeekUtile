@@ -2,6 +2,22 @@
 
 Tous les changements notables de ce projet sont documentés dans ce fichier.
 
+## [4.0.0] - 2026-06-29
+
+### Added
+
+- **Landing page V4 — VibeCode Sessions** : page HTML standalone ciblant les étudiants en informatique pour promouvoir des sessions hebdomadaires de vibe coding sur Discord.
+  - Charte graphique V3 embarquée inline (neon, bg sombre, Orbitron/JetBrains Mono/Space Grotesk)
+  - Section "Les 2 compétences" : vibecoding (vitesse) + compréhension du code (contrôle)
+  - Section "Valeur de base" : IA locale open source avec Ollama — éthique, éco-responsabilité, autonomie
+  - Section "Orchestration multi-agents" : gestion de contexte, minimisation tokens, agents parallèles
+  - Arsenal d'outils : GitHub, VSCode, Claude Code, Codex, Antigravity, Zcode
+  - Flux sans inscription — rejoindre Discord en 1 clic, sans formulaire
+  - Navigation responsive avec CTA Discord toujours visible sur mobile
+  - Paliers responsive : 1200px / 1024px / 900px / 600px / 480px
+
+---
+
 ## [3.0.2] - 2026-05-13
 
 ### Added
