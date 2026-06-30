@@ -2,6 +2,14 @@
 
 Tous les changements notables de ce projet sont documentés dans ce fichier.
 
+## [4.2.0] - 2026-06-30
+
+### Modifié
+- **Landing page V4 — Suppression de redondances** : sections concept et étapes supprimées, carte outil 05 simplifiée, bouton GitHub "Voir le projet" en bas de page supprimé.
+- **Landing page V4 — Textes cibles** : titre et sous-titres reformulés au présent et au futur simple pour interpeller directement les étudiants en informatique et valoriser leurs connaissances académiques.
+
+---
+
 ## [4.1.0] - 2026-06-30
 
 ### Modifié
