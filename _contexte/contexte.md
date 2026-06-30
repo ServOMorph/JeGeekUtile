@@ -4,7 +4,7 @@
 JeGeekUtile — boîte à outils open source pour associations. La technologie au service de l'humain.
 
 ## État actuel
-- V4 landing page finalisée : VibeCode Sessions, ciblant étudiants en informatique, sessions Discord hebdomadaires
+- V4 landing page affinée : Ollama intégré en 7ème outil (arsenal 3+4), section "Valeur de base" supprimée, tuile "Présence / À ton rythme" ajoutée au Format
 - V3 (Flask) stable : dashboard responsive, tests 74/74, coverage 91.67%
 - Nettoyage agents IA à faire (P1 — voir signals.md)
 - Deux éléments V4 à compléter : lien Discord réel + jour de la semaine

@@ -24,20 +24,22 @@ réf: site internet/V4/index.html — occurrences "discord.gg/" et "à définir 
 
 ---
 
-## Dernière session — 2026-06-29
+## Dernière session — 2026-06-30
 
 ### Décisions prises
-- La landing page V4 est le point d'entrée public du projet (standalone HTML, sans backend)
-- Ollama/IA locale posé comme valeur de base, pas option secondaire
-- Flux Discord pur : aucune inscription, aucun formulaire
-- Nettoyage du système agents IA reporté à la prochaine session
+- Ollama intégré comme 7ème outil dans la section "L'arsenal" (suppression de la section "Valeur de base" séparée)
+- Codex repositionné en 3ème position dans l'arsenal
+- Layout outils : grille 3+4 (3 cartes ligne 1, 4 cartes ligne 2)
+- Tuile "Présence / À ton rythme" ajoutée dans la section Format
 
 ### Livrables produits ou modifiés
-- `site internet/V4/index.html` : créé et finalisé
-- `site internet/V4/README.md` : créé
-- `CHANGELOG.md` : entrée [4.0.0] ajoutée
-- `README.md` : V4 intégrée, version bumpée à 4.0.0
-- `_contexte/signals.md` : TODO nettoyage agents ajouté
+- `site internet/V4/index.html` : refonte section outils (7 cartes, layout 3+4, Ollama intégré, section valeur de base supprimée), tuile Présence ajoutée
+
+### Hypothèses validées / invalidées
+- VALIDE : intégrer Ollama dans l'arsenal des outils plutôt qu'en section séparée
 
 ### Prochaine étape exacte
 Nettoyer le projet : supprimer AGENTS/, console-agents/, donnees/agents.json, sessions/, trace_workflow.py et commandes Claude agents. Puis mettre à jour README et CHANGELOG.
+
+### Question bloquante pour la session suivante
+Aucune

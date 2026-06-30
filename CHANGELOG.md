@@ -2,6 +2,14 @@
 
 Tous les changements notables de ce projet sont documentés dans ce fichier.
 
+## [4.1.0] - 2026-06-30
+
+### Modifié
+- **Landing page V4 — section outils** : Ollama intégré comme 7ème outil (bordure cyan), section "Valeur de base" supprimée, Codex repositionné en 3ème position, layout grille 3+4 cartes
+- **Landing page V4 — section Format** : tuile "Présence / À ton rythme" ajoutée pour réduire la pression d'assiduité
+
+---
+
 ## [4.0.0] - 2026-06-29
 
 ### Added

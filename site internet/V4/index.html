@@ -542,7 +542,7 @@
 
     .rdv-item {
       flex: 1;
-      min-width: 200px;
+      min-width: 160px;
       background: var(--bg-card);
       border: 1px solid var(--line);
       border-left: 3px solid var(--neon);
@@ -635,6 +635,27 @@
     .footer a { color: var(--mute); text-decoration: none; }
     .footer a:hover { color: var(--neon); }
 
+    /* ── Outils grid 3+4 ── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    .tools-grid .card { grid-column: span 4; }
+    .tools-grid .card:nth-child(n+4) { grid-column: span 3; }
+
+    @media (max-width: 1200px) {
+      .tools-grid { grid-template-columns: repeat(2, 1fr); }
+      .tools-grid .card,
+      .tools-grid .card:nth-child(n+4) { grid-column: span 1; }
+    }
+
+    @media (max-width: 600px) {
+      .tools-grid { grid-template-columns: 1fr; }
+    }
+
     /* ── Petits écrans : ajustements globaux ── */
     @media (max-width: 600px) {
       body { font-size: 16px; }
@@ -668,7 +689,6 @@
     <div class="nav-links">
       <a class="nav-item" href="#concept"><span class="dot"></span> Concept</a>
       <a class="nav-item" href="#competences"><span class="dot"></span> Les 2 compétences</a>
-      <a class="nav-item" href="#ethique"><span class="dot"></span> IA locale</a>
       <a class="nav-item" href="#programme"><span class="dot"></span> Programme</a>
       <a class="nav-item" href="#orchestration"><span class="dot"></span> Multi-agents</a>
     </div>
@@ -785,38 +805,6 @@
     </div>
   </section>
 
-  <!-- VALEUR DE BASE : IA LOCALE / OLLAMA -->
-  <section class="section" id="ethique">
-    <div class="section-eyebrow">Notre valeur de base</div>
-    <div class="value-banner">
-      <div class="value-banner-glow"></div>
-      <div class="value-banner-tag">// IA LOCALE &amp; OPEN SOURCE</div>
-      <h2 class="value-banner-title">On apprend aussi à vibecoder avec des IA locales open source, via <span class="cyan">Ollama</span>.</h2>
-      <p class="value-banner-text">
-        Vibecoder ne veut pas dire tout envoyer dans le cloud. Ici, on fait aussi tourner
-        des modèles open source directement sur ta machine avec Ollama. Ce n'est pas une
-        option de fin de programme : c'est une valeur de base, dès le départ.
-      </p>
-      <div class="value-grid">
-        <div class="value-item">
-          <div class="value-item-icon">[ ÉTHIQUE ]</div>
-          <div class="value-item-title">Tes données restent chez toi</div>
-          <p>Pas de code ni de données envoyés à un service tiers. Souveraineté et confidentialité par défaut.</p>
-        </div>
-        <div class="value-item">
-          <div class="value-item-icon">[ ÉCO-RESPONSABLE ]</div>
-          <div class="value-item-title">Moins de cloud, moins d'empreinte</div>
-          <p>Un modèle local bien choisi suffit pour énormément de tâches, sans solliciter un datacenter géant.</p>
-        </div>
-        <div class="value-item">
-          <div class="value-item-icon">[ AUTONOMIE ]</div>
-          <div class="value-item-title">Tu ne dépends de personne</div>
-          <p>Pas d'abonnement obligatoire, pas de quota. Tu gardes le contrôle total de tes outils.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- PROGRAMME -->
   <section class="section" id="programme">
     <div class="section-eyebrow">Au programme</div>
@@ -845,7 +833,7 @@
       <div class="card">
         <div class="card-icon">&gt; 05</div>
         <div class="card-title">Outils &amp; workflow</div>
-        <p class="card-text">Maîtriser GitHub, VSCode, Claude Code, Codex, Antigravity et Zcode — les 6 outils du vibecoder.</p>
+        <p class="card-text">Maîtriser GitHub, VSCode, Codex, Claude Code, Antigravity, Zcode et Ollama — les 7 outils du vibecoder.</p>
       </div>
       <div class="card">
         <div class="card-icon">&gt; 06</div>
@@ -863,7 +851,7 @@
       Pas de théorie abstraite — on apprend sur les vrais outils du vibe coding professionnel,
       ceux que les meilleurs développeurs utilisent aujourd'hui.
     </p>
-    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 48px;">
+    <div class="tools-grid">
       <div class="card" style="border-left: 3px solid var(--neon);">
         <div class="card-icon">[ 01 ] GITHUB</div>
         <div class="card-title">GitHub</div>
@@ -875,14 +863,14 @@
         <p class="card-text">L'éditeur central du workflow IA. Extensions, terminal intégré, debug et agents dans un seul espace.</p>
       </div>
       <div class="card" style="border-left: 3px solid var(--neon);">
-        <div class="card-icon">[ 03 ] CLAUDE CODE</div>
-        <div class="card-title">Claude Code</div>
-        <p class="card-text">L'agent IA en ligne de commande d'Anthropic. Il lit, écrit et modifie ta codebase en dialogue direct.</p>
-      </div>
-      <div class="card" style="border-left: 3px solid var(--neon);">
-        <div class="card-icon">[ 04 ] CODEX</div>
+        <div class="card-icon">[ 03 ] CODEX</div>
         <div class="card-title">Codex</div>
         <p class="card-text">L'agent cloud d'OpenAI qui exécute des tâches de développement en autonomie depuis un repo GitHub.</p>
+      </div>
+      <div class="card" style="border-left: 3px solid var(--neon);">
+        <div class="card-icon">[ 04 ] CLAUDE CODE</div>
+        <div class="card-title">Claude Code</div>
+        <p class="card-text">L'agent IA en ligne de commande d'Anthropic. Il lit, écrit et modifie ta codebase en dialogue direct.</p>
       </div>
       <div class="card" style="border-left: 3px solid var(--magenta);">
         <div class="card-icon" style="color: var(--magenta);">[ 05 ] ANTIGRAVITY</div>
@@ -893,6 +881,11 @@
         <div class="card-icon" style="color: var(--magenta);">[ 06 ] ZCODE</div>
         <div class="card-title">Zcode</div>
         <p class="card-text">Environnement de développement assisté par IA pour accélérer les cycles de code, test et déploiement.</p>
+      </div>
+      <div class="card" style="border-left: 3px solid var(--cyan);">
+        <div class="card-icon" style="color: var(--cyan);">[ 07 ] OLLAMA</div>
+        <div class="card-title">Ollama</div>
+        <p class="card-text">Fais tourner des IA open source directement sur ta machine. Tes données restent chez toi, sans cloud, sans quota.</p>
       </div>
     </div>
   </section>
@@ -955,6 +948,11 @@
         <div class="rdv-label">Pour qui</div>
         <div class="rdv-value">Étudiants en informatique</div>
         <div class="rdv-sub">tous niveaux</div>
+      </div>
+      <div class="rdv-item">
+        <div class="rdv-label">Présence</div>
+        <div class="rdv-value">À ton rythme</div>
+        <div class="rdv-sub">tu viens quand tu peux</div>
       </div>
     </div>
   </section>
