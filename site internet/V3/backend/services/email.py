@@ -3,7 +3,6 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from flask import current_app, url_for
 from backend.models import db, User, PasswordReset
-from datetime import datetime
 import logging
 
 logger = logging.getLogger(__name__)
@@ -54,7 +53,7 @@ class EmailService:
         db.session.add(reset)
         db.session.commit()
 
-        reset_url = url_for('auth.confirm_reset', token=reset.token, _external=True)
+        reset_url = url_for('main.reset_password', token=reset.token, _external=True)
 
         html_content = f"""
         <html>

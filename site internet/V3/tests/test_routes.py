@@ -4,6 +4,12 @@ from backend.models import db, User, PasswordReset
 from datetime import datetime, timedelta
 
 
+def prime_csrf(client, path='/login'):
+    client.get(path)
+    with client.session_transaction() as session:
+        return session['_csrf_token']
+
+
 @pytest.fixture
 def app():
     app = create_app('testing')
@@ -45,9 +51,11 @@ class TestIndex:
         assert '/login' in response.location
 
     def test_index_redirect_to_dashboard_authenticated(self, client, auth_user):
+        csrf_token = prime_csrf(client)
         client.post('/login', data={
             'email': 'test@example.com',
-            'password': 'SecurePassword123'
+            'password': 'SecurePassword123',
+            'csrf_token': csrf_token
         })
         response = client.get('/', follow_redirects=False)
         assert response.status_code == 302
@@ -62,40 +70,50 @@ class TestLogin:
         assert b'LOGIN' in response.data
 
     def test_login_success(self, client, auth_user):
+        csrf_token = prime_csrf(client)
         response = client.post('/login', data={
             'email': 'test@example.com',
-            'password': 'SecurePassword123'
+            'password': 'SecurePassword123',
+            'csrf_token': csrf_token
         }, follow_redirects=False)
         assert response.status_code == 302
         assert '/dashboard' in response.location
 
     def test_login_invalid_email(self, client):
+        csrf_token = prime_csrf(client)
         response = client.post('/login', data={
             'email': 'nonexistent@example.com',
-            'password': 'SomePassword123'
+            'password': 'SomePassword123',
+            'csrf_token': csrf_token
         })
         assert response.status_code == 200
         assert b'invalide' in response.data
 
     def test_login_invalid_password(self, client, auth_user):
+        csrf_token = prime_csrf(client)
         response = client.post('/login', data={
             'email': 'test@example.com',
-            'password': 'WrongPassword123'
+            'password': 'WrongPassword123',
+            'csrf_token': csrf_token
         })
         assert response.status_code == 200
         assert b'invalide' in response.data
 
     def test_login_missing_email(self, client):
+        csrf_token = prime_csrf(client)
         response = client.post('/login', data={
-            'password': 'SomePassword123'
+            'password': 'SomePassword123',
+            'csrf_token': csrf_token
         })
         assert response.status_code == 200
         assert b'LOGIN' in response.data
 
     def test_login_sets_session(self, client, auth_user):
+        csrf_token = prime_csrf(client)
         response = client.post('/login', data={
             'email': 'test@example.com',
-            'password': 'SecurePassword123'
+            'password': 'SecurePassword123',
+            'csrf_token': csrf_token
         })
         assert response.status_code == 302
 
@@ -103,9 +121,11 @@ class TestLogin:
         auth_user.is_active = False
         db.session.commit()
 
+        csrf_token = prime_csrf(client)
         response = client.post('/login', data={
             'email': 'test@example.com',
-            'password': 'SecurePassword123'
+            'password': 'SecurePassword123',
+            'csrf_token': csrf_token
         })
         assert response.status_code == 200
 
@@ -113,11 +133,14 @@ class TestLogin:
 class TestLogout:
 
     def test_logout_success(self, client, auth_user):
+        login_csrf = prime_csrf(client)
         client.post('/login', data={
             'email': 'test@example.com',
-            'password': 'SecurePassword123'
+            'password': 'SecurePassword123',
+            'csrf_token': login_csrf
         })
-        response = client.post('/logout', follow_redirects=False)
+        logout_csrf = prime_csrf(client, '/dashboard')
+        response = client.post('/logout', data={'csrf_token': logout_csrf}, follow_redirects=False)
         assert response.status_code == 302
         assert '/login' in response.location
 
@@ -134,8 +157,10 @@ class TestForgotPassword:
         assert b'RESET MDP' in response.data
 
     def test_forgot_password_valid_email(self, client, auth_user):
+        csrf_token = prime_csrf(client, '/forgot-password')
         response = client.post('/forgot-password', data={
-            'email': 'test@example.com'
+            'email': 'test@example.com',
+            'csrf_token': csrf_token
         })
         assert response.status_code == 200
         assert b'envoy' in response.data.lower() or b'lien' in response.data.lower()
@@ -144,13 +169,16 @@ class TestForgotPassword:
         assert reset is not None
 
     def test_forgot_password_nonexistent_email(self, client):
+        csrf_token = prime_csrf(client, '/forgot-password')
         response = client.post('/forgot-password', data={
-            'email': 'nonexistent@example.com'
+            'email': 'nonexistent@example.com',
+            'csrf_token': csrf_token
         })
         assert response.status_code == 200
 
     def test_forgot_password_missing_email(self, client):
-        response = client.post('/forgot-password', data={})
+        csrf_token = prime_csrf(client, '/forgot-password')
+        response = client.post('/forgot-password', data={'csrf_token': csrf_token})
         assert response.status_code == 200
 
 
@@ -187,9 +215,11 @@ class TestResetPassword:
         db.session.add(reset)
         db.session.commit()
 
+        csrf_token = prime_csrf(client, f'/reset-password/{reset.token}')
         response = client.post(f'/reset-password/{reset.token}', data={
             'password': 'NewPassword123',
-            'password_confirm': 'NewPassword123'
+            'password_confirm': 'NewPassword123',
+            'csrf_token': csrf_token
         }, follow_redirects=False)
         assert response.status_code == 302
         assert '/login' in response.location
@@ -199,9 +229,11 @@ class TestResetPassword:
         db.session.add(reset)
         db.session.commit()
 
+        csrf_token = prime_csrf(client, f'/reset-password/{reset.token}')
         response = client.post(f'/reset-password/{reset.token}', data={
             'password': 'NewPassword123',
-            'password_confirm': 'DifferentPassword456'
+            'password_confirm': 'DifferentPassword456',
+            'csrf_token': csrf_token
         })
         assert response.status_code == 200
 
@@ -210,9 +242,11 @@ class TestResetPassword:
         db.session.add(reset)
         db.session.commit()
 
+        csrf_token = prime_csrf(client, f'/reset-password/{reset.token}')
         response = client.post(f'/reset-password/{reset.token}', data={
             'password': 'weak',
-            'password_confirm': 'weak'
+            'password_confirm': 'weak',
+            'csrf_token': csrf_token
         })
         assert response.status_code == 200
 
@@ -220,9 +254,11 @@ class TestResetPassword:
 class TestDashboard:
 
     def test_dashboard_authenticated(self, client, auth_user):
+        csrf_token = prime_csrf(client)
         client.post('/login', data={
             'email': 'test@example.com',
-            'password': 'SecurePassword123'
+            'password': 'SecurePassword123',
+            'csrf_token': csrf_token
         })
         response = client.get('/dashboard')
         assert response.status_code == 200
@@ -233,9 +269,11 @@ class TestDashboard:
         assert response.status_code == 401
 
     def test_dashboard_deleted_user(self, client, auth_user):
+        csrf_token = prime_csrf(client)
         client.post('/login', data={
             'email': 'test@example.com',
-            'password': 'SecurePassword123'
+            'password': 'SecurePassword123',
+            'csrf_token': csrf_token
         })
         User.query.filter_by(id=auth_user.id).delete()
         db.session.commit()
@@ -247,9 +285,11 @@ class TestDashboard:
 class TestAdmin:
 
     def test_admin_authenticated_admin(self, client, admin_user):
+        csrf_token = prime_csrf(client)
         client.post('/login', data={
             'email': 'admin@example.com',
-            'password': 'AdminPassword123'
+            'password': 'AdminPassword123',
+            'csrf_token': csrf_token
         })
         response = client.get('/admin')
         assert response.status_code == 200
@@ -260,9 +300,11 @@ class TestAdmin:
         assert response.status_code == 401
 
     def test_admin_authenticated_non_admin(self, client, auth_user):
+        csrf_token = prime_csrf(client)
         client.post('/login', data={
             'email': 'test@example.com',
-            'password': 'SecurePassword123'
+            'password': 'SecurePassword123',
+            'csrf_token': csrf_token
         })
         response = client.get('/admin', follow_redirects=False)
         assert response.status_code == 403
@@ -275,9 +317,11 @@ class TestErrorPages:
         assert response.status_code == 404
 
     def test_403_error(self, client, auth_user):
+        csrf_token = prime_csrf(client)
         client.post('/login', data={
             'email': 'test@example.com',
-            'password': 'SecurePassword123'
+            'password': 'SecurePassword123',
+            'csrf_token': csrf_token
         })
         response = client.get('/admin')
         assert response.status_code == 403

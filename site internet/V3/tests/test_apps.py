@@ -3,6 +3,12 @@ from app import create_app
 from backend.models import db, User, App
 
 
+def set_csrf_token(client, value='test-csrf-token'):
+    with client.session_transaction() as session:
+        session['_csrf_token'] = value
+    return value
+
+
 @pytest.fixture
 def app():
     app = create_app('testing')
@@ -29,6 +35,7 @@ def auth_user(app):
 
 @pytest.fixture
 def login(client, auth_user):
+    set_csrf_token(client)
     response = client.post('/auth/login', json={
         'email': 'test@example.com',
         'password': 'SecurePassword123'
@@ -106,17 +113,17 @@ class TestAppInstall:
         assert response.status_code == 401
 
     def test_install_missing_app_id(self, client, login):
-        response = client.post('/api/apps/install', json={})
+        response = client.post('/api/apps/install', json={}, headers={'X-CSRF-Token': 'test-csrf-token'})
         assert response.status_code == 400
         assert response.get_json()['success'] is False
 
     def test_install_unknown_app(self, client, login):
-        response = client.post('/api/apps/install', json={'app_id': 999})
+        response = client.post('/api/apps/install', json={'app_id': 999}, headers={'X-CSRF-Token': 'test-csrf-token'})
         assert response.status_code == 404
         assert response.get_json()['success'] is False
 
     def test_install_success(self, client, login, auth_user, public_app):
-        response = client.post('/api/apps/install', json={'app_id': public_app.id})
+        response = client.post('/api/apps/install', json={'app_id': public_app.id}, headers={'X-CSRF-Token': 'test-csrf-token'})
         assert response.status_code == 200
         assert response.get_json()['success'] is True
 
@@ -127,7 +134,7 @@ class TestAppInstall:
         auth_user.installed_apps = [public_app.id]
         db.session.commit()
 
-        response = client.post('/api/apps/install', json={'app_id': public_app.id})
+        response = client.post('/api/apps/install', json={'app_id': public_app.id}, headers={'X-CSRF-Token': 'test-csrf-token'})
         assert response.status_code == 400
         assert response.get_json()['success'] is False
 
@@ -137,7 +144,7 @@ class TestAppInstall:
 
         monkeypatch.setattr(db.session, 'commit', fail_commit)
 
-        response = client.post('/api/apps/install', json={'app_id': public_app.id})
+        response = client.post('/api/apps/install', json={'app_id': public_app.id}, headers={'X-CSRF-Token': 'test-csrf-token'})
         assert response.status_code == 500
         assert response.get_json()['success'] is False
 
@@ -149,12 +156,12 @@ class TestAppUninstall:
         assert response.status_code == 401
 
     def test_uninstall_missing_app_id(self, client, login):
-        response = client.delete('/api/apps/uninstall', json={})
+        response = client.delete('/api/apps/uninstall', json={}, headers={'X-CSRF-Token': 'test-csrf-token'})
         assert response.status_code == 400
         assert response.get_json()['success'] is False
 
     def test_uninstall_unknown_app(self, client, login):
-        response = client.delete('/api/apps/uninstall', json={'app_id': 999})
+        response = client.delete('/api/apps/uninstall', json={'app_id': 999}, headers={'X-CSRF-Token': 'test-csrf-token'})
         assert response.status_code == 404
         assert response.get_json()['success'] is False
 
@@ -162,12 +169,12 @@ class TestAppUninstall:
         auth_user.installed_apps = [default_app.id]
         db.session.commit()
 
-        response = client.delete('/api/apps/uninstall', json={'app_id': default_app.id})
+        response = client.delete('/api/apps/uninstall', json={'app_id': default_app.id}, headers={'X-CSRF-Token': 'test-csrf-token'})
         assert response.status_code == 400
         assert response.get_json()['success'] is False
 
     def test_uninstall_not_installed(self, client, login, public_app):
-        response = client.delete('/api/apps/uninstall', json={'app_id': public_app.id})
+        response = client.delete('/api/apps/uninstall', json={'app_id': public_app.id}, headers={'X-CSRF-Token': 'test-csrf-token'})
         assert response.status_code == 400
         assert response.get_json()['success'] is False
 
@@ -175,7 +182,7 @@ class TestAppUninstall:
         auth_user.installed_apps = [public_app.id]
         db.session.commit()
 
-        response = client.delete('/api/apps/uninstall', json={'app_id': public_app.id})
+        response = client.delete('/api/apps/uninstall', json={'app_id': public_app.id}, headers={'X-CSRF-Token': 'test-csrf-token'})
         assert response.status_code == 200
         assert response.get_json()['success'] is True
 
@@ -191,6 +198,6 @@ class TestAppUninstall:
 
         monkeypatch.setattr(db.session, 'commit', fail_commit)
 
-        response = client.delete('/api/apps/uninstall', json={'app_id': public_app.id})
+        response = client.delete('/api/apps/uninstall', json={'app_id': public_app.id}, headers={'X-CSRF-Token': 'test-csrf-token'})
         assert response.status_code == 500
         assert response.get_json()['success'] is False

@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash
 from backend.models import db, User, PasswordReset, App
 from backend.auth import login_required, admin_required
+from backend.security import csrf_protect
 from backend.services.email import EmailService
 import logging
 
@@ -19,6 +20,9 @@ def index():
 @main_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        csrf_error = csrf_protect()
+        if csrf_error:
+            return csrf_error
         email = request.form.get('email', '').strip()
         password = request.form.get('password', '').strip()
 
@@ -49,8 +53,14 @@ def login():
     return render_template('login.html')
 
 
-@main_bp.route('/logout', methods=['POST', 'GET'])
+@main_bp.route('/logout', methods=['POST'])
 def logout():
+    if not session.get('user_id'):
+        return redirect(url_for('main.login'))
+
+    csrf_error = csrf_protect()
+    if csrf_error:
+        return csrf_error
     session.clear()
     flash('Déconnexion réussie', 'success')
     return redirect(url_for('main.login'))
@@ -59,6 +69,9 @@ def logout():
 @main_bp.route('/forgot-password', methods=['GET', 'POST'])
 def forgot_password():
     if request.method == 'POST':
+        csrf_error = csrf_protect()
+        if csrf_error:
+            return csrf_error
         email = request.form.get('email', '').strip()
 
         if not email:
@@ -91,6 +104,9 @@ def reset_password(token):
         return render_template('error.html', code=410, message='Token expiré'), 410
 
     if request.method == 'POST':
+        csrf_error = csrf_protect()
+        if csrf_error:
+            return csrf_error
         new_password = request.form.get('password', '').strip()
         password_confirm = request.form.get('password_confirm', '').strip()
 

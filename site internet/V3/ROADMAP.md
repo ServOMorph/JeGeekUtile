@@ -96,6 +96,13 @@ Ce fichier centralise la progression globale du projet JeGeekUtile.
 
 ## 📅 Phase 11 : Tests & Optimisation
 - [x] **Coverage global ≥ 85%**
+- [x] **Correctifs sécurité core V3**
+- [x] Corriger le lien email de reset MDP (route UI valide)
+- [x] Supprimer l'auto-création implicite des comptes de test
+- [x] Durcir les sessions/cookies de production
+- [x] Ajouter protection CSRF sur formulaires et actions sensibles
+- [x] Ajouter rate limiting sur login/reset
+- [x] Mettre en cache le rendu Markdown global
 - [ ] **Performance <2s validée**
 - [ ] Sécurité auditée
 - [ ] Déploiement staging + production

@@ -1,11 +1,15 @@
 import os
-from flask import Flask, render_template, redirect, url_for, send_from_directory
+from pathlib import Path
+
+import markdown
+from flask import Flask, redirect, url_for, send_from_directory
 from dotenv import load_dotenv
 from config import config
 from backend.models import db, User, App
 from backend.auth import auth_bp
 from backend.routes import main_bp
 from backend.apps import apps_bp
+from backend.security import get_csrf_token
 import logging
 
 load_dotenv()
@@ -77,6 +81,7 @@ def create_app(config_name=None):
         instance_relative_config=True
     )
     app.config.from_object(config[config_name])
+    _validate_runtime_config(app)
 
     os.makedirs(app.instance_path, exist_ok=True)
     os.makedirs(template_dir, exist_ok=True)
@@ -86,7 +91,7 @@ def create_app(config_name=None):
 
     with app.app_context():
         db.create_all()
-        if not app.testing:
+        if app.config.get('BOOTSTRAP_TEST_USERS'):
             _create_test_users()
 
     app.register_blueprint(auth_bp)
@@ -96,6 +101,8 @@ def create_app(config_name=None):
     setup_logging(app)
 
     bot_assets_dir = r'D:\ServOMorph\Bot ou pas Bot\UI\V3\ASSETS'
+    content_cache = {}
+
     @app.route('/apps/<path:filename>')
     def serve_apps(filename):
         apps_dir = os.path.join(base_dir, 'src', 'apps')
@@ -109,49 +116,25 @@ def create_app(config_name=None):
 
     @app.context_processor
     def inject_progression():
-        from backend.models import User
         from flask import session
         user_id = session.get('user_id')
         if user_id:
-            user = db.session.get(User, user_id)
-            if user:
-                # Logic for progression (placeholder for now)
-                # In Phase 8 we will implement real tracking
-                return {
-                    'progression': {
-                        'level': 12,
-                        'percent': 65,
-                        'geekos': 1250
-                    }
+            return {
+                'progression': {
+                    'level': 12,
+                    'percent': 65,
+                    'geekos': 1250
                 }
+            }
         return {'progression': None}
 
     @app.context_processor
     def inject_content():
-        import markdown
-        content = {}
-        
-        # Presentation
-        pres_path = os.path.join(base_dir, 'src', 'content', 'presentation.md')
-        try:
-            if os.path.exists(pres_path):
-                with open(pres_path, 'r', encoding='utf-8') as f:
-                    content['presentation_html'] = markdown.markdown(f.read(), extensions=['extra', 'admonition', 'codehilite'])
-        except Exception as e:
-            app.logger.error(f"Error loading presentation.md: {e}")
-            content['presentation_html'] = '<p>Erreur de chargement.</p>'
-
-        # Projects
-        proj_path = os.path.join(base_dir, 'src', 'content', 'projects.md')
-        try:
-            if os.path.exists(proj_path):
-                with open(proj_path, 'r', encoding='utf-8') as f:
-                    content['projects_html'] = markdown.markdown(f.read(), extensions=['extra', 'admonition', 'codehilite'])
-        except Exception as e:
-            app.logger.error(f"Error loading projects.md: {e}")
-            content['projects_html'] = '<p>Erreur de chargement.</p>'
-
-        return content
+        return {
+            'presentation_html': _render_markdown_content(app, content_cache, Path(base_dir) / 'src' / 'content' / 'presentation.md'),
+            'projects_html': _render_markdown_content(app, content_cache, Path(base_dir) / 'src' / 'content' / 'projects.md'),
+            'csrf_token': get_csrf_token(),
+        }
 
     @app.route('/')
     def index():
@@ -185,6 +168,40 @@ def setup_logging(app):
         app.logger.addHandler(file_handler)
         app.logger.setLevel(logging.INFO)
         app.logger.info('JeGeekUtile V3 startup')
+
+
+def _validate_runtime_config(app):
+    if app.config.get('TESTING'):
+        return
+
+    if app.config.get('SECRET_KEY') == 'dev-secret-key-change-in-prod':
+        app.logger.warning('SECRET_KEY par défaut détectée; remplace-la avant mise en production.')
+
+    if app.config.get('PASSWORD_RESET_SALT') == 'reset-salt-change-in-prod':
+        app.logger.warning('PASSWORD_RESET_SALT par défaut détecté; remplace-le avant mise en production.')
+
+
+def _render_markdown_content(app, cache, path):
+    cache_key = str(path)
+
+    try:
+        if not path.exists():
+            return '<p>Contenu indisponible.</p>'
+
+        mtime = path.stat().st_mtime
+        cached = cache.get(cache_key)
+        if cached and cached['mtime'] == mtime:
+            return cached['html']
+
+        html = markdown.markdown(
+            path.read_text(encoding='utf-8'),
+            extensions=['extra', 'admonition', 'codehilite']
+        )
+        cache[cache_key] = {'mtime': mtime, 'html': html}
+        return html
+    except Exception as exc:
+        app.logger.error(f'Error loading {path.name}: {exc}')
+        return '<p>Erreur de chargement.</p>'
 
 
 if __name__ == '__main__':

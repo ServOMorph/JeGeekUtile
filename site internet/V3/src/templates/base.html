@@ -10,6 +10,9 @@
 </head>
 
 <body>
+  <script>
+    window.JGU_CSRF_TOKEN = {{ csrf_token|tojson }};
+  </script>
   <nav class="sidenav">
     <div class="sidenav-logo">
       <div class="sidenav-logo-mark"></div>
@@ -46,9 +49,12 @@
       </a>
       {% endif %}
 
-      <a class="nav-item" href="{{ url_for('main.logout') }}" onclick="return confirm('Quitter ?')">
-        <span class="dot"></span> Logout
-      </a>
+      <form method="POST" action="{{ url_for('main.logout') }}" onsubmit="return confirm('Quitter ?')" style="margin: 0;">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <button type="submit" class="nav-item" style="width: 100%; text-align: left; background: none; border: 0; cursor: pointer;">
+          <span class="dot"></span> Logout
+        </button>
+      </form>
     </div>
 
     <!-- LEVEL BADGE -->

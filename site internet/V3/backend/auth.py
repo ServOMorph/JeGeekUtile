@@ -1,6 +1,7 @@
-from flask import Blueprint, request, jsonify, session, render_template, redirect, url_for, flash, current_app
+from flask import Blueprint, request, jsonify, session
 from backend.models import db, User, PasswordReset
 from backend.services.email import EmailService
+from backend.security import csrf_protect, rate_limit
 from datetime import datetime
 from functools import wraps
 import logging
@@ -32,8 +33,9 @@ def admin_required(f):
 
 
 @auth_bp.route('/register', methods=['POST'])
+@rate_limit('auth-register', 10, 300)
 def register():
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
     email = data.get('email', '').strip()
     password = data.get('password', '').strip()
 
@@ -61,8 +63,9 @@ def register():
 
 
 @auth_bp.route('/login', methods=['POST'])
+@rate_limit('auth-login', 'LOGIN_RATE_LIMIT_MAX', 'LOGIN_RATE_LIMIT_WINDOW')
 def login():
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
     email = data.get('email', '').strip()
     password = data.get('password', '').strip()
 
@@ -94,6 +97,9 @@ def login():
 @auth_bp.route('/logout', methods=['POST'])
 @login_required
 def logout():
+    csrf_error = csrf_protect()
+    if csrf_error:
+        return csrf_error
     user_id = session.get('user_id')
     session.clear()
     logger.info(f'User logged out: {user_id}')
@@ -101,8 +107,9 @@ def logout():
 
 
 @auth_bp.route('/reset_password', methods=['POST'])
+@rate_limit('auth-reset', 'RESET_RATE_LIMIT_MAX', 'RESET_RATE_LIMIT_WINDOW')
 def reset_password():
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
     email = data.get('email', '').strip()
 
     if not email:
@@ -123,8 +130,9 @@ def reset_password():
 
 
 @auth_bp.route('/confirm_reset', methods=['POST'])
+@rate_limit('auth-confirm-reset', 10, 300)
 def confirm_reset():
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
     token = data.get('token', '').strip()
     new_password = data.get('password', '').strip()
 

@@ -9,6 +9,7 @@
     <p class="form-box-desc">Connecte-toi à ton compte</p>
 
     <form method="POST" action="{{ url_for('main.login') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
       <div class="form-group">
         <label class="form-label">Email</label>
         <div class="input-field">

@@ -5,6 +5,12 @@ from app import create_app
 from backend.models import db, User, PasswordReset
 
 
+def set_csrf_token(client, value='test-csrf-token'):
+    with client.session_transaction() as session:
+        session['_csrf_token'] = value
+    return value
+
+
 @pytest.fixture
 def app():
     app = create_app('testing')
@@ -122,7 +128,8 @@ class TestLogout:
             'email': 'test@example.com',
             'password': 'SecurePassword123'
         })
-        response = client.post('/auth/logout')
+        csrf_token = set_csrf_token(client)
+        response = client.post('/auth/logout', headers={'X-CSRF-Token': csrf_token})
         assert response.status_code == 200
         assert 'réussi' in response.json['message']
 

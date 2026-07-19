@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, session
 from backend.models import db, User, App
 from backend.auth import login_required
+from backend.security import csrf_protect
 import logging
 
 logger = logging.getLogger(__name__)
@@ -18,7 +19,11 @@ def get_catalog():
 @apps_bp.route('/install', methods=['POST'])
 @login_required
 def install_app():
-    data = request.get_json()
+    csrf_error = csrf_protect()
+    if csrf_error:
+        return csrf_error
+
+    data = request.get_json(silent=True) or {}
     app_id = data.get('app_id')
 
     if not app_id:
@@ -53,7 +58,11 @@ def install_app():
 @apps_bp.route('/uninstall', methods=['DELETE'])
 @login_required
 def uninstall_app():
-    data = request.get_json()
+    csrf_error = csrf_protect()
+    if csrf_error:
+        return csrf_error
+
+    data = request.get_json(silent=True) or {}
     app_id = data.get('app_id')
 
     if not app_id:

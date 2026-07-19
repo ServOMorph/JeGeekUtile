@@ -30,3 +30,9 @@ build/
 # OS
 .DS_Store
 Thumbs.db
+
+# Tests coverage
+.coverage
+coverage.xml
+htmlcov/
+.pytest_cache/
