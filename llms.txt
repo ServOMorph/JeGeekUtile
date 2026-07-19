@@ -1,0 +1,32 @@
+# Je Geek Utile (JGU)
+
+Boîte à outils open source d'éco-conception logicielle et d'orchestration IA au service des associations loi 1901.
+
+## Informations clés
+- **Stack principale** : Python 3.8+, Flask, SQLite (SQLAlchemy), HTML5, Vanilla CSS / JavaScript, Claude Code.
+- **Dépendances** : Flask, Flask-SQLAlchemy (pour le site internet V3) ; sounddevice, watchdog, PyQt6 (pour l'application de création musicale crea_zik).
+- **Licence** : MIT (Copyright 2026 ServOMorph).
+- **Principes de conception** :
+  - **Éco-responsabilité** : Thème sombre obligatoire, zéro dépendance externe côté front, moins de 5% de pixels blancs.
+  - **Indépendance & Souveraineté** : Auto-hébergeable en 3 commandes, pas d'IA en boîte noire (détection active des hallucinations).
+  - **Modularité** : Structure multi-agents et applications satellites découplées.
+
+## Architecture
+Le projet s'organise autour de modules distincts :
+- `run.py` : Point d'entrée pour lancer le site internet principal Flask (ouvre automatiquement le navigateur).
+- `site internet/` :
+  - `V3/` : Application web Flask avec authentification, BDD SQLite, logs d'activité et tableau de bord de gestion.
+  - `V4/` : Landing page éco-conçue standalone (`index.html`) pour les sessions VibeCode.
+- `.claude/` et `AGENTS.md` : Structure d'orchestration multi-agents pour Claude Code (Robert, Halu, PromptParfait, AdminIA, ComIA, Partenaires-Intégrateur).
+- `console-agents/` : Tableau de bord web local en Vanilla JS pour configurer et superviser les sessions des agents IA.
+- `applis/` : Applications satellites :
+  - `auto_ia` : API HTTP Flask d'automatisation souris/clavier contrôlable par IA.
+  - `stat_usage_ia` : Interface de suivi pour mesurer le ratio d'usage d'IA locale vs cloud.
+  - `modele_appli` : Gabarit HTML/CSS/JS conforme à la charte éco-conçue pour créer de nouvelles applis.
+
+## Orchestration Multi-Agents (Robert)
+La hiérarchie des agents d'accompagnement est pilotée par Robert (Niveau 0) :
+- **Robert** -> Reçoit les prompts et supervise.
+- **Halu** (Niveau 1) -> Détecte les hallucinations et contradictions.
+- **PromptParfait** (Niveau 2, enfant de Halu) -> Optimise le prompt pour un traitement minimal en jetons.
+- **AdminIA, ComIA, Partenaires-Intégrateur** (Niveau 1) -> Tâches spécialisées.

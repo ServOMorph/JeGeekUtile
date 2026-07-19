@@ -443,7 +443,8 @@ Pour les bugs ou idées : ouvre une [issue](https://github.com/ServOMorph/JeGeek
 
 ## Licence
 
-MIT — voir [LICENSE](LICENSE)
+Ce projet est sous licence MIT — voir le fichier [LICENSE](LICENSE) pour plus de détails.  
+Copyright (c) 2026 ServOMorph.
 
 ---
 
