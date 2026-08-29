@@ -9,6 +9,7 @@ class LandingTests(unittest.TestCase):
     def setUp(self):
         self.index = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
         self.config = (ROOT / "netlify.toml").read_text(encoding="utf-8")
+        self.privacy = (ROOT / "site" / "confidentialite.html").read_text(encoding="utf-8")
 
     def test_netlify_publish_directory(self):
         self.assertIn('command = ""', self.config)
@@ -33,6 +34,28 @@ class LandingTests(unittest.TestCase):
         self.assertIn("Éthique", self.index)
         self.assertIn("Durabilité", self.index)
         self.assertIn("l'IA assiste le jugement humain", self.index)
+
+    def test_privacy_page_has_mandatory_information(self):
+        for mention in (
+            "Raphaël Richard",
+            "jegeekutile.rec@gmail.com",
+            "en cours de constitution",
+            "Durée de conservation",
+            "vingt-quatre mois",
+            "article 6.1.a du RGPD",
+            "Netlify, Inc.",
+            "CNIL",
+        ):
+            self.assertIn(mention, self.privacy)
+
+    def test_privacy_page_claims_no_legal_entity(self):
+        self.assertNotIn("jegeekutile.org", self.privacy)
+        self.assertNotIn("association loi 1901", self.privacy)
+        self.assertNotIn("Association Je Geek Utile", self.privacy)
+
+    def test_privacy_page_has_no_placeholder_left(self):
+        for placeholder in ("Avant toute publication", "[", "à compléter", "TODO"):
+            self.assertNotIn(placeholder, self.privacy)
 
     def test_legal_and_confirmation_pages_exist(self):
         self.assertTrue((ROOT / "site" / "merci" / "index.html").is_file())

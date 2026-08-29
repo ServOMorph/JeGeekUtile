@@ -74,7 +74,7 @@ VertIA porte une vision où les humains et les IA cohabitent de manière apaisé
 
 ### Pied de page
 
-- Porteur : Je Geek Utile, association loi 1901.
+- Porteur : Je Geek Utile, projet associatif en cours de constitution (association non encore declaree).
 - Lien ou coordonnées vers les mentions légales et la politique de confidentialité.
 - Année de publication.
 
