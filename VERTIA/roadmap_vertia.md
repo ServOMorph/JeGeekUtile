@@ -11,7 +11,7 @@ Lancer VertIA auprès de personnes intéressées par les IA locales, avec une la
 - Respect du thème sombre, de la sobriété numérique et de l'absence de dépendance non nécessaire.
 - Toute collecte de données doit préciser la finalité, le responsable et le mode de contact ; ne collecter que le minimum nécessaire.
 
-## Phase 1 — Cadrage du lancement et spécification du MVP 1 [EN COURS]
+## Phase 1 — Cadrage du lancement et spécification du MVP 1 [FAIT]
 
 - Définir les publics prioritaires, leur besoin concret et la promesse de VertIA.
 - Définir le parcours de la landing page : découverte, compréhension, réassurance, inscription d'intérêt.
@@ -21,7 +21,7 @@ Lancer VertIA auprès de personnes intéressées par les IA locales, avec une la
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 
-## Phase 2 — Landing page MVP 1 et recueil d'intérêt [TODO]
+## Phase 2 — Landing page MVP 1 et recueil d'intérêt [EN COURS]
 
 - Implémenter la landing page dans le périmètre validé et son appel à l'action principal.
 - Mettre en place le recueil d'intérêt choisi, avec les informations de confidentialité nécessaires.
