@@ -11,6 +11,7 @@ class LandingTests(unittest.TestCase):
         self.config = (ROOT / "netlify.toml").read_text(encoding="utf-8")
 
     def test_netlify_publish_directory(self):
+        self.assertIn('command = ""', self.config)
         self.assertIn('publish = "site"', self.config)
 
     def test_netlify_deployment_files_exist(self):
