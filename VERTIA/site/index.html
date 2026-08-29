@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="VertIA prépare un espace pour explorer les intelligences artificielles locales.">
+  <title>VertIA — Explorer l'IA locale</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#accueil" aria-label="VertIA, accueil">Vert<span>IA</span></a>
+    <nav aria-label="Navigation principale">
+      <a href="#projet">Le projet</a>
+      <a href="#local">Pourquoi local ?</a>
+      <a href="#participer">Être informé</a>
+    </nav>
+  </header>
+  <main id="accueil">
+    <section class="hero" aria-labelledby="titre-principal">
+      <p class="eyebrow">Un projet de Je Geek Utile</p>
+      <h1 id="titre-principal">Explorer l'IA locale,<br>sur votre ordinateur.</h1>
+      <p class="lead">VertIA prépare un espace pour comprendre et expérimenter des intelligences artificielles exécutées localement, avec une approche transparente et sobre.</p>
+      <a class="button" href="#participer">Je souhaite suivre le lancement</a>
+    </section>
+    <section id="local" class="section" aria-labelledby="titre-local">
+      <p class="eyebrow">Pourquoi une IA locale ?</p>
+      <h2 id="titre-local">Choisir en connaissance de cause.</h2>
+      <div class="cards">
+        <article><h3>Maîtrise</h3><p>Garder davantage de contrôle sur ses usages et ses données.</p></article>
+        <article><h3>Compréhension</h3><p>Identifier les possibilités et les limites selon son ordinateur.</p></article>
+        <article><h3>Pratiques ouvertes</h3><p>Découvrir des outils ouverts et des usages responsables.</p></article>
+      </div>
+      <p class="note">L'IA locale ne convient pas à tous les ordinateurs et ne garantit pas, à elle seule, une sécurité absolue.</p>
+    </section>
+    <section id="projet" class="section alternate" aria-labelledby="titre-projet">
+      <p class="eyebrow">Le projet</p>
+      <h2 id="titre-projet">Un point de départ pour apprendre et échanger.</h2>
+      <div class="project-grid">
+        <p>VertIA réunira progressivement des ressources pour débuter et des personnes intéressées par l'IA locale.</p>
+        <p>Après validation de l'intérêt, le projet pourra explorer l'aide au choix de logiciels open source et un tableau de bord local.</p>
+      </div>
+    </section>
+    <section class="section values" aria-labelledby="titre-valeurs">
+      <p class="eyebrow">Nos repères</p>
+      <h2 id="titre-valeurs">Une IA qui accompagne les humains, dans la durée.</h2>
+      <div class="cards">
+        <article><h3>Écoresponsabilité</h3><p>Privilégier la sobriété et éclairer les besoins matériels, sans encourager l'équipement inutile.</p></article>
+        <article><h3>Éthique</h3><p>Parler autant des limites et des impacts que des possibilités offertes par les outils.</p></article>
+        <article><h3>Durabilité</h3><p>Favoriser des pratiques utiles dans le temps, où l'IA assiste le jugement humain sans le remplacer.</p></article>
+      </div>
+    </section>
+    <section id="participer" class="section signup" aria-labelledby="titre-participer">
+      <p class="eyebrow">Participer au lancement</p>
+      <h2 id="titre-participer">Restez informé des prochaines étapes.</h2>
+      <p>Laissez votre adresse pour être recontacté au sujet du lancement de VertIA.</p>
+      <form name="interet-vertia" method="POST" action="/merci/" data-netlify="true" data-netlify-honeypot="website" netlify>
+        <input type="hidden" name="form-name" value="interet-vertia">
+        <p class="honeypot"><label>Ne pas remplir ce champ <input name="website" tabindex="-1" autocomplete="off"></label></p>
+        <label for="email">Adresse e-mail <span aria-hidden="true">*</span></label>
+        <input id="email" name="email" type="email" autocomplete="email" required>
+        <label for="interet">Centre d'intérêt <span class="optional">facultatif</span></label>
+        <select id="interet" name="interet">
+          <option value="">Choisir une option</option>
+          <option value="decouverte">Découvrir l'IA locale</option>
+          <option value="creatif">Usages créatifs</option>
+          <option value="technique">Usages techniques</option>
+          <option value="vie-privee">Vie privée</option>
+          <option value="autre">Autre</option>
+        </select>
+        <label class="consent" for="consent"><input id="consent" name="consent" type="checkbox" required> J'accepte d'être recontacté au sujet du lancement de VertIA.</label>
+        <p class="privacy">Vos données sont utilisées uniquement pour le lancement de VertIA. Consultez la <a href="confidentialite.html">politique de confidentialité</a> avant l'envoi.</p>
+        <button class="button" type="submit">Être informé</button>
+      </form>
+    </section>
+  </main>
+  <footer><p>VertIA · Un projet de Je Geek Utile · <a href="confidentialite.html">Confidentialité</a></p></footer>
+</body>
+</html>
