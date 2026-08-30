@@ -26,9 +26,13 @@ if ($SiteId) {
 
 Push-Location $projectRoot
 try {
-    python -m unittest discover -s tests -v
-    if ($LASTEXITCODE -ne 0) {
-        throw "Les tests ont échoué (code $LASTEXITCODE)."
+    $previousPreference = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    python -m unittest discover -s tests -v 2>&1 | ForEach-Object { Write-Host $_ }
+    $testsExitCode = $LASTEXITCODE
+    $ErrorActionPreference = $previousPreference
+    if ($testsExitCode -ne 0) {
+        throw "Les tests ont échoué (code $testsExitCode)."
     }
 
     $arguments = @('netlify', 'deploy', '--dir', 'site')
@@ -38,9 +42,13 @@ try {
     if ($env:NETLIFY_SITE_ID) {
         $arguments += "--site=$($env:NETLIFY_SITE_ID)"
     }
-    & npx @arguments
-    if ($LASTEXITCODE -ne 0) {
-        throw "Le déploiement Netlify a échoué (code $LASTEXITCODE)."
+    $previousPreference = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    & npx @arguments 2>&1 | ForEach-Object { Write-Host $_ }
+    $deployExitCode = $LASTEXITCODE
+    $ErrorActionPreference = $previousPreference
+    if ($deployExitCode -ne 0) {
+        throw "Le déploiement Netlify a échoué (code $deployExitCode)."
     }
 }
 finally {
