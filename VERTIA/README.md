@@ -12,11 +12,11 @@ Projet porté par Je Geek Utile pour fédérer une communauté autour des IA loc
 
 ## Structure
 - `site/` : landing page en production (`index.html`, `styles.css`, `confidentialite.html`, `merci/`).
-- `designs/` : trois propositions graphiques non retenues, à nettoyer.
 - `tests/` : tests automatisés de la landing.
+- `tests_manuels.md` : file d'attente des contrôles manuels non validés.
 - `scripts/` : intégration Netlify (API + déploiement).
 - `_contexte/` : signals.md et contexte.md, protocole vibecoding de la zone.
 - `specification_mvp1.md`, `roadmap_vertia.md` : cadrage et suivi de phases.
 
 ## État actuel
-La landing MVP 1 est en production sur `https://vertia-v0.netlify.app`, formulaire Netlify Forms actif avec notification vers `jegeekutile.rec@gmail.com`, politique de confidentialité complète. La direction graphique retenue est la palette verte de `site/styles.css`. Tests : 9/9. Restent à faire : vérification mobile/accessibilité, test d'inscription réel, nettoyage de `designs/`.
+La landing MVP 1 est en production sur `https://vertia-v0.netlify.app`, formulaire Netlify Forms actif avec notification vers `jegeekutile.rec@gmail.com`, politique de confidentialité complète. Direction graphique : palette verte de `site/styles.css` ; le dossier `designs/` a été supprimé. Revue statique d'accessibilité faite (contrastes conformes AA) ; correctifs `:focus-visible`, `prefers-reduced-motion` et anti-débordement du `h1` appliqués à `styles.css` mais pas encore déployés. Tests automatisés : 9/9. Restent à faire : redéploiement des correctifs, tests manuels (mobile, clavier, inscription réelle).

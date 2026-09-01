@@ -11,11 +11,11 @@ Concevoir et faire évoluer VertIA, projet porté par l'association Je Geek Util
 - Références : `README.md`, `CONTEXT.md`, `config.json`, `applis/modele_appli/` et `site internet/` à consulter avant toute décision d'intégration au projet parent.
 
 ## État actuel (réécrit intégralement à chaque /close)
-La landing MVP 1 est en production sur `https://vertia-v0.netlify.app`, avec formulaire Netlify Forms, page de confirmation et politique de confidentialité complète (responsable, contact, finalité, base légale, durée de conservation, droits, CNIL).
-La notification Netlify Forms est active vers `jegeekutile.rec@gmail.com`.
-La direction graphique retenue est la palette verte déjà en place dans `site/styles.css` ; les trois propositions de `designs/` ne sont pas utilisées et restent à nettoyer.
-Les tests de landing passent (9/9).
-Restent à faire avant une communication large : vérification mobile/accessibilité, test d'inscription réel, nettoyage de `designs/`.
+La landing MVP 1 est en production sur `https://vertia-v0.netlify.app`, avec formulaire Netlify Forms, page de confirmation et politique de confidentialité complète (responsable, contact, finalité, base légale, durée de conservation, droits, CNIL). Notification active vers `jegeekutile.rec@gmail.com`.
+Direction graphique retenue : palette verte de `site/styles.css`. Le dossier `designs/` a été supprimé du dépôt.
+Revue statique d'accessibilité effectuée : contrastes conformes WCAG AA ; correctifs `:focus-visible`, `prefers-reduced-motion` et anti-débordement du `h1` appliqués à `site/styles.css` mais pas encore déployés en production.
+Tests automatisés : 9/9.
+Restent avant communication large : redéploiement des correctifs CSS, tests manuels (rendu mobile, navigation clavier, inscription réelle).
 
 ## Décisions structurantes (append only — 10 entrées max, 5 lignes max/entrée, archiver au-delà)
 - 2026-08-29 : Le lancement public vise d'abord à identifier et fédérer des personnes intéressées ; la landing page constitue le MVP 1 avant les fonctionnalités communautaires et le dashboard local.
@@ -25,3 +25,4 @@ Restent à faire avant une communication large : vérification mobile/accessibil
 - 2026-08-30 : La direction graphique retenue pour VertIA est la palette verte déjà présente dans `site/styles.css`, pas la charte JGU officielle (Aurore Humaine) ni l'une des trois propositions de `designs/`.
 - 2026-08-30 : L'association Je Geek Utile n'étant pas déclarée, le responsable du traitement des inscriptions VertIA est Raphaël Richard à titre personnel, jusqu'à la création de l'association.
 - 2026-08-30 : Le contact unique de VertIA est `jegeekutile.rec@gmail.com` (formulaire et politique de confidentialité) ; les adresses `@jegeekutile.org` ne sont pas utilisées, l'association n'existant pas.
+- 2026-09-01 : Le dossier `designs/` est supprimé du dépôt (historique dans le commit `0c0b59f`) ; correctifs d'accessibilité et de rendu mobile appliqués à `site/styles.css`.
