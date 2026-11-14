@@ -36,3 +36,4 @@ Thumbs.db
 coverage.xml
 htmlcov/
 .pytest_cache/
+**/_contexte/journal_session.md
